@@ -1,0 +1,39 @@
+{
+  "name": "moonkake",
+  "version": "5.0.0",
+  "description": "Moonkake start kit",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "p1rate",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/detectiveshelby/moonkake.git"
+  },
+  "dependencies": {
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-archiver": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-csscomb": "*",
+    "gulp-cssnano": "*",
+    "gulp-flatten": "*",
+    "gulp-group-css-media-queries": "*",
+    "gulp-less": "*",
+    "gulp-pug": "*",
+    "gulp-rename": "*",
+    "gulp-rev-all": "*",
+    "gulp-sass": "*",
+    "gulp-sass-glob": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "gulp.spritesmith": "*",
+    "less-plugin-autoprefix": "*",
+    "less-plugin-glob": "*",
+    "merge-stream": "*"
+  }
+}

@@ -1,0 +1,51 @@
+/* COMMON
+ * -------------------------------------------------- */
+
+.header
+  background: #aaa
+.navigation
+  background: #bbb
+.aside
+  background: #ccc
+.section
+  background: #ddd
+.footer
+  background: #eee
+
+html,
+body
+  height: 100%
+
+body
+  min-width: 320px
+
+.wrapper
+  min-height: 100%
+  margin: 0 auto -50px
+
+  .main
+    +flex()
+    padding-bottom: 50px
+
+    .aside
+      flex: 0 0 20%
+
+    .section
+      flex: 0 0 80%
+
+  .article
+    hyphens: auto
+
+    table
+      width: 100%
+      margin-bottom: $textMargin
+
+      td,
+      th
+        border: 1px solid #ccc
+        padding: 10px
+
+      // tr:nth-child(2n+1)
+      //   td,
+      //   th
+      //     background: #ddd

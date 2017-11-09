@@ -1,0 +1,399 @@
+/* COMMON
+ * -------------------------------------------------- */
+
+html
+  box-sizing: border-box
+  font-size: $baseSize
+  text-size-adjust: 100%
+
+*,
+*::before,
+*::after
+  box-sizing: inherit
+
+body
+  line-height: 1.4
+  font-size: 1.6rem
+  margin: 0
+  direction: ltr
+  text-align: left
+  font-family: $textFontFamily
+  color: $baseColor
+  background: #ffffff
+  font-smooth: always
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+/* CONTENT
+ * -------------------------------------------------- */
+
+p,
+ul,
+ol,
+dl,
+table,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+q,
+blockquote
+  &:last-child
+    margin-bottom: 0
+
+a
+  color: inherit
+  text-decoration: none
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+  outline: none
+  transition: color .25s, border-color .25s, background-color .25s, opacity .25s
+
+  &:hover
+    text-decoration: none
+
+  &:not([class])
+    text-decoration: underline
+
+    &:hover
+      text-decoration: none
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  margin: 0 0 $headMargin 0
+  font-family: $headFontFamily
+  font-weight: normal
+  color: $headColor
+  text-rendering: optimizelegibility
+  line-height: 1.2
+
+  a
+    text-decoration: none
+    color: inherit
+
+h1
+  font-size: 3rem
+
+h2
+  font-size: 3rem
+
+h3
+  font-size: 2.8rem
+
+h4
+  font-size: 2.4rem
+
+h5
+  font-size: 2.2rem
+
+h6
+  font-size: 2rem
+
+p,
+ul,
+ol,
+dl,
+table
+  & + h1,
+  & + h2,
+  & + h3,
+  & + h4,
+  & + h5,
+  & + h6
+    margin-top: $textHeadMargin
+
+p
+  margin: 0 0 $textMargin 0
+
+ul,
+ol
+  padding: 0
+  margin: 0 0 $textMargin 25px
+
+ul,
+ol
+  ul,
+  ol
+    margin-bottom: 0
+
+ul,
+ol
+  &:not([class])
+    li + li
+      margin-top: $textMargin/2
+
+dl
+  margin: 0 0 $textMargin 0
+
+dt
+  font-weight: bold
+
+dd
+  margin-left: 0
+
+sub,
+sup
+  font-size: 75%
+  line-height: 0
+  position: relative
+
+sup
+  top: -50%
+
+sub
+  bottom: -25%
+
+big
+  font-size: 120%
+
+small
+  font-size: 80%
+
+tt,
+pre,
+kbd,
+xmp,
+code,
+samp,
+plaintext
+  font-family: monospace, sans-serif
+
+pre
+  overflow: auto
+
+address
+  font-style: normal
+
+i,
+em,
+dfn,
+cite
+  font-style: italic
+
+u,
+ins,
+var
+  text-decoration: underline
+
+b,
+strong
+  font-weight: bold
+
+s,
+del,
+strike
+  text-decoration: line-through
+
+abbr,
+acronym
+  cursor: help
+  border-bottom: 1px dashed #eeeeee
+
+mark
+  color: #000000
+  background: #ffff00
+
+q,
+blockquote
+  quotes: '' ''
+  font-style: normal
+  padding: 10px 20px
+  margin: 0 0 10px 0
+  border-left: 5px solid #eeeeee
+
+  *:last-child
+    margin-bottom: 0
+
+  &::after,
+  &::before
+    content: ''
+
+img
+  vertical-align: top
+  -ms-interpolation-mode: bicubic
+  max-width: 100%
+  height: auto
+  border: 0
+
+hr
+  display: block
+  height: 1px
+  border: 0
+  border-top: 1px solid #eeeeee
+  margin: 20px 0
+  padding: 0
+
+svg:not(:root)
+  overflow: hidden
+
+/* TABLE
+ * -------------------------------------------------- */
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+
+th
+  font-weight: bold
+
+caption
+  text-align: center
+  font-weight: bold
+  padding-bottom: 10px
+
+/* HTML
+ * -------------------------------------------------- */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary
+  display: block
+
+audio,
+canvas,
+progress,
+video
+  display: inline-block
+  vertical-align: baseline
+
+audio:not([controls])
+  display: none
+  height: 0
+
+[hidden],
+template
+  display: none
+
+figure
+  margin: 0
+
+/* FORM
+ * -------------------------------------------------- */
+
+::-ms-clear
+  display: none
+
+iframe,
+frame,
+frameset,
+fieldset,
+form
+  padding: 0
+  margin: 0
+  border: 0
+
+label
+  display: block
+  vertical-align: middle
+
+legend
+  padding: 0 5px
+
+button,
+input,
+select,
+optgroup,
+textarea
+  font: inherit
+  color: inherit
+  margin: 0
+  vertical-align: baseline
+  outline: none
+
+button
+  overflow: visible
+
+button,
+select
+  text-transform: none
+
+// input[type='text'],
+// input[type='password'],
+// input[type='search'],
+// input[type='email'],
+// input[type='number'],
+// input[type='date'],
+// input[type='tel'],
+// textarea,
+// select
+//   border: 1px solid #eeeeee
+//   border-radius: 0
+//   padding: 10px 10px
+//   color: #000000
+
+//   &:focus
+//     border-color: #dddddd
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button
+  opacity: 1
+  height: auto
+
+*::-webkit-input-placeholder
+  color: inherit
+  opacity: .5
+
+*:-moz-placeholder
+  color: inherit
+  opacity: .5
+
+*::-moz-placeholder
+  color: inherit
+  opacity: .5
+
+*:-ms-input-placeholder
+  color: inherit
+  opacity: .5
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit']
+  cursor: pointer
+  -webkit-appearance: button
+
+button[disabled],
+input[disabled],
+textarea[disabled],
+select[disabled]
+  cursor: default
+
+input[type='checkbox'],
+input[type='radio']
+  vertical-align: baseline
+  padding: 0
+  box-sizing: border-box
+
+input[type='search'],
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button
+  -webkit-appearance: none
+
+button::-moz-focus-inner,
+input::-moz-focus-inner
+  border: 0
+  padding: 0
+
+textarea
+  overflow: auto
+  vertical-align: top
+  resize: none
+  height: auto
+
+optgroup
+  font-weight: bold

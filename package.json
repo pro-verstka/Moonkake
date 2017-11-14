@@ -1,6 +1,6 @@
 {
   "name": "moonkake",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Moonkake start kit",
   "main": "gulpfile.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "gulp-cssnano": "*",
     "gulp-flatten": "*",
     "gulp-group-css-media-queries": "*",
-    "gulp-less": "*",
     "gulp-pug": "*",
     "gulp-rename": "*",
     "gulp-rev-all": "*",
@@ -32,8 +31,6 @@
     "gulp-uglify": "*",
     "gulp-util": "*",
     "gulp.spritesmith": "*",
-    "less-plugin-autoprefix": "*",
-    "less-plugin-glob": "*",
     "merge-stream": "*"
   }
 }

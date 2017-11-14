@@ -18,10 +18,6 @@ var
   csscomb = require('gulp-csscomb'),
   cssnano = require('gulp-cssnano'),
 
-  //less
-  //less = require('gulp-less'),
-  //glob = require('less-plugin-glob'),
-
   //sass
   sass = require('gulp-sass'),
   glob = require('gulp-sass-glob'),
@@ -125,35 +121,6 @@ gulp.task('css', function () {
   .pipe(browserSync.reload({
     stream: true
   }));
-
-// less
-// return gulp.src('src/assets/css/general.less', {
-//     base: '.'
-//   })
-//   .pipe(sourcemaps.init())
-//   .pipe(less({
-//     plugins: [glob],
-//     compress: false
-//   }))
-//   .pipe(autoprefixer({
-//     browsers: ['last 3 version']
-//   }))
-//   .on('error', gutil.log)
-//   .pipe(gcmq())
-//   .pipe(csscomb())
-//   .pipe(flatten())
-//   .pipe(gulp.dest('dist/assets/css/'))
-//   .pipe(rename({
-//     suffix: '.min'
-//   }))
-//   .pipe(cssnano({
-//     zindex: false
-//   }))
-//   .pipe(sourcemaps.write('maps'))
-//   .pipe(gulp.dest('dist/assets/css/'))
-//   .pipe(browserSync.reload({
-//     stream: true
-//   }));
 });
 
 /* Fonts */
@@ -185,13 +152,13 @@ gulp.task('js:common', function () {
   return gulp.src('src/js/common.js', {
     base: './src/js/'
   })
-  .pipe(sourcemaps.init())
+  //.pipe(sourcemaps.init())
   .pipe(gulp.dest('dist/assets/js/'))
   .pipe(uglify())
   .pipe(rename({
     suffix: '.min'
   }))
-  .pipe(sourcemaps.write('maps'))
+  //.pipe(sourcemaps.write('maps'))
   .pipe(gulp.dest('dist/assets/js/'));
 });
 
@@ -202,10 +169,10 @@ gulp.task('js:bundle', function () {
   ], {
     base: '.'
   })
-  .pipe(sourcemaps.init())
+  //.pipe(sourcemaps.init())
   .pipe(concat('bundle.min.js'))
   .pipe(uglify())
-  .pipe(sourcemaps.write('maps'))
+  //.pipe(sourcemaps.write('maps'))
   .pipe(gulp.dest('dist/assets/js/'));
 });
 

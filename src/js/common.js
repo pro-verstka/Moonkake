@@ -16,6 +16,10 @@ var $b = $('body');
 -------------------------------------------------- */
 
 var $mk = {
+  work: function() {
+    console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - пишите нам на hello@devbrains.ru');
+  },
+
   scrollTo: function ($object, offset, callback) {
     $('html, body').stop().animate({
       scrollTop: $object.offset().top - ((typeof (offset) == 'number') ? offset : 0)
@@ -384,5 +388,7 @@ $(function () {
 
   $tabs.init();
   $toggler.init();
+
+  $mk.work();
 
 });

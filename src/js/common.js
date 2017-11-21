@@ -129,7 +129,7 @@ var $toggler = {
   init: function ($options) {
     var $this = this;
 
-    if (typeof $options == 'object') {
+    if (typeof $options === 'object') {
       $this.options = $options;
     }
 

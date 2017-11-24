@@ -20,6 +20,28 @@ var $mk = {
     console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - пишите нам на hello@devbrains.ru');
   },
 
+  getPageQuery: function(key) {
+    var query = [];
+
+    if (window.location.search) {
+      var q = window.location.search;
+      q = q.slice(1);
+      q = q.split('&');
+      var tmp;
+
+      for (var i = 0; i < q.length; i++) {
+        tmp = q[i].split('=');
+        query[tmp[0]] = tmp[1];
+      };
+
+      if (key !== '') {
+        return query[key];
+      } else {
+        return query;
+      };
+    };
+  },
+
   scrollTo: function ($object, offset, callback) {
     $('html, body').stop().animate({
       scrollTop: $object.offset().top - ((typeof (offset) == 'number') ? offset : 0)

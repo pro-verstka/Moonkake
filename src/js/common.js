@@ -17,11 +17,11 @@ var $b = $('body');
 
 var $mk = {
   work: function() {
-    console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - пишите нам на hello@devbrains.ru');
+    console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на devbrains.ru');
   },
 
   getPageQuery: function(key) {
-    var query = [];
+    var query = {};
 
     if (window.location.search) {
       var q = window.location.search;

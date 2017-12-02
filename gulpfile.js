@@ -73,7 +73,7 @@ gulp.task('templates', function () {
 
 /* PNG Sprites */
 
-gulp.task('sprite', function () {
+gulp.task('sprite:png', function () {
   var spriteData = gulp.src('src/sprite/**/*', {
     base: '.'
   })
@@ -216,17 +216,17 @@ gulp.task('backup', function () {
 
 /* Common */
 
-gulp.task('build', ['templates', 'sprite', 'css', 'img', 'fonts', 'js:all'], function () {
+gulp.task('build', ['sprite:png', 'css', 'img', 'fonts', 'js:all', 'templates'], function () {
   gutil.log('Project building done!');
 });
 
 gulp.task('default', ['browser'], function () {
-  gulp.watch('src/templates/**/*', ['templates']);
-  gulp.watch('src/sprite/**/*', ['sprite']);
+  gulp.watch('src/sprite/**/*', ['sprite:png']);
   gulp.watch('src/css/**/*', ['css']);
   gulp.watch('src/img/**/*', ['img']);
   gulp.watch('src/fonts/**/*', ['fonts']);
   gulp.watch('src/js/**/*', ['js:all']);
+  gulp.watch('src/templates/**/*', ['templates']);
 
   gutil.log('Project is running!');
 });

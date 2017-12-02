@@ -12,6 +12,10 @@ var $w = $(window);
 var $h = $('html');
 var $b = $('body');
 
+if ($.browser.mobile) {
+  $b.addClass('mobile');
+}
+
 /* UTILS
 -------------------------------------------------- */
 
@@ -404,6 +408,11 @@ $(function () {
   $('input[type="tel"]').inputmask({
     mask: '+7 (999) 999-99-99'
   });
+
+  /* LAZYLOAD
+  -------------------------------------------------- */
+
+  $('.js-lazy').lazyload();
 
   /* INITIALIZATION
   -------------------------------------------------- */

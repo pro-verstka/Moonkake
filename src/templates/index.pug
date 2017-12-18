@@ -1,115 +1,90 @@
-doctype html
+extends layouts/layout.pug
 
-html(lang="ru")
+block main
+  main.main
+    aside.aside aside
+    // aside
 
-  head
-    include blocks/head.pug
+    section.section
 
-  body#body
+      div.owl-carousel
+        -for (var i = 0; i < 10; i++)
+          div.carousel-item=i
 
-    div.wrapper
-      header.header
-        a.logotype(href="/") title
-      // header
+      article.article
 
-      nav.navigation
-        ul.list.list-flex.navigation-primary
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-      // navigation
+        h1 h1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        h2 h2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        h3 h3 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        h4 h4 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        h5 h5 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        h6 h6 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
-      main.main
-        aside.aside aside
-        // aside
+        a.button.js-popup(href="#modal") Modal
 
-        section.section
+        div.popup.mfp-hide#modal
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, tempora, dolores eos delectus reiciendis dolor excepturi error dignissimos provident nemo cumque ducimus accusantium repudiandae culpa assumenda nisi ut reprehenderit ad tempore commodi voluptatibus debitis officia vero inventore harum placeat enim sint voluptates est numquam fugiat consequuntur perspiciatis suscipit esse iusto similique id libero omnis amet dicta aliquid voluptatem! Eum, vitae, accusamus, quam, a alias nihil id libero temporibus corporis quibusdam obcaecati optio suscipit iure nesciunt aut ullam ex dolores perferendis quasi enim recusandae eius ad modi blanditiis quis. Earum, vero, illum iusto ex vitae ducimus. Illum rerum blanditiis quisquam placeat. Sapiente, dolorum, est, porro, doloremque neque illum ratione quidem a libero voluptate ipsa quaerat voluptatibus. Eveniet, quia, reiciendis, a dolor fuga vero culpa commodi voluptate aperiam sequi facilis recusandae ipsum mollitia animi ipsa harum dolores officia doloremque dolorem tempore fugit perferendis suscipit rerum nulla minima. Ab, id sed blanditiis quod dignissimos molestias assumenda eum sit nesciunt cum iste maxime porro at! Officiis, harum, similique deserunt fuga ipsum unde enim culpa dolore quae laboriosam quidem fugit laborum soluta commodi optio voluptate itaque ratione numquam odio fugiat nostrum incidunt esse laudantium amet ab architecto accusantium odit? Quod maxime necessitatibus excepturi ipsa neque!
 
-          div.owl-carousel
-            -for (var i = 0; i < 10; i++)
-              div.carousel-item=i
+        ul
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
-          article.article
+        ol
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
-            h1 h1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            h2 h2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            h3 h3 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            h4 h4 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            h5 h5 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            h6 h6 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        p: a(href="#") Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
-            a.button.js-popup(href="#modal") Modal
+        table
+          tr
+            td 1
+            td 2
+            td 3
+          tr
+            td 1
+            td 2
+            td 3
+      // article
 
-            div.popup.mfp-hide#modal
-              p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, tempora, dolores eos delectus reiciendis dolor excepturi error dignissimos provident nemo cumque ducimus accusantium repudiandae culpa assumenda nisi ut reprehenderit ad tempore commodi voluptatibus debitis officia vero inventore harum placeat enim sint voluptates est numquam fugiat consequuntur perspiciatis suscipit esse iusto similique id libero omnis amet dicta aliquid voluptatem! Eum, vitae, accusamus, quam, a alias nihil id libero temporibus corporis quibusdam obcaecati optio suscipit iure nesciunt aut ullam ex dolores perferendis quasi enim recusandae eius ad modi blanditiis quis. Earum, vero, illum iusto ex vitae ducimus. Illum rerum blanditiis quisquam placeat. Sapiente, dolorum, est, porro, doloremque neque illum ratione quidem a libero voluptate ipsa quaerat voluptatibus. Eveniet, quia, reiciendis, a dolor fuga vero culpa commodi voluptate aperiam sequi facilis recusandae ipsum mollitia animi ipsa harum dolores officia doloremque dolorem tempore fugit perferendis suscipit rerum nulla minima. Ab, id sed blanditiis quod dignissimos molestias assumenda eum sit nesciunt cum iste maxime porro at! Officiis, harum, similique deserunt fuga ipsum unde enim culpa dolore quae laboriosam quidem fugit laborum soluta commodi optio voluptate itaque ratione numquam odio fugiat nostrum incidunt esse laudantium amet ab architecto accusantium odit? Quod maxime necessitatibus excepturi ipsa neque!
+      div.grid.text-center
+        div.col-12 100%
 
-            ul
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        div.col-6 50%
+        div.col-6 50%
 
-            ol
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              li Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        div.col-6 50%
+        div.col-3 25%
+        div.col-3 25%
 
-            p: a(href="#") Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        div.col-4 33%
+        div.col-4 33%
+        div.col-4 33%
 
-            table
-              tr
-                td 1
-                td 2
-                td 3
-              tr
-                td 1
-                td 2
-                td 3
-          // article
+        div.col-3 25%
+        div.col-3 25%
+        div.col-3 25%
+        div.col-3 25%
 
-          div.grid.text-center
-            div.col-12 100%
+        div.col-2 16.7%
+        div.col-2 16.7%
+        div.col-2 16.7%
+        div.col-2 16.7%
+        div.col-2 16.7%
+        div.col-2 16.7%
 
-            div.col-6 50%
-            div.col-6 50%
-
-            div.col-6 50%
-            div.col-3 25%
-            div.col-3 25%
-
-            div.col-4 33%
-            div.col-4 33%
-            div.col-4 33%
-
-            div.col-3 25%
-            div.col-3 25%
-            div.col-3 25%
-            div.col-3 25%
-
-            div.col-2 16.7%
-            div.col-2 16.7%
-            div.col-2 16.7%
-            div.col-2 16.7%
-            div.col-2 16.7%
-            div.col-2 16.7%
-
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-            div.col-1 8.3%
-        // section
-      // main
-
-    footer.footer footer
-    // footer
-
-    include blocks/scripts.pug
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+        div.col-1 8.3%
+    // section
+  // main

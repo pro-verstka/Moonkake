@@ -4,3 +4,4 @@ _psd
 dist
 .vscode
 .idea
+package-lock.json

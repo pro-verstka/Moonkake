@@ -56,7 +56,8 @@ gulp.task('browser', function () {
 gulp.task('templates', function () {
   return gulp.src([
     'src/templates/**/*',
-    '!src/templates/blocks/*'
+    '!src/templates/blocks/*',
+    '!src/templates/layouts/*'
   ], {
     base: '.'
   })

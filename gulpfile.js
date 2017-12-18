@@ -10,7 +10,7 @@ var
   gutil = require('gulp-util'),
   merge = require('merge-stream'),
   rename = require('gulp-rename'),
-  sourcemaps = require('gulp-sourcemaps'),
+  //sourcemaps = require('gulp-sourcemaps'),
 
   // css
   gcmq = require('gulp-group-css-media-queries'),

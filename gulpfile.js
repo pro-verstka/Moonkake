@@ -66,9 +66,9 @@ gulp.task('templates', function () {
   .on('error', gutil.log)
   .pipe(flatten())
   .pipe(gulp.dest('dist/'))
-  .pipe(browserSync.reload({
-    stream: true
-  }));
+  .on('end', function() {
+    browserSync.reload();
+  });
 });
 
 /* PNG Sprites */
@@ -118,9 +118,9 @@ gulp.task('css', function () {
   }))
   //.pipe(sourcemaps.write('maps'))
   .pipe(gulp.dest('dist/assets/css/'))
-  .pipe(browserSync.reload({
-    stream: true
-  }));
+  .on('end', function() {
+    browserSync.reload();
+  });
 });
 
 /* Fonts */
@@ -130,9 +130,9 @@ gulp.task('fonts', function () {
     base: './src/fonts/'
   })
   .pipe(gulp.dest('dist/assets/fonts/'))
-  .pipe(browserSync.reload({
-    stream: true
-  }));
+  .on('end', function() {
+    browserSync.reload();
+  });
 });
 
 /* Images */
@@ -142,9 +142,9 @@ gulp.task('img', function () {
     base: './src/img/'
   })
   .pipe(gulp.dest('dist/assets/img/'))
-  .pipe(browserSync.reload({
-    stream: true
-  }));
+  .on('end', function() {
+    browserSync.reload();
+  });
 });
 
 /* Scripts */
@@ -159,7 +159,10 @@ gulp.task('js:common', function () {
     suffix: '.min'
   }))
   //.pipe(sourcemaps.write('maps'))
-  .pipe(gulp.dest('dist/assets/js/'));
+  .pipe(gulp.dest('dist/assets/js/'))
+  .on('end', function() {
+    browserSync.reload();
+  });
 });
 
 gulp.task('js:bundle', function () {

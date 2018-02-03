@@ -35,10 +35,10 @@ var $mk = {
 
       for (var i = 0; i < q.length; i++) {
         tmp = q[i].split('=');
-        query[tmp[0]] = tmp[1];
+        query[tmp[0]] = decodeURIComponent(tmp[1]);
       };
 
-      if (key !== '') {
+      if (key) {
         return query[key];
       } else {
         return query;
@@ -163,7 +163,7 @@ var $toggler = {
       $this.options = $options;
     }
 
-    $('[' + $this.options.toggler + ']').on('click', function () {
+    $d.on('click', '[' + $this.options.toggler + ']', function () {
       var _ = $(this);
       var target = _.attr($this.options.target);
 
@@ -196,17 +196,19 @@ var $toggler = {
       });
     });
 
-    $('[' + $this.options.toggler + ']').on('click', function (event) {
+    $d.on('click', '[' + $this.options.toggler + ']', function (event) {
       event.stopPropagation();
     });
 
-    $('[' + $this.options.toggler + ']').each(function() {
+    $('[' + $this.options.toggler + ']').each(function () {
       var _ = $(this);
       var target = _.attr($this.options.target);
 
-      $('#' + target).each(function() {
+      $('#' + target).each(function () {
         $(this).on('click', function (event) {
-          event.stopPropagation();
+          if (!$(event.originalEvent.target).is('a')) {
+            event.stopPropagation();
+          }
         });
       });
     });
@@ -222,12 +224,12 @@ $(function () {
   /* SCROLL
   -------------------------------------------------- */
 
-  $('.js-scroll').on('click', function () {
+  $('.js-scroll').on('click', function (event) {
+    event.preventDefault();
+
     var href = $(this).attr('href');
 
     $mk.scrollTo($(href), 0);
-
-    return false;
   });
 
   /* POPUP
@@ -399,6 +401,22 @@ $(function () {
 
     if (_.val() === '' || _.val() === '0') {
       _.val(1);
+    }
+  });
+
+  /* FILE
+  -------------------------------------------------- */
+
+  $d.on('change', '.file input[type="file"]', function () {
+    var value = $(this).val();
+    var $label = $(this).closest('.file').find('label span');
+    var label = $label.data();
+
+    if (value) {
+      value = value.split(/(\\|\/)/g).pop();
+      $label.text(value);
+    } else {
+      $label.text(label.label);
     }
   });
 

@@ -234,6 +234,34 @@ img
     &::after
       border-radius: 50%
 
+.file
+  position: relative
+  overflow: hidden
+  display: inline-block
+  vertical-align: top
+  margin: 10px
+
+  input
+    position: absolute
+    left: -999px
+    top: 0
+    width: 0
+    height: 0
+    visibility: hidden
+    overflow: hidden
+
+  label
+    display: block
+    position: relative
+    cursor: pointer
+
+    span
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      display: block
+      max-width: 185px
+
 /* Tabs */
 
 .tabs

@@ -108,9 +108,9 @@ gulp.task('css', function () {
     browsers: ['last 3 version', 'ie >= 11']
   }))
   .pipe(gcmq())
-  .pipe(csscomb())
+  //.pipe(csscomb())
   .pipe(flatten())
-  .pipe(gulp.dest('dist/assets/css/'))
+  //.pipe(gulp.dest('dist/assets/css/'))
   .pipe(rename({
     suffix: '.min'
   }))
@@ -119,9 +119,9 @@ gulp.task('css', function () {
   }))
   //.pipe(sourcemaps.write('maps'))
   .pipe(gulp.dest('dist/assets/css/'))
-  .on('end', function() {
-    browserSync.reload();
-  });
+  .pipe(browserSync.reload({
+    stream: true
+  }));
 });
 
 /* Fonts */

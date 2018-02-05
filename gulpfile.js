@@ -169,7 +169,9 @@ gulp.task('js:common', function () {
 gulp.task('js:bundle', function () {
   return gulp.src([
     'src/js/vendor/**/*.js',
-    '!src/js/vendor/**/_*.js'
+    '!src/js/vendor/**/_*.js',
+    'src/js/modules/**/*.js',
+    '!src/js/modules/**/_*.js'
   ], {
     base: '.'
   })

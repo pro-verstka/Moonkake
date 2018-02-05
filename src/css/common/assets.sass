@@ -1,40 +1,3 @@
-/* GRID
- * -------------------------------------------------- */
-
-/* Container */
-
-.container
-  max-width: 1200px
-  margin: 0 auto
-  padding-left: 20px
-  padding-right: 20px
-
-/* Columns */
-
-.row
-  +clearfix()
-
-  &-table
-    display: table
-
-    > *
-      display: table-cell
-      overflow: visible
-
-.col-left
-  float: left
-
-.col-right
-  float: right
-
-.col-middle
-  overflow: hidden
-
-/* Grid */
-
-.grid
-  +grid($hgap)
-
 /* MISC
  * -------------------------------------------------- */
 
@@ -138,14 +101,14 @@ img
 
 .form
   &-group + &-group
-    margin-top: $formGap
+    margin-top: $gap
 
   &-row
     +clearfix()
-    margin-left: -$formGap
+    margin-left: -$gap
 
   &-row > &-item
-    padding-left: $formGap
+    padding-left: $gap
     float: left
 
   &-item
@@ -168,6 +131,8 @@ img
   &-error
     color: red
 
+/* Select */
+
 .select
   position: relative
   display: inline-block
@@ -182,7 +147,10 @@ img
   select::-ms-expand
     display: none
 
-  // option[disabled]display:none
+  // option[disabled]
+  //  display:none
+
+/* Checkbox, Radio */
 
 .radio,
 .checkbox
@@ -234,6 +202,8 @@ img
     &::after
       border-radius: 50%
 
+/* File */
+
 .file
   position: relative
   overflow: hidden
@@ -266,10 +236,9 @@ img
 
 .tabs
   &-title
-    +clearfix()
+    +flex()
 
     .tabs-item
-      float: left
       cursor: pointer
 
       &.-active
@@ -284,36 +253,37 @@ img
 /* Popup */
 
 .popup
+  display: none
   background: #fff
   position: relative
-  padding: 20px
+  padding: 40px
   width: auto
   max-width: 700px
   margin: 0 auto
 
-.mfp-fade
-  &.mfp-bg
-    opacity: 0
-    transition: all 0.15s ease-out
+// .mfp-fade
+//   &.mfp-bg
+//     opacity: 0
+//     transition: all 0.15s ease-out
 
-    &.mfp-ready
-      opacity: 0.8
+//     &.mfp-ready
+//       opacity: 0.8
 
-    &.mfp-removing
-      opacity: 0
+//     &.mfp-removing
+//       opacity: 0
 
-  &.mfp-wrap
-    .mfp-content
-      opacity: 0
-      transition: all 0.15s ease-out
+//   &.mfp-wrap
+//     .mfp-content
+//       opacity: 0
+//       transition: all 0.15s ease-out
 
-    &.mfp-ready
-      .mfp-content
-        opacity: 1
+//     &.mfp-ready
+//       .mfp-content
+//         opacity: 1
 
-    &.mfp-removing
-      .mfp-content
-        opacity: 0
+//     &.mfp-removing
+//       .mfp-content
+//         opacity: 0
 
 /* Buttons */
 
@@ -331,7 +301,7 @@ img
 /* Breadcrumbs */
 
 .breadcrumbs
-  margin-bottom: $vgap
+  margin-bottom: $gap
 
   .list-item
     &::after
@@ -350,7 +320,7 @@ img
 /* Pagination */
 
 .pagination
-  margin: $vgap 0 $vgap -10px
+  margin: $gap 0 $gap -10px
   justify-content: center
 
   .list-item

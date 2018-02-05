@@ -11,9 +11,7 @@ $textFontFamily: Arial, sans-serif
 $headFontFamily: Arial, sans-serif
 $ff_rouble: 'Rouble'
 
-$vgap: 20px
-$hgap: 20px
-$formGap: 20px
+$gap: 20px
 
 /* COLORS
  * -------------------------------------------------- */
@@ -65,45 +63,7 @@ $color-1: #000
 
 /* Grid */
 
-=grid($gap: $hgap, $column: 12, $flex: 1, $offsets: 0)
-  @if $flex == 1
-    +flex()
-
-  @if $flex != 1
-    &::before,
-    &::after
-      content: ' '
-      display: table
-
-    &::after
-      clear: both
-
-  @if $offsets == 1
-    margin-left: -$hgap/2
-    margin-right: -$hgap/2
-
-  @for $i from 1 through $column
-    & > .col-#{$i}
-      @if $flex == 1
-        flex: 0 0 ($i * 100% / $column)
-        max-width: ($i * 100% / $column)
-
-      @if $flex != 1
-        width: ($i * 100% / $column)
-        float: left
-
-      @if $offsets == 1
-        padding-left: $gap/2
-        padding-right: $gap/2
-
-    @if $offsets == 1
-      .push-#{$i}
-        margin-right: ($i * 100% / $column)
-
-      .pull-#{$i}
-        margin-left: ($i * 100% / $column)
-
-=column($column: 2, $vgap: $vgap, $hgap: $hgap, $flex: 1)
+=column($column: 2, $vgap: $gap, $hgap: $gap, $flex: 1)
   &
     margin-top: -$vgap
     margin-left: -$hgap
@@ -119,70 +79,9 @@ $color-1: #000
     padding-left: $hgap
     padding-top: $vgap
 
-    // &:nth-child(#{$i}n + 1)
-    //   clear: none
+    @if $flex != 1
+      &:nth-child(#{$i}n + 1)
+        clear: none
 
-    // &:nth-child(#{$column}n + 1)
-    //   clear: both
-
-=triangle($size, $color, $direction)
-  $width: nth($size, 1)
-  $height: nth($size, length($size))
-  $foreground-color: nth($color, 1)
-  $background-color: if(length($color) == 2, nth($color, 2), transparent)
-  height: 0
-  width: 0
-
-  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left)
-    $width: $width / 2
-    $height: if(length($size) > 1, $height, $height/2)
-
-    @if $direction == up
-      border-bottom: $height solid $foreground-color
-      border-left: $width solid $background-color
-      border-right: $width solid $background-color
-    @else if $direction == right
-      border-bottom: $width solid $background-color
-      border-left: $height solid $foreground-color
-      border-top: $width solid $background-color
-    @else if $direction == down
-      border-left: $width solid $background-color
-      border-right: $width solid $background-color
-      border-top: $height solid $foreground-color
-    @else if $direction == left
-      border-bottom: $width solid $background-color
-      border-right: $height solid $foreground-color
-      border-top: $width solid $background-color
-
-  @else if ($direction == up-right) or ($direction == up-left)
-    border-top: $height solid $foreground-color
-
-    @if $direction == up-right
-      border-left:  $width solid $background-color
-    @else if $direction == up-left
-      border-right: $width solid $background-color
-
-  @else if ($direction == down-right) or ($direction == down-left)
-    border-bottom: $height solid $foreground-color
-
-    @if $direction == down-right
-      border-left:  $width solid $background-color
-    @else if $direction == down-left
-      border-right: $width solid $background-color
-
-  @else if ($direction == inset-up)
-    border-color: $background-color $background-color $foreground-color
-    border-style: solid
-    border-width: $height $width
-  @else if ($direction == inset-down)
-    border-color: $foreground-color $background-color $background-color
-    border-style: solid
-    border-width: $height $width
-  @else if ($direction == inset-right)
-    border-color: $background-color $background-color $background-color $foreground-color
-    border-style: solid
-    border-width: $width $height
-  @else if ($direction == inset-left)
-    border-color: $background-color $foreground-color $background-color $background-color
-    border-style: solid
-    border-width: $width $height
+      &:nth-child(#{$column}n + 1)
+        clear: both

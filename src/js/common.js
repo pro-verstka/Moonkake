@@ -1,5 +1,5 @@
 /*!
- * Moonkake v5.0.1
+ * Moonkake 6.0.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -12,213 +12,6 @@ var $w = $(window);
 var $h = $('html');
 var $b = $('body');
 
-if ($.browser.mobile) {
-  $b.addClass('mobile');
-}
-
-/* UTILS
--------------------------------------------------- */
-
-var $mk = {
-  work: function() {
-    console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на devbrains.ru');
-  },
-
-  getPageQuery: function(key) {
-    var query = {};
-
-    if (window.location.search) {
-      var q = window.location.search;
-      q = q.slice(1);
-      q = q.split('&');
-      var tmp;
-
-      for (var i = 0; i < q.length; i++) {
-        tmp = q[i].split('=');
-        query[tmp[0]] = decodeURIComponent(tmp[1]);
-      };
-
-      if (key) {
-        return query[key];
-      } else {
-        return query;
-      };
-    };
-  },
-
-  scrollTo: function ($object, offset, callback) {
-    $('html, body').stop().animate({
-      scrollTop: $object.offset().top - ((typeof (offset) == 'number') ? offset : 0)
-    }, 500, function () {
-      if ($(this)[0].nodeName == 'HTML') {
-        if (typeof (callback) == 'function') {
-          callback();
-        }
-      }
-    });
-  },
-
-  getScreenIndex: function ($object, offset) {
-    var index = 0;
-
-    $object.each(function () {
-      var $self = $(this);
-
-      if ($d.scrollTop() >= $self.offset().top - offset) {
-        index = $self.index();
-      }
-    });
-
-    return index;
-  },
-
-  numberFormat: function (number, decimals, dec_point, thousands_sep) {
-    // original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-    // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-    // bugfix by: Michael White (http://crestidg.com)
-    var i, j, kw, kd, km;
-
-    if (isNaN(decimals = Math.abs(decimals))) {
-      decimals = 2;
-    }
-    if (dec_point == undefined) {
-      dec_point = ',';
-    }
-    if (thousands_sep == undefined) {
-      thousands_sep = '.';
-    }
-
-    i = parseInt(number = (+number || 0).toFixed(decimals)) + '';
-
-    if ((j = i.length) > 3) {
-      j = j % 3;
-    } else {
-      j = 0;
-    }
-
-    km = j ?
-        i.substr(0, j) + thousands_sep :
-        '';
-    kw = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep);
-    kd = (decimals ?
-        dec_point + Math.abs(number - i).toFixed(decimals).replace(/-/, '0').slice(2) :
-        '');
-
-    return km + kw + kd;
-  },
-};
-
-/* TABS
-  -------------------------------------------------- */
-
-var $tabs = {
-  opts: {
-    root: '.tabs:not(.tabs-nojs)',
-    title: '.tabs-title',
-    content: '.tabs-content',
-    item: '.tabs-item',
-    active: '-active'
-  },
-
-  changeTab: function ($root, index) {
-    var opt = this.opts;
-
-    $root.find(opt.title + ' ' + opt.item).eq(index).addClass(opt.active).siblings(opt.item).removeClass(opt.active);
-    $root.find(opt.content + ' ' + opt.item).eq(index).addClass(opt.active).siblings(opt.item).removeClass(opt.active);
-
-    $d.trigger('tabChanged', {
-      root: $root,
-      index: index
-    });
-  },
-
-  init: function () {
-    var $this = this;
-    var opt = $this.opts;
-
-    $(opt.title).on('click', opt.item, function () {
-      var _ = $(this);
-      var $root = _.closest(opt.root);
-      var index = _.index();
-
-      $this.changeTab($root, index);
-    });
-  }
-};
-
-/* NAVIGATION
--------------------------------------------------- */
-
-var $toggler = {
-  options: {
-    toggler: 'data-toggler',
-    target: 'data-target',
-    active: '-active'
-  },
-
-  init: function ($options) {
-    var $this = this;
-
-    if (typeof $options === 'object') {
-      $this.options = $options;
-    }
-
-    $d.on('click', '[' + $this.options.toggler + ']', function () {
-      var _ = $(this);
-      var target = _.attr($this.options.target);
-
-      $('[' + $this.options.target + ']').each(function () {
-        var _ = $(this);
-        var currentTarget = _.attr($this.options.target);
-
-        if (currentTarget !== target) {
-          _.removeClass($this.options.active);
-          $('#' + currentTarget).removeClass($this.options.active);
-        }
-      });
-
-      _.toggleClass($this.options.active);
-
-      $('#' + target).toggleClass($this.options.active);
-
-      return false;
-    });
-
-    $d.on('click', function () {
-      $('[' + $this.options.toggler + ']').removeClass($this.options.active);
-
-      $('[' + $this.options.toggler + ']').each(function () {
-        var _ = $(this);
-        var target = _.attr($this.options.target);
-
-        _.removeClass($this.options.active);
-        $('#' + target).removeClass($this.options.active);
-      });
-    });
-
-    $d.on('click', '[' + $this.options.toggler + ']', function (event) {
-      event.stopPropagation();
-    });
-
-    $('[' + $this.options.toggler + ']').each(function () {
-      var _ = $(this);
-      var target = _.attr($this.options.target);
-
-      $('#' + target).each(function () {
-        $(this).on('click', function (event) {
-          if (!$(event.originalEvent.target).is('a')) {
-            event.stopPropagation();
-          }
-        });
-      });
-    });
-
-  }
-};
-
-/* OK, WE ARE READY
--------------------------------------------------- */
-
 $(function () {
 
   /* SCROLL
@@ -227,130 +20,83 @@ $(function () {
   $('.js-scroll').on('click', function (event) {
     event.preventDefault();
 
-    var href = $(this).attr('href');
+    var target = $(this).data('target');
+    var offset = $(this).data('offset') || 0;
 
-    $mk.scrollTo($(href), 0);
+    $utils.scrollTo($(target), offset);
   });
 
   /* POPUP
   -------------------------------------------------- */
 
-  $('.js-popup').magnificPopup({
-    type: 'inline',
-    midClick: true,
-    closeBtnInside: true,
-    removalDelay: 300,
-    mainClass: 'mfp-fade',
-    fixedContentPos: false,
-    callbacks: {
-      beforeOpen: function() {
-        $d.trigger('mfpPopupBeforeOpen', {
-          instance: this
-        });
-      },
-      open: function() {
-        $d.trigger('mfpPopupOpen', {
-          instance: this
-        });
-      },
-      beforeClose: function() {
-        $d.trigger('mfpPopupBeforeClose', {
-          instance: this
-        });
-      },
-      close: function() {
-        $d.trigger('mfpPopupClose', {
-          instance: this
-        });
-      },
-      afterClose: function() {
-        $d.trigger('mfpPopupAfterClose', {
-          instance: this
-        });
-      }
-    }
+  // $('.js-popup').magnificPopup({
+  //   type: 'inline',
+  //   midClick: true,
+  //   closeBtnInside: true,
+  //   removalDelay: 300,
+  //   mainClass: 'mfp-fade',
+  //   fixedContentPos: false
+  // });
+
+  // $('.js-image').magnificPopup({
+  //   type: 'image',
+  //   closeOnContentClick: true,
+  //   removalDelay: 300,
+  //   mainClass: 'mfp-fade mfp-img-mobile',
+  //   image: {
+  //     verticalFit: true
+  //   }
+  // });
+
+  // $('.js-gallery').each(function() {
+  //   $(this).magnificPopup({
+  //     delegate: 'a',
+  //     type: 'image',
+  //     tLoading: 'Загрузка изображения #%curr%...',
+  //     mainClass: 'mfp-fade mfp-img-mobile',
+  //     removalDelay: 300,
+  //     gallery: {
+  //       enabled: true,
+  //       navigateByImgClick: true,
+  //       preload: [0, 1],
+  //       tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
+  //     },
+  //     image: {
+  //       tError: '<a href="%url%">Изображение #%curr%</a> не может быть загружено.'
+  //     }
+  //   });
+  // });
+
+  $('.js-popup').fancybox({
+    defaultType: 'inline',
+    animationEffect: 'fade',
+    baseClass: 'fancybox-popup-custom',
+    touch: false
   });
 
-  $('.js-image').magnificPopup({
-    type: 'image',
-    closeOnContentClick: true,
-    removalDelay: 300,
-    mainClass: 'mfp-fade mfp-img-mobile',
-    image: {
-      verticalFit: true
-    },
-    callbacks: {
-      beforeOpen: function() {
-        $d.trigger('mfpImageBeforeOpen', {
-          instance: this
-        });
-      },
-      open: function() {
-        $d.trigger('mfpImageOpen', {
-          instance: this
-        });
-      },
-      beforeClose: function() {
-        $d.trigger('mfpImageBeforeClose', {
-          instance: this
-        });
-      },
-      close: function() {
-        $d.trigger('mfpImageClose', {
-          instance: this
-        });
-      },
-      afterClose: function() {
-        $d.trigger('mfpImageAfterClose', {
-          instance: this
-        });
-      }
-    }
+  $('.js-image').fancybox({
+    defaultType: 'image',
+    animationEffect: 'fade',
+    baseClass: 'fancybox-image-custom'
   });
 
   $('.js-gallery').each(function() {
-    $(this).magnificPopup({
-      delegate: 'a',
-      type: 'image',
-      tLoading: 'Загрузка изображения #%curr%...',
-      mainClass: 'mfp-fade mfp-img-mobile',
-      removalDelay: 300,
-      gallery: {
-        enabled: true,
-        navigateByImgClick: true,
-        preload: [0, 1],
-        tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
+    var $collection = $(this).find('a');
+
+    $collection.on('click', function() {
+
+      $.fancybox.open($collection, {
+        defaultType: 'image',
+        loop: true,
+        protect: true,
+        buttons: ['slideShow', 'fullScreen', 'thumbs', 'download', 'zoom', 'close'],
+        animationEffect: 'fade',
+        baseClass: 'fancybox-gallery-custom'
       },
-      image: {
-        tError: '<a href="%url%">Изображение #%curr%</a> не может быть загружено.'
-      },
-      callbacks: {
-        beforeOpen: function() {
-          $d.trigger('mfpGalleryBeforeOpen', {
-            instance: this
-          });
-        },
-        open: function() {
-          $d.trigger('mfpGalleryOpen', {
-            instance: this
-          });
-        },
-        beforeClose: function() {
-          $d.trigger('mfpGalleryBeforeClose', {
-            instance: this
-          });
-        },
-        close: function() {
-          $d.trigger('mfpGalleryClose', {
-            instance: this
-          });
-        },
-        afterClose: function() {
-          $d.trigger('mfpGalleryAfterClose', {
-            instance: this
-          });
-        }
-      }
+        $collection.index(this)
+      );
+
+      return false;
     });
   });
 
@@ -426,18 +172,5 @@ $(function () {
   $('input[type="tel"]').inputmask({
     mask: '+7 (999) 999-99-99'
   });
-
-  /* LAZYLOAD
-  -------------------------------------------------- */
-
-  $('.js-lazy').lazyload();
-
-  /* INITIALIZATION
-  -------------------------------------------------- */
-
-  $tabs.init();
-  $toggler.init();
-
-  $mk.work();
 
 });

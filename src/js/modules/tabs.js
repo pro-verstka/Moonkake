@@ -27,7 +27,7 @@ var $tabs = {
       .siblings($this.options.item)
       .removeClass($this.options.active);
 
-    $(document).trigger('tabChanged', {
+    $(document).trigger('tabAfterChange', {
       root: $root,
       index: index
     });
@@ -44,6 +44,11 @@ var $tabs = {
       var _ = $(this);
       var $root = _.closest($this.options.root);
       var index = _.index();
+
+      $(document).trigger('tabBeforeChange', {
+        root: $root,
+        index: index
+      });
 
       $this.changeTab($root, index);
     });

@@ -28,16 +28,22 @@ var $utils = {
     };
   },
 
-  scrollTo: function ($object, offset) {
+  scrollTo: function ($element, offset) {
+    offset = offset || 0;
+
     $('html, body').stop().animate({
-      scrollTop: $object.offset().top - offset
-    }, 500);
+      scrollTop: $element.offset().top - offset
+    }, 500, function () {
+      $(document).trigger('scrollToAfterScroll', {
+        element: $element
+      });
+    });
   },
 
-  getScreenIndex: function ($object, offset) {
+  getScreenIndex: function ($element, offset) {
     var index = 0;
 
-    $object.each(function () {
+    $element.each(function () {
       var $self = $(this);
 
       if ($(document).scrollTop() >= $self.offset().top - offset) {

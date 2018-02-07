@@ -104,12 +104,12 @@ img
     margin-top: $gap
 
   &-row
-    +clearfix()
+    +flex()
     margin-left: -$gap
 
   &-row > &-item
     padding-left: $gap
-    float: left
+    flex: 1 0 auto
 
   &-item
 
@@ -159,13 +159,7 @@ img
   display: inline-block
 
   input
-    position: absolute
-    left: -999px
-    top: 0
-    width: 0
-    height: 0
-    visibility: hidden
-    overflow: hidden
+    +hidden()
 
     &:checked + label::after
       opacity: 1
@@ -212,13 +206,7 @@ img
   margin: 10px
 
   input
-    position: absolute
-    left: -999px
-    top: 0
-    width: 0
-    height: 0
-    visibility: hidden
-    overflow: hidden
+    +hidden()
 
   label
     display: block
@@ -256,8 +244,8 @@ img
   display: none
   background: #fff
   position: relative
-  padding: 40px
-  width: auto
+  padding: 20px
+  width: 100%
   max-width: 700px
   margin: 0 auto
 
@@ -292,11 +280,17 @@ img
   text-decoration: none
   padding: 10px 20px
   border: 0
-  border-radius: 3px
+  border-radius: 0
   background: #ccc
   color: #000
   text-align: center
   transition: color .25s, background-color .25s, opacity .25s, border-color .25s
+
+  &.button-default
+
+  &.button-primary
+
+  &.button-secondary
 
 /* Breadcrumbs */
 
@@ -359,8 +353,8 @@ img
 
     .owl-dot
       display: inline-block
-      width: 20px
-      height: 20px
+      width: 10px
+      height: 10px
       border-radius: 50%
       margin: 0 5px
       background: #eee

@@ -12,13 +12,6 @@
 .footer
   background: #eee
 
-html,
-body
-  height: 100%
-
-body
-  min-width: 320px
-
 .container
   max-width: 1200px
   margin: 0 auto
@@ -26,32 +19,51 @@ body
   padding-right: $gap
 
 .wrapper
-  min-height: 100%
-  margin: 0 auto -50px
+  height: 100%
+  display: flex
+  flex-direction: column
 
   .main
     +flex()
-    padding-bottom: 50px
+    flex: 1 0 auto
 
     .aside
-      flex: 0 0 20%
+      +flex-width(300px)
 
     .section
-      flex: 0 0 80%
+      flex: 1
 
-  .article
-    hyphens: auto
+.article
+  hyphens: auto
+
+  table
+    width: 100%
+    margin-bottom: $textMargin
+
+    td,
+    th
+      border: 1px solid #ccc
+      padding: 10px
+
+    // tr:nth-child(2n+1)
+    //   td,
+    //   th
+    //     background: #ddd
+
+  .table
+    margin-bottom: $textMargin
+    overflow: auto
 
     table
-      width: 100%
-      margin-bottom: $textMargin
+      margin-bottom: 0
 
-      td,
-      th
-        border: 1px solid #ccc
-        padding: 10px
+    &:last-child
+      margin-bottom: 0
 
-      // tr:nth-child(2n+1)
-      //   td,
-      //   th
-      //     background: #ddd
+    & + h1,
+    & + h2,
+    & + h3,
+    & + h4,
+    & + h5,
+    & + h6
+      margin-top: $textHeadMargin

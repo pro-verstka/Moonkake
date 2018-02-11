@@ -2,6 +2,10 @@
  * -------------------------------------------------- */
 
 $baseSize: 10px
+$minFontSize: 14px
+$maxFontSize: 18px
+$minViewPortWidth: 600px
+$maxViewPortWidth: 1200px
 
 $h1FontSize: 3rem
 $h2FontSize: 3rem
@@ -28,10 +32,30 @@ $headColor: #333
 
 $color-1: #000
 
+/* FUNCTIONS
+ * -------------------------------------------------- */
+
+@function strip-unit($number)
+  @if type-of($number) == 'number' and not unitless($number)
+    @return $number / ($number * 0 + 1)
+
+  @return $number
+
 /* MIXINS
  * -------------------------------------------------- */
 
 /* Common */
+
+=fontSize($minfz: $minFontSize, $maxfz: $maxFontSize, $minvw: $minViewPortWidth, $maxvw: $maxViewPortWidth)
+  $fz: strip-unit($maxfz - $minfz)
+  $vp: strip-unit($maxvw - $minvw)
+  font-size: calc(#{$minfz} + #{$fz} * ((100vw - #{$minViewPortWidth}) / #{$vp}))
+
+  @media screen and (max-width: $minvw)
+    font-size: $minfz
+
+  @media screen and (min-width: $maxViewPortWidth)
+    font-size: $maxfz
 
 =content()
   content: ''

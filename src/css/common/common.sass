@@ -13,7 +13,7 @@
   background: #eee
 
 .container
-  max-width: 1200px
+  max-width: $maxViewPortWidth
   margin: 0 auto
   padding-left: $gap
   padding-right: $gap
@@ -34,6 +34,7 @@
       flex: 1
 
 .article
+  +fontSize(14px, 20px)
   hyphens: auto
 
   table

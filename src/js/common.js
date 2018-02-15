@@ -156,7 +156,7 @@ $(function () {
   $d.on('change', '.file input[type="file"]', function () {
     var value = $(this).val();
     var $label = $(this).closest('.file').find('label span');
-    var label = $label.data();
+    var label = $label.data() || 'Выберите файл';
 
     if (value) {
       value = value.split(/(\\|\/)/g).pop();
@@ -169,8 +169,23 @@ $(function () {
   /* INPUTMASK
   -------------------------------------------------- */
 
-  $('input[type="tel"]').inputmask({
+  $('input[data-mask-phone]').inputmask({
     mask: '+7 (999) 999-99-99'
+  });
+
+  $('input[data-mask-email]').inputmask({
+    alias: 'email'
+  });
+
+  $('input[data-mask-date]').inputmask({
+    alias: 'dd.mm.yyyy',
+    placeholder: 'дд.мм.гггг'
+  });
+
+  $('input[data-mask-number]').inputmask({
+    rightAlign: false,
+    alias: 'integer',
+    allowMinus: false
   });
 
   /* TABLES

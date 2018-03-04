@@ -87,6 +87,4 @@ var $utils = {
   },
 };
 
-$(document).on('ready', function () {
-  $utils.work();
-});
+$utils.work();

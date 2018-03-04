@@ -68,6 +68,4 @@ var $toggler = {
   }
 };
 
-$(document).on('ready', function () {
-  $toggler.init();
-});
+$toggler.init();

@@ -20,10 +20,10 @@ $(function () {
   $('.js-scroll').on('click', function (event) {
     event.preventDefault();
 
-    var target = $(this).data('target');
+    var to = $(this).data('to');
     var offset = $(this).data('offset') || 0;
 
-    $utils.scrollTo($(target), offset);
+    $utils.scrollTo($(to), offset);
   });
 
   /* POPUP

@@ -55,6 +55,4 @@ var $tabs = {
   }
 };
 
-$(document).on('ready', function () {
-  $tabs.init();
-});
+$tabs.init();

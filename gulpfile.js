@@ -104,9 +104,7 @@ gulp.task('css', function () {
 		browsers: ['last 3 version', 'ie >= 11']
 	}))
 	.pipe(gcmq())
-	//.pipe(csscomb())
 	.pipe(flatten())
-	//.pipe(gulp.dest('dist/assets/css/'))
 	.pipe(rename({
 		suffix: '.min'
 	}))
@@ -148,7 +146,6 @@ gulp.task('js:common', function () {
 	return gulp.src('src/js/common.js', {
 		base: './src/js/'
 	})
-	//.pipe(gulp.dest('dist/assets/js/'))
 	.pipe(uglify())
 	.pipe(rename({
 		suffix: '.min'
@@ -163,7 +160,6 @@ gulp.task('js:app', function () {
 	return gulp.src('src/js/app.js', {
 		base: './src/js/'
 	})
-		//.pipe(gulp.dest('dist/assets/js/'))
 		.pipe(uglify())
 		.pipe(rename({
 			suffix: '.min'
@@ -189,42 +185,6 @@ gulp.task('js:bundle', function () {
 });
 
 gulp.task('js:all', ['js:bundle', 'js:common', 'js:app']);
-
-/* Backup */
-
-gulp.task('backup', function () {
-	var path = require('path');
-	var package = path.parse(__dirname);
-
-	return gulp.src([
-		'src/**/*',
-		'dist/**/*',
-		'.csscomb.json',
-		'.gitignore',
-		'gulpfile.js',
-		'package.json',
-		'README.md'
-	], {
-		base: '.'
-	})
-	.pipe(archiver(package.name + '.zip'))
-	.pipe(revall.revision({
-		transformFilename: function (file, hash) {
-			function addZero(number) {
-				return number < 10 ? '0' + number : '' + number;
-			}
-
-			var date = new Date();
-			var day = addZero(date.getDate());
-			var month = addZero(date.getMonth() + 1);
-			var year = date.getFullYear();
-			var hours = addZero(date.getHours());
-			var minutes = addZero(date.getMinutes());
-			return package.name + '.' + year + '.' + month + '.' + day + '_' + hours + '.' + minutes + '.zip';
-		}
-	}))
-	.pipe(gulp.dest('backup/'));
-});
 
 /* Common */
 

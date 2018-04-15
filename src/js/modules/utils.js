@@ -2,7 +2,7 @@
 -------------------------------------------------- */
 
 var $utils = {
-  work: function () {
+  hello: function () {
     console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru');
   },
 
@@ -87,4 +87,4 @@ var $utils = {
   },
 };
 
-$utils.work();
+$utils.hello();

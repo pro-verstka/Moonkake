@@ -101,7 +101,8 @@ gulp.task('css', function () {
 	.pipe(sass())
 	.on('error', gutil.log)
 	.pipe(autoprefixer({
-		browsers: ['last 3 version', 'ie >= 11']
+    browsers: ['last 5 version', 'ie >= 11'],
+    grid: true
 	}))
 	.pipe(gcmq())
 	.pipe(flatten())

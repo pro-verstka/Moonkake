@@ -2,9 +2,6 @@
  * -------------------------------------------------- */
 
 $baseSize: 10px
-$minFontSize: 14px
-$maxFontSize: 18px
-$minViewPortWidth: 600px
 $maxViewPortWidth: 1200px
 
 $h1FontSize: 3rem
@@ -32,30 +29,10 @@ $headColor: #333
 
 $color-1: #000
 
-/* FUNCTIONS
- * -------------------------------------------------- */
-
-@function strip-unit($number)
-  @if type-of($number) == 'number' and not unitless($number)
-    @return $number / ($number * 0 + 1)
-
-  @return $number
-
 /* MIXINS
  * -------------------------------------------------- */
 
 /* Common */
-
-=fontSize($minfz: $minFontSize, $maxfz: $maxFontSize, $minvw: $minViewPortWidth, $maxvw: $maxViewPortWidth)
-  $fz: strip-unit($maxfz - $minfz)
-  $vp: strip-unit($maxvw - $minvw)
-  font-size: calc(#{$minfz} + #{$fz} * ((100vw - #{$minViewPortWidth}) / #{$vp}))
-
-  @media screen and (max-width: $minvw)
-    font-size: $minfz
-
-  @media screen and (min-width: $maxViewPortWidth)
-    font-size: $maxfz
 
 =content()
   content: ''
@@ -69,7 +46,7 @@ $color-1: #000
   & > *
     min-width: 0
 
-=flex-width($width)
+=width($width)
   flex: 0 0 $width
   max-width: $width
 
@@ -103,7 +80,7 @@ $color-1: #000
 
 /* Grid */
 
-=column($column: 2, $vgap: $gap, $hgap: $gap, $flex: 1)
+=grid($column: 2, $vgap: $gap, $hgap: $gap)
   &
     margin-top: -$vgap
     margin-left: -$hgap
@@ -111,16 +88,5 @@ $color-1: #000
   & > *
     padding-left: $hgap
     padding-top: $vgap
-
-    @if $flex == 1
-      flex: 0 0 100%/$column
-      max-width: 100%/$column
-
-    @if $flex != 1
-      width: 100%/$column
-
-      &:nth-child(#{$i}n + 1)
-        clear: none
-
-      &:nth-child(#{$column}n + 1)
-        clear: both
+    flex: 0 0 100%/$column
+    max-width: 100%/$column

@@ -1,16 +1,8 @@
 /*!
- * Moonkake 6.0.0
+ * Moonkake 6.0.1
  *
  * https://github.com/detectiveshelby/moonkake
  */
-
-/* VAR
--------------------------------------------------- */
-
-var $d = $(document);
-var $w = $(window);
-var $h = $('html');
-var $b = $('body');
 
 $(function () {
 
@@ -51,7 +43,8 @@ $(function () {
   });
 
   $('input[data-mask-date]').inputmask({
-    alias: 'dd.mm.yyyy',
+    inputFormat: 'dd.mm.yyyy',
+    alias: 'datetime',
     placeholder: 'дд.мм.гггг'
   });
 
@@ -65,10 +58,5 @@ $(function () {
   -------------------------------------------------- */
 
   $('article table').wrap('<div class="table"></div>');
-
-  /* STICKY
-  -------------------------------------------------- */
-
-  // $('.js-sticky').hcSticky();
 
 });

@@ -4,7 +4,8 @@
 var $toggler = {
   options: {
     toggler: 'data-toggler',
-    target: 'data-target',
+    target: 'data-toggler-target',
+    close: 'data-toggler-close',
     active: '-active'
   },
 
@@ -30,20 +31,31 @@ var $toggler = {
       });
 
       _.toggleClass($this.options.active);
+      $('body').toggleClass($this.options.active + '-' + target);
 
       $('#' + target).toggleClass($this.options.active);
 
       return false;
     });
 
-    $(document).on('click', function () {
-      $('[' + $this.options.toggler + ']').removeClass($this.options.active);
+    $(document).on('click', '[' + $this.options.close + ']', function () {
+      var _ = $(this);
+      var target = _.attr($this.options.close);
 
+      $('[' + $this.options.target + '="'+ target +'"]').removeClass($this.options.active);
+      $('body').removeClass($this.options.active + '-' + target);
+      $('#' + target).removeClass($this.options.active);
+
+      return false;
+    });
+
+    $(document).on('click', function () {
       $('[' + $this.options.toggler + ']').each(function () {
         var _ = $(this);
         var target = _.attr($this.options.target);
 
         _.removeClass($this.options.active);
+        $('body').removeClass($this.options.active + '-' + target);
         $('#' + target).removeClass($this.options.active);
       });
     });
@@ -58,7 +70,7 @@ var $toggler = {
 
       $('#' + target).each(function () {
         $(this).on('click', function (event) {
-          if (!$(event.originalEvent.target).is('a')) {
+          if (!$(event.originalEvent.target).is('a') && !$(event.originalEvent.target).is('[' + $this.options.close + ']')) {
             event.stopPropagation();
           }
         });

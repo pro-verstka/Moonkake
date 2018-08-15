@@ -9,11 +9,11 @@ $(function () {
   /* SCROLL
   -------------------------------------------------- */
 
-  $('.js-scroll').on('click', function (event) {
+  $('[data-scroll-to]').on('click', function (event) {
     event.preventDefault();
 
-    var to = $(this).data('to');
-    var offset = $(this).data('offset') || 0;
+    var to = $(this).data('scroll-to-target');
+    var offset = $(this).data('scroll-to-offset') || 0;
 
     $utils.scrollTo($(to), offset);
   });
@@ -31,6 +31,15 @@ $(function () {
     autoplayTimeout: 5000
   });
 
+  // $('.carousel').slick({
+  //   accessibility: false,
+  //   autoplay: true,
+  //   autoplaySpeed: 5000,
+  //   arrows: true,
+  //   dots: true,
+  //   infinite: true
+  // });
+
   /* INPUTMASK
   -------------------------------------------------- */
 
@@ -38,9 +47,9 @@ $(function () {
     mask: '+7 (999) 999-99-99'
   });
 
-  $('input[type="email"]').inputmask({
-    alias: 'email'
-  });
+  // $('input[type="email"]').inputmask({
+  //   alias: 'email'
+  // });
 
   $('input[data-mask-date]').inputmask({
     inputFormat: 'dd.mm.yyyy',

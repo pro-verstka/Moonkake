@@ -1,7 +1,7 @@
 /* POPUP
 -------------------------------------------------- */
 
-// $('.js-popup').magnificPopup({
+// $('[data-popup]').magnificPopup({
 //   type: 'inline',
 //   midClick: true,
 //   closeBtnInside: true,
@@ -10,7 +10,7 @@
 //   fixedContentPos: false
 // });
 
-// $('.js-image').magnificPopup({
+// $('[data-popup-image]').magnificPopup({
 //   type: 'image',
 //   closeOnContentClick: true,
 //   removalDelay: 300,
@@ -20,7 +20,7 @@
 //   }
 // });
 
-// $('.js-gallery').each(function() {
+// $('[data-popup-gallery]').each(function() {
 //   $(this).magnificPopup({
 //     delegate: 'a',
 //     type: 'image',
@@ -39,20 +39,20 @@
 //   });
 // });
 
-$('.js-popup').fancybox({
+$('[data-popup]').fancybox({
   defaultType: 'inline',
   animationEffect: 'fade',
   baseClass: 'fancybox-popup-custom',
   touch: false
 });
 
-$('.js-image').fancybox({
+$('[data-popup-image]').fancybox({
   defaultType: 'image',
   animationEffect: 'fade',
   baseClass: 'fancybox-image-custom'
 });
 
-$('.js-gallery').each(function() {
+$('[data-popup-gallery]').each(function() {
   var $collection = $(this).find('a');
 
   $collection.on('click', function() {

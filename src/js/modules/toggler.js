@@ -4,7 +4,7 @@
 var $toggler = {
   options: {
     toggler: 'data-toggler',
-    target: 'data-toggler-target',
+    target: 'data-toggler-toggle',
     close: 'data-toggler-close',
     active: '-active'
   },

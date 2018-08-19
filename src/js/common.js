@@ -15,7 +15,7 @@ $(function () {
     var to = $(this).data('scroll-to-target');
     var offset = $(this).data('scroll-to-offset') || 0;
 
-    $utils.scrollTo($(to), offset);
+    $utils.scrollTo($(to), '', offset);
   });
 
   /* CAROUSEL

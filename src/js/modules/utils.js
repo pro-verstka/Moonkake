@@ -28,11 +28,12 @@ var $utils = {
     };
   },
 
-  scrollTo: function ($element, offset) {
+  scrollTo: function ($element, $context, offset) {
     offset = offset || 0;
+    $context = $($context) || $('html, body');
 
-    $('html, body').stop().animate({
-      scrollTop: $element.offset().top - offset
+    $context.stop().animate({
+      scrollTop: $element.offset().top + $context.scrollTop() - offset
     }, 500, function () {
       $(document).trigger('scrollToAfterScroll', {
         element: $element
@@ -40,18 +41,19 @@ var $utils = {
     });
   },
 
-  getScreenIndex: function ($element, offset) {
-    var index = 0;
+  getSection: function ($element, $context, offset) {
+    var $item = 0;
+    $context = $($context) || $(document);
 
     $element.each(function () {
       var $self = $(this);
 
-      if ($(document).scrollTop() >= $self.offset().top - offset) {
-        index = $self.index();
+      if ($context.scrollTop() >= $self.offset().top + $context.scrollTop() - offset) {
+        $item = $self;
       }
     });
 
-    return index;
+    return $item;
   },
 
   numberFormat: function (number, decimals, dec_point, thousands_sep) {

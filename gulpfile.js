@@ -29,11 +29,11 @@ var
   pug = require('gulp-pug'),
 
   // sprites
-  spritesmith = require('gulp.spritesmith'),
+  spritesmith = require('gulp.spritesmith');
 
   // backup
-  revall = require('gulp-rev-all'),
-  archiver = require('gulp-archiver');
+  // revall = require('gulp-rev-all'),
+  // archiver = require('gulp-archiver');
 
 /* TASKS
 -------------------------------------------------- */
@@ -175,8 +175,8 @@ gulp.task('js:bundle', function () {
   return gulp.src([
     'src/js/vendor/**/*.js',
     '!src/js/vendor/**/_*.js',
-    'src/js/modules/**/*.js',
-    '!src/js/modules/**/_*.js',
+    'src/js/components/**/*.js',
+    '!src/js/components/**/_*.js',
     'src/js/common.js'
   ], {
     base: '.'

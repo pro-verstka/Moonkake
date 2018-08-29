@@ -1,5 +1,5 @@
 /*!
- * Moonkake 6.0.1
+ * Moonkake 6.0.2
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -43,29 +43,25 @@ $(function () {
   /* INPUTMASK
   -------------------------------------------------- */
 
-  $('input[type="tel"]').inputmask({
-    mask: '+7 (999) 999-99-99'
-  });
-
-  // $('input[type="email"]').inputmask({
-  //   alias: 'email'
+  // $('input[type="tel"]').inputmask({
+  //   mask: '+7 (999) 999-99-99'
   // });
 
-  $('input[data-mask-date]').inputmask({
-    inputFormat: 'dd.mm.yyyy',
-    alias: 'datetime',
-    placeholder: 'дд.мм.гггг'
-  });
+  // $('input[data-mask-date]').inputmask({
+  //   inputFormat: 'dd.mm.yyyy',
+  //   alias: 'datetime',
+  //   placeholder: 'дд.мм.гггг'
+  // });
 
-  $('input[data-mask-number]').inputmask({
-    rightAlign: false,
-    alias: 'integer',
-    allowMinus: false
-  });
+  // $('input[data-mask-number]').inputmask({
+  //   rightAlign: false,
+  //   alias: 'integer',
+  //   allowMinus: false
+  // });
 
   /* TABLES
   -------------------------------------------------- */
 
-  $('article table').wrap('<div class="table"></div>');
+  //$('article table').wrap('<div class="table"></div>');
 
 });

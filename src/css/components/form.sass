@@ -1,0 +1,31 @@
+.form
+  &-group + &-group
+    margin-top: $gap
+
+  &-row
+    +flex()
+    margin-left: -$gap
+
+  &-row > &-item
+    padding-left: $gap
+    flex: 1 0 auto
+
+  &-item
+
+  &-label
+    display: block
+
+  &-field
+    width: 100%
+    border: 1px solid #eeeeee
+    border-radius: 0
+    padding: 10px 10px
+    color: #000000
+
+    &:focus
+      border-color: #dddddd
+
+  &-submit
+
+  &-error
+    color: red

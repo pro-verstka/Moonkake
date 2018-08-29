@@ -12,7 +12,7 @@ html(lang="ru")
     meta(name="keywords" content="")
     meta(name="description" content="")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    //- meta(name="format-detection" content="telephone=no")
+    meta(name="format-detection" content="telephone=no")
     link(rel="stylesheet" href='assets/css/general.min.css' + '?v=' + time)
 
   body
@@ -31,17 +31,9 @@ html(lang="ru")
           li.list-item: a.list-link(href="#") item01
       // navigation
 
-      block main
-        main.main
-          aside.aside aside
-          // aside
-
-          section.section
-            block content
-              article.article
-                h1 {{message}}
-          // section
-        // main
+      main.main
+        block main
+      // main
 
       footer.footer footer
       // footer
@@ -51,7 +43,6 @@ html(lang="ru")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     //script(src="https://cdn.jsdelivr.net/npm/vue")
     script(src='assets/js/bundle.min.js' + '?v=' + time)
-    //script(src='assets/js/common.min.js' + '?v=' + time)
     //script(src="assets/js/app.min.js")
 
     block js

@@ -30,10 +30,19 @@ var $utils = {
 
   scrollTo: function ($element, $context, offset) {
     offset = offset || 0;
-    $context = $($context) || $('html, body');
+    var scrollTop = 0;
+
+    if ($context == '') {
+      $context = $('html, body');
+    }
+
+    if ($context != '') {
+      $context = $($context);
+      scrollTop = $context.scrollTop();
+    }
 
     $context.stop().animate({
-      scrollTop: $element.offset().top + $context.scrollTop() - offset
+      scrollTop: $element.offset().top + scrollTop - offset
     }, 500, function () {
       $(document).trigger('scrollToAfterScroll', {
         element: $element
@@ -43,12 +52,21 @@ var $utils = {
 
   getSection: function ($element, $context, offset) {
     var $item = 0;
-    $context = $($context) || $(document);
+    var scrollTop = 0;
+
+    if ($context == '') {
+      $context = $(document);
+    }
+
+    if ($context != '') {
+      $context = $($context);
+      scrollTop = $context.scrollTop();
+    }
 
     $element.each(function () {
       var $self = $(this);
 
-      if ($context.scrollTop() >= $self.offset().top + $context.scrollTop() - offset) {
+      if ($context.scrollTop() >= $self.offset().top + scrollTop - offset) {
         $item = $self;
       }
     });
@@ -87,6 +105,20 @@ var $utils = {
 
     return km + kw + kd;
   },
+
+  isTouchDevice: function() {
+    var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+    var mq = function(query) {
+      return window.matchMedia(query).matches;
+    }
+
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      return true;
+    }
+
+    var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+    return mq(query);
+  }
 };
 
 $utils.hello();

@@ -1,0 +1,23 @@
+/* COMMON
+ * -------------------------------------------------- */
+
+.container
+  max-width: $maxViewPortWidth + $gap * 2
+  margin: 0 auto
+  padding-left: $gap
+  padding-right: $gap
+
+.wrapper
+  height: 100%
+  display: flex
+  flex-direction: column
+
+  .main
+    +flex()
+    flex: 1 0 auto
+
+    .aside
+      +width(300px)
+
+    .section
+      flex: 1 0 auto

@@ -1,0 +1,16 @@
+.select
+  position: relative
+  display: inline-block
+
+  &::after
+    +content()
+
+  select
+    appearance: none
+    width: 100%
+
+  select::-ms-expand
+    display: none
+
+  // option[disabled]
+  //  display:none

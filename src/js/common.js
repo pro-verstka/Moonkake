@@ -4,12 +4,12 @@
  * https://github.com/detectiveshelby/moonkake
  */
 
-$(function () {
+$(() => {
 
   /* SCROLL
   -------------------------------------------------- */
 
-  $('[data-scroll-to]').on('click', function (event) {
+  $('[data-scroll-to]').on('click', (event) => {
     event.preventDefault();
 
     var to = $(this).data('scroll-to-target');

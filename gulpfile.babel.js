@@ -14,7 +14,7 @@ var
   // css
   gcmq = require('gulp-group-css-media-queries'),
   autoprefixer = require('gulp-autoprefixer'),
-  csscomb = require('gulp-csscomb'),
+  //csscomb = require('gulp-csscomb'),
   cssnano = require('gulp-cssnano'),
 
   //sass
@@ -22,6 +22,7 @@ var
   glob = require('gulp-sass-glob'),
 
   // js
+  babel = require('gulp-babel'),
   uglify = require('gulp-uglify'),
   concat = require('gulp-concat'),
 
@@ -143,19 +144,18 @@ gulp.task('img', function () {
 });
 
 /* Scripts */
-// gulp.task('js:common', function () {
-//   return gulp.src('src/js/common.js', {
-//     base: './src/js/'
-//   })
-//   .pipe(uglify())
-//   .pipe(rename({
-//     suffix: '.min'
-//   }))
-//   .pipe(gulp.dest('dist/assets/js/'))
-//   .on('end', function() {
-//     browserSync.reload();
-//   });
-// });
+gulp.task('js:common', function () {
+  return gulp.src('src/js/common.js')
+  .pipe(babel())
+  .pipe(uglify())
+  .pipe(rename({
+    suffix: '.min'
+  }))
+  .pipe(gulp.dest('dist/assets/js'))
+  .on('end', function() {
+    browserSync.reload();
+  });
+});
 
 // gulp.task('js:app', function () {
 //   return gulp.src('src/js/app.js', {
@@ -176,8 +176,7 @@ gulp.task('js:bundle', function () {
     'src/js/vendor/**/*.js',
     '!src/js/vendor/**/_*.js',
     'src/js/components/**/*.js',
-    '!src/js/components/**/_*.js',
-    'src/js/common.js'
+    '!src/js/components/**/_*.js'
   ], {
     base: '.'
   })
@@ -187,7 +186,7 @@ gulp.task('js:bundle', function () {
 });
 
 //gulp.task('js:all', ['js:bundle', 'js:common', 'js:app']);
-gulp.task('js:all', ['js:bundle']);
+gulp.task('js:all', ['js:bundle', 'js:common']);
 
 /* Common */
 

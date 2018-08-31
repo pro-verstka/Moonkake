@@ -36,62 +36,69 @@ $color-1: #000
 
 // width: vw(20px)
 @function vw($size, $width: $maxViewPortWidth)
-  $vw: ($width * 0.01) * 1px
-  @return ($size / $vw) * 1vw
+	$vw: ($width * 0.01) * 1px
+	@return ($size / $vw) * 1vw
 
 =content()
-  content: ''
-  display: block
-  position: absolute
+	content: ''
+	display: block
+	position: absolute
 
 =flex()
-  display: flex
-  flex-wrap: wrap
+	display: flex
+	flex-wrap: wrap
 
-  & > *
-    min-width: 0
+	& > *
+		min-width: 0
 
 =width($width)
-  flex: 0 0 $width
-  max-width: $width
+	flex: 0 0 $width
+	max-width: $width
 
 =clearfix()
-  &::before,
-  &::after
-    content: ' '
-    display: table
+	&::before,
+	&::after
+		content: ' '
+		display: table
 
-  &::after
-    clear: both
+	&::after
+		clear: both
 
 =hidden()
-  position: absolute
-  left: 0
-  top: 0
-  width: 0
-  height: 0
-  visibility: hidden
-  overflow: hidden
+	position: absolute
+	left: 0
+	top: 0
+	width: 0
+	height: 0
+	visibility: hidden
+	overflow: hidden
 
 /* Font-face */
 
+// =font-face($family, $filename: $family, $weight: normal, $style: normal)
+// 	@font-face
+// 		font-family: "#{$family}"
+// 		src: url('../fonts/#{$filename}.eot')
+// 		src: url('../fonts/#{$filename}.eot?#iefix') format('embedded-opentype'), url('../fonts/#{$filename}.woff2') format('woff2'), url('../fonts/#{$filename}.woff') format('woff'), url('../fonts/#{$filename}.ttf') format('truetype'), url('../fonts/#{$filename}.svg##{$filename}') format('svg')
+// 		font-weight: $weight
+// 		font-style: $style
+
 =font-face($family, $filename: $family, $weight: normal, $style: normal)
-  @font-face
-    font-family: "#{$family}"
-    src: url('../fonts/#{$filename}.eot')
-    src: url('../fonts/#{$filename}.eot?#iefix') format('embedded-opentype'), url('../fonts/#{$filename}.woff2') format('woff2'), url('../fonts/#{$filename}.woff') format('woff'), url('../fonts/#{$filename}.ttf') format('truetype'), url('../fonts/#{$filename}.svg##{$filename}') format('svg')
-    font-weight: $weight
-    font-style: $style
+	@font-face
+		font-family: "#{$family}"
+		src: url('../fonts/#{$filename}.woff2') format('woff2'), url('../fonts/#{$filename}.woff') format('woff')
+		font-weight: $weight
+		font-style: $style
 
 /* Grid */
 
 =grid($column: 2, $vgap: $gap, $hgap: $gap)
-  &
-    margin-top: -$vgap
-    margin-left: -$hgap
+	&
+		margin-top: -$vgap
+		margin-left: -$hgap
 
-  & > *
-    padding-left: $hgap
-    padding-top: $vgap
-    flex: 0 0 100%/$column
-    max-width: 100%/$column
+	& > *
+		padding-left: $hgap
+		padding-top: $vgap
+		flex: 0 0 100%/$column
+		max-width: 100%/$column

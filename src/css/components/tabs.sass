@@ -1,22 +1,22 @@
 .tabs
-  &-title
-    +flex()
+	&-title
+		+flex()
 
-    .tabs-item
-      cursor: pointer
+		.tabs-item
+			cursor: pointer
 
-      &.-active
+			&.-active
 
-  &-content
-    .tabs-item
-      display: none
+	&-content
+		.tabs-item
+			display: none
 
-      &.-active
-        display: block
-        animation: tabsIn 1s forwards
+			&.-active
+				display: block
+				animation: tabsIn 1s forwards
 
 @keyframes tabsIn
-  0%
-    opacity: 0
-  100%
-    opacity: 1
+	0%
+		opacity: 0
+	100%
+		opacity: 1

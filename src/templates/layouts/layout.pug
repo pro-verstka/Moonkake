@@ -1,49 +1,46 @@
 -
-  var time = new Date().getTime();
+	var time = new Date().getTime();
 
 doctype html
 
 html(lang="ru")
 
-  head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible" content="IE=Edge")
-    title title
-    meta(name="keywords" content="")
-    meta(name="description" content="")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta(name="format-detection" content="telephone=no")
-    link(rel="stylesheet" href='assets/css/general.min.css' + '?v=' + time)
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=Edge")
+		title title
+		meta(name="keywords" content="")
+		meta(name="description" content="")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="format-detection" content="telephone=no")
+		link(rel="stylesheet" href='assets/css/app.min.css' + '?v=' + time)
 
-  body
+	body
 
-    div.wrapper
-      header.header
-        a.logotype(href="/") title
-      // header
+		div.wrapper
+			header.header
+				a.logotype(href="/") title
+			// header
 
-      nav.navigation
-        ul.list.list-flex.navigation-primary
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-          li.list-item: a.list-link(href="#") item01
-      // navigation
+			nav.navigation
+				ul.list.list-flex.navigation-primary
+					li.list-item: a.list-link(href="#") item01
+					li.list-item: a.list-link(href="#") item01
+					li.list-item: a.list-link(href="#") item01
+					li.list-item: a.list-link(href="#") item01
+					li.list-item: a.list-link(href="#") item01
+			// navigation
 
-      main.main
-        block main
-      // main
+			main.main
+				block main
+			// main
 
-      footer.footer footer
-      // footer
-    // wrapper
+			footer.footer footer
+			// footer
+		// wrapper
 
-    // JS
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
-    //script(src="https://cdn.jsdelivr.net/npm/vue")
-    script(src='assets/js/bundle.min.js' + '?v=' + time)
-    script(src='assets/js/common.min.js' + '?v=' + time)
-    //script(src="assets/js/app.min.js")
+		// JS
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		script(src='assets/js/app.min.js' + '?v=' + time)
 
-    block js
+		block js

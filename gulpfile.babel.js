@@ -32,7 +32,7 @@ const pug = require('gulp-pug');
 const spritesmith = require('gulp.spritesmith');
 
 let buildMode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-let isProd = buildMode === 'production' ? true : false;
+let isProd = buildMode === 'production';
 
 /* TASKS
 -------------------------------------------------- */

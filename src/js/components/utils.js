@@ -10,7 +10,7 @@ var $utils = {
 		var query = {};
 
 		if (window.location.search) {
-			var tmp;
+			let tmp;
 			var q = window.location.search;
 			q = q.slice(1);
 			q = q.split('&');
@@ -18,25 +18,25 @@ var $utils = {
 			for (var i = 0; i < q.length; i++) {
 				tmp = q[i].split('=');
 				query[tmp[0]] = decodeURIComponent(tmp[1]);
-			};
+			}
 
 			if (key) {
 				return query[key];
 			} else {
 				return query;
-			};
-		};
+			}
+		}
 	},
 
 	scrollTo: function ($element, $context, offset) {
 		offset = offset || 0;
-		var scrollTop = 0;
+		let scrollTop = 0;
 
-		if ($context == '') {
+		if ($context === '') {
 			$context = $('html, body');
 		}
 
-		if ($context != '') {
+		if ($context !== '') {
 			$context = $($context);
 			scrollTop = $context.scrollTop();
 		}
@@ -51,14 +51,14 @@ var $utils = {
 	},
 
 	getSection: function ($element, $context, offset) {
-		var $item = 0;
-		var scrollTop = 0;
+		let $item = 0;
+		let scrollTop = 0;
 
-		if ($context == '') {
+		if ($context === '') {
 			$context = $(document);
 		}
 
-		if ($context != '') {
+		if ($context !== '') {
 			$context = $($context);
 			scrollTop = $context.scrollTop();
 		}
@@ -80,10 +80,10 @@ var $utils = {
 		if (isNaN(decimals = Math.abs(decimals))) {
 			decimals = 2;
 		}
-		if (dec_point == undefined) {
+		if (dec_point === undefined) {
 			dec_point = ',';
 		}
-		if (thousands_sep == undefined) {
+		if (thousands_sep === undefined) {
 			thousands_sep = '.';
 		}
 

@@ -199,10 +199,13 @@ let webpackConfig = {
 
 gulp.task('js', () => {
 	return gulp.src('./src/js/app.js')
-		.pipe(webpackStream(webpackConfig))
-		.on('error', notify.onError('Error: <%= error.message %>'))
+		//.pipe(webpackStream(webpackConfig))
+		.pipe(webpackStream(webpackConfig, null, (err, stats) => {
+			if (stats.compilation.errors.length) {
+				notify('Error: <%= stats.compilation.errors[0].error %>');
+			}
+		}))
 		.pipe(gulpif(isProd, uglify()))
-		.on('error', notify.onError('Error: <%= error.message %>'))
 		.pipe(gulp.dest('dist/assets/js/'))
 		.on('end', function() {
 			browserSync.reload();

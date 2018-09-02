@@ -54,3 +54,5 @@ let $tabs = {
 		});
 	}
 };
+
+$tabs.init();

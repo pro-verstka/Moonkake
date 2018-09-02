@@ -1,3 +1,6 @@
+import 'magnific-popup'
+//import '@fancyapps/fancybox'
+
 /* POPUP
 -------------------------------------------------- */
 

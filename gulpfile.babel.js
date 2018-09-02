@@ -97,7 +97,9 @@ gulp.task('css', () => {
 		base: '.'
 	})
 	.pipe(glob())
-	.pipe(sass())
+	.pipe(sass({
+		includePaths: ['node_modules']
+	}))
 	.on('error', notify.onError('Error: <%= error.message %>'))
 	.pipe(autoprefixer({
 		browsers: ['last 5 version', 'ie >= 10'],

@@ -1,7 +1,7 @@
 /* UTILS
 -------------------------------------------------- */
 
-var $utils = {
+let Utils = {
 	hello: function () {
 		console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru');
 	},
@@ -32,13 +32,13 @@ var $utils = {
 		offset = offset || 0;
 		let scrollTop = 0;
 
-		if ($context === '') {
-			$context = $('html, body');
-		}
-
 		if ($context !== '') {
 			$context = $($context);
 			scrollTop = $context.scrollTop();
+		}
+
+		if ($context === '') {
+			$context = $('html, body');
 		}
 
 		$context.stop().animate({
@@ -54,13 +54,13 @@ var $utils = {
 		let $item = 0;
 		let scrollTop = 0;
 
-		if ($context === '') {
-			$context = $(document);
-		}
-
 		if ($context !== '') {
 			$context = $($context);
 			scrollTop = $context.scrollTop();
+		}
+
+		if ($context === '') {
+			$context = $(document);
 		}
 
 		$element.each(function () {
@@ -121,4 +121,4 @@ var $utils = {
 	}
 };
 
-$utils.hello();
+export default Utils;

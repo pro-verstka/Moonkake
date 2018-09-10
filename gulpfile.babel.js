@@ -205,7 +205,12 @@ gulp.task('js', () => {
 				notify('Error: <%= stats.compilation.errors[0].error %>');
 			}
 		}))
-		.pipe(gulpif(isProd, uglify()))
+		//.pipe(gulpif(isProd, uglify()))
+		.pipe(gulpif(isProd, uglify({
+			compress: {
+				collapse_vars: false
+			}
+		})))
 		.pipe(gulp.dest('dist/assets/js/'))
 		.on('end', function() {
 			browserSync.reload();

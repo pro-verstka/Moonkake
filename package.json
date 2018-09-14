@@ -4,8 +4,8 @@
 	"description": "Moonkake start kit",
 	"main": "gulpfile.babel.js",
 	"scripts": {
-		"dev": "NODE_ENV='development' gulp",
-		"build": "NODE_ENV='production' gulp build"
+		"dev": "cross-env NODE_ENV=development gulp",
+		"build": "cross-env NODE_ENV=production gulp build"
 	},
 	"author": "p1rate",
 	"license": "MIT",
@@ -20,6 +20,7 @@
 		"babel-loader": "^8.0.0",
 		"babel-preset-env": "^1.7.0",
 		"browser-sync": "^2.24.7",
+		"cross-env": "^5.2.0",
 		"gulp": "^3.9.1",
 		"gulp-autoprefixer": "^6.0.0",
 		"gulp-concat": "^2.6.1",

@@ -5,31 +5,38 @@
 */
 
 import Utils from './components/utils';
-import './components/tabs';
+import Tabs from './components/tabs';
 import './components/toggler';
 import './components/popup';
 import './components/carousel';
 import './components/inputmask';
 
-$(function() {
+//$(function() {
 
 	Utils.hello();
 
-	/* SCROLL
+	/* SCROLL TO
 	-------------------------------------------------- */
 
-	$('[data-scroll-to]').on('click', function(event) {
-		event.preventDefault();
+	document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
+		scrollTo.addEventListener('click', event => {
+			event.preventDefault();
 
-		var to = $(this).data('scroll-to-target');
-		var offset = $(this).data('scroll-to-offset') || 0;
+			let target = event.target.dataset.scrollTo;
+			let offset = event.target.dataset.scrollToOffset || 0;
 
-		Utils.scrollTo($(to), '', offset);
+			Utils.scrollTo($(target), '', offset);
+		})
 	});
+
+	/* TABS
+	-------------------------------------------------- */
+
+	let tabs = new Tabs();
 
 	/* TABLES
 	-------------------------------------------------- */
 
 	//$('article table').wrap('<div class="table"></div>');
 
-});
+//});

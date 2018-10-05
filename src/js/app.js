@@ -6,6 +6,7 @@
 
 import Utils from './components/utils';
 import Tabs from './components/tabs';
+//import Sticky from './components/sticky';
 import './components/toggler';
 import './components/popup';
 import './components/carousel';

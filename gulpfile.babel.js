@@ -184,7 +184,7 @@ let webpackConfig = {
 		rules: [
 			{
 				test: /\.(js)$/,
-				exclude: /(node_modules)/,
+				exclude: [/node_modules\/(?!(swiper|dom7)\/).*/, /\.test\.jsx?$/],
 				loader: 'babel-loader',
 				query: {
 					presets: ['@babel/preset-env']

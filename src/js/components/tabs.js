@@ -59,11 +59,11 @@
 
 let Tabs = function(options) {
 	let defaults = {
-		root: '.tabs:not(.tabs-nojs)',
+		root: '.tabs:not(.--no-js)',
 		title: '.tabs-title',
 		content: '.tabs-content',
 		item: '.tabs-item',
-		active: '-active'
+		active: '--active'
 	}
 
 	if (typeof options === 'object') {

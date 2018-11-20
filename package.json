@@ -41,6 +41,7 @@
 		"webpack-stream": "^5.1.1"
 	},
 	"dependencies": {
+		"@babel/polyfill": "^7.0.0",
 		"@fancyapps/fancybox": "^3.4.1",
 		"inputmask": "^4.0.0",
 		"jquery": "^3.3.1",

@@ -4,6 +4,7 @@
 * https://github.com/detectiveshelby/moonkake
 */
 
+import '@babel/polyfill';
 import Utils from './components/utils';
 import Tabs from './components/tabs';
 //import Sticky from './components/sticky';
@@ -12,32 +13,34 @@ import './components/popup';
 import './components/carousel';
 import './components/inputmask';
 
-//$(function() {
+Utils.hello();
 
-	Utils.hello();
+/* SCROLL TO
+-------------------------------------------------- */
 
-	/* SCROLL TO
-	-------------------------------------------------- */
+document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
+	scrollTo.addEventListener('click', event => {
+		event.preventDefault();
 
-	document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
-		scrollTo.addEventListener('click', event => {
-			event.preventDefault();
+		let el = event.target;
 
-			let target = event.target.dataset.scrollTo;
-			let offset = event.target.dataset.scrollToOffset || 0;
+		if (scrollTo != el) {
+			el = event.target.parentElement;
+		}
 
-			Utils.scrollTo($(target), '', offset);
-		})
-	});
+		let target = el.dataset.scrollTo;
+		let offset = el.dataset.scrollToOffset || 0;
 
-	/* TABS
-	-------------------------------------------------- */
+		Utils.scrollTo($(target), '', offset);
+	})
+});
 
-	let tabs = new Tabs();
+/* TABS
+-------------------------------------------------- */
 
-	/* TABLES
-	-------------------------------------------------- */
+let tabs = new Tabs();
 
-	//$('article table').wrap('<div class="table"></div>');
+/* TABLES
+-------------------------------------------------- */
 
-//});
+//$('article table').wrap('<div class="table"></div>');

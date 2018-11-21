@@ -1,36 +1,76 @@
-/* COUNT
--------------------------------------------------- */
+const Counter = function (options) {
 
-$('.count').on('click', '.count-plus, .count-minus', function (event) {
-	var _ = $(this),
-		$input = _.closest('.count').find('input'),
-		value = parseInt($input.val()),
-		min = $input.attr('min') || '',
-		max = $input.attr('max') || '';
-
-	if (event.currentTarget.className === 'count-minus') {
-		value -= 1;
-		if (value <= 1) value = 1;
+	let defaults = {
+		root: '.counter',
+		plus: '.counter-plus',
+		minus: '.counter-minus'
 	}
 
-	if (event.currentTarget.className === 'count-plus') {
-		value += 1;
+	if (typeof options === 'object') {
+		Object.keys(options).forEach(key => {
+			defaults[key] = options[key];
+		});
 	}
 
-	$input.val(value);
+	this.options = defaults;
 
-	$(document).trigger('inputCountChanged', {
-		input: $input,
-		value: value
+	this.handle();
+
+};
+
+Counter.prototype.handle = function() {
+
+	document.querySelectorAll(this.options.root).forEach(el => {
+		let input = el.querySelector('input');
+		let min = input.dataset.min || '';
+		let max = input.dataset.max || '';
+
+		el.querySelector(this.options.plus).addEventListener('click', function () {
+			let value = parseInt(input.value);
+
+			value += 1;
+
+			if (max && value >= max) {
+				value = max;
+			}
+
+			input.value = value;
+			input.dispatchEvent(new CustomEvent('change'));
+		});
+
+		el.querySelector(this.options.minus).addEventListener('click', function () {
+			let value = parseInt(input.value);
+
+			value -= 1;
+
+			if (min && value <= min) {
+				value = min;
+			} else if (value <= 1) {
+				value = 1;
+			}
+
+			input.value = value;
+			input.dispatchEvent(new CustomEvent('change'));
+		});
+
+		input.addEventListener('blur', function() {
+			if (this.value === '' || this.value === '0') {
+				if (min) {
+					this.value = min;
+				} else {
+					this.value = 1;
+				}
+			}
+		});
+
+		input.addEventListener('keyup', function() {
+			let value = input.value.replace(/[^0-9]/, '');
+
+			input.value = value;
+		});
+
 	});
 
-	return false;
-});
+};
 
-$('.count').on('focusout', 'input', function (event) {
-	var _ = $(this);
-
-	if (_.val() === '' || _.val() === '0') {
-		_.val(1);
-	}
-});
+export default Counter;

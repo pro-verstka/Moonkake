@@ -3,10 +3,11 @@
 *
 * https://github.com/detectiveshelby/moonkake
 */
+import './components/polyfills';
 
-import '@babel/polyfill';
 import Utils from './components/utils';
 import Tabs from './components/tabs';
+import Counter from './components/count';
 //import Sticky from './components/sticky';
 import './components/toggler';
 import './components/popup';
@@ -24,7 +25,7 @@ document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
 
 		let el = event.target;
 
-		if (scrollTo != el) {
+		if (scrollTo !== el) {
 			el = event.target.parentElement;
 		}
 
@@ -39,6 +40,11 @@ document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
 -------------------------------------------------- */
 
 let tabs = new Tabs();
+
+/* COUNT
+-------------------------------------------------- */
+
+let counter = new Counter();
 
 /* TABLES
 -------------------------------------------------- */

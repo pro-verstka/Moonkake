@@ -3,12 +3,12 @@
 *
 * https://github.com/detectiveshelby/moonkake
 */
-import './components/polyfills';
 
+import './components/polyfills';
 import Utils from './components/utils';
 import Tabs from './components/tabs';
 import Counter from './components/count';
-//import Sticky from './components/sticky';
+import Accordion from './components/accordion';
 import './components/toggler';
 import './components/popup';
 import './components/carousel';
@@ -45,6 +45,11 @@ let tabs = new Tabs();
 -------------------------------------------------- */
 
 let counter = new Counter();
+
+/* ACCORDION
+-------------------------------------------------- */
+
+let accordion = new Accordion();
 
 /* TABLES
 -------------------------------------------------- */

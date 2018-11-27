@@ -1,0 +1,14 @@
+.accordion
+  &-header
+    cursor: pointer
+
+  &-body
+    display: none
+
+  &-item + &-item
+    margin-top: 20px
+
+  &-item
+    &.--active
+      .accordion-body
+        display: block

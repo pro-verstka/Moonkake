@@ -7,15 +7,15 @@ let Utils = {
 	},
 
 	getPageQuery: function (key) {
-		var query = {};
+		let query = {};
 
 		if (window.location.search) {
 			let tmp;
-			var q = window.location.search;
+			let q = window.location.search;
 			q = q.slice(1);
 			q = q.split('&');
 
-			for (var i = 0; i < q.length; i++) {
+			for (let i = 0; i < q.length; i++) {
 				tmp = q[i].split('=');
 				query[tmp[0]] = decodeURIComponent(tmp[1]);
 			}
@@ -107,8 +107,8 @@ let Utils = {
 	},
 
 	isTouchDevice: function() {
-		var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-		var mq = function(query) {
+		let prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+		let mq = function(query) {
 			return window.matchMedia(query).matches;
 		}
 
@@ -116,7 +116,8 @@ let Utils = {
 			return true;
 		}
 
-		var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+		let query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+
 		return mq(query);
 	}
 };

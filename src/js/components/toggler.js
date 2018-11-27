@@ -6,7 +6,7 @@ var $toggler = {
 		toggler: 'data-toggler',
 		target: 'data-toggler-toggle',
 		close: 'data-toggler-close',
-		active: '-active'
+		active: '--active'
 	},
 
 	init: function ($options) {

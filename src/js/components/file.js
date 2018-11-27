@@ -1,15 +1,19 @@
 /* FILE
 -------------------------------------------------- */
 
-$(document).on('change', '.file input[type="file"]', function () {
-	var value = $(this).val();
-	var $label = $(this).closest('.file').find('label span');
-	var label = $label.data() || 'Выберите файл';
+document.querySelectorAll('.file').forEach(el => {
+	let label = el.querySelector('label span');
+	let text = el.dataset.text || 'Выберите файл';
 
-	if (value) {
-		value = value.split(/(\\|\/)/g).pop();
-		$label.text(value);
-	} else {
-		$label.text(label.label);
-	}
+	el.querySelector('input[type="file"]').addEventListener('onchange', function () {
+		let value = this.value;
+
+		if (value) {
+			value = value.split(/(\\|\/)/g).pop();
+		} else {
+			value = text;
+		}
+
+		label.innerText = value;
+	});
 });

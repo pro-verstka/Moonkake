@@ -35,7 +35,7 @@ Counter.prototype.handle = function() {
 			}
 
 			input.value = value;
-			input.dispatchEvent(new CustomEvent('change'));
+			input.dispatchEvent(new CustomEvent('change', {'bubbles': true}));
 		});
 
 		el.querySelector(this.options.minus).addEventListener('click', function () {
@@ -50,7 +50,7 @@ Counter.prototype.handle = function() {
 			}
 
 			input.value = value;
-			input.dispatchEvent(new CustomEvent('change'));
+			input.dispatchEvent(new CustomEvent('change', {'bubbles': true}));
 		});
 
 		input.addEventListener('blur', function() {

@@ -146,34 +146,6 @@ gulp.task('img', () => {
 });
 
 /* Scripts */
-// gulp.task('js:common', function () {
-//   return gulp.src('src/js/common.js')
-//   .pipe(babel())
-//   .pipe(uglify())
-//   .pipe(rename({
-//     suffix: '.min'
-//   }))
-//   .pipe(gulp.dest('dist/assets/js'))
-//   .on('end', function() {
-//     browserSync.reload();
-//   });
-// });
-
-// gulp.task('js:bundle', function () {
-//   return gulp.src([
-//     'src/js/vendor/**/*.js',
-//     '!src/js/vendor/**/_*.js',
-//     'src/js/components/**/*.js',
-//     '!src/js/components/**/_*.js'
-//   ], {
-//     base: '.'
-//   })
-//   .pipe(concat('bundle.min.js'))
-//   .pipe(uglify())
-//   .pipe(gulp.dest('dist/assets/js/'));
-// });
-
-// gulp.task('js:all', ['js:bundle', 'js:common']);
 
 let webpackConfig = {
 	mode: buildMode,
@@ -199,13 +171,11 @@ let webpackConfig = {
 
 gulp.task('js', () => {
 	return gulp.src('./src/js/app.js')
-		//.pipe(webpackStream(webpackConfig))
 		.pipe(webpackStream(webpackConfig, null, (err, stats) => {
 			if (stats.compilation.errors.length) {
 				notify('Error: <%= stats.compilation.errors[0].error %>');
 			}
 		}))
-		//.pipe(gulpif(isProd, uglify()))
 		.pipe(gulpif(isProd, uglify({
 			compress: {
 				collapse_vars: false
@@ -219,17 +189,19 @@ gulp.task('js', () => {
 
 /* Common */
 
-gulp.task('build', ['sprites', 'css', 'img', 'fonts', 'js', 'templates'], () => {
-	notify('Project building done!');
-});
-
-gulp.task('default', ['browser'], () => {
-	gulp.watch('src/sprite/**/*', ['sprites']);
-	gulp.watch('src/css/**/*', ['css']);
-	gulp.watch('src/img/**/*', ['img']);
-	gulp.watch('src/fonts/**/*', ['fonts']);
-	gulp.watch('src/js/**/*', ['js']);
-	gulp.watch('src/templates/**/*', ['templates']);
+gulp.task('watch', () => {
+	gulp.watch('src/sprite/**/*', gulp.series('sprites'));
+	gulp.watch('src/css/**/*', gulp.series('css'));
+	gulp.watch('src/img/**/*', gulp.series('img'));
+	gulp.watch('src/fonts/**/*', gulp.series('fonts'));
+	gulp.watch('src/js/**/*', gulp.series('js'));
+	gulp.watch('src/templates/**/*', gulp.series('templates'));
 
 	notify('Project is running!');
 });
+
+gulp.task('build', gulp.parallel('sprites', 'css', 'img', 'fonts', 'js', 'templates'), () => {
+	notify('Project building done!');
+});
+
+gulp.task('default', gulp.parallel('browser', 'watch'));

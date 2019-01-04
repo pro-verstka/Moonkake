@@ -5,6 +5,8 @@
 */
 
 import './components/polyfills';
+//import {on, off, fire} from 'delegated-events';
+
 import Utils from './components/utils';
 import Tabs from './components/tabs';
 import Counter from './components/count';

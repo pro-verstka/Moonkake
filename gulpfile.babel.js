@@ -102,7 +102,7 @@ gulp.task('css', () => {
 	}))
 	.on('error', notify.onError('Error: <%= error.message %>'))
 	.pipe(autoprefixer({
-		browsers: ['last 5 version', 'ie >= 10'],
+		browsers: ['last 3 version', 'ie >= 11'],
 		grid: true
 	}))
 	.pipe(gcmq())

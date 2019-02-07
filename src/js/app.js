@@ -1,11 +1,13 @@
 /*!
-* Moonkake 6.0.3
+* Moonkake 6.0.5
 *
 * https://github.com/detectiveshelby/moonkake
 */
 
+//import '@babel/polyfill';
 import './components/polyfills';
 //import {on, off, fire} from 'delegated-events';
+import axios from 'axios';
 
 import Utils from './components/utils';
 import Tabs from './components/tabs';
@@ -52,8 +54,3 @@ let counter = new Counter();
 -------------------------------------------------- */
 
 let accordion = new Accordion();
-
-/* TABLES
--------------------------------------------------- */
-
-//$('article table').wrap('<div class="table"></div>');

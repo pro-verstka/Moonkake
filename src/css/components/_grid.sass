@@ -1,8 +1,14 @@
+.container
+	max-width: $maxViewPortWidth + $gap * 2
+	margin: 0 auto
+	padding-left: $gap
+	padding-right: $gap
+
 .row
 	+flex()
 
 	> .col
-		flex: 1 0 auto
+		flex: 1
 
 .list
 	list-style: none

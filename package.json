@@ -15,12 +15,14 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
+		"@babel/polyfill": "^7.2.5",
 		"@babel/preset-env": "^7.0.0",
 		"@babel/register": "^7.0.0",
 		"babel-loader": "^8.0.0",
 		"babel-preset-env": "^1.7.0",
 		"browser-sync": "^2.24.7",
 		"cross-env": "^5.2.0",
+		"del": "^3.0.0",
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
 		"gulp-concat": "^2.6.1",
@@ -42,6 +44,7 @@
 	},
 	"dependencies": {
 		"@fancyapps/fancybox": "^3.4.1",
+		"axios": "^0.18.0",
 		"delegated-events": "^1.0.9",
 		"inputmask": "^4.0.0",
 		"jquery": "^3.3.1",

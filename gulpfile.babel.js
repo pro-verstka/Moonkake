@@ -203,6 +203,8 @@ gulp.task('js', () => {
 		});
 });
 
+/* Clean */
+
 gulp.task('clean', () => {
 	return del([
 		'dist/*'
@@ -222,7 +224,7 @@ gulp.task('watch', () => {
 	notify('Project is running!');
 });
 
-gulp.task('build', gulp.parallel('clean', 'css', 'img', 'fonts', 'js', 'templates'), () => {
+gulp.task('build', gulp.series('clean', 'css', 'img', 'fonts', 'js', 'templates'), () => {
 	notify('Project building done!');
 });
 

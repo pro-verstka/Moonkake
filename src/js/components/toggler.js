@@ -6,7 +6,7 @@ var $toggler = {
 		toggler: 'data-toggler',
 		target: 'data-toggler-toggle',
 		close: 'data-toggler-close',
-		active: '--active'
+		active: '-active'
 	},
 
 	init: function ($options) {
@@ -81,3 +81,25 @@ var $toggler = {
 };
 
 $toggler.init();
+
+/*
+document.querySelectorAll('[data-toggler]').forEach($el => {
+	$el.addEventListener('click', function() {
+		let target = $el.dataset.toggler
+
+		$el.classList.toggle('-active')
+		document.getElementById(target).classList.toggle('-active')
+		document.body.classList.toggle(`-{$target}-active`)
+	})
+})
+
+document.querySelectorAll('[data-toggler-close]').forEach($el => {
+	$el.addEventListener('click', function() {
+		let target = $el.dataset.toggler
+
+		$el.classList.remove('-active')
+		document.getElementById(target).classList.remove('-active')
+		document.body.classList.remove(`-{$target}-active`)
+	})
+})
+*/

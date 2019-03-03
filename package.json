@@ -49,10 +49,8 @@
 		"inputmask": "^4.0.0",
 		"jquery": "^3.3.1",
 		"magnific-popup": "^1.1.0",
-		"owl.carousel": "^2.3.4",
+		"scroll-to-element": "^2.0.2",
 		"scrollreveal": "^4.0.0",
-		"slick-carousel": "^1.8.1",
-		"sticky-kit": "^1.1.3",
 		"swiper": "^4.4.1"
 	}
 }

@@ -1,5 +1,3 @@
-//import 'slick-carousel';
-//import 'owl.carousel';
 import Swiper from 'swiper';
 
 /* CAROUSEL
@@ -10,6 +8,15 @@ let slider = new Swiper('.swiper-container', {
 	spaceBetween: 0,
 	speed: 1500,
 	effect: 'slide',
+
+	autoplay: {
+		delay: 5000,
+		disableOnInteraction: false
+	},
+
+	// fadeEffect: {
+	// 	crossFade: true
+	// },
 
 	navigation: {
 		nextEl: '.swiper-button-next',
@@ -22,22 +29,3 @@ let slider = new Swiper('.swiper-container', {
 		clickable: true
 	},
 });
-
-// $('.owl-carousel').owlCarousel({
-// 	items: 3,
-// 	loop: true,
-// 	margin: 0,
-// 	nav: true,
-// 	dots: true,
-// 	autoplay: true,
-// 	autoplayTimeout: 5000
-// });
-
-// $('.carousel').slick({
-// 	accessibility: false,
-// 	autoplay: true,
-// 	autoplaySpeed: 5000,
-// 	arrows: true,
-// 	dots: true,
-// 	infinite: true
-// });

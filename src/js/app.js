@@ -15,7 +15,7 @@ import Counter from './components/count';
 import Accordion from './components/accordion';
 import './components/toggler';
 import './components/popup';
-import './components/carousel';
+import './components/slider';
 import './components/inputmask';
 
 Utils.hello();
@@ -23,20 +23,20 @@ Utils.hello();
 /* SCROLL TO
 -------------------------------------------------- */
 
-document.querySelectorAll('[data-scroll-to]').forEach(scrollTo => {
-	scrollTo.addEventListener('click', event => {
+document.querySelectorAll('[data-scroll-to]').forEach($el => {
+	$el.addEventListener('click', function(event) {
 		event.preventDefault();
 
 		let el = event.target;
 
-		if (scrollTo !== el) {
+		if ($el !== el) {
 			el = event.target.parentElement;
 		}
 
 		let target = el.dataset.scrollTo;
 		let offset = el.dataset.scrollToOffset || 0;
 
-		Utils.scrollTo($(target), '', offset);
+		Utils.scrollTo(target, offset);
 	})
 });
 

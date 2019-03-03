@@ -1,3 +1,5 @@
+import scrollToElement from 'scroll-to-element';
+
 /* UTILS
 -------------------------------------------------- */
 
@@ -28,48 +30,23 @@ let Utils = {
 		}
 	},
 
-	scrollTo: function ($element, $context, offset) {
+	scrollTo: function ($target, offset) {
 		offset = offset || 0;
-		let scrollTop = 0;
 
-		if ($context !== '') {
-			$context = $($context);
-			scrollTop = $context.scrollTop();
-		}
-
-		if ($context === '') {
-			$context = $('html, body');
-		}
-
-		$context.stop().animate({
-			scrollTop: $element.offset().top + scrollTop - offset
-		}, 500, function () {
-			$(document).trigger('scrollToAfterScroll', {
-				element: $element
-			});
+		scrollToElement($target, {
+			offset: offset,
+			duration: 500
 		});
 	},
 
-	getSection: function ($element, $context, offset) {
-		let $item = 0;
-		let scrollTop = 0;
+	getSection: function (target, offset) {
+		let $item = null;
 
-		if ($context !== '') {
-			$context = $($context);
-			scrollTop = $context.scrollTop();
-		}
-
-		if ($context === '') {
-			$context = $(document);
-		}
-
-		$element.each(function () {
-			var $self = $(this);
-
-			if ($context.scrollTop() >= $self.offset().top + scrollTop - offset) {
-				$item = $self;
+		document.querySelectorAll(target).forEach($el => {
+			if (window.pageYOffset >= $el.offsetTop + offset) {
+				$item = $el;
 			}
-		});
+		})
 
 		return $item;
 	},

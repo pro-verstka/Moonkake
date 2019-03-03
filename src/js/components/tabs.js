@@ -4,7 +4,7 @@ const Tabs = function(options) {
 		title: '.tabs-title',
 		content: '.tabs-content',
 		item: '.tabs-item',
-		active: '--active'
+		active: '-active'
 	}
 
 	if (typeof options === 'object') {

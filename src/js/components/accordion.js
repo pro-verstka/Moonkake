@@ -4,7 +4,7 @@ const Accordion = function (options) {
 		root: '.accordion',
 		item: '.accordion-item',
 		handler: '.accordion-header',
-		active: '--active'
+		active: '-active'
 	}
 
 	if (typeof options === 'object') {

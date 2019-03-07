@@ -84,22 +84,22 @@ $toggler.init();
 
 /*
 document.querySelectorAll('[data-toggler]').forEach($el => {
-	$el.addEventListener('click', function() {
+	$el.addEventListener('click', function () {
 		let target = $el.dataset.toggler
 
 		$el.classList.toggle('-active')
 		document.getElementById(target).classList.toggle('-active')
-		document.body.classList.toggle(`-{$target}-active`)
+		document.body.classList.toggle(`-${target}-active`)
 	})
 })
 
 document.querySelectorAll('[data-toggler-close]').forEach($el => {
-	$el.addEventListener('click', function() {
+	$el.addEventListener('click', function () {
 		let target = $el.dataset.toggler
 
 		$el.classList.remove('-active')
 		document.getElementById(target).classList.remove('-active')
-		document.body.classList.remove(`-{$target}-active`)
+		document.body.classList.remove(`-${target}-active`)
 	})
 })
 */

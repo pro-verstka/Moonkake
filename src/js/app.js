@@ -7,13 +7,13 @@
 //import '@babel/polyfill';
 import './components/polyfills';
 //import {on, off, fire} from 'delegated-events';
-import axios from 'axios';
+//import axios from 'axios';
 
 import Utils from './components/utils';
 import Tabs from './components/tabs';
 import Counter from './components/count';
 import Accordion from './components/accordion';
-import './components/toggler';
+import Toggler from './components/toggler';
 import './components/popup';
 import './components/slider';
 import './components/inputmask';
@@ -54,3 +54,8 @@ let counter = new Counter();
 -------------------------------------------------- */
 
 let accordion = new Accordion();
+
+/* TOGGLER
+-------------------------------------------------- */
+
+let toggler = new Toggler();

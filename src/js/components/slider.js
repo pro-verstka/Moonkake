@@ -1,6 +1,6 @@
 import Swiper from 'swiper';
 
-/* CAROUSEL
+/* SLIDER
  -------------------------------------------------- */
 
 let slider = new Swiper('.swiper-container', {

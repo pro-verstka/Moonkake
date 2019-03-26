@@ -8,9 +8,10 @@ const Tabs = function(options) {
 	}
 
 	if (typeof options === 'object') {
-		Object.keys(options).forEach(key => {
-			defaults[key] = options[key];
-		});
+		// Object.keys(options).forEach(key => {
+		// 	defaults[key] = options[key];
+		// });
+		defaults = Object.assign(defaults, options)
 	}
 
 	this.options = defaults;

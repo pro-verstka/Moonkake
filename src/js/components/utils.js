@@ -30,16 +30,14 @@ let Utils = {
 		}
 	},
 
-	scrollTo: function ($target, offset) {
-		offset = offset || 0;
-
+	scrollTo: function ($target, offset = 0) {
 		scrollToElement($target, {
 			offset: offset,
 			duration: 500
 		});
 	},
 
-	getSection: function (target, offset) {
+	getSection: function (target, offset = 0) {
 		let $item = null;
 
 		document.querySelectorAll(target).forEach($el => {
@@ -51,6 +49,7 @@ let Utils = {
 		return $item;
 	},
 
+	/*
 	numberFormat: function (number, decimals, dec_point, thousands_sep) {
 		var i, j, kw, kd, km;
 
@@ -82,6 +81,7 @@ let Utils = {
 
 		return km + kw + kd;
 	},
+	*/
 
 	isTouchDevice: function() {
 		let prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');

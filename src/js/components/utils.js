@@ -3,7 +3,7 @@ import scrollToElement from 'scroll-to-element';
 /* UTILS
 -------------------------------------------------- */
 
-let Utils = {
+const Utils = {
 	hello: function () {
 		console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru');
 	},

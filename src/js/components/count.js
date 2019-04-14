@@ -7,9 +7,6 @@ const Counter = function (options) {
 	}
 
 	if (typeof options === 'object') {
-		// Object.keys(options).forEach(key => {
-		// 	defaults[key] = options[key];
-		// });
 		defaults = Object.assign(defaults, options)
 	}
 

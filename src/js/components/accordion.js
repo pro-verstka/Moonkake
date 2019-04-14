@@ -1,4 +1,4 @@
-let Accordion = class {
+const Accordion = class {
 
 	constructor(options) {
 		let defaults = {

@@ -8,13 +8,13 @@ Inputmask({
 }).mask(document.querySelectorAll('input[type="tel"]'))
 
 Inputmask({
-  inputFormat: 'dd.mm.yyyy',
-  alias: 'datetime',
-  placeholder: 'дд.мм.гггг'
+	inputFormat: 'dd.mm.yyyy',
+	alias: 'datetime',
+	placeholder: 'дд.мм.гггг'
 }).mask(document.querySelectorAll('input[data-mask-date]'))
 
 Inputmask({
-  rightAlign: false,
-  alias: 'integer',
-  allowMinus: false
+	rightAlign: false,
+	alias: 'integer',
+	allowMinus: false
 }).mask(document.querySelectorAll('input[data-mask-number]'))

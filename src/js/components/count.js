@@ -16,12 +16,13 @@ const Counter = function (options) {
 
 };
 
-Counter.prototype.handle = function() {
+Counter.prototype.handle = function () {
 
 	document.querySelectorAll(this.options.root).forEach(el => {
 		let input = el.querySelector('input');
 		let min = input.dataset.min || '';
 		let max = input.dataset.max || '';
+		let postfix = input.dataset.postfix || '';
 
 		el.querySelector(this.options.plus).addEventListener('click', function () {
 			let value = parseInt(input.value);
@@ -32,8 +33,8 @@ Counter.prototype.handle = function() {
 				value = max;
 			}
 
-			input.value = value;
-			input.dispatchEvent(new CustomEvent('change', {'bubbles': true}));
+			input.value = value + postfix;
+			input.dispatchEvent(new CustomEvent('change', { 'bubbles': true }));
 		});
 
 		el.querySelector(this.options.minus).addEventListener('click', function () {
@@ -47,22 +48,40 @@ Counter.prototype.handle = function() {
 				value = 1;
 			}
 
-			input.value = value;
-			input.dispatchEvent(new CustomEvent('change', {'bubbles': true}));
+			input.value = value + postfix;
+			input.dispatchEvent(new CustomEvent('change', { 'bubbles': true }));
 		});
 
-		input.addEventListener('blur', function() {
-			if (this.value === '' || this.value === '0') {
+		input.addEventListener('focus', function () {
+			if (this.readOnly || this.disabled) {
+				return false;
+			}
+
+			let value = input.value.replace(/[^0-9]/gim, '');
+
+			input.value = value;
+		});
+
+		input.addEventListener('blur', function () {
+			if (this.readOnly || this.disabled) {
+				return false;
+			}
+
+			let value = this.value
+
+			if (value === '' || value === '0') {
 				if (min) {
-					this.value = min;
+					value = min;
 				} else {
-					this.value = 1;
+					value = 1;
 				}
 			}
+
+			this.value = value + postfix
 		});
 
-		input.addEventListener('keyup', function() {
-			let value = input.value.replace(/[^0-9]/, '');
+		input.addEventListener('keyup', function () {
+			let value = input.value.replace(/[^0-9]/gim, '');
 
 			input.value = value;
 		});

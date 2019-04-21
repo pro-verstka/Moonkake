@@ -1,6 +1,6 @@
 const Accordion = class {
 
-	constructor(options) {
+	constructor(options = {}) {
 		let defaults = {
 			root: '.accordion',
 			item: '.accordion-item',
@@ -12,21 +12,21 @@ const Accordion = class {
 			defaults = Object.assign(defaults, options)
 		}
 
-		this.options = defaults;
+		this.options = defaults
 
-		this.handle();
+		this.handle()
 	}
 
 	handle() {
 		document.querySelectorAll(this.options.root).forEach($el => {
 			$el.querySelectorAll(this.options.item).forEach($item => {
 				$item.querySelector(this.options.handler).addEventListener('click', () => {
-					$item.classList.toggle(this.options.active);
-				});
-			});
-		});
+					$item.classList.toggle(this.options.active)
+				})
+			})
+		})
 	}
 
 }
 
-export default Accordion;
+export default Accordion

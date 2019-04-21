@@ -1,62 +1,75 @@
-const Sticky = function(options) {
-	let defaults = {
-		el: '[data-sticky]',
-		parent: '',
-		offset: 0
+const Sticky = class {
+
+	constructor(options = {}) {
+		let defaults = {
+			selector: '[data-sticky]',
+			breakpoint: 1024,
+			offsetTop: 0,
+			parent: ''
+		}
+
+		if (typeof options === 'object') {
+			defaults = Object.assign(defaults, options)
+		}
+
+		this.options = defaults
+
+		const $el = document.querySelector(this.options.selector)
+		const $elParent = (this.options.parent == '') ? $el.parentElement : document.querySelector(this.options.parent)
+
+		window.addEventListener('load', () => {
+			this.handle($el, $elParent)
+		})
+
+		window.addEventListener('scroll', () => {
+			this.handle($el, $elParent)
+		})
+
+		window.addEventListener('resize', () => {
+			this.handle($el, $elParent)
+		})
 	}
 
-	if (typeof options === 'object') {
-		defaults = Object.assign(defaults, options)
+	handle($el, $elParent) {
+		if (window.innerWidth <= this.options.breakpoint) {
+			$el.style = null
+
+			return false
+		}
+
+		const { top: bodyTop } = document.body.getBoundingClientRect()
+		const { height: elHeight } = $el.getBoundingClientRect()
+		const { height: elParentHeight, width: elParentWidth, top: elParentTop, left: elParentLeft } = $elParent.getBoundingClientRect()
+
+		let position = 'static'
+		let positionX = elParentLeft
+		let positionY = elParentTop - bodyTop
+		let width = elParentWidth + elParentWidth
+
+		if (elHeight >= elParentHeight) {
+			return false
+		}
+
+		if (window.pageYOffset >= elParentTop) {
+			$el.style = null
+		}
+
+		if (window.pageYOffset > elParentTop - bodyTop - this.options.offsetTop) {
+			position = 'fixed'
+			positionY = this.options.offsetTop
+		}
+
+		if (window.pageYOffset + window.innerHeight >= elParentHeight + elParentTop - bodyTop + window.innerHeight - elHeight - this.options.offsetTop) {
+			position = 'absolute'
+			positionX = 0
+			positionY = (elParentTop - bodyTop) + elParentHeight - elHeight - (elParentTop - bodyTop)
+		}
+
+		$el.style.position = position
+		$el.style.top = `${positionY}px`
+		$el.style.left = `${positionX}px`
+		$el.style.width = `${width}px`
 	}
-
-	this.options = defaults;
-
-	this.handle();
-
-	document.addEventListener('scroll', () => {
-		this.handle();
-	});
 }
 
-Sticky.prototype.handle = function () {
-
-	document.querySelectorAll(this.options.el).forEach(el => {
-		let parent = el.parentElement;
-
-		if (this.options.parent !== '' && document.querySelector(this.options.parent)) {
-			parent = document.querySelector(this.options.parent);
-		}
-
-		let parentOffset = parent.offsetTop - this.options.offset;
-		let parentHeight = parent.offsetHeight;
-		let elHeight = el.offsetHeight;
-
-		if (window.scrollY >= parentOffset && window.scrollY <= parentOffset + parentHeight - elHeight) {
-
-			let offsetTop = window.scrollY - parentOffset;
-
-			el.classList.add('sticky');
-			el.style.transform = `translateY(${offsetTop}px)`;
-
-		}
-
-		else if (window.scrollY >= parentOffset + parentHeight - elHeight && window.scrollY <= parentOffset + parentHeight + this.options.offset) {
-
-			let offsetTop = parentOffset + parentHeight - elHeight + this.options.offset;
-
-			el.classList.add('sticky');
-			el.style.transform = `translateY(${offsetTop}px)`;
-
-		}
-
-		else {
-
-			el.classList.remove('sticky');
-			el.style.transform = null;
-
-		}
-	});
-
-}
-
-export default Sticky;
+export default Sticky

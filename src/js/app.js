@@ -1,10 +1,10 @@
 /*!
-* Moonkake 6.0.5
+* Moonkake 7.0.0
 *
 * https://github.com/detectiveshelby/moonkake
 */
 
-import './components/polyfills'
+import './vendor/polyfills'
 //import {on, off, fire} from 'delegated-events'
 //import axios from 'axios'
 
@@ -13,6 +13,7 @@ import Tabs from './components/tabs'
 import Counter from './components/count'
 import Accordion from './components/accordion'
 import Toggler from './components/toggler'
+import Sticky from './components/sticky'
 //import './components/popup'
 import './components/slider'
 import './components/inputmask'
@@ -41,19 +42,24 @@ document.querySelectorAll('[data-scroll-to]').forEach($el => {
 /* TABS
 -------------------------------------------------- */
 
-let tabs = new Tabs()
+const tabs = new Tabs()
 
 /* COUNT
 -------------------------------------------------- */
 
-let counter = new Counter()
+const counter = new Counter()
 
 /* ACCORDION
 -------------------------------------------------- */
 
-let accordion = new Accordion()
+const accordion = new Accordion()
 
 /* TOGGLER
 -------------------------------------------------- */
 
-let toggler = new Toggler()
+const toggler = new Toggler()
+
+/* STICKY
+-------------------------------------------------- */
+
+const sticky = new Sticky()

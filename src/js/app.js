@@ -1,10 +1,15 @@
 /*!
-* Moonkake 7.0.0
+* Moonkake 7.0.1
 *
 * https://github.com/detectiveshelby/moonkake
 */
 
 import './vendor/polyfills'
+import './vendor/detect-preload'
+
+import './components/font'
+import './components/lazyload'
+
 //import {on, off, fire} from 'delegated-events'
 //import axios from 'axios'
 
@@ -14,10 +19,12 @@ import Counter from './components/count'
 import Accordion from './components/accordion'
 import Toggler from './components/toggler'
 import Sticky from './components/sticky'
+import TableColumnHighlight from './components/table-highlight'
 //import './components/popup'
 import './components/slider'
 import './components/inputmask'
 import './components/map'
+import './components/gallery'
 
 /* SCROLL TO
 -------------------------------------------------- */
@@ -62,4 +69,15 @@ const toggler = new Toggler()
 /* STICKY
 -------------------------------------------------- */
 
-const sticky = new Sticky()
+document.querySelectorAll('[data-sticky]').forEach($el => {
+	const sticky = new Sticky({
+		selector: $el
+	})
+})
+
+/* TABLE HIGHLIGHT
+-------------------------------------------------- */
+
+document.querySelectorAll('[data-highlight]').forEach($el => {
+	const table = new TableColumnHighlight($el)
+})

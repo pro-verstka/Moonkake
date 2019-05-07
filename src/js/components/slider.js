@@ -1,4 +1,4 @@
-import Swiper from 'swiper';
+import Swiper from 'swiper'
 
 /* SLIDER
  -------------------------------------------------- */
@@ -8,6 +8,13 @@ const slider = new Swiper('.swiper-container', {
 	spaceBetween: 0,
 	speed: 1500,
 	effect: 'slide',
+
+	preloadImages: false,
+
+	lazy: {
+		loadPrevNext: true,
+		loadOnTransitionStart: true
+	},
 
 	autoplay: {
 		delay: 5000,
@@ -28,4 +35,4 @@ const slider = new Swiper('.swiper-container', {
 		type: 'bullets',
 		clickable: true
 	},
-});
+})

@@ -7,10 +7,10 @@
 	input
 		+hidden()
 
-		&:checked + label::after
+		&:checked + div::after
 			opacity: 1
 
-	label
+	div
 		display: block
 		line-height: 20px
 		padding-left: 30px
@@ -37,7 +37,7 @@
 			transition: background-color .25s, opacity .25s, border-color .25s
 
 .radio
-	label
+	div
 		&::before,
 		&::after
 			border-radius: 50%

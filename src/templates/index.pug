@@ -7,4 +7,28 @@ block main
 	section.section
 		article.article
 			h1 Moonkake
+
+			button(data-modal="modal_callback") Open
 	// section
+
+	div.modal#modal_callback
+		div.modal-container
+			button.modal-close(data-modal-close="modal_callback") &times;
+
+			h1 Modal title
+			p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione natus eaque at quasi rerum deleniti, velit ullam, corrupti accusamus cum nulla quidem? Distinctio ad quasi praesentium rerum ab reprehenderit?
+
+			button(data-modal="modal_callback2") Open
+			button(data-modal-close="modal_callback" data-modal="modal_callback2") Open & close
+	// modal
+
+	div.modal#modal_callback2
+		div.modal-container
+			button.modal-close(data-modal-close="modal_callback2") &times;
+
+			h1 Modal title
+			p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione natus eaque at quasi rerum deleniti, velit ullam, corrupti accusamus cum nulla quidem? Distinctio ad quasi praesentium rerum ab reprehenderit?
+			p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione natus eaque at quasi rerum deleniti, velit ullam, corrupti accusamus cum nulla quidem? Distinctio ad quasi praesentium rerum ab reprehenderit?
+			p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione natus eaque at quasi rerum deleniti, velit ullam, corrupti accusamus cum nulla quidem? Distinctio ad quasi praesentium rerum ab reprehenderit?
+			p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione natus eaque at quasi rerum deleniti, velit ullam, corrupti accusamus cum nulla quidem? Distinctio ad quasi praesentium rerum ab reprehenderit?
+	// modal

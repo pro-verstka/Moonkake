@@ -7,7 +7,7 @@
 import './vendor/polyfills'
 import './vendor/detect-preload'
 
-import './components/font'
+//import './components/font'
 import './components/lazyload'
 
 //import {on, off, fire} from 'delegated-events'
@@ -23,8 +23,10 @@ import TableColumnHighlight from './components/table-highlight'
 //import './components/popup'
 import './components/slider'
 import './components/inputmask'
-import './components/map'
+//import './components/map'
 import './components/gallery'
+
+import Modal from './components/modal'
 
 /* SCROLL TO
 -------------------------------------------------- */
@@ -81,3 +83,8 @@ document.querySelectorAll('[data-sticky]').forEach($el => {
 document.querySelectorAll('[data-highlight]').forEach($el => {
 	const table = new TableColumnHighlight($el)
 })
+
+/* MODAL
+-------------------------------------------------- */
+
+const modal = new Modal()

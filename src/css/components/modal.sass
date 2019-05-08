@@ -1,0 +1,64 @@
+.modal
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	background: rgba(#000, .5)
+	z-index: 1000
+	text-align: center
+	display: none
+	opacity: 0
+	overflow: auto
+	-webkit-overflow-scrolling: touch
+	backface-visibility: hidden
+	outline: none
+	transition: opacity .3s ease
+	padding: 2rem
+
+	&::before
+		content: ''
+		display: inline-block
+		height: 100%
+		vertical-align: middle
+		margin-left: -.278em
+
+	&-container
+		width: 100%
+		max-width: 70rem
+		margin: 0 auto
+		padding: 4rem
+		background: #fff
+		position: relative
+		display: inline-block
+		vertical-align: middle
+		text-align: left
+
+	&-close
+		position: absolute
+		top: 0
+		right: 0
+		width: 4rem
+		height: 4rem
+		background: transparent
+		text-decoration: none
+		border: 0
+		padding: 0
+		cursor: pointer
+		color: #343434
+		font-weight: bold
+		font-size: 2rem
+		line-height: 4rem
+		transition: opacity .25s ease
+
+		&:hover
+			opacity: .5
+
+	&.modal--opened
+		display: block
+
+	&.modal--visible
+		opacity: 1
+
+	&.modal--exists
+		background: transparent

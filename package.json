@@ -45,6 +45,7 @@
 	"dependencies": {
 		"@fancyapps/fancybox": "^3.4.1",
 		"axios": "^0.18.0",
+		"body-scroll-lock": "^2.6.1",
 		"delegated-events": "^1.0.9",
 		"fontfaceobserver": "^2.1.0",
 		"inputmask": "^4.0.0",

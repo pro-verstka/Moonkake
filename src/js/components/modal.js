@@ -22,9 +22,7 @@ const Modal = class {
 			$el.addEventListener('click', e => {
 				e.preventDefault()
 
-				const id = $el.dataset.modal
-
-				this.open(id)
+				this.open($el.dataset.modal)
 			})
 		})
 
@@ -33,9 +31,7 @@ const Modal = class {
 			$el.addEventListener('click', e => {
 				e.preventDefault()
 
-				const id = $el.dataset.modalClose
-
-				this.close(id)
+				this.close($el.dataset.modalClose)
 			})
 		})
 
@@ -46,21 +42,15 @@ const Modal = class {
 					return false
 				}
 
-				const id = $el.getAttribute('id')
-
-				this.close(id)
-			})
-		})
-
-		document.querySelectorAll('.modal-container').forEach($el => {
-			$el.addEventListener('click', e => {
-				e.stopPropagation()
+				if (e.target.matches('.modal')) {
+					this.close($el.getAttribute('id'))
+				}
 			})
 		})
 
 		// close by Esc
 		document.body.addEventListener('keydown', e => {
-			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode == 27) {
+			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode === 27) {
 				if (this.modals.length) {
 					this.close(this.modals[this.modals.length - 1])
 				}

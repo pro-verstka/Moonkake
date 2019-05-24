@@ -1,48 +1,44 @@
-const Tabs = function(options) {
-	let defaults = {
-		root: '.tabs',
-		title: '.tabs-title',
-		content: '.tabs-content',
-		item: '.tabs-item',
-		active: '-active'
-	}
+const Tabs = class {
+	constructor(options = {}) {
 
-	if (typeof options === 'object') {
-		defaults = Object.assign(defaults, options)
-	}
+		let defaults = {
+			root: '.tabs',
+			title: '.tabs-title',
+			content: '.tabs-content',
+			item: '.tabs-item',
+			active: '-active'
+		}
 
-	this.options = defaults;
+		if (typeof options === 'object') {
+			defaults = Object.assign(defaults, options)
+		}
 
-	this.handle();
-};
+		this.options = defaults
 
-Tabs.prototype.handle = function() {
+		document.querySelectorAll(this.options.root).forEach($elRoot => {
+			const $elTitles = $elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`)
 
-	document.querySelectorAll(this.options.root).forEach(root => {
-		let tabTitles = root.querySelectorAll(`${this.options.title} ${this.options.item}`);
-
-		tabTitles.forEach(tabItem => {
-			tabItem.addEventListener('click', () => {
-				this.change(root, Array.from(tabTitles).indexOf(tabItem));
-			});
+			$elTitles.forEach($elItem => {
+				$elItem.addEventListener('click', e => {
+					this.change($elRoot, Array.from($elTitles).indexOf($elItem))
+				})
+			})
 		})
-	});
 
+	}
+
+	change($elRoot, index) {
+		const $elTitles = $elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`)
+		const $elContents = $elRoot.querySelectorAll(`${this.options.content} ${this.options.item}`)
+
+		$elTitles.forEach(($el, key) => {
+			$el.classList[(key === index ? 'add' : 'remove')](this.options.active)
+		})
+
+		$elContents.forEach(($el, key) => {
+			$el.classList[(key === index ? 'add' : 'remove')](this.options.active)
+		})
+	}
 }
 
-Tabs.prototype.change = function(root, index) {
-
-	let tabsTitle = root.querySelectorAll(`${this.options.title} ${this.options.item}`);
-	let tabsContent = root.querySelectorAll(`${this.options.content} ${this.options.item}`);
-
-	tabsTitle.forEach((item, key) => {
-		item.classList[(key === index ? 'add' : 'remove')](this.options.active);
-	});
-
-	tabsContent.forEach((item, key) => {
-		item.classList[(key === index ? 'add' : 'remove')](this.options.active);
-	});
-
-}
-
-export default Tabs;
+export default Tabs

@@ -8,6 +8,7 @@ const slider = new Swiper('.swiper-container', {
 	spaceBetween: 0,
 	speed: 1500,
 	effect: 'slide',
+	loop: true,
 
 	preloadImages: false,
 

@@ -1,55 +1,72 @@
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
+import {
+	disableBodyScroll,
+	clearAllBodyScrollLocks
+} from 'body-scroll-lock'
 
 const Modal = class {
 
 	constructor(options = {}) {
 		let defaults = {
 			modalSelector: '[data-modal]',
-			closeSelector: '[data-modal-close]',
-			//type: 'inline', // inline, media
-			closeByOverlayClick: true
+			modalVideoSelector: '[data-modal-video]',
+			modalCloseSelector: '[data-modal-close]',
+
+			closeByOverlayClick: true,
+
+			modalVideoId: 'modal_video'
 		}
 
 		if (typeof options === 'object') {
 			defaults = Object.assign(defaults, options)
 		}
 
-		this.options = defaults
 		this.modals = []
+		this.options = defaults
 
-		// open by button
-		document.querySelectorAll(this.options.modalSelector).forEach($el => {
-			$el.addEventListener('click', e => {
+		// prepare for video
+		if (document.querySelector(this.options.modalVideoSelector)) {
+			document.body.insertAdjacentHTML('beforeend', `
+				<div class="modal modal--video" id="${this.options.modalVideoId}">
+					<div class="modal-container">
+						<button class="modal-close" data-modal-close>&times;</button>
+						<div class="modal-iframe"></div>
+					</div>
+				</div>
+			`)
+		}
+
+		document.addEventListener('click', e => {
+			// open by button
+			if (e.target.matches(this.options.modalSelector)) {
 				e.preventDefault()
 
-				this.open($el.dataset.modal)
-			})
-		})
+				this.open(e.target.getAttribute('href').substr(1))
+			}
 
-		// close by button
-		document.querySelectorAll(this.options.closeSelector).forEach($el => {
-			$el.addEventListener('click', e => {
+			// open video by button
+			if (e.target.matches(this.options.modalVideoSelector)) {
 				e.preventDefault()
 
-				this.close($el.dataset.modalClose)
-			})
-		})
+				this.openVideo(e.target.getAttribute('href'))
+			}
 
-		// close by overlay click
-		document.querySelectorAll('.modal').forEach($el => {
-			$el.addEventListener('click', e => {
-				if (!this.options.closeByOverlayClick) {
-					return false
-				}
+			// close by button
+			if (e.target.matches(this.options.modalCloseSelector)) {
+				e.preventDefault()
 
-				if (e.target.matches('.modal')) {
-					this.close($el.getAttribute('id'))
-				}
-			})
+				this.close(e.target.closest('.modal').getAttribute('id'))
+			}
+
+			// close by overlay click
+			if (e.target.matches('.modal') && this.options.closeByOverlayClick) {
+				e.preventDefault()
+
+				this.close(e.target.getAttribute('id'))
+			}
 		})
 
 		// close by Esc
-		document.body.addEventListener('keydown', e => {
+		document.addEventListener('keydown', e => {
 			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode === 27) {
 				if (this.modals.length) {
 					this.close(this.modals[this.modals.length - 1])
@@ -59,17 +76,23 @@ const Modal = class {
 	}
 
 	open(id) {
+		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
+			'bubbles': true,
+			'detail': id
+		}))
+
 		this.modals.push(id)
 
-		const modal = document.getElementById(id)
+		let modal = document.getElementById(id)
 
 		document.documentElement.classList.add('-modal-locked')
 
 		modal.classList.add('modal--opened')
 
-		// if (this.modals.length > 1) {
-		// 	modal.classList.add('modal--exists')
-		// }
+		window.dispatchEvent(new CustomEvent('modalOpen', {
+			'bubbles': true,
+			'detail': id
+		}))
 
 		setTimeout(() => {
 			modal.classList.add('modal--visible')
@@ -78,22 +101,97 @@ const Modal = class {
 		disableBodyScroll(modal, {
 			reserveScrollBarGap: true
 		})
+
+		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
+			'bubbles': true,
+			'detail': id
+		}))
+	}
+
+	openVideo(href) {
+		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
+			'bubbles': true,
+			'detail': this.options.modalVideoId
+		}))
+
+		this.modals.push(this.options.modalVideoId)
+
+		let modal = document.getElementById(this.options.modalVideoId)
+
+		let iframe = document.createElement('iframe')
+		iframe.setAttribute('allowfullscreen', 'allowfullscreen')
+		iframe.setAttribute('frameborder', '0')
+		iframe.setAttribute('allow', 'autoplay; fullscreen')
+
+		if (href.includes('youtube')) {
+			let src = href.replace(/watch\?v=/g, 'embed/')
+
+			iframe.setAttribute('src', `${src}?autoplay=1`)
+		}
+
+		if (href.includes('vimeo')) {
+			let src = href.replace(/[^0-9]/g, '')
+
+			iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
+		}
+
+		modal.querySelector('.modal-iframe').appendChild(iframe)
+
+		document.documentElement.classList.add('-modal-locked')
+
+		modal.classList.add('modal--opened')
+
+		window.dispatchEvent(new CustomEvent('modalOpen', {
+			'bubbles': true,
+			'detail': this.options.modalVideoId
+		}))
+
+		setTimeout(() => {
+			modal.classList.add('modal--visible')
+		}, 10)
+
+		disableBodyScroll(modal, {
+			reserveScrollBarGap: true
+		})
+
+		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
+			'bubbles': true,
+			'detail': this.options.modalVideoId
+		}))
 	}
 
 	close(id) {
-		const modalIndex = this.modals.indexOf(id)
+		window.dispatchEvent(new CustomEvent('modalBeforeClose', {
+			'bubbles': true,
+			'detail': id
+		}))
+
+		let modalIndex = this.modals.indexOf(id)
 
 		if (modalIndex > -1) {
 			this.modals.splice(modalIndex, 1)
 		}
 
-		const modal = document.getElementById(id)
+		let modal = document.getElementById(id)
 
 		modal.classList.remove('modal--visible')
 
+		window.dispatchEvent(new CustomEvent('modalClose', {
+			'bubbles': true,
+			'detail': id
+		}))
+
 		modal.addEventListener('transitionend', e => {
 			modal.classList.remove('modal--opened')
-			//modal.classList.remove('modal--exists')
+
+			if (modal.querySelector('iframe')) {
+				modal.querySelector('iframe').remove()
+			}
+
+			window.dispatchEvent(new CustomEvent('modalAfterClose', {
+				'bubbles': true,
+				'detail': id
+			}))
 
 			if (!this.modals.length) {
 				document.documentElement.classList.remove('-modal-locked')

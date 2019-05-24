@@ -14,17 +14,12 @@ const Accordion = class {
 
 		this.options = defaults
 
-		this.handle()
-	}
-
-	handle() {
-		document.querySelectorAll(this.options.root).forEach($el => {
-			$el.querySelectorAll(this.options.item).forEach($item => {
-				$item.querySelector(this.options.handler).addEventListener('click', () => {
-					$item.classList.toggle(this.options.active)
-				})
+		document.querySelectorAll(`${this.options.root} ${this.options.handler}`).forEach($el => {
+			$el.addEventListener('click', e => {
+				$el.closest(this.options.item).classList.toggle(this.options.active)
 			})
 		})
+
 	}
 
 }

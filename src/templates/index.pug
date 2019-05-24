@@ -8,11 +8,32 @@ block main
 		article.article
 			h1 Moonkake
 
+			h2 Modal
 			a(href="#modal_example" data-modal) Open
 			br
 			a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Open YouTube
 			br
 			a(href="https://vimeo.com/191947042" data-modal-video) Open Vimeo
+
+			h2 Tabs
+			div.tabs
+				div.tabs-title
+					div.tabs-item.-active title 1
+					div.tabs-item title 2
+					div.tabs-item title 3
+				div.tabs-content
+					div.tabs-item.-active content 1
+					div.tabs-item content 2
+					div.tabs-item content 3
+
+			h2 Accordion
+			div.accordion
+				div.accordion-item
+					div.accordion-header accordion title 1
+					div.accordion-body accordion content 1
+				div.accordion-item
+					div.accordion-header accordion title 2
+					div.accordion-body accordion content 2
 	// section
 
 	div.modal#modal_example

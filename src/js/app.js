@@ -4,47 +4,42 @@
 * https://github.com/detectiveshelby/moonkake
 */
 
+// Vendors
 import './vendor/polyfills'
 import './vendor/detect-preload'
 
+// Libs
+import Utils from './libs/utils'
+import Tabs from './libs/tabs'
+import Counter from './libs/count'
+import Accordion from './libs/accordion'
+import Toggler from './libs/toggler'
+import Sticky from './libs/sticky'
+import TableColumnHighlight from './libs/table-highlight'
+import Modal from './libs/modal'
+
+// Components
 //import './components/font'
 import './components/lazyload'
-
-//import {on, off, fire} from 'delegated-events'
-//import axios from 'axios'
-
-import Utils from './components/utils'
-import Tabs from './components/tabs'
-import Counter from './components/count'
-import Accordion from './components/accordion'
-import Toggler from './components/toggler'
-import Sticky from './components/sticky'
-import TableColumnHighlight from './components/table-highlight'
-//import './components/popup'
-import './components/slider'
 import './components/inputmask'
-//import './components/map'
+import './components/slider'
 import './components/gallery'
-
-import Modal from './components/modal'
+//import './components/map'
 
 /* SCROLL TO
 -------------------------------------------------- */
 
 document.querySelectorAll('[data-scroll-to]').forEach($el => {
-	$el.addEventListener('click', function(event) {
-		event.preventDefault()
+	$el.addEventListener('click', e => {
+		e.preventDefault()
 
-		let el = event.target
+		let el = e.target
 
 		if ($el !== el) {
-			el = event.target.parentElement
+			el = e.target.parentElement
 		}
 
-		let target = el.dataset.scrollTo
-		let offset = el.dataset.scrollToOffset || 0
-
-		Utils.scrollTo(target, offset)
+		Utils.scrollTo(el.dataset.scrollTo, el.dataset.scrollToOffset)
 	})
 })
 

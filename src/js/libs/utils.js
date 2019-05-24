@@ -30,23 +30,23 @@ const Utils = {
 		}
 	},
 
-	scrollTo: function ($target, offset = 0) {
+	scrollTo: function ($target, offset) {
 		scrollToElement($target, {
-			offset: offset,
+			offset: offset || 0,
 			duration: 500
 		})
 	},
 
-	getSection: function (target, offset = 0) {
-		let $item = null
+	getSection: function (selector, offset = 0) {
+		let $target = null
 
-		document.querySelectorAll(target).forEach($el => {
+		document.querySelectorAll(selector).forEach($el => {
 			if (window.pageYOffset >= $el.offsetTop + offset) {
-				$item = $el
+				$target = $el
 			}
 		})
 
-		return $item
+		return $target
 	},
 
 	/*

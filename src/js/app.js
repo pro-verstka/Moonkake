@@ -11,7 +11,7 @@ import './vendor/detect-preload'
 // Libs
 import Utils from './libs/utils'
 import Tabs from './libs/tabs'
-import Counter from './libs/count'
+import Counter from './libs/counter'
 import Accordion from './libs/accordion'
 import Toggler from './libs/toggler'
 import Sticky from './libs/sticky'

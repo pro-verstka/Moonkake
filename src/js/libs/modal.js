@@ -77,8 +77,8 @@ class Modal {
 
 	open(id) {
 		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
-			'bubbles': true,
-			'detail': id
+			bubbles: true,
+			detail: id
 		}))
 
 		this.modals.push(id)
@@ -90,8 +90,8 @@ class Modal {
 		modal.classList.add('modal--opened')
 
 		window.dispatchEvent(new CustomEvent('modalOpen', {
-			'bubbles': true,
-			'detail': id
+			bubbles: true,
+			detail: id
 		}))
 
 		setTimeout(() => {
@@ -103,15 +103,15 @@ class Modal {
 		})
 
 		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
-			'bubbles': true,
-			'detail': id
+			bubbles: true,
+			detail: id
 		}))
 	}
 
 	openVideo(href) {
 		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
-			'bubbles': true,
-			'detail': this.options.modalVideoId
+			bubbles: true,
+			detail: this.options.modalVideoId
 		}))
 
 		this.modals.push(this.options.modalVideoId)
@@ -142,8 +142,8 @@ class Modal {
 		modal.classList.add('modal--opened')
 
 		window.dispatchEvent(new CustomEvent('modalOpen', {
-			'bubbles': true,
-			'detail': this.options.modalVideoId
+			bubbles: true,
+			detail: this.options.modalVideoId
 		}))
 
 		setTimeout(() => {
@@ -155,15 +155,15 @@ class Modal {
 		})
 
 		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
-			'bubbles': true,
-			'detail': this.options.modalVideoId
+			bubbles: true,
+			detail: this.options.modalVideoId
 		}))
 	}
 
 	close(id) {
 		window.dispatchEvent(new CustomEvent('modalBeforeClose', {
-			'bubbles': true,
-			'detail': id
+			bubbles: true,
+			detail: id
 		}))
 
 		let modalIndex = this.modals.indexOf(id)
@@ -177,8 +177,8 @@ class Modal {
 		modal.classList.remove('modal--visible')
 
 		window.dispatchEvent(new CustomEvent('modalClose', {
-			'bubbles': true,
-			'detail': id
+			bubbles: true,
+			detail: id
 		}))
 
 		modal.addEventListener('transitionend', e => {
@@ -189,8 +189,8 @@ class Modal {
 			}
 
 			window.dispatchEvent(new CustomEvent('modalAfterClose', {
-				'bubbles': true,
-				'detail': id
+				bubbles: true,
+				detail: id
 			}))
 
 			if (!this.modals.length) {

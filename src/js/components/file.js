@@ -2,8 +2,8 @@
 -------------------------------------------------- */
 
 document.querySelectorAll('.file').forEach(el => {
-	let label = el.querySelector('label span');
-	let text = el.dataset.text || 'Выберите файл';
+	let label = el.querySelector('label span')
+	let text = el.dataset.text || 'Выберите файл'
 
 	el.querySelector('input[type="file"]').addEventListener('change', function () {
 		let value = this.value;
@@ -11,9 +11,9 @@ document.querySelectorAll('.file').forEach(el => {
 		if (value) {
 			value = value.split(/(\\|\/)/g).pop();
 		} else {
-			value = text;
+			value = text
 		}
 
-		label.innerText = value;
-	});
-});
+		label.innerText = value
+	})
+})

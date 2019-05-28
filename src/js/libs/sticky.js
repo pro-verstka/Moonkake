@@ -17,21 +17,40 @@ class Sticky {
 		const $el = (typeof this.options.selector == 'object') ? this.options.selector : document.querySelector(this.options.selector)
 		const $elParent = (this.options.parent == '') ? $el.parentElement : document.querySelector(this.options.parent)
 
-		$el.insertAdjacentHTML('afterend', '<div data-sticky-fake style="display: none;"></div>')
+		if (this.isStickySupport()) {
 
-		const $elFake = $elParent.querySelector('[data-sticky-fake]')
+			$el.style.position = 'sticky'
+			$el.style.top = `${this.options.offsetTop}px`
 
-		window.addEventListener('load', () => {
-			this.handle($el, $elParent, $elFake)
-		})
+		}
 
-		window.addEventListener('scroll', () => {
-			this.handle($el, $elParent, $elFake)
-		})
+		if (!this.isStickySupport()) {
 
-		window.addEventListener('resize', () => {
-			this.handle($el, $elParent, $elFake)
-		})
+			$el.insertAdjacentHTML('afterend', '<div data-sticky-fake style="display: none;"></div>')
+
+			const $elFake = $elParent.querySelector('[data-sticky-fake]')
+
+			window.addEventListener('load', () => {
+				this.handle($el, $elParent, $elFake)
+			})
+
+			window.addEventListener('scroll', () => {
+				this.handle($el, $elParent, $elFake)
+			})
+
+			window.addEventListener('resize', () => {
+				this.handle($el, $elParent, $elFake)
+			})
+
+		}
+	}
+
+	isStickySupport() {
+		const $el = document.createElement('div')
+
+		$el.style.cssText = 'position: sticky; position: -webkit-sticky; position: -ms-sticky;'
+
+		return $el.style.position.indexOf('sticky') !== -1
 	}
 
 	handle($el, $elParent, $elFake) {

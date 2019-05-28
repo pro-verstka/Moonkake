@@ -1,4 +1,4 @@
-const Tabs = class {
+class Tabs {
 	constructor(options = {}) {
 
 		let defaults = {
@@ -44,6 +44,14 @@ const Tabs = class {
 		$elRoot.querySelectorAll(`${this.options.content} ${this.options.item}`).forEach(($el, key) => {
 			$el.classList[(key === index ? 'add' : 'remove')](this.options.active)
 		})
+
+		window.dispatchEvent(new CustomEvent('tabChange', {
+			bubbles: true,
+			detail: {
+				root: $elRoot,
+				index: index
+			}
+		}))
 	}
 }
 

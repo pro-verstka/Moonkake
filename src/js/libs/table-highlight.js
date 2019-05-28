@@ -1,4 +1,4 @@
-const TableColumnHighlight = class {
+class TableColumnHighlight {
 
 	constructor($table) {
 		this.$root = $table
@@ -9,7 +9,7 @@ const TableColumnHighlight = class {
 			})
 
 			$el.addEventListener('mouseout', event => {
-				this.highlightColumn($el, '#ffffff')
+				this.highlightColumn($el)
 			})
 		})
 
@@ -18,7 +18,7 @@ const TableColumnHighlight = class {
 		}
 	}
 
-	highlightColumn($target, color) {
+	highlightColumn($target, color = null) {
 		let trs = this.$root.querySelectorAll('tr')
 		let tds = $target.closest('tr').querySelectorAll('td')
 		let index = Array.from(tds).indexOf($target)

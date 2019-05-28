@@ -3,7 +3,7 @@ import {
 	clearAllBodyScrollLocks
 } from 'body-scroll-lock'
 
-const Modal = class {
+class Modal {
 
 	constructor(options = {}) {
 		let defaults = {

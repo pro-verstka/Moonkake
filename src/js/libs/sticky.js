@@ -1,4 +1,4 @@
-const Sticky = class {
+class Sticky {
 
 	constructor(options = {}) {
 		let defaults = {

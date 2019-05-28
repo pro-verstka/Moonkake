@@ -4,13 +4,15 @@ import Inputmask from 'inputmask';
 -------------------------------------------------- */
 
 Inputmask({
-	mask: '+7 (999) 999-99-99'
+	mask: '+7 (999) 999-99-99',
+	clearIncomplete: true
 }).mask(document.querySelectorAll('input[type="tel"]'))
 
 Inputmask({
 	inputFormat: 'dd.mm.yyyy',
 	alias: 'datetime',
-	placeholder: 'дд.мм.гггг'
+	placeholder: 'дд.мм.гггг',
+	clearIncomplete: true
 }).mask(document.querySelectorAll('input[data-mask-date]'))
 
 Inputmask({

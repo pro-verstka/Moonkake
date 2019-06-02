@@ -17,14 +17,19 @@ class Accordion {
 		document.addEventListener('click', e => {
 			if (e.target.matches(`${this.options.root} ${this.options.handler}`)) {
 				e.target.closest(this.options.item).classList.toggle(this.options.active)
+
+				window.dispatchEvent(
+					new CustomEvent('accordionToggle', {
+						bubbles: true,
+						detail: {
+							root: e.target.closest(this.options.root),
+							item: e.target.closest(this.options.item)
+						}
+					})
+				)
+
 			}
 		})
-
-		// document.querySelectorAll(`${this.options.root} ${this.options.handler}`).forEach($el => {
-		// 	$el.addEventListener('click', e => {
-		// 		$el.closest(this.options.item).classList.toggle(this.options.active)
-		// 	})
-		// })
 
 	}
 

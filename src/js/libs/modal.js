@@ -40,14 +40,14 @@ class Modal {
 			if (e.target.matches(this.options.modalSelector)) {
 				e.preventDefault()
 
-				this.open(e.target.getAttribute('href').substr(1))
+				this.open(e.target.getAttribute('href').substr(1), e.target)
 			}
 
 			// open video by button
 			if (e.target.matches(this.options.modalVideoSelector)) {
 				e.preventDefault()
 
-				this.openVideo(e.target.getAttribute('href'))
+				this.openVideo(e.target.getAttribute('href'), e.target)
 			}
 
 			// close by button
@@ -75,11 +75,16 @@ class Modal {
 		})
 	}
 
-	open(id) {
-		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
-			bubbles: true,
-			detail: id
-		}))
+	open(id, $trigger) {
+		window.dispatchEvent(
+			new CustomEvent('modalBeforeOpen', {
+				bubbles: true,
+				detail: {
+					id: id,
+					trigger: $trigger
+				}
+			})
+		);
 
 		this.modals.push(id)
 
@@ -89,10 +94,15 @@ class Modal {
 
 		modal.classList.add('modal--opened')
 
-		window.dispatchEvent(new CustomEvent('modalOpen', {
-			bubbles: true,
-			detail: id
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalOpen', {
+				bubbles: true,
+				detail: {
+					id: id,
+					trigger: $trigger
+				}
+			})
+		);
 
 		setTimeout(() => {
 			modal.classList.add('modal--visible')
@@ -102,17 +112,27 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
-			bubbles: true,
-			detail: id
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalAfterOpen', {
+				bubbles: true,
+				detail: {
+					id: id,
+					trigger: $trigger
+				}
+			})
+		);
 	}
 
-	openVideo(href) {
-		window.dispatchEvent(new CustomEvent('modalBeforeOpen', {
-			bubbles: true,
-			detail: this.options.modalVideoId
-		}))
+	openVideo(href, $trigger) {
+		window.dispatchEvent(
+			new CustomEvent('modalBeforeOpen', {
+				bubbles: true,
+				detail: {
+					id: this.options.modalVideoId,
+					trigger: $trigger
+				}
+			})
+		);
 
 		this.modals.push(this.options.modalVideoId)
 
@@ -141,10 +161,15 @@ class Modal {
 
 		modal.classList.add('modal--opened')
 
-		window.dispatchEvent(new CustomEvent('modalOpen', {
-			bubbles: true,
-			detail: this.options.modalVideoId
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalOpen', {
+				bubbles: true,
+				detail: {
+					id: this.options.modalVideoId,
+					trigger: $trigger
+				}
+			})
+		);
 
 		setTimeout(() => {
 			modal.classList.add('modal--visible')
@@ -154,17 +179,26 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		window.dispatchEvent(new CustomEvent('modalAfterOpen', {
-			bubbles: true,
-			detail: this.options.modalVideoId
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalAfterOpen', {
+				bubbles: true,
+				detail: {
+					id: this.options.modalVideoId,
+					trigger: $trigger
+				}
+			})
+		);
 	}
 
 	close(id) {
-		window.dispatchEvent(new CustomEvent('modalBeforeClose', {
-			bubbles: true,
-			detail: id
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalBeforeClose', {
+				bubbles: true,
+				detail: {
+					id: id
+				}
+			})
+		);
 
 		let modalIndex = this.modals.indexOf(id)
 
@@ -176,10 +210,14 @@ class Modal {
 
 		modal.classList.remove('modal--visible')
 
-		window.dispatchEvent(new CustomEvent('modalClose', {
-			bubbles: true,
-			detail: id
-		}))
+		window.dispatchEvent(
+			new CustomEvent('modalClose', {
+				bubbles: true,
+				detail: {
+					id: id
+				}
+			})
+		);
 
 		modal.addEventListener('transitionend', e => {
 			modal.classList.remove('modal--opened')
@@ -188,10 +226,14 @@ class Modal {
 				modal.querySelector('iframe').remove()
 			}
 
-			window.dispatchEvent(new CustomEvent('modalAfterClose', {
-				bubbles: true,
-				detail: id
-			}))
+			window.dispatchEvent(
+				new CustomEvent('modalAfterClose', {
+					bubbles: true,
+					detail: {
+						id: id
+					}
+				})
+			);
 
 			if (!this.modals.length) {
 				document.documentElement.classList.remove('-modal-locked')

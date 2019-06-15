@@ -1,7 +1,7 @@
-import FontFaceObserver from "fontfaceobserver/fontfaceobserver"
+import FontFaceObserver from 'fontfaceobserver/fontfaceobserver'
 
-const font = new FontFaceObserver("FONT_NAME")
+const font = new FontFaceObserver('FONT_NAME')
 
 Promise.all([font.load()]).then(function() {
-	document.documentElement.classList.add("-fonts-ready")
+	document.documentElement.classList.add('-fonts-ready')
 })

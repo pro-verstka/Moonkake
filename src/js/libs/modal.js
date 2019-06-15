@@ -222,8 +222,8 @@ class Modal {
 		modal.addEventListener('transitionend', e => {
 			modal.classList.remove('modal--opened')
 
-			if (modal.querySelector('iframe')) {
-				modal.querySelector('iframe').remove()
+			if (modal.querySelector('.modal-iframe iframe')) {
+				modal.querySelector('.modal-iframe iframe').remove()
 			}
 
 			window.dispatchEvent(

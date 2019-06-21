@@ -1,6 +1,5 @@
 class Tabs {
 	constructor(options = {}) {
-
 		let defaults = {
 			root: '.tabs',
 			title: '.tabs-title',
@@ -33,25 +32,26 @@ class Tabs {
 		// 		})
 		// 	})
 		// })
-
 	}
 
 	change($elRoot, index) {
 		$elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`).forEach(($el, key) => {
-			$el.classList[(key === index ? 'add' : 'remove')](this.options.active)
+			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
 		$elRoot.querySelectorAll(`${this.options.content} ${this.options.item}`).forEach(($el, key) => {
-			$el.classList[(key === index ? 'add' : 'remove')](this.options.active)
+			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
-		window.dispatchEvent(new CustomEvent('tabChange', {
-			bubbles: true,
-			detail: {
-				root: $elRoot,
-				index: index
-			}
-		}))
+		window.dispatchEvent(
+			new CustomEvent('tabChange', {
+				bubbles: true,
+				detail: {
+					root: $elRoot,
+					index: index
+				}
+			})
+		)
 	}
 }
 

@@ -1,6 +1,5 @@
 class Toggler {
 	constructor(options = {}) {
-
 		let defaults = {
 			toggler: '[data-toggler]',
 			togglerClose: '[data-toggler-close]',
@@ -28,10 +27,12 @@ class Toggler {
 						document.getElementById(elTarget).classList.remove(this.options.activeClass)
 						document.body.classList.remove(`-${elTarget + this.options.activeClass}`)
 
-						window.dispatchEvent(new CustomEvent('togglerClose', {
-							bubbles: true,
-							detail: $element
-						}));
+						window.dispatchEvent(
+							new CustomEvent('togglerClose', {
+								bubbles: true,
+								detail: $element
+							})
+						)
 					}
 				})
 
@@ -39,10 +40,12 @@ class Toggler {
 				document.getElementById(target).classList.toggle(this.options.activeClass)
 				document.body.classList.toggle(`-${target + this.options.activeClass}`)
 
-				window.dispatchEvent(new CustomEvent('togglerChange', {
-					bubbles: true,
-					detail: $el
-				}))
+				window.dispatchEvent(
+					new CustomEvent('togglerChange', {
+						bubbles: true,
+						detail: $el
+					})
+				)
 			})
 		})
 
@@ -57,10 +60,12 @@ class Toggler {
 				document.getElementById(target).classList.remove(this.options.activeClass)
 				document.body.classList.remove(`-${target + this.options.activeClass}`)
 
-				window.dispatchEvent(new CustomEvent('togglerClose', {
-					bubbles: true,
-					detail: $el
-				}))
+				window.dispatchEvent(
+					new CustomEvent('togglerClose', {
+						bubbles: true,
+						detail: $el
+					})
+				)
 			})
 		})
 
@@ -77,14 +82,15 @@ class Toggler {
 					document.getElementById(target).classList.remove(this.options.activeClass)
 					document.body.classList.remove(`-${target + this.options.activeClass}`)
 
-					window.dispatchEvent(new CustomEvent('togglerClose', {
-						bubbles: true,
-						detail: $el
-					}))
+					window.dispatchEvent(
+						new CustomEvent('togglerClose', {
+							bubbles: true,
+							detail: $el
+						})
+					)
 				}
 			})
 		})
-
 	}
 }
 

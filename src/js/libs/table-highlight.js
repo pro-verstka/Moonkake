@@ -1,5 +1,4 @@
 class TableColumnHighlight {
-
 	constructor($table) {
 		this.$root = $table
 
@@ -39,7 +38,7 @@ class TableColumnHighlight {
 
 		for (let i = 0; i < trs.length; i++) {
 			let item = this.findTdSpan(trs[i], index)
-			item.classList.add('active');
+			item.classList.add('active')
 		}
 	}
 

@@ -1,10 +1,6 @@
-import {
-	disableBodyScroll,
-	clearAllBodyScrollLocks
-} from 'body-scroll-lock'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 class Modal {
-
 	constructor(options = {}) {
 		let defaults = {
 			modalSelector: '[data-modal]',
@@ -25,14 +21,17 @@ class Modal {
 
 		// prepare for video
 		if (document.querySelector(this.options.modalVideoSelector)) {
-			document.body.insertAdjacentHTML('beforeend', `
+			document.body.insertAdjacentHTML(
+				'beforeend',
+				`
 				<div class="modal modal--video" id="${this.options.modalVideoId}">
 					<div class="modal-container">
 						<button class="modal-close" data-modal-close>&times;</button>
 						<div class="modal-iframe"></div>
 					</div>
 				</div>
-			`)
+			`
+			)
 		}
 
 		document.addEventListener('click', e => {
@@ -84,7 +83,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 
 		this.modals.push(id)
 
@@ -102,7 +101,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 
 		setTimeout(() => {
 			modal.classList.add('modal--visible')
@@ -120,7 +119,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 	}
 
 	openVideo(href, $trigger) {
@@ -132,7 +131,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 
 		this.modals.push(this.options.modalVideoId)
 
@@ -169,7 +168,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 
 		setTimeout(() => {
 			modal.classList.add('modal--visible')
@@ -187,7 +186,7 @@ class Modal {
 					trigger: $trigger
 				}
 			})
-		);
+		)
 	}
 
 	close(id) {
@@ -198,7 +197,7 @@ class Modal {
 					id: id
 				}
 			})
-		);
+		)
 
 		let modalIndex = this.modals.indexOf(id)
 
@@ -217,31 +216,35 @@ class Modal {
 					id: id
 				}
 			})
-		);
+		)
 
-		modal.addEventListener('transitionend', e => {
-			modal.classList.remove('modal--opened')
+		modal.addEventListener(
+			'transitionend',
+			e => {
+				modal.classList.remove('modal--opened')
 
-			if (modal.querySelector('.modal-iframe iframe')) {
-				modal.querySelector('.modal-iframe iframe').remove()
+				if (modal.querySelector('.modal-iframe iframe')) {
+					modal.querySelector('.modal-iframe iframe').remove()
+				}
+
+				window.dispatchEvent(
+					new CustomEvent('modalAfterClose', {
+						bubbles: true,
+						detail: {
+							id: id
+						}
+					})
+				)
+
+				if (!this.modals.length) {
+					document.documentElement.classList.remove('-modal-locked')
+					clearAllBodyScrollLocks()
+				}
+			},
+			{
+				once: true
 			}
-
-			window.dispatchEvent(
-				new CustomEvent('modalAfterClose', {
-					bubbles: true,
-					detail: {
-						id: id
-					}
-				})
-			);
-
-			if (!this.modals.length) {
-				document.documentElement.classList.remove('-modal-locked')
-				clearAllBodyScrollLocks()
-			}
-		}, {
-			once: true
-		})
+		)
 	}
 }
 

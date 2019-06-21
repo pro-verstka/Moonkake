@@ -1,5 +1,4 @@
 class Accordion {
-
 	constructor(options = {}) {
 		let defaults = {
 			root: '.accordion',
@@ -27,12 +26,9 @@ class Accordion {
 						}
 					})
 				)
-
 			}
 		})
-
 	}
-
 }
 
 export default Accordion

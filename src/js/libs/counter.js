@@ -3,7 +3,7 @@ class Counter {
 		let defaults = {
 			root: '.counter',
 			plus: '.counter-plus',
-			minus: '.counter-minus',
+			minus: '.counter-minus'
 		}
 
 		if (typeof options === 'object') {
@@ -17,8 +17,7 @@ class Counter {
 	}
 
 	handle() {
-
-		document.addEventListener('click', (e) => {
+		document.addEventListener('click', e => {
 			if (e.target.matches(`${this.options.root} ${this.options.plus}`)) {
 				this.handlePlus(e.target)
 			}
@@ -28,24 +27,35 @@ class Counter {
 			}
 		})
 
-		document.addEventListener('focus', (e) => {
-			if (e.target.matches(`${this.options.root} input`)) {
-				this.handleInputFocus(e.target)
-			}
-		}, true)
+		document.addEventListener(
+			'focus',
+			e => {
+				if (e.target.matches(`${this.options.root} input`)) {
+					this.handleInputFocus(e.target)
+				}
+			},
+			true
+		)
 
-		document.addEventListener('blur', (e) => {
-			if (e.target.matches(`${this.options.root} input`)) {
-				this.handleInputBlur(e.target)
-			}
-		}, true)
+		document.addEventListener(
+			'blur',
+			e => {
+				if (e.target.matches(`${this.options.root} input`)) {
+					this.handleInputBlur(e.target)
+				}
+			},
+			true
+		)
 
-		document.addEventListener('keyup', (e) => {
-			if (e.target.matches(`${this.options.root} input`)) {
-				this.handleInputKeyup(e.target)
-			}
-		}, true)
-
+		document.addEventListener(
+			'keyup',
+			e => {
+				if (e.target.matches(`${this.options.root} input`)) {
+					this.handleInputKeyup(e.target)
+				}
+			},
+			true
+		)
 	}
 
 	handlePlus($el) {
@@ -65,9 +75,11 @@ class Counter {
 
 		$input.value = prefix + value + postfix
 
-		$input.dispatchEvent(new CustomEvent('change', {
-			bubbles: true
-		}))
+		$input.dispatchEvent(
+			new CustomEvent('change', {
+				bubbles: true
+			})
+		)
 	}
 
 	handleMinus($el) {
@@ -89,9 +101,11 @@ class Counter {
 
 		$input.value = prefix + value + postfix
 
-		$input.dispatchEvent(new CustomEvent('change', {
-			bubbles: true
-		}))
+		$input.dispatchEvent(
+			new CustomEvent('change', {
+				bubbles: true
+			})
+		)
 	}
 
 	handleInputFocus($input) {
@@ -161,7 +175,6 @@ class Counter {
 
 		$input.value = value
 	}
-
 }
 
 export default Counter

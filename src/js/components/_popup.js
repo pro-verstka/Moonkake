@@ -5,42 +5,42 @@ import 'magnific-popup'
 -------------------------------------------------- */
 
 $('[data-popup]').magnificPopup({
-  type: 'inline',
-  midClick: true,
-  closeBtnInside: true,
-  removalDelay: 300,
-  mainClass: 'mfp-fade',
-  fixedContentPos: false
-});
+	type: 'inline',
+	midClick: true,
+	closeBtnInside: true,
+	removalDelay: 300,
+	mainClass: 'mfp-fade',
+	fixedContentPos: false
+})
 
 $('[data-popup-image]').magnificPopup({
-  type: 'image',
-  closeOnContentClick: true,
-  removalDelay: 300,
-  mainClass: 'mfp-fade mfp-img-mobile',
-  image: {
-    verticalFit: true
-  }
-});
+	type: 'image',
+	closeOnContentClick: true,
+	removalDelay: 300,
+	mainClass: 'mfp-fade mfp-img-mobile',
+	image: {
+		verticalFit: true
+	}
+})
 
 $('[data-popup-gallery]').each(function() {
-  $(this).magnificPopup({
-    delegate: 'a',
-    type: 'image',
-    tLoading: 'Загрузка изображения #%curr%...',
-    mainClass: 'mfp-fade mfp-img-mobile',
-    removalDelay: 300,
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0, 1],
-      tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
-    },
-    image: {
-      tError: '<a href="%url%">Изображение #%curr%</a> не может быть загружено.'
-    }
-  });
-});
+	$(this).magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		tLoading: 'Загрузка изображения #%curr%...',
+		mainClass: 'mfp-fade mfp-img-mobile',
+		removalDelay: 300,
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0, 1],
+			tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
+		},
+		image: {
+			tError: '<a href="%url%">Изображение #%curr%</a> не может быть загружено.'
+		}
+	})
+})
 
 // $('[data-popup]').fancybox({
 // 	defaultType: 'inline',

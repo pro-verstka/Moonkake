@@ -1,8 +1,8 @@
 /*!
-* Moonkake 7.0.1
-*
-* https://github.com/detectiveshelby/moonkake
-*/
+ * Moonkake 7.0.1
+ *
+ * https://github.com/detectiveshelby/moonkake
+ */
 
 // Vendors
 import './vendor/polyfills'

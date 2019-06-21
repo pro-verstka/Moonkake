@@ -1,7 +1,9 @@
 import PhotoSwipe from 'photoswipe/dist/photoswipe'
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
 
-document.body.insertAdjacentHTML('beforeend', `
+document.body.insertAdjacentHTML(
+	'beforeend',
+	`
 	<div class="pswp">
 		<div class="pswp__bg"></div>
 		<div class="pswp__scroll-wrap">
@@ -35,7 +37,8 @@ document.body.insertAdjacentHTML('beforeend', `
 			</div>
 		</div>
 	</div>
-`)
+`
+)
 
 const pswpElement = document.querySelectorAll('.pswp')[0]
 
@@ -64,7 +67,7 @@ document.querySelectorAll('[data-gallery]').forEach($gallery => {
 	})
 
 	$links.forEach(($link, index) => {
-		$link.addEventListener('click', function (e) {
+		$link.addEventListener('click', function(e) {
 			e.preventDefault()
 
 			options.index = index

@@ -1,4 +1,4 @@
-import Inputmask from 'inputmask';
+import Inputmask from 'inputmask'
 
 /* INPUTMASK
 -------------------------------------------------- */

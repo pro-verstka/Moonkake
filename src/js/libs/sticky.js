@@ -1,5 +1,4 @@
 class Sticky {
-
 	constructor(options = {}) {
 		let defaults = {
 			selector: '[data-sticky]',
@@ -14,18 +13,16 @@ class Sticky {
 
 		this.options = defaults
 
-		const $el = (typeof this.options.selector == 'object') ? this.options.selector : document.querySelector(this.options.selector)
-		const $elParent = (this.options.parent == '') ? $el.parentElement : document.querySelector(this.options.parent)
+		const $el =
+			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)
+		const $elParent = this.options.parent == '' ? $el.parentElement : document.querySelector(this.options.parent)
 
 		if (this.isStickySupport()) {
-
 			$el.style.position = 'sticky'
 			$el.style.top = `${this.options.offsetTop}px`
-
 		}
 
 		if (!this.isStickySupport()) {
-
 			$el.insertAdjacentHTML('afterend', '<div data-sticky-fake style="display: none;"></div>')
 
 			const $elFake = $elParent.querySelector('[data-sticky-fake]')
@@ -41,7 +38,6 @@ class Sticky {
 			window.addEventListener('resize', () => {
 				this.handle($el, $elParent, $elFake)
 			})
-
 		}
 	}
 
@@ -62,7 +58,12 @@ class Sticky {
 
 		const { top: bodyTop } = document.body.getBoundingClientRect()
 		const { height: elHeight } = $el.getBoundingClientRect()
-		const { height: elParentHeight, width: elParentWidth, top: elParentTop, left: elParentLeft } = $elParent.getBoundingClientRect()
+		const {
+			height: elParentHeight,
+			width: elParentWidth,
+			top: elParentTop,
+			left: elParentLeft
+		} = $elParent.getBoundingClientRect()
 
 		let position = 'static'
 		let positionX = elParentLeft
@@ -85,10 +86,13 @@ class Sticky {
 			display = 'block'
 		}
 
-		if (window.pageYOffset + window.innerHeight >= elParentHeight + elParentTop - bodyTop + window.innerHeight - elHeight - this.options.offsetTop) {
+		if (
+			window.pageYOffset + window.innerHeight >=
+			elParentHeight + elParentTop - bodyTop + window.innerHeight - elHeight - this.options.offsetTop
+		) {
 			position = 'absolute'
 			positionX = 0
-			positionY = (elParentTop - bodyTop) + elParentHeight - elHeight - (elParentTop - bodyTop)
+			positionY = elParentTop - bodyTop + elParentHeight - elHeight - (elParentTop - bodyTop)
 			display = 'block'
 		}
 

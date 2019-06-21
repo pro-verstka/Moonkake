@@ -9,20 +9,29 @@
 		"url": "git://github.com/detectiveshelby/moonkake.git"
 	},
 	"main": "gulpfile.babel.js",
-
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development gulp",
 		"build": "cross-env NODE_ENV=production gulp build"
 	},
-
 	"browserslist": [
 		"last 3 version",
 		"ie >= 11"
 	],
 	"babel": {
-		"presets": ["@babel/preset-env"]
+		"presets": [
+			"@babel/preset-env"
+		]
 	},
-
+	"prettier": {
+		"semi": false,
+		"tabWidth": 2,
+		"useTabs": true,
+		"singleQuote": true,
+		"arrowParens": "avoid",
+		"bracketSpacing": true,
+		"trailingComma": "none",
+		"printWidth": 120
+	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
 		"@babel/polyfill": "^7.2.5",

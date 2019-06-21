@@ -4,11 +4,11 @@ import scrollToElement from 'scroll-to-element'
 -------------------------------------------------- */
 
 const Utils = {
-	hello: function () {
+	hello: function() {
 		console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru')
 	},
 
-	getPageQuery: function (key) {
+	getPageQuery: function(key) {
 		let query = {}
 
 		if (window.location.search) {
@@ -30,14 +30,14 @@ const Utils = {
 		}
 	},
 
-	scrollTo: function ($target, offset) {
+	scrollTo: function($target, offset) {
 		scrollToElement($target, {
 			offset: offset || 0,
 			duration: 500
 		})
 	},
 
-	getSection: function (selector, offset = 0) {
+	getSection: function(selector, offset = 0) {
 		let $target = null
 
 		document.querySelectorAll(selector).forEach($el => {
@@ -83,8 +83,8 @@ const Utils = {
 	},
 	*/
 
-	declension: function (oneNominative, severalGenitive, severalNominative, number) {
-		number = number % 100;
+	declension: function(oneNominative, severalGenitive, severalNominative, number) {
+		number = number % 100
 
 		return number <= 14 && number >= 11
 			? severalGenitive
@@ -96,7 +96,7 @@ const Utils = {
 				: number === 0
 				? severalGenitive
 				: severalNominative
-			: severalGenitive;
+			: severalGenitive
 	},
 
 	isTouchDevice: function() {
@@ -105,7 +105,7 @@ const Utils = {
 			return window.matchMedia(query).matches
 		}
 
-		if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+		if ('ontouchstart' in window || (window.DocumentTouch && document instanceof DocumentTouch)) {
 			return true
 		}
 

@@ -36,4 +36,4 @@ const slider = new Swiper('.swiper-container', {
 		type: 'bullets',
 		clickable: true
 	},
-})
+});

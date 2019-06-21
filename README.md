@@ -33,16 +33,16 @@ npm run build
 
 ### Сheckbox
 ```pug
-div.checkbox
-  input(type="checkbox", id="checkbox", name="checkbox_name")
-  label(for="checkbox") Текст
+label.checkbox
+  input(type="checkbox", name="checkbox_name")
+  div Текст
 ```
 
 ### Radio
 ```pug
-div.radio
-  input(type="radio", id="radio", name="radio_name")
-  label(for="radio") Текст
+label.radio
+  input(type="radio", name="radio_name")
+  div Текст
 ```
 
 ### File
@@ -91,6 +91,25 @@ div.tabs
     div.tabs-item Таб 3
 ```
 
+### Accordion
+```pug
+div.accordion
+  div.accordion-item
+    div.accordion-header accordion title 1
+    div.accordion-body accordion content 1
+  div.accordion-item
+    div.accordion-header accordion title 2
+    div.accordion-body accordion content 2
+```
+
+### Counter
+```pug
+div.counter
+  button.counter-minus -
+  input(type="text" value="до 5 после" data-prefix="до " data-postfix=" после" data-min="2" data-max="10")
+  button.counter-plus +
+```
+
 ### Breadcrumbs
 ```pug
 ul.list.list-flex.breadcrumbs
@@ -105,4 +124,17 @@ ul.list.list-flex.pagination
   li.list-item: a.list-link(href="#") 1
   li.list-item: a.list-link(href="#") 2
   li.list-item: a.list-link(href="#") 3
+```
+
+### Modal
+```pug
+a(href="#modal_example" data-modal) Open
+
+div.modal#modal_example
+  div.modal-container
+    button.modal-close(data-modal-close) &times;
+    h1 Modal title
+    
+a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Open YouTube
+a(href="https://vimeo.com/191947042" data-modal-video) Open Vimeo
 ```

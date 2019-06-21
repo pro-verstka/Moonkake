@@ -69,7 +69,7 @@ class Sticky {
 		let positionY = elParentTop - bodyTop
 		let width = elParentWidth
 		let height = elHeight
-		let display = 'none';
+		let display = 'none'
 
 		if (elHeight >= elParentHeight) {
 			return false

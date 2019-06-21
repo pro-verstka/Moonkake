@@ -23,8 +23,8 @@ class TableColumnHighlight {
 		let tds = $target.closest('tr').querySelectorAll('td')
 		let index = Array.from(tds).indexOf($target)
 
-		for (var i = 0; i < trs.length; i++) {
-			var item = this.findTdSpan(trs[i], index)
+		for (let i = 0; i < trs.length; i++) {
+			let item = this.findTdSpan(trs[i], index)
 
 			if (!item.classList.contains('active')) {
 				item.style.backgroundColor = color
@@ -37,8 +37,8 @@ class TableColumnHighlight {
 		let tds = $target.closest('tr').querySelectorAll('td')
 		let index = Array.from(tds).indexOf($target)
 
-		for (var i = 0; i < trs.length; i++) {
-			var item = this.findTdSpan(trs[i], index)
+		for (let i = 0; i < trs.length; i++) {
+			let item = this.findTdSpan(trs[i], index)
 			item.classList.add('active');
 		}
 	}
@@ -47,7 +47,7 @@ class TableColumnHighlight {
 		let tds = tr.children
 		let num = 0
 
-		for (var i = 0; i < tds.length; i++) {
+		for (let i = 0; i < tds.length; i++) {
 			num += tds[i].colSpan
 
 			if (num >= index + 1) {

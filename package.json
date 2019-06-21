@@ -2,17 +2,27 @@
 	"name": "moonkake",
 	"version": "7.0.1",
 	"description": "Moonkake start kit",
-	"main": "gulpfile.babel.js",
-	"scripts": {
-		"dev": "cross-env NODE_ENV=development gulp",
-		"build": "cross-env NODE_ENV=production gulp build"
-	},
 	"author": "p1rate",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/detectiveshelby/moonkake.git"
 	},
+	"main": "gulpfile.babel.js",
+
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development gulp",
+		"build": "cross-env NODE_ENV=production gulp build"
+	},
+
+	"browserslist": [
+		"last 3 version",
+		"ie >= 11"
+	],
+	"babel": {
+		"presets": ["@babel/preset-env"]
+	},
+
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
 		"@babel/polyfill": "^7.2.5",

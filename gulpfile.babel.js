@@ -12,6 +12,7 @@ const flatten = require('gulp-flatten')
 const rename = require('gulp-rename')
 const gulpif = require('gulp-if')
 const del = require('del')
+const data = require('gulp-data')
 
 // css
 const gcmq = require('gulp-group-css-media-queries')
@@ -54,6 +55,11 @@ gulp.task('templates', () => {
 		.src(['src/templates/**/*', '!src/templates/mixins/*', '!src/templates/blocks/*', '!src/templates/layouts/*'], {
 			base: '.'
 		})
+		.pipe(
+			data(function(file) {
+				return JSON.parse(fs.readFileSync('src/data.json'))
+			})
+		)
 		.pipe(
 			pug({
 				pretty: true
@@ -215,6 +221,7 @@ gulp.task('watch', () => {
 	gulp.watch('src/fonts/**/*', gulp.series('fonts'))
 	gulp.watch('src/js/**/*', gulp.series('js'))
 	gulp.watch('src/templates/**/*', gulp.series('templates'))
+	gulp.watch('src/data.json', gulp.series('templates'))
 
 	notify('Project is running!')
 })

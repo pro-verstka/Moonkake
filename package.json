@@ -58,6 +58,7 @@
 		"gulp.spritesmith": "^6.9.0",
 		"merge-stream": "^1.0.1",
 		"node-sass": "^4.9.3",
+		"prettier": "^1.18.2",
 		"webpack": "^4.17.1",
 		"webpack-stream": "^5.1.1"
 	},

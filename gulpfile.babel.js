@@ -62,7 +62,7 @@ gulp.task('templates', () => {
 		)
 		.pipe(
 			pug({
-				pretty: true
+				pretty: isProd
 			})
 		)
 		.on('error', notify.onError('Error: <%= error.message %>'))
@@ -161,8 +161,11 @@ gulp.task('img', () => {
 
 let webpackConfig = {
 	mode: buildMode,
+	entry: {
+		app: './src/js/app.js'
+	},
 	output: {
-		filename: 'app.min.js'
+		filename: '[name].min.js'
 	},
 	module: {
 		rules: [
@@ -183,7 +186,7 @@ let webpackConfig = {
 
 gulp.task('js', () => {
 	return gulp
-		.src('./src/js/app.js')
+		.src(['./src/js/app.js'])
 		.pipe(
 			webpackStream(webpackConfig, null, (err, stats) => {
 				if (stats.compilation.errors.length) {

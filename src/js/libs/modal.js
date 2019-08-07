@@ -52,24 +52,32 @@ class Modal {
 
 		document.addEventListener('click', e => {
 			// open by button
-			if (e.target.matches(this.options.modalSelector)) {
+			const $elModal = e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)
+
+			if ($elModal) {
 				e.preventDefault()
 
-				this.open(e.target.getAttribute('href').substr(1), e.target)
+				this.open($elModal.getAttribute('href').substr(1), $elModal)
 			}
 
 			// open image by link
-			if (e.target.matches(this.options.modalImageSelector)) {
+			const $elImage =
+				e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)
+
+			if ($elImage) {
 				e.preventDefault()
 
-				this.openImage(e.target.getAttribute('href'), e.target)
+				this.openImage($elImage.getAttribute('href'), $elImage)
 			}
 
 			// open video by button
-			if (e.target.matches(this.options.modalVideoSelector)) {
+			const $elVideo =
+				e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)
+
+			if ($elVideo) {
 				e.preventDefault()
 
-				this.openVideo(e.target.getAttribute('href'), e.target)
+				this.openVideo($elVideo.getAttribute('href'), $elVideo)
 			}
 
 			// close by button

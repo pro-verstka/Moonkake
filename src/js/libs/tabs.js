@@ -5,7 +5,8 @@ class Tabs {
 			title: '.tabs-title',
 			content: '.tabs-content',
 			item: '.tabs-item',
-			active: '-active'
+			active: '-active',
+			useHashNav: true
 		}
 
 		if (typeof options === 'object') {
@@ -14,40 +15,72 @@ class Tabs {
 
 		this.options = defaults
 
+		// tab click
 		document.addEventListener('click', e => {
 			if (e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)) {
-				const $elRoot = e.target.closest(this.options.root)
-				const $elTitles = $elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`)
+				const $root = e.target.closest(this.options.root)
+				const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
 
-				this.change($elRoot, Array.from($elTitles).indexOf(e.target))
+				this.change($root, Array.from($titles).indexOf(e.target))
 			}
 		})
 
-		// document.querySelectorAll(this.options.root).forEach($elRoot => {
-		// 	const $elTitles = $elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`)
+		// tab change on history change
+		window.addEventListener('popstate', e => {
+			if (e.state && e.state.hasOwnProperty('source') && e.state.source == 'tabs') {
+				const $root = document
+					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
+					.closest(this.options.root)
 
-		// 	$elTitles.forEach($elItem => {
-		// 		$elItem.addEventListener('click', e => {
-		// 			this.change($elRoot, Array.from($elTitles).indexOf($elItem))
-		// 		})
-		// 	})
-		// })
+				this.change($root, e.state.index, false)
+			}
+		})
+
+		// tab change on window load
+		window.addEventListener('load', e => {
+			if (window.location.hash) {
+				const hash = window.location.hash.substr(1)
+				const $title = document.querySelector(`${this.options.root} [data-hash="${hash}"]`)
+
+				if ($title) {
+					const $root = $title.closest(this.options.root)
+					const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
+
+					this.change($root, Array.from($titles).indexOf($title), false)
+				}
+			}
+		})
 	}
 
-	change($elRoot, index) {
-		$elRoot.querySelectorAll(`${this.options.title} ${this.options.item}`).forEach(($el, key) => {
+	change($root, index, changeHash = true) {
+		const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
+		const $contents = $root.querySelectorAll(`${this.options.content} ${this.options.item}`)
+
+		$titles.forEach(($el, key) => {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
-		$elRoot.querySelectorAll(`${this.options.content} ${this.options.item}`).forEach(($el, key) => {
+		$contents.forEach(($el, key) => {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
+
+		if (this.options.useHashNav && changeHash && $titles[index].dataset.hasOwnProperty('hash')) {
+			window.history.pushState(
+				{
+					source: 'tabs',
+					hash: $titles[index].dataset.hash,
+					index: index
+				},
+				null,
+				`${window.location.pathname}#${$titles[index].dataset.hash}`
+			)
+		}
 
 		window.dispatchEvent(
 			new CustomEvent('tabChange', {
 				bubbles: true,
 				detail: {
-					root: $elRoot,
+					root: $root,
 					index: index
 				}
 			})

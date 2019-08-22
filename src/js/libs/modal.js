@@ -20,6 +20,19 @@ class Modal {
 
 		this.modals = []
 
+		this.bodyLockOptions = {
+			reserveScrollBarGap: true,
+			allowTouchMove: el => {
+				while (el && el !== document.body) {
+					if (el.getAttribute('data-body-scroll-lock-ignore') !== null) {
+						return true
+					}
+
+					el = el.parentNode
+				}
+			}
+		}
+
 		// prepare for image
 		if (document.querySelector(this.options.modalImageSelector)) {
 			document.body.insertAdjacentHTML(
@@ -160,9 +173,7 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
-			reserveScrollBarGap: true
-		})
+		disableBodyScroll(modal, this.bodyLockOptions)
 
 		this.emitEvent('modalAfterOpen', {
 			id: id,
@@ -195,9 +206,7 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
-			reserveScrollBarGap: true
-		})
+		disableBodyScroll(modal, this.bodyLockOptions)
 
 		this.emitEvent('modalAfterOpen', {
 			id: this.options.modalImageId,
@@ -271,9 +280,7 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
-			reserveScrollBarGap: true
-		})
+		disableBodyScroll(modal, this.bodyLockOptions)
 
 		this.emitEvent('modalAfterOpen', {
 			id: this.options.modalVideoId,

@@ -20,19 +20,6 @@ class Modal {
 
 		this.modals = []
 
-		this.bodyLockOptions = {
-			reserveScrollBarGap: true,
-			allowTouchMove: el => {
-				while (el && el !== document.body) {
-					if (el.getAttribute('data-body-scroll-lock-ignore') !== null) {
-						return true
-					}
-
-					el = el.parentNode
-				}
-			}
-		}
-
 		// prepare for image
 		if (document.querySelector(this.options.modalImageSelector)) {
 			document.body.insertAdjacentHTML(
@@ -65,32 +52,34 @@ class Modal {
 
 		document.addEventListener('click', e => {
 			// open by button
-			const $elModal = e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)
-
-			if ($elModal) {
+			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
 				e.preventDefault()
 
-				this.open($elModal.getAttribute('href').substr(1), $elModal)
+				let $el = e.target.matches(this.options.modalSelector) ? e.target : e.target.closest(this.options.modalSelector)
+
+				this.open($el.getAttribute('href').substr(1), $el)
 			}
 
 			// open image by link
-			const $elImage =
-				e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)
-
-			if ($elImage) {
+			if (e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)) {
 				e.preventDefault()
 
-				this.openImage($elImage.getAttribute('href'), $elImage)
+				let $el = e.target.matches(this.options.modalImageSelector)
+					? e.target
+					: e.target.closest(this.options.modalImageSelector)
+
+				this.openImage($el.getAttribute('href'), $el)
 			}
 
 			// open video by button
-			const $elVideo =
-				e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)
-
-			if ($elVideo) {
+			if (e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)) {
 				e.preventDefault()
 
-				this.openVideo($elVideo.getAttribute('href'), $elVideo)
+				let $el = e.target.matches(this.options.modalVideoSelector)
+					? e.target
+					: e.target.closest(this.options.modalVideoSelector)
+
+				this.openVideo($el.getAttribute('href'), $el)
 			}
 
 			// close by button
@@ -173,7 +162,9 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, this.bodyLockOptions)
+		disableBodyScroll(modal, {
+			reserveScrollBarGap: true
+		})
 
 		this.emitEvent('modalAfterOpen', {
 			id: id,
@@ -206,7 +197,9 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, this.bodyLockOptions)
+		disableBodyScroll(modal, {
+			reserveScrollBarGap: true
+		})
 
 		this.emitEvent('modalAfterOpen', {
 			id: this.options.modalImageId,
@@ -280,7 +273,9 @@ class Modal {
 			modal.classList.add('modal--visible')
 		}, 10)
 
-		disableBodyScroll(modal, this.bodyLockOptions)
+		disableBodyScroll(modal, {
+			reserveScrollBarGap: true
+		})
 
 		this.emitEvent('modalAfterOpen', {
 			id: this.options.modalVideoId,

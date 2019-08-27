@@ -17,11 +17,18 @@ class Tabs {
 
 		// tab click
 		document.addEventListener('click', e => {
-			if (e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)) {
+			if (
+				e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`) ||
+				e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
+			) {
 				const $root = e.target.closest(this.options.root)
 				const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
 
-				this.change($root, Array.from($titles).indexOf(e.target))
+				let $el = e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)
+					? e.target
+					: e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
+
+				this.change($root, Array.from($titles).indexOf($el))
 			}
 		})
 

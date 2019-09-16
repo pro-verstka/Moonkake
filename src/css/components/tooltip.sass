@@ -1,0 +1,52 @@
+[data-tooltip]
+	cursor: help
+
+$tooltipColor: #000
+
+.tooltip
+	padding: 5px 10px
+	border-radius: 4px
+	color: #fff
+	opacity: 1
+	background-color: $tooltipColor
+	font-size: 1.2rem
+	box-shadow: 0 4px 11px 2px rgba(66, 67, 67, 0.2)
+	max-width: 280px
+
+	&-arrow
+		position: absolute
+		width: 0
+		height: 0
+		border-style: solid
+
+	&[x-placement="top"]
+		margin-bottom: 5px
+
+		.tooltip-arrow
+			top: 100%
+			border-width: 5px 5px 0 5px
+			border-color: $tooltipColor transparent transparent transparent
+
+	&[x-placement="bottom"]
+		margin-top: 5px
+
+		.tooltip-arrow
+			bottom: 100%
+			border-width: 0 5px 5px 5px
+			border-color: transparent transparent $tooltipColor transparent
+
+	&[x-placement="left"]
+		margin-right: 5px
+
+		.tooltip-arrow
+			left: 100%
+			border-width: 5px 0 5px 5px
+			border-color: transparent transparent transparent $tooltipColor
+
+	&[x-placement="right"]
+		margin-left: 5px
+
+		.tooltip-arrow
+			right: 100%
+			border-width: 5px 5px 5px 0
+			border-color: transparent $tooltipColor transparent transparent

@@ -147,7 +147,9 @@ class Counter {
 			value = max
 		}
 
-		$input.value = prefix + value + postfix
+		setTimeout(() => {
+			$input.value = prefix + value + postfix
+		}, 300)
 	}
 
 	handleInputKeyup($input) {

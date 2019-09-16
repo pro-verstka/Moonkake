@@ -6,6 +6,9 @@ import Inputmask from 'inputmask'
 Inputmask({
 	mask: '+7 (999) 999-99-99',
 	clearIncomplete: true
+	// clearMaskOnLostFocus: false,
+	// showMaskOnFocus: true,
+	// showMaskOnHover: true,
 }).mask(document.querySelectorAll('input[type="tel"]'))
 
 Inputmask({

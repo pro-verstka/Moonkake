@@ -14,17 +14,35 @@ import Tabs from './libs/tabs'
 import Counter from './libs/counter'
 import Accordion from './libs/accordion'
 import Toggler from './libs/toggler'
-import Sticky from './libs/sticky'
-import TableColumnHighlight from './libs/table-highlight'
 import Modal from './libs/modal'
+import Sticky from './libs/sticky'
+//import TableColumnHighlight from './libs/table-highlight'
 
 // Components
-//import './components/font'
+import './components/font'
 import './components/lazyload'
 import './components/inputmask'
 import './components/slider'
 import './components/gallery'
+//import './components/tooltip'
+//import './components/animation'
 //import './components/map'
+
+/* INIT
+-------------------------------------------------- */
+
+window.MK = {}
+
+/* MOBILE
+-------------------------------------------------- */
+
+if (Utils.isMobile()) {
+	document.body.classList.add('-device-mobile')
+}
+
+if (Utils.isTouchDevice()) {
+	document.body.classList.add('-device-touch')
+}
 
 /* SCROLL TO
 -------------------------------------------------- */
@@ -33,35 +51,34 @@ document.querySelectorAll('[data-scroll-to]').forEach($el => {
 	$el.addEventListener('click', e => {
 		e.preventDefault()
 
-		let el = e.target
-
-		if ($el !== el) {
-			el = e.target.parentElement
-		}
-
-		Utils.scrollTo(el.dataset.scrollTo, el.dataset.scrollToOffset)
+		Utils.scrollTo($el.dataset.scrollTo, $el.dataset.scrollToOffset)
 	})
 })
 
 /* TABS
 -------------------------------------------------- */
 
-const tabs = new Tabs()
+MK.tabs = new Tabs()
 
 /* COUNT
 -------------------------------------------------- */
 
-const counter = new Counter()
+MK.counter = new Counter()
 
 /* ACCORDION
 -------------------------------------------------- */
 
-const accordion = new Accordion()
+MK.accordion = new Accordion()
 
 /* TOGGLER
 -------------------------------------------------- */
 
-const toggler = new Toggler()
+MK.toggler = new Toggler()
+
+/* MODAL
+-------------------------------------------------- */
+
+MK.modal = new Modal()
 
 /* STICKY
 -------------------------------------------------- */
@@ -75,11 +92,6 @@ document.querySelectorAll('[data-sticky]').forEach($el => {
 /* TABLE HIGHLIGHT
 -------------------------------------------------- */
 
-document.querySelectorAll('[data-highlight]').forEach($el => {
-	const table = new TableColumnHighlight($el)
-})
-
-/* MODAL
--------------------------------------------------- */
-
-const modal = new Modal()
+// document.querySelectorAll('[data-highlight]').forEach($el => {
+// 	const table = new TableColumnHighlight($el)
+// })

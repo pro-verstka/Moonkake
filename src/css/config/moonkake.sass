@@ -47,7 +47,13 @@ h2,
 h3,
 h4,
 h5,
-h6
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6
 	margin: 0 0 $headMargin 0
 	font-family: $headFontFamily
 	font-weight: normal
@@ -60,22 +66,28 @@ h6
 		text-decoration: none
 		color: inherit
 
-h1
+h1,
+.h1
 	font-size: $h1FontSize
 
-h2
+h2,
+.h2
 	font-size: $h2FontSize
 
-h3
+h3,
+.h3
 	font-size: $h3FontSize
 
-h4
+h4,
+.h4
 	font-size: $h4FontSize
 
-h5
+h5,
+.h5
 	font-size: $h5FontSize
 
-h6
+h6,
+.h6
 	font-size: $h6FontSize
 
 p,
@@ -88,7 +100,13 @@ table
 	& + h3,
 	& + h4,
 	& + h5,
-	& + h6
+	& + h6,
+	& + .h1,
+	& + .h2,
+	& + .h3,
+	& + .h4,
+	& + .h5,
+	& + .h6
 		margin-top: $textHeadMargin
 
 p
@@ -340,26 +358,26 @@ input[type='number']::-webkit-outer-spin-button
 
 *::-webkit-input-placeholder
 	color: inherit
-	opacity: .5
+	opacity: 1
 
 *:-moz-placeholder
 	color: inherit
-	opacity: .5
+	opacity: 1
 
 *::-moz-placeholder
 	color: inherit
-	opacity: .5
+	opacity: 1
 
 *:-ms-input-placeholder
 	color: inherit
-	opacity: .5
+	opacity: 1
 
 button,
 input[type='button'],
 input[type='reset'],
 input[type='submit']
 	cursor: pointer
-	-webkit-appearance: button
+	appearance: button
 
 button[disabled],
 input[disabled],
@@ -377,7 +395,7 @@ input[type='radio']
 input[type='search'],
 input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-cancel-button
-	-webkit-appearance: none
+	appearance: none
 
 button::-moz-focus-inner,
 input::-moz-focus-inner

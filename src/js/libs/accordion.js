@@ -14,7 +14,7 @@ class Accordion {
 		this.options = defaults
 
 		document.addEventListener('click', e => {
-			if (e.target.matches(`${this.options.root} ${this.options.handler}`)) {
+			if (e.target.matches(`${this.options.root} ${this.options.handler}`) || e.target.closest(this.options.handler)) {
 				e.target.closest(this.options.item).classList.toggle(this.options.active)
 
 				window.dispatchEvent(

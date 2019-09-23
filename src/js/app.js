@@ -1,5 +1,5 @@
 /*!
- * Moonkake 7.0.1
+ * Moonkake 8.0.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -24,11 +24,12 @@ import './components/lazyload'
 import './components/inputmask'
 import './components/slider'
 import './components/gallery'
+import './components/calendar'
 //import './components/tooltip'
 //import './components/animation'
 //import './components/map'
 
-/* INIT
+/* SETUP
 -------------------------------------------------- */
 
 window.MK = {}

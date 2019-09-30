@@ -5,6 +5,7 @@
  */
 
 // Vendors
+//import '@babel/polyfill'
 import './vendor/polyfills'
 import './vendor/detect-preload'
 

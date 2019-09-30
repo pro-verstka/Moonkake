@@ -186,7 +186,7 @@ let webpackConfig = {
 
 gulp.task('js', () => {
 	return gulp
-		.src(['./src/js/app.js'])
+		.src(Object.values(webpackConfig.entry))
 		.pipe(
 			webpackStream(webpackConfig, null, (err, stats) => {
 				if (stats.compilation.errors.length) {

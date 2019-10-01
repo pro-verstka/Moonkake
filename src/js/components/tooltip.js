@@ -4,11 +4,9 @@ const $tooltips = document.querySelectorAll('[data-tooltip]')
 
 if ($tooltips) {
 	$tooltips.forEach($el => {
-		let data = $el.dataset
-
 		let tip = new Tooltip($el, {
-			placement: data.tooltipPosition || 'top',
-			title: data.tooltip,
+			placement: $el.dataset.tooltipPosition || 'top',
+			title: $el.dataset.tooltip,
 			html: true
 		})
 	})

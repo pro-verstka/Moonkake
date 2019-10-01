@@ -153,27 +153,8 @@ class Counter {
 	}
 
 	handleInputKeyup($input) {
-		// const min = parseInt($input.dataset.min) || ''
-		// const max = parseInt($input.dataset.max) || ''
-
 		let value = $input.value.replace(this.regex, '')
-		value = parseInt(value)
-
-		// if (!value) {
-		// 	if (min) {
-		// 		value = min
-		// 	} else {
-		// 		value = 1
-		// 	}
-		// }
-
-		// if (value && min && value < min) {
-		// 	value = min
-		// }
-
-		// if (value && max && value > max) {
-		// 	value = max
-		// }
+		if (value) value = parseInt(value)
 
 		$input.value = value
 	}

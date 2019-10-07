@@ -28,6 +28,7 @@ body
 	font-smooth: always
 	-webkit-font-smoothing: antialiased
 	-moz-osx-font-smoothing: grayscale
+	text-rendering: optimizeSpeed
 
 /* CONTENT
  * -------------------------------------------------- */
@@ -38,6 +39,7 @@ a
 	-webkit-tap-highlight-color: rgba(0,0,0,0)
 	outline: none
 	transition: color .25s, border-color .25s, background-color .25s, opacity .25s
+	text-decoration-skip-ink: auto
 
 	&:not([class])
 		+link()
@@ -58,7 +60,6 @@ h6,
 	font-family: $headFontFamily
 	font-weight: normal
 	color: $headColor
-	text-rendering: optimizelegibility
 	line-height: 1.2
 	hyphens: none
 

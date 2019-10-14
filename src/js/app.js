@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.0.0
+ * Moonkake 8.0.1
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -10,7 +10,7 @@ import './vendor/polyfills'
 import './vendor/detect-preload'
 
 // Libs
-import Utils from './libs/utils'
+import { isMobile, isTouchDevice, scrollTo } from './libs/utils'
 import Tabs from './libs/tabs'
 import Counter from './libs/counter'
 import Accordion from './libs/accordion'
@@ -29,58 +29,26 @@ import './components/calendar'
 //import './components/tooltip'
 //import './components/animation'
 //import './components/map'
+//import './components/scrollbooster'
 
 /* SETUP
 -------------------------------------------------- */
 
-window.MK = {}
-
-/* MOBILE
--------------------------------------------------- */
-
-if (Utils.isMobile()) {
+if (isMobile()) {
 	document.body.classList.add('-device-mobile')
 }
 
-if (Utils.isTouchDevice()) {
+if (isTouchDevice()) {
 	document.body.classList.add('-device-touch')
 }
 
-/* SCROLL TO
--------------------------------------------------- */
-
-document.querySelectorAll('[data-scroll-to]').forEach($el => {
-	$el.addEventListener('click', e => {
-		e.preventDefault()
-
-		Utils.scrollTo($el.dataset.scrollTo, $el.dataset.scrollToOffset)
-	})
-})
-
-/* TABS
--------------------------------------------------- */
-
-MK.tabs = new Tabs()
-
-/* COUNT
--------------------------------------------------- */
-
-MK.counter = new Counter()
-
-/* ACCORDION
--------------------------------------------------- */
-
-MK.accordion = new Accordion()
-
-/* TOGGLER
--------------------------------------------------- */
-
-MK.toggler = new Toggler()
-
-/* MODAL
--------------------------------------------------- */
-
-MK.modal = new Modal()
+window.MK = {
+	tabs: new Tabs(),
+	counter: new Counter(),
+	accordion: new Accordion(),
+	toggler: new Toggler(),
+	modal: new Modal()
+}
 
 /* STICKY
 -------------------------------------------------- */
@@ -94,6 +62,17 @@ document.querySelectorAll('[data-sticky]').forEach($el => {
 /* TABLE HIGHLIGHT
 -------------------------------------------------- */
 
-// document.querySelectorAll('[data-highlight]').forEach($el => {
+// document.querySelectorAll('[data-table-highlight]').forEach($el => {
 // 	const table = new TableColumnHighlight($el)
 // })
+
+/* SCROLL TO
+-------------------------------------------------- */
+
+document.querySelectorAll('[data-scroll-to]').forEach($el => {
+	$el.addEventListener('click', e => {
+		e.preventDefault()
+
+		scrollTo($el.dataset.scrollTo, $el.dataset.scrollToOffset)
+	})
+})

@@ -3,12 +3,12 @@ import scrollToElement from 'scroll-to-element'
 /* UTILS
 -------------------------------------------------- */
 
-const Utils = {
-	hello: function() {
+class Utils {
+	hello() {
 		console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru')
-	},
+	}
 
-	getPageQuery: function(key) {
+	getPageQuery(key) {
 		let query = {}
 
 		if (window.location.search) {
@@ -28,17 +28,20 @@ const Utils = {
 				return query
 			}
 		}
-	},
+	}
 
-	scrollTo: function($target, offset) {
+	scrollTo($target, offset, callback) {
 		scrollToElement($target, {
 			offset: offset || 0,
 			duration: 500
+		}).on('end', () => {
+			if (typeof callback == 'function') callback()
 		})
-	},
+	}
 
-	getSection: function(selector, offset = 0) {
+	getSection(selector, offset) {
 		let $target = null
+		offset = offset || 0
 
 		document.querySelectorAll(selector).forEach($el => {
 			if (window.pageYOffset >= $el.offsetTop + offset) {
@@ -47,9 +50,9 @@ const Utils = {
 		})
 
 		return $target
-	},
+	}
 
-	numberFormat: function(number, decimals, dec_point, thousands_sep) {
+	numberFormat(number, decimals, dec_point, thousands_sep) {
 		var i, j, kw, kd, km
 
 		if (isNaN((decimals = Math.abs(decimals)))) {
@@ -81,9 +84,9 @@ const Utils = {
 			: ''
 
 		return km + kw + kd
-	},
+	}
 
-	declension: function(oneNominative, severalGenitive, severalNominative, number) {
+	declension(oneNominative, severalGenitive, severalNominative, number) {
 		number = number % 100
 
 		return number <= 14 && number >= 11
@@ -97,9 +100,9 @@ const Utils = {
 				? severalGenitive
 				: severalNominative
 			: severalGenitive
-	},
+	}
 
-	isTouchDevice: function() {
+	isTouchDevice() {
 		let prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
 		let mq = function(query) {
 			return window.matchMedia(query).matches
@@ -112,10 +115,10 @@ const Utils = {
 		let query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('')
 
 		return mq(query)
-	},
+	}
 
-	isMobile: function(agent = navigator.userAgent) {
-		return /Android|iPhone|iPad|iPod/i.test(agent)
+	isMobile() {
+		return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 	}
 }
 

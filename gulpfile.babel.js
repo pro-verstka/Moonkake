@@ -162,7 +162,7 @@ gulp.task('img', () => {
 let webpackConfig = {
 	mode: buildMode,
 	entry: {
-		app: './src/js/app.js'
+		//app: './src/js/app.js'
 	},
 	output: {
 		filename: '[name].min.js'
@@ -185,6 +185,18 @@ let webpackConfig = {
 }
 
 gulp.task('js', () => {
+	let dir = './src/js'
+	let files = fs.readdirSync(dir)
+
+	files.forEach(file => {
+		let name = dir + '/' + file
+
+		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
+			let filename = path.basename(name, path.extname(name))
+			webpackConfig.entry[filename] = name
+		}
+	})
+
 	return gulp
 		.src(Object.values(webpackConfig.entry))
 		.pipe(

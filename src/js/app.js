@@ -17,6 +17,8 @@ import Accordion from './libs/accordion'
 import Toggler from './libs/toggler'
 import Modal from './libs/modal'
 import Sticky from './libs/sticky'
+import Parallax from './libs/parallax'
+import Fullheight from './libs/fullheight'
 //import TableColumnHighlight from './libs/table-highlight'
 
 // Components
@@ -30,6 +32,7 @@ import './components/calendar'
 //import './components/animation'
 //import './components/map'
 //import './components/scrollbooster'
+//import './components/fullheight'
 
 /* SETUP
 -------------------------------------------------- */
@@ -47,7 +50,9 @@ window.MK = {
 	counter: new Counter(),
 	accordion: new Accordion(),
 	toggler: new Toggler(),
-	modal: new Modal()
+	modal: new Modal(),
+	parallax: new Parallax(),
+	fullheight: new Fullheight()
 }
 
 /* STICKY

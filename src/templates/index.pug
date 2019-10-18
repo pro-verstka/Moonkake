@@ -9,7 +9,7 @@ block main
 			h1=meta.title
 
 			input(type="tel", name="phone")
-			input(type="text", name="", data-mask-date)
+			input(type="text", name="", data-calendar, placeholder="дд.мм.гггг")
 			input(type="text", name="", data-mask-number)
 
 			h2 Modal
@@ -22,6 +22,9 @@ block main
 			a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image) Open Image Landscape
 			br
 			a(href="https://images.unsplash.com/photo-1561483534-44abb06e7b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" data-modal-image) Open Image Portrait
+
+			div(data-fullheight, style="width: 200px; min-height: 500px; background: #444") 100% window height
+			div(data-parallax, style="width: 100px; height: 100px; background: #000")
 
 			h2 Tabs
 			div.tabs

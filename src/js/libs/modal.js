@@ -11,7 +11,11 @@ class Modal {
 			closeByOverlayClick: true,
 
 			modalImageId: 'modal_image',
-			modalVideoId: 'modal_video'
+			modalVideoId: 'modal_video',
+
+			language: {
+				loadingText: 'Loading...'
+			}
 		}
 
 		if (typeof options === 'object') {
@@ -182,7 +186,7 @@ class Modal {
 
 		const modal = document.getElementById(this.options.modalImageId)
 		const modalImage = modal.querySelector('.modal-image')
-		modalImage.innerHTML = 'Loading...'
+		modalImage.innerHTML = `<span class="modal-loader">${this.options.language.loadingText}</span>`
 
 		document.documentElement.classList.add('-modal-locked')
 

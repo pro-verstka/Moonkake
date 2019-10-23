@@ -250,13 +250,13 @@ class Modal {
 		iframe.setAttribute('frameborder', '0')
 		iframe.setAttribute('allow', 'autoplay; fullscreen')
 
-		if (href.includes('youtube')) {
+		if (href.indexOf('youtube') > -1) {
 			let src = href.replace(/watch\?v=/g, 'embed/')
 
 			iframe.setAttribute('src', `${src}?autoplay=1`)
 		}
 
-		if (href.includes('vimeo')) {
+		if (href.indexOf('vimeo') > -1) {
 			let src = href.replace(/[^0-9]/g, '')
 
 			iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)

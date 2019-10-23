@@ -4,14 +4,14 @@
 $tooltipColor: #000
 
 .tooltip
-	padding: 5px 10px
-	border-radius: 4px
+	padding: .5rem 1rem
+	border-radius: .4rem
 	color: #fff
 	opacity: 1
 	background-color: $tooltipColor
 	font-size: 1.2rem
-	box-shadow: 0 4px 11px 2px rgba(66, 67, 67, 0.2)
-	max-width: 280px
+	box-shadow: 0 .4rem 1.1rem .2rem rgba(66, 67, 67, 0.2)
+	max-width: 28rem
 
 	&-arrow
 		position: absolute
@@ -20,33 +20,33 @@ $tooltipColor: #000
 		border-style: solid
 
 	&[x-placement="top"]
-		margin-bottom: 5px
+		margin-bottom: .5rem
 
 		.tooltip-arrow
 			top: 100%
-			border-width: 5px 5px 0 5px
+			border-width: .5rem .5rem 0 .5rem
 			border-color: $tooltipColor transparent transparent transparent
 
 	&[x-placement="bottom"]
-		margin-top: 5px
+		margin-top: .5rem
 
 		.tooltip-arrow
 			bottom: 100%
-			border-width: 0 5px 5px 5px
+			border-width: 0 .5rem .5rem .5rem
 			border-color: transparent transparent $tooltipColor transparent
 
 	&[x-placement="left"]
-		margin-right: 5px
+		margin-right: .5rem
 
 		.tooltip-arrow
 			left: 100%
-			border-width: 5px 0 5px 5px
+			border-width: .5rem 0 .5rem .5rem
 			border-color: transparent transparent transparent $tooltipColor
 
 	&[x-placement="right"]
-		margin-left: 5px
+		margin-left: .5rem
 
 		.tooltip-arrow
 			right: 100%
-			border-width: 5px 5px 5px 0
+			border-width: .5rem .5rem .5rem 0
 			border-color: transparent $tooltipColor transparent transparent

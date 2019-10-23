@@ -197,6 +197,10 @@ gulp.task('js', () => {
 		}
 	})
 
+	if (!isProd) {
+		webpackConfig['devtool'] = 'cheap-source-map'
+	}
+
 	return gulp
 		.src(Object.values(webpackConfig.entry))
 		.pipe(

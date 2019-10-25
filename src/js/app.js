@@ -74,10 +74,10 @@ document.querySelectorAll('[data-sticky]').forEach($el => {
 /* SCROLL TO
 -------------------------------------------------- */
 
-document.querySelectorAll('[data-scroll-to]').forEach($el => {
-	$el.addEventListener('click', e => {
+document.addEventListener('click', e => {
+	if (e.target.matches('[data-scroll-to]')) {
 		e.preventDefault()
 
-		scrollTo($el.dataset.scrollTo, $el.dataset.scrollToOffset)
-	})
+		scrollTo(e.target.dataset.scrollTo, e.target.dataset.scrollToOffset)
+	}
 })

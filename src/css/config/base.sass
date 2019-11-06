@@ -17,7 +17,6 @@ $textHeadMargin: 3rem
 
 $textFontFamily: sans-serif
 $headFontFamily: sans-serif
-//$ff_rouble: 'Rouble'
 
 $gap: 2rem
 
@@ -50,8 +49,13 @@ $headColor: #333
 		min-width: 0
 
 =width($width)
-	flex: 0 0 $width
-	max-width: $width
+	@if $width == 'none'
+		flex: none
+		max-width: none
+	@else
+		flex: 0 0 $width
+		max-width: $width
+
 
 =clearfix()
 	&::before,

@@ -30,8 +30,17 @@ class Fullheight {
 
 		this.$els.forEach($el => {
 			let minHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('min-height')) || 0
-			let height = window.innerHeight <= minHeight ? minHeight : window.innerHeight
+			let maxHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('max-height')) || ''
 			let offset = parseFloat($el.getAttribute('data-fullheight-offset')) || this.options.offset
+			let height = window.innerHeight
+
+			if (minHeight && window.innerHeight <= minHeight) {
+				height = minHeight
+			}
+
+			if (maxHeight && window.innerHeight >= maxHeight) {
+				height = maxHeight
+			}
 
 			$el.style.height = `${height + offset}px`
 		})

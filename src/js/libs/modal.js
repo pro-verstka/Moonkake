@@ -33,6 +33,7 @@ class Modal {
 					<div class="modal-container">
 						<button class="modal-close" data-modal-close>&times;</button>
 						<div class="modal-image"></div>
+						<div class="modal-caption"></div>
 					</div>
 				</div>
 			`
@@ -127,16 +128,16 @@ class Modal {
 
 		image.removeAttribute('style')
 
-		if (image.width >= window.innerWidth - padding) {
+		if (image.naturalWidth >= window.innerWidth - padding) {
 			maxWidth = window.innerWidth - padding
 		} else {
-			maxWidth = image.width
+			maxWidth = image.naturalWidth
 		}
 
-		if (image.height >= window.innerHeight - padding) {
+		if (image.naturalHeight >= window.innerHeight - padding) {
 			maxHeight = window.innerHeight - padding
 		} else {
-			maxHeight = image.height
+			maxHeight = image.naturalHeight
 		}
 
 		image.style.maxWidth = `${maxWidth}px`
@@ -186,11 +187,21 @@ class Modal {
 
 		const modal = document.getElementById(this.options.modalImageId)
 		const modalImage = modal.querySelector('.modal-image')
+		const modalCaption = modal.querySelector('.modal-caption')
 		modalImage.innerHTML = `<span class="modal-loader">${this.options.language.loadingText}</span>`
 
 		document.documentElement.classList.add('-modal-locked')
 
 		modal.classList.add('modal--opened')
+
+		if (modalCaption) {
+			let title = $trigger.getAttribute('title') || ''
+
+			if (title) {
+				modalCaption.innerHTML = title
+				modalCaption.style.visibility = 'visible'
+			}
+		}
 
 		this.emitEvent('modalOpen', {
 			id: this.options.modalImageId,
@@ -306,30 +317,35 @@ class Modal {
 			id: id
 		})
 
-		modal.addEventListener(
-			'transitionend',
-			e => {
-				modal.classList.remove('modal--opened')
+		const handleClose = e => {
+			modal.classList.remove('modal--opened')
 
-				if (modal.querySelector('.modal-iframe iframe')) {
-					modal.querySelector('.modal-iframe iframe').remove()
-				}
+			const modalIframe = modal.querySelector('.modal-iframe iframe')
+			const modalCaption = modal.querySelector('.modal-caption')
 
-				this.emitEvent('modalAfterClose', {
-					id: id
-				})
-
-				window.removeEventListener('resize', this.setImageDimensions)
-
-				if (!this.modals.length) {
-					document.documentElement.classList.remove('-modal-locked')
-					clearAllBodyScrollLocks()
-				}
-			},
-			{
-				once: true
+			if (modalIframe) {
+				modalIframe.remove()
 			}
-		)
+
+			if (modalCaption) {
+				modalCaption.style.visibility = 'hidden'
+				modalCaption.innerHTML = ''
+			}
+
+			this.emitEvent('modalAfterClose', {
+				id: id
+			})
+
+			window.removeEventListener('resize', this.setImageDimensions)
+
+			if (!this.modals.length) {
+				document.documentElement.classList.remove('-modal-locked')
+				clearAllBodyScrollLocks()
+				modal.removeEventListener('transitionend', handleClose)
+			}
+		}
+
+		modal.addEventListener('transitionend', handleClose)
 	}
 }
 

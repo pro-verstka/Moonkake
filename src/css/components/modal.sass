@@ -74,6 +74,21 @@
 	&-image
 		img
 			display: block
+			width: auto
+			height: auto
+
+	&-caption
+		position: absolute
+		bottom: 0
+		left: 0
+		z-index: 1
+		padding: 2rem
+		color: #fff
+		font-size: 1.2rem
+		background: rgba(#000, .5)
+		visibility: hidden
+		width: 100%
+		text-align: center
 
 		// &.modal-image--portrait
 		// 	img
@@ -104,9 +119,11 @@
 
 	&.modal--image
 		.modal-container
-			position: static
 			width: auto
+			height: auto
 			max-width: 100%
+			max-height: 100%
+			position: static
 			padding: 0
 			box-shadow: 0 .5rem .5rem rgba(#000, .25)
 			margin: 0 auto

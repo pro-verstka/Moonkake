@@ -36,8 +36,8 @@ class Parallax {
 			let ratio = parseFloat($el.getAttribute('data-parallax-ratio')) || this.options.ratio
 			let offset = parseFloat($el.getAttribute('data-parallax-offset')) || this.options.offset
 
-			if ($el.getBoundingClientRect().y - (window.innerHeight - window.innerHeight * offset) < 0) {
-				$el.style.transform = `translateY(${($el.getBoundingClientRect().y -
+			if ($el.getBoundingClientRect().top - (window.innerHeight - window.innerHeight * offset) < 0) {
+				$el.style.transform = `translateY(${($el.getBoundingClientRect().top -
 					(window.innerHeight - window.innerHeight * offset)) /
 					ratio}px)`
 			} else {

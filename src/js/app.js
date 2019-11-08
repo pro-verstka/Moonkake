@@ -7,7 +7,7 @@
 // Vendors
 //import '@babel/polyfill'
 import './vendor/polyfills'
-import './vendor/detect-preload'
+//import './vendor/detect-preload'
 
 // Libs
 import { isMobile, isTouchDevice, scrollTo } from './libs/utils'
@@ -32,7 +32,6 @@ import './components/calendar'
 //import './components/animation'
 //import './components/map'
 //import './components/scrollbooster'
-//import './components/fullheight'
 
 /* SETUP
 -------------------------------------------------- */

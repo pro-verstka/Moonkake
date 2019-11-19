@@ -1,6 +1,8 @@
 .field
-	input,
-	textarea
+	&-label
+		margin-bottom: 0.5rem
+
+	&-input
 		width: 100%
 		border: .1rem solid #eeeeee
 		border-radius: 0
@@ -8,6 +10,12 @@
 		color: #000000
 		box-shadow: none
 		appearance: none
+
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus,
+		&:-webkit-autofill:active
+			transition: background-color 36000s ease-in-out 0s
 
 		&:focus
 			border-color: #dddddd

@@ -119,3 +119,27 @@ export function isTouchDevice() {
 export function isMobile() {
 	return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 }
+
+export function openFullscreen($el) {
+	if ($el.requestFullscreen) {
+		$el.requestFullscreen()
+	} else if ($el.mozRequestFullScreen) {
+		$el.mozRequestFullScreen()
+	} else if ($el.webkitRequestFullscreen) {
+		$el.webkitRequestFullscreen()
+	} else if ($el.msRequestFullscreen) {
+		$el.msRequestFullscreen()
+	}
+}
+
+export function closeFullscreen() {
+	if (document.exitFullscreen) {
+		document.exitFullscreen()
+	} else if (document.mozCancelFullScreen) {
+		document.mozCancelFullScreen()
+	} else if (document.webkitExitFullscreen) {
+		document.webkitExitFullscreen()
+	} else if (document.msExitFullscreen) {
+		document.msExitFullscreen()
+	}
+}

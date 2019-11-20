@@ -1,0 +1,3 @@
+mixin icon(id, width, height, className = '')
+	svg(class=`icon ${className == '' ? 'icon--'+id : className}` width=width height=height viewBox=`0 0 ${width} ${height}`)
+		use(xlink:href=`#${id}`)

@@ -1,3 +1,5 @@
+include ../blocks/mixins.pug
+
 -
 	var time = new Date().getTime();
 
@@ -27,10 +29,10 @@ html(lang="ru")
 			nav.navigation
 				ul.list.list--flex.navigation-primary
 					li.list-item: a.list-link(href="#") item01
-					li.list-item: a.list-link(href="#") item01
-					li.list-item: a.list-link(href="#") item01
-					li.list-item: a.list-link(href="#") item01
-					li.list-item: a.list-link(href="#") item01
+					li.list-item: a.list-link(href="#") item02
+					li.list-item: a.list-link(href="#") item03
+					li.list-item: a.list-link(href="#") item04
+					li.list-item: a.list-link(href="#") item05
 			// navigation
 
 			main.main
@@ -40,6 +42,8 @@ html(lang="ru")
 			footer.footer footer
 			// footer
 		// wrapper
+
+		// include ../../img/icons.svg
 
 		// JS
 		script(defer src='assets/js/app.min.js?v=' + time)

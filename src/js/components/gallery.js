@@ -62,7 +62,8 @@ document.querySelectorAll('[data-gallery]').forEach($gallery => {
 		images.push({
 			src: $link.getAttribute('href'),
 			w: dimensions[0],
-			h: dimensions[1]
+			h: dimensions[1],
+			title: $link.getAttribute('title') || ''
 		})
 	})
 

@@ -23,23 +23,15 @@ html(lang="ru")
 
 		div.wrapper
 			header.header
-				a.logotype(href="/")=meta.title
+				div.container
 			// header
-
-			nav.navigation
-				ul.list.list--flex.navigation-primary
-					li.list-item: a.list-link(href="#") item01
-					li.list-item: a.list-link(href="#") item02
-					li.list-item: a.list-link(href="#") item03
-					li.list-item: a.list-link(href="#") item04
-					li.list-item: a.list-link(href="#") item05
-			// navigation
 
 			main.main
 				block main
 			// main
 
-			footer.footer footer
+			footer.footer
+				div.container
 			// footer
 		// wrapper
 
@@ -48,11 +40,12 @@ html(lang="ru")
 		// JS
 		script(defer src='assets/js/app.min.js?v=' + time)
 
-		script.
-			//- setTimeout(function () {
-			//- 	var script = document.createElement('script');
-			//- 	script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
-			//- 	document.body.appendChild(script);
-			//- }, 3000);
+		//
+			script.
+				setTimeout(function () {
+					var script = document.createElement('script');
+					script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
+					document.body.appendChild(script);
+				}, 3000);
 
 		block js

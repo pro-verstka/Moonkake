@@ -28,10 +28,10 @@ import './components/inputmask'
 import './components/slider'
 import './components/gallery'
 import './components/calendar'
-//import './components/tooltip'
-//import './components/animation'
+import './components/tooltip'
+import './components/animation'
+import './components/scrollbooster'
 //import './components/map'
-//import './components/scrollbooster'
 
 /* SETUP
 -------------------------------------------------- */

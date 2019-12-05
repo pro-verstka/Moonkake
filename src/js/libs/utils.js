@@ -3,10 +3,6 @@ import scrollToElement from 'scroll-to-element'
 /* UTILS
 -------------------------------------------------- */
 
-export function hello() {
-	console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru')
-}
-
 export function getPageQuery(key) {
 	let query = {}
 

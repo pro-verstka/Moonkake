@@ -36,6 +36,16 @@ npm run dev
 npm run build
 ```
 
+## Доступные настройки gulpfile.babel.js
+
+```js
+{
+	separateCssToPages: false, // файлы css из папки src/css/pages будут подключаться отдельно в head
+	separateJsToPages: false,  // файлы js из папки src/js/pages будут подключаться отдельно в head
+	appendFontsToHead: true   // файлы шрифтов из папки src/fonts будут подключаться в head
+}
+```
+
 # Разметка
 
 ### Сheckbox

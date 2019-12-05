@@ -1,3 +1,12 @@
+/* CONFIG
+-------------------------------------------------- */
+
+const config = {
+	separateCssToPages: false,
+	separateJsToPages: false,
+	appendFontsToHead: true
+}
+
 /* COMMON
 -------------------------------------------------- */
 
@@ -13,6 +22,8 @@ const rename = require('gulp-rename')
 const gulpif = require('gulp-if')
 const del = require('del')
 const data = require('gulp-data')
+const cheerio = require('gulp-cheerio')
+const prettify = require('gulp-prettify')
 
 // css
 const gcmq = require('gulp-group-css-media-queries')
@@ -51,6 +62,18 @@ gulp.task('browser', () => {
 /* Templates */
 
 gulp.task('templates', () => {
+	let fonts = []
+
+	if (config.appendFontsToHead) {
+		fs.readdirSync('./src/fonts').forEach(file => {
+			let name = `./src/fonts/${file}`
+
+			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.woff2') {
+				fonts.push(path.basename(file, path.extname(name)))
+			}
+		})
+	}
+
 	return gulp
 		.src(['src/templates/**/*', '!src/templates/mixins/*', '!src/templates/blocks/*', '!src/templates/layouts/*'], {
 			base: '.'
@@ -60,9 +83,39 @@ gulp.task('templates', () => {
 				return JSON.parse(fs.readFileSync('src/data.json'))
 			})
 		)
+		.pipe(pug())
 		.pipe(
-			pug({
-				pretty: isProd
+			cheerio(function($, file) {
+				let name = path.basename(file.path, path.extname(file.path))
+				let time = new Date().getTime()
+				let $css = $('[data-app-css]')
+				let $js = $('[data-app-js]')
+
+				if (fs.existsSync(`./src/css/pages/${name}.sass`) && config.separateCssToPages) {
+					$css.after(`<link rel="stylesheet" href="assets/css/pages/${name}.min.css?v=${time}">`)
+				}
+
+				if (fs.existsSync(`./src/js/pages/${name}.js`) && config.separateJsToPages) {
+					$js.after(`<script defer src="assets/js/pages/${name}.min.js?v=${time}"></script>`)
+				}
+
+				$css.removeAttr('data-app-css')
+				$js.removeAttr('data-app-js')
+
+				if (config.appendFontsToHead) {
+					fonts.forEach(name => {
+						$('[rel="stylesheet"]')
+							.eq(0)
+							.before(`<link rel="preload" href="assets/fonts/${name}.woff2" as="font" type="font/woff2" crossorigin>`)
+					})
+				}
+			})
+		)
+		.pipe(
+			prettify({
+				indent_size: 2,
+				indent_with_tabs: true,
+				indent_inner_html: true
 			})
 		)
 		.on('error', notify.onError('Error: <%= error.message %>'))
@@ -76,18 +129,25 @@ gulp.task('templates', () => {
 /* Styles */
 
 gulp.task('css', () => {
-	// sass
 	let src = []
-	let dir = './src/css'
-	let files = fs.readdirSync(dir)
 
-	files.forEach(file => {
-		let name = dir + '/' + file
+	fs.readdirSync('./src/css').forEach(file => {
+		let name = `./src/css/${file}`
 
 		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.sass') {
 			src.push(name)
 		}
 	})
+
+	if (config.separateCssToPages) {
+		fs.readdirSync('./src/css/pages').forEach(file => {
+			let name = `./src/css/pages/${file}`
+
+			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.sass') {
+				src.push(name)
+			}
+		})
+	}
 
 	return gulp
 		.src(src, {
@@ -121,7 +181,14 @@ gulp.task('css', () => {
 				suffix: '.min'
 			})
 		)
-		.pipe(gulp.dest('dist/assets/css/'))
+		.pipe(
+			rename(path => {
+				if (path.basename !== 'app.min') {
+					path.dirname += '/pages'
+				}
+			})
+		)
+		.pipe(gulp.dest('dist/assets/css'))
 		.pipe(
 			browserSync.reload({
 				stream: true
@@ -161,9 +228,7 @@ gulp.task('img', () => {
 
 let webpackConfig = {
 	mode: buildMode,
-	entry: {
-		//app: './src/js/app.js'
-	},
+	entry: {},
 	output: {
 		filename: '[name].min.js'
 	},
@@ -191,17 +256,25 @@ let webpackConfig = {
 }
 
 gulp.task('js', () => {
-	let dir = './src/js'
-	let files = fs.readdirSync(dir)
-
-	files.forEach(file => {
-		let name = dir + '/' + file
+	fs.readdirSync('./src/js').forEach(file => {
+		let name = `./src/js/${file}`
 
 		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
 			let filename = path.basename(name, path.extname(name))
 			webpackConfig.entry[filename] = name
 		}
 	})
+
+	if (config.separateJsToPages) {
+		fs.readdirSync('./src/js/pages').forEach(file => {
+			let name = `./src/js/pages/${file}`
+
+			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
+				let filename = path.basename(name, path.extname(name))
+				webpackConfig.entry[filename] = name
+			}
+		})
+	}
 
 	if (!isProd) {
 		webpackConfig['devtool'] = 'cheap-source-map'
@@ -226,6 +299,13 @@ gulp.task('js', () => {
 				})
 			)
 		)
+		.pipe(
+			rename(path => {
+				if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {
+					path.dirname += '/pages'
+				}
+			})
+		)
 		.pipe(gulp.dest('dist/assets/js/'))
 		.on('end', function() {
 			browserSync.reload()
@@ -242,16 +322,16 @@ gulp.task('clean', () => {
 
 gulp.task('watch', () => {
 	gulp.watch('src/css/**/*', gulp.series('css'))
+	gulp.watch('src/js/**/*', gulp.series('js'))
 	gulp.watch('src/img/**/*', gulp.series('img'))
 	gulp.watch('src/fonts/**/*', gulp.series('fonts'))
-	gulp.watch('src/js/**/*', gulp.series('js'))
 	gulp.watch('src/templates/**/*', gulp.series('templates'))
 	gulp.watch('src/data.json', gulp.series('templates'))
 
 	notify('Project is running!')
 })
 
-gulp.task('build', gulp.series('clean', 'css', 'img', 'fonts', 'js', 'templates'), () => {
+gulp.task('build', gulp.series('clean', 'css', 'js', 'img', 'fonts', 'templates'), () => {
 	notify('Project building done!')
 })
 

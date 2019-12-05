@@ -15,8 +15,7 @@ html(lang="ru")
 		meta(name="description" content="")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
-		//link(rel="preload" href="assets/fonts/FONT_NAME.woff2" as="font" type="font/woff2" crossorigin)
-		link(rel="stylesheet" href='assets/css/app.min.css?v=' + time)
+		link(data-app-css rel="stylesheet" href='assets/css/app.min.css?v=' + time)
 		//link(rel="preload" href='assets/css/app.min.css?v=' + time as="style" onload="this.rel='stylesheet'")
 
 	body
@@ -38,7 +37,9 @@ html(lang="ru")
 		// include ../../img/icons.svg
 
 		// JS
-		script(defer src='assets/js/app.min.js?v=' + time)
+		script(data-app-js defer src='assets/js/app.min.js?v=' + time)
+
+		block js
 
 		//
 			script.
@@ -47,5 +48,3 @@ html(lang="ru")
 					script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
 					document.body.appendChild(script);
 				}, 3000);
-
-		block js

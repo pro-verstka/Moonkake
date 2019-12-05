@@ -33,8 +33,13 @@ import './components/animation'
 import './components/scrollbooster'
 //import './components/map'
 
+// Pages
+//import './pages/index'
+
 /* SETUP
 -------------------------------------------------- */
+
+console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru')
 
 if (isMobile()) {
 	document.body.classList.add('-device-mobile')

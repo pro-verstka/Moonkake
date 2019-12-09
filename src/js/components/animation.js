@@ -1,7 +1,8 @@
 import ScrollReveal from 'scrollreveal'
+//import anime from 'animejs'
 
 window.addEventListener('load', () => {
-	const fx = ScrollReveal().reveal('[data-scroll-fx]', {
+	const scrollFX = ScrollReveal().reveal('[data-scroll-fx]', {
 		distance: 0,
 		duration: 1500,
 		interval: 100,
@@ -11,4 +12,16 @@ window.addEventListener('load', () => {
 		mobile: false
 		//reset: true
 	})
+
+	// const svg = anime({
+	// 	targets: 'svg path',
+	// 	strokeDashoffset: [anime.setDashoffset, 0],
+	// 	easing: 'easeInOutSine',
+	// 	duration: 1500,
+	// 	delay: function(el, i) {
+	// 		return i * 250
+	// 	},
+	// 	direction: 'alternate',
+	// 	loop: false
+	// })
 })

@@ -1,6 +1,6 @@
 {
 	"name": "moonkake",
-	"version": "8.0.1",
+	"version": "8.0.3",
 	"description": "Moonkake start kit",
 	"author": "p1rate",
 	"license": "MIT",
@@ -64,6 +64,7 @@
 		"webpack-stream": "^5.1.1"
 	},
 	"dependencies": {
+		"animejs": "^3.1.0",
 		"axios": "^0.18.0",
 		"body-scroll-lock": "^2.6.1",
 		"flatpickr": "^4.6.2",

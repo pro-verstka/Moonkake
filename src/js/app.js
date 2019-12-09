@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.0.1
+ * Moonkake 8.0.3
  *
  * https://github.com/detectiveshelby/moonkake
  */

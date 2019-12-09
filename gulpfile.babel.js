@@ -85,29 +85,36 @@ gulp.task('templates', () => {
 		)
 		.pipe(pug())
 		.pipe(
-			cheerio(function($, file) {
-				let name = path.basename(file.path, path.extname(file.path))
-				let time = new Date().getTime()
-				let $css = $('[data-app-css]')
-				let $js = $('[data-app-js]')
+			cheerio({
+				run: function($, file) {
+					let name = path.basename(file.path, path.extname(file.path))
+					let time = new Date().getTime()
+					let $css = $('[data-app-css]')
+					let $js = $('[data-app-js]')
 
-				if (fs.existsSync(`./src/css/pages/${name}.sass`) && config.separateCssToPages) {
-					$css.after(`<link rel="stylesheet" href="assets/css/pages/${name}.min.css?v=${time}">`)
-				}
+					if (fs.existsSync(`./src/css/pages/${name}.sass`) && config.separateCssToPages) {
+						$css.after(`<link rel="stylesheet" href="assets/css/pages/${name}.min.css?v=${time}">`)
+					}
 
-				if (fs.existsSync(`./src/js/pages/${name}.js`) && config.separateJsToPages) {
-					$js.after(`<script defer src="assets/js/pages/${name}.min.js?v=${time}"></script>`)
-				}
+					if (fs.existsSync(`./src/js/pages/${name}.js`) && config.separateJsToPages) {
+						$js.after(`<script defer src="assets/js/pages/${name}.min.js?v=${time}"></script>`)
+					}
 
-				$css.removeAttr('data-app-css')
-				$js.removeAttr('data-app-js')
+					$css.removeAttr('data-app-css')
+					$js.removeAttr('data-app-js')
 
-				if (config.appendFontsToHead) {
-					fonts.forEach(name => {
-						$('[rel="stylesheet"]')
-							.eq(0)
-							.before(`<link rel="preload" href="assets/fonts/${name}.woff2" as="font" type="font/woff2" crossorigin>`)
-					})
+					if (config.appendFontsToHead) {
+						fonts.forEach(name => {
+							$('[rel="stylesheet"]')
+								.eq(0)
+								.before(
+									`<link rel="preload" href="assets/fonts/${name}.woff2" as="font" type="font/woff2" crossorigin>`
+								)
+						})
+					}
+				},
+				parserOptions: {
+					decodeEntities: false
 				}
 			})
 		)

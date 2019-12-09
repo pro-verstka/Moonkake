@@ -40,9 +40,9 @@ npm run build
 
 ```js
 {
-	separateCssToPages: false, // файлы css из папки src/css/pages будут подключаться отдельно в head
-	separateJsToPages: false,  // файлы js из папки src/js/pages будут подключаться отдельно в head
-	appendFontsToHead: true   // файлы шрифтов из папки src/fonts будут подключаться в head
+  separateCssToPages: false, // файлы css из папки src/css/pages будут подключаться отдельно в head
+  separateJsToPages: false,  // файлы js из папки src/js/pages будут подключаться отдельно после app.js
+  appendFontsToHead: true   // файлы шрифтов из папки src/fonts будут подключаться в head
 }
 ```
 
@@ -97,7 +97,7 @@ form.form(action="", mathod="", id="form")
   div.form-fieldset
     div.form-group
       div.form-item
-        button.button.button-default(type="submit") Отправить
+        button.button(type="submit") Отправить
 ```
 
 ### Tabs
@@ -139,7 +139,7 @@ div.counter
 ### Breadcrumbs
 
 ```pug
-ul.list.list-flex.breadcrumbs
+ul.list.list--flex.breadcrumbs
   li.list-item: a.list-link(href="#") Главная
   li.list-item: a.list-link(href="#") Раздел
   li.list-item: span.list-current Страница
@@ -148,7 +148,7 @@ ul.list.list-flex.breadcrumbs
 ### Pagination
 
 ```pug
-ul.list.list-flex.pagination
+ul.list.list--flex.pagination
   li.list-item: a.list-link(href="#") 1
   li.list-item: a.list-link(href="#") 2
   li.list-item: a.list-link(href="#") 3

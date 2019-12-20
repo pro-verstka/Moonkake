@@ -37,6 +37,7 @@ const glob = require('gulp-sass-glob')
 // js
 const webpackStream = require('webpack-stream')
 const uglify = require('gulp-uglify')
+const babel = require('gulp-babel')
 
 // tpl
 const pug = require('gulp-pug')
@@ -287,36 +288,39 @@ gulp.task('js', () => {
 		webpackConfig['devtool'] = 'cheap-source-map'
 	}
 
-	return gulp
-		.src(Object.values(webpackConfig.entry))
-		.pipe(
-			webpackStream(webpackConfig, null, (err, stats) => {
-				if (stats.compilation.errors.length) {
-					notify('Error: <%= stats.compilation.errors[0].error %>')
-				}
-			})
-		)
-		.pipe(
-			gulpif(
-				isProd,
-				uglify({
-					compress: {
-						collapse_vars: false
+	return (
+		gulp
+			.src(Object.values(webpackConfig.entry))
+			.pipe(
+				webpackStream(webpackConfig, null, (err, stats) => {
+					if (stats.compilation.errors.length) {
+						notify('Error: <%= stats.compilation.errors[0].error %>')
 					}
 				})
 			)
-		)
-		.pipe(
-			rename(path => {
-				if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {
-					path.dirname += '/pages'
-				}
+			//.pipe(babel())
+			.pipe(
+				gulpif(
+					isProd,
+					uglify({
+						compress: {
+							collapse_vars: false
+						}
+					})
+				)
+			)
+			.pipe(
+				rename(path => {
+					if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {
+						path.dirname += '/pages'
+					}
+				})
+			)
+			.pipe(gulp.dest('dist/assets/js/'))
+			.on('end', function() {
+				browserSync.reload()
 			})
-		)
-		.pipe(gulp.dest('dist/assets/js/'))
-		.on('end', function() {
-			browserSync.reload()
-		})
+	)
 })
 
 /* Clean */
@@ -332,7 +336,7 @@ gulp.task('watch', () => {
 	gulp.watch('src/js/**/*', gulp.series('js'))
 	gulp.watch('src/img/**/*', gulp.series('img'))
 	gulp.watch('src/fonts/**/*', gulp.series('fonts'))
-	gulp.watch('src/templates/**/*', gulp.series('templates'))
+	gulp.watch(['src/templates/**/*', 'src/img/**/*.svg'], gulp.series('templates'))
 	gulp.watch('src/data.json', gulp.series('templates'))
 
 	notify('Project is running!')

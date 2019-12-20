@@ -1,5 +1,5 @@
 import ScrollReveal from 'scrollreveal'
-//import anime from 'animejs'
+//import anime from 'animejs/lib/anime.es'
 
 window.addEventListener('load', () => {
 	const scrollFX = ScrollReveal().reveal('[data-scroll-fx]', {

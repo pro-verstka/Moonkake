@@ -14,7 +14,7 @@
 		"build": "cross-env NODE_ENV=production gulp build"
 	},
 	"browserslist": [
-		"last 3 version",
+		"last 2 version",
 		"ie >= 11"
 	],
 	"babel": {
@@ -44,6 +44,7 @@
 		"del": "^3.0.0",
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
+		"gulp-babel": "^8.0.0",
 		"gulp-cheerio": "^1.0.0",
 		"gulp-concat": "^2.6.1",
 		"gulp-cssnano": "^2.1.3",

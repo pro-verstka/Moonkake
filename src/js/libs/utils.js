@@ -25,18 +25,25 @@ export function getPageQuery(key) {
 	}
 }
 
-export function scrollTo($target, offset, callback) {
-	scrollToElement($target, {
-		offset: offset || 0,
+export function scrollTo($target, options = {}, callback) {
+	let defaults = {
+		offset: 0,
 		duration: 500
-	}).on('end', () => {
+	}
+
+	if (typeof options === 'object') {
+		options = Object.assign(defaults, options)
+	} else {
+		options = defaults
+	}
+
+	scrollToElement($target, options).on('end', () => {
 		if (typeof callback == 'function') callback()
 	})
 }
 
-export function getSection(selector, offset) {
+export function getSection(selector, offset = 0) {
 	let $target = null
-	offset = offset || 0
 
 	document.querySelectorAll(selector).forEach($el => {
 		if (window.pageYOffset >= $el.offsetTop + offset) {
@@ -47,18 +54,8 @@ export function getSection(selector, offset) {
 	return $target
 }
 
-export function numberFormat(number, decimals, dec_point, thousands_sep) {
+export function numberFormat(number, decimals = 2, dec_point = ',', thousands_sep = '.') {
 	var i, j, kw, kd, km
-
-	if (isNaN((decimals = Math.abs(decimals)))) {
-		decimals = 2
-	}
-	if (dec_point === undefined) {
-		dec_point = ','
-	}
-	if (thousands_sep === undefined) {
-		thousands_sep = '.'
-	}
 
 	i = parseInt((number = (+number || 0).toFixed(decimals))) + ''
 

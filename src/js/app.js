@@ -36,20 +36,19 @@ import './components/scrollbooster'
 // Pages
 //import './pages/index'
 
+console.info(
+	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',
+	'padding: 10px; background-color: #282c34; color: #fff;'
+)
+
 /* SETUP
 -------------------------------------------------- */
 
-console.log('Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru')
-
-if (isMobile()) {
-	document.body.classList.add('-device-mobile')
+if (typeof window.MK === 'undefined') {
+	window.MK = {}
 }
 
-if (isTouchDevice()) {
-	document.body.classList.add('-device-touch')
-}
-
-window.MK = {
+const plugins = {
 	tabs: new Tabs(),
 	counter: new Counter(),
 	accordion: new Accordion(),
@@ -58,6 +57,11 @@ window.MK = {
 	parallax: new Parallax(),
 	fullheight: new Fullheight()
 }
+
+Object.assign(window.MK, plugins)
+
+if (isMobile()) document.body.classList.add('-device-mobile')
+if (isTouchDevice()) document.body.classList.add('-device-touch')
 
 /* STICKY
 -------------------------------------------------- */
@@ -82,6 +86,8 @@ document.addEventListener('click', e => {
 	if (e.target.matches('[data-scroll-to]')) {
 		e.preventDefault()
 
-		scrollTo(e.target.dataset.scrollTo, e.target.dataset.scrollToOffset)
+		scrollTo(e.target.dataset.scrollTo, {
+			offset: e.target.dataset.scrollToOffset || 0
+		})
 	}
 })

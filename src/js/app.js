@@ -8,6 +8,7 @@
 //import '@babel/polyfill'
 import './vendor/polyfills'
 //import './vendor/detect-preload'
+import './vendor/swiped-events'
 
 // Libs
 import { isMobile, isTouchDevice, scrollTo } from './libs/utils'

@@ -7,7 +7,7 @@ if ($scrollbooster.length) {
 		const $content = $viewport.querySelector('[data-scrollbooster-content]')
 
 		if ($content) {
-			let sb = new ScrollBooster({
+			const scrollboster = new ScrollBooster({
 				viewport: $viewport,
 				content: $content,
 				mode: 'x',
@@ -15,7 +15,8 @@ if ($scrollbooster.length) {
 					$content.style.transform = `translateX(${-data.position.x}px)`
 				},
 				shouldScroll: () => {
-					return window.innerWidth <= 600
+					//return window.innerWidth <= 600
+					return $content.clientWidth > $viewport.clientWidth
 				}
 			})
 		}

@@ -180,3 +180,11 @@ input(type="text", name="", data-calendar, placeholder="дд.мм.гггг")
 ```pug
 a(href="#" data-scroll-to="div_id") Прокрутка к ID
 ```
+
+### Spoiler
+
+```pug
+div(data-spoiler)
+  div(data-spoiler-body)
+    p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto nisi, pariatur nostrum est iste sint recusandae? Consequuntur libero ratione cupiditate numquam saepe, odio delectus aliquam voluptatibus. Dolor quis vel ipsa!
+```

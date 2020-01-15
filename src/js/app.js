@@ -21,6 +21,7 @@ import Sticky from './libs/sticky'
 import Parallax from './libs/parallax'
 import Fullheight from './libs/fullheight'
 //import TableColumnHighlight from './libs/table-highlight'
+import Spoiler from './libs/spoiler'
 
 // Components
 import './components/font'
@@ -56,7 +57,8 @@ const plugins = {
 	toggler: new Toggler(),
 	modal: new Modal(),
 	parallax: new Parallax(),
-	fullheight: new Fullheight()
+	fullheight: new Fullheight(),
+	spoiler: new Spoiler()
 }
 
 Object.assign(window.MK, plugins)

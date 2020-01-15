@@ -14,10 +14,7 @@ if ($scrollbooster.length) {
 				onUpdate: data => {
 					$content.style.transform = `translateX(${-data.position.x}px)`
 				},
-				shouldScroll: () => {
-					//return window.innerWidth <= 600
-					return $content.clientWidth > $viewport.clientWidth
-				}
+				shouldScroll: () => $content.clientWidth > $viewport.clientWidth
 			})
 		}
 	})

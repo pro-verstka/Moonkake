@@ -113,6 +113,22 @@ export function isMobile() {
 	return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 }
 
+export function isIOS() {
+	return /iPhone|iPad|iPod/i.test(navigator.userAgent)
+}
+
+export function isAndroid() {
+	return /Android/i.test(navigator.userAgent)
+}
+
+export function isIPhone() {
+	return /iPhone|iPod/i.test(navigator.userAgent)
+}
+
+export function isIPad() {
+	return /iPad/i.test(navigator.userAgent)
+}
+
 export function openFullscreen($el) {
 	if ($el.requestFullscreen) {
 		$el.requestFullscreen()

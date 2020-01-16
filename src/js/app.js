@@ -8,10 +8,10 @@
 //import '@babel/polyfill'
 import './vendor/polyfills'
 //import './vendor/detect-preload'
-import './vendor/swiped-events'
+//import './vendor/swiped-events'
 
 // Libs
-import { isMobile, isTouchDevice, scrollTo } from './libs/utils'
+import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, scrollTo } from './libs/utils'
 import Tabs from './libs/tabs'
 import Counter from './libs/counter'
 import Accordion from './libs/accordion'
@@ -65,6 +65,10 @@ Object.assign(window.MK, plugins)
 
 if (isMobile()) document.body.classList.add('-device-mobile')
 if (isTouchDevice()) document.body.classList.add('-device-touch')
+if (isAndroid()) document.body.classList.add('-device-android')
+if (isIOS()) document.body.classList.add('-device-ios')
+if (isIPhone()) document.body.classList.add('-device-iphone')
+if (isIPad()) document.body.classList.add('-device-ipad')
 
 /* STICKY
 -------------------------------------------------- */

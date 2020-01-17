@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.0.3
+ * Moonkake 8.1.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -28,11 +28,11 @@ import './components/font'
 import './components/lazyload'
 import './components/inputmask'
 import './components/slider'
-import './components/gallery'
-import './components/calendar'
-import './components/tooltip'
+//import './components/gallery'
+//import './components/calendar'
+//import './components/tooltip'
 import './components/animation'
-import './components/scrollbooster'
+//import './components/scrollbooster'
 //import './components/map'
 
 // Pages

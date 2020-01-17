@@ -37,7 +37,6 @@ const glob = require('gulp-sass-glob')
 // js
 const webpackStream = require('webpack-stream')
 const uglify = require('gulp-uglify')
-const babel = require('gulp-babel')
 
 // tpl
 const pug = require('gulp-pug')
@@ -245,9 +244,11 @@ let webpackConfig = {
 			{
 				test: /\.(js)$/,
 				exclude: [/node_modules\/(?!(swiper|dom7)\/).*/, /\.test\.jsx?$/],
-				loader: 'babel-loader',
-				query: {
-					presets: ['@babel/preset-env']
+				loader: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env']
+					}
 				}
 			}
 		]
@@ -256,10 +257,7 @@ let webpackConfig = {
 		jquery: 'jQuery'
 	},
 	resolve: {
-		extensions: ['.js', '.vue', '.json'],
-		alias: {
-			vue$: 'vue/dist/vue.esm.js'
-		}
+		extensions: ['.js', '.json']
 	}
 }
 

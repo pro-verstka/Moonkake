@@ -15,7 +15,7 @@ html(lang="ru")
 		meta(name="description" content="")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
-		link(data-app-css rel="stylesheet" href='assets/css/app.min.css?v=' + time)
+		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${time}`)
 		//link(rel="preload" href='assets/css/app.min.css?v=' + time as="style" onload="this.rel='stylesheet'")
 
 	body
@@ -37,7 +37,7 @@ html(lang="ru")
 		// include ../../img/icons.svg
 
 		// JS
-		script(data-app-js defer src='assets/js/app.min.js?v=' + time)
+		script(data-app-js defer src=`assets/js/app.min.js?v=${time}`)
 
 		block js
 

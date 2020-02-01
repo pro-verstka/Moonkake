@@ -3,7 +3,7 @@ import LazyLoad from 'vanilla-lazyload'
 // https://www.andreaverlicchi.eu/lazyload/
 
 const lazyLoadInstance = new LazyLoad({
-	elements_selector: 'img:not(.swiper-lazy)',
+	elements_selector: '.lazy',
 	use_native: true
 })
 
@@ -14,4 +14,10 @@ const lazyLoadInstance = new LazyLoad({
 
 // 		lazyLoadInstance.update()
 // 	}
+// }
+
+// if (window.jQuery) {
+// 	$(document).on('mse2_load', function(e, data) {
+// 		lazyLoadInstance.update()
+// 	})
 // }

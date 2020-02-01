@@ -15,7 +15,10 @@ class Modal {
 
 			language: {
 				loadingText: 'Loading...'
-			}
+			},
+
+			duration: 300,
+			imagePadding: 40
 		}
 
 		if (typeof options === 'object') {
@@ -124,7 +127,7 @@ class Modal {
 	setImageDimensions(image, ratio) {
 		let maxWidth = 0
 		let maxHeight = 0
-		const padding = 40
+		let padding = this.options.imagePadding
 
 		image.removeAttribute('style')
 
@@ -146,7 +149,7 @@ class Modal {
 
 	open(id, $trigger) {
 		this.emitEvent('modalBeforeOpen', {
-			id: id,
+			id,
 			trigger: $trigger
 		})
 
@@ -159,7 +162,7 @@ class Modal {
 		modal.classList.add('modal--opened')
 
 		this.emitEvent('modalOpen', {
-			id: id,
+			id,
 			trigger: $trigger
 		})
 
@@ -172,7 +175,7 @@ class Modal {
 		})
 
 		this.emitEvent('modalAfterOpen', {
-			id: id,
+			id,
 			trigger: $trigger
 		})
 	}
@@ -314,7 +317,7 @@ class Modal {
 		modal.classList.remove('modal--visible')
 
 		this.emitEvent('modalClose', {
-			id: id
+			id
 		})
 
 		const handleClose = e => {
@@ -333,19 +336,21 @@ class Modal {
 			}
 
 			this.emitEvent('modalAfterClose', {
-				id: id
+				id
 			})
 
 			window.removeEventListener('resize', this.setImageDimensions)
+			modal.removeEventListener('transitionend', handleClose)
 
 			if (!this.modals.length) {
 				document.documentElement.classList.remove('-modal-locked')
 				clearAllBodyScrollLocks()
-				modal.removeEventListener('transitionend', handleClose)
 			}
 		}
 
 		modal.addEventListener('transitionend', handleClose)
+
+		//setTimeout(handleClose, this.options.duration)
 	}
 }
 

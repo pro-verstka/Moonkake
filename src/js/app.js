@@ -12,16 +12,16 @@ import './vendor/polyfills'
 
 // Libs
 import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, scrollTo } from './libs/utils'
-import Tabs from './libs/tabs'
-import Counter from './libs/counter'
 import Accordion from './libs/accordion'
-import Toggler from './libs/toggler'
-import Modal from './libs/modal'
-import Sticky from './libs/sticky'
-import Parallax from './libs/parallax'
+import Counter from './libs/counter'
 import Fullheight from './libs/fullheight'
-//import TableColumnHighlight from './libs/table-highlight'
+import Modal from './libs/modal'
+import Parallax from './libs/parallax'
 import Spoiler from './libs/spoiler'
+import Sticky from './libs/sticky'
+//import TableColumnHighlight from './libs/table-highlight'
+import Tabs from './libs/tabs'
+import Toggler from './libs/toggler'
 
 // Components
 import './components/font'

@@ -40,41 +40,80 @@ document.body.insertAdjacentHTML(
 `
 )
 
-const pswpElement = document.querySelectorAll('.pswp')[0]
+const pswpElement = document.querySelector('.pswp')
 
-document.querySelectorAll('[data-gallery]').forEach($gallery => {
-	let images = []
+document.addEventListener('click', e => {
+	if (e.target.matches('a[data-size]') && e.target.closest('[data-gallery]')) {
+		e.preventDefault()
 
-	let options = {
-		closeOnScroll: false,
-		showHideOpacity: false,
-		bgOpacity: 0.8,
-		history: false,
+		const $photos = e.target.closest('[data-gallery]').querySelectorAll('[data-size]')
 
-		index: 0
-	}
+		if ($photos.length) {
+			const photos = Array.from($photos)
+			const index = photos.indexOf(e.target)
+			const images = photos.map($el => {
+				const dimensions = $el.dataset.size.split('x')
 
-	let $links = $gallery.querySelectorAll('a')
+				return {
+					src: $el.getAttribute('href'),
+					w: dimensions[0],
+					h: dimensions[1],
+					title: $el.getAttribute('title') || ''
+				}
+			})
 
-	$links.forEach($link => {
-		const dimensions = $link.dataset.size.split('x')
+			const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, images, {
+				closeOnScroll: false,
+				showHideOpacity: true,
+				bgOpacity: 0.8,
+				history: false,
+				index,
+				getThumbBoundsFn: function(index) {
+					const thumbnail = $photos[index]
+					const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+					const rect = thumbnail.getBoundingClientRect()
+					return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
+				}
+			})
 
-		images.push({
-			src: $link.getAttribute('href'),
-			w: dimensions[0],
-			h: dimensions[1],
-			title: $link.getAttribute('title') || ''
-		})
-	})
-
-	$links.forEach(($link, index) => {
-		$link.addEventListener('click', function(e) {
-			e.preventDefault()
-
-			options.index = index
-
-			const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, images, options)
 			gallery.init()
-		})
-	})
+		}
+	}
 })
+
+// document.querySelectorAll('[data-gallery]').forEach($gallery => {
+// 	let images = []
+
+// 	let options = {
+// 		closeOnScroll: false,
+// 		showHideOpacity: false,
+// 		bgOpacity: 0.8,
+// 		history: false,
+
+// 		index: 0
+// 	}
+
+// 	let $links = $gallery.querySelectorAll('a')
+
+// 	$links.forEach($link => {
+// 		const dimensions = $link.dataset.size.split('x')
+
+// 		images.push({
+// 			src: $link.getAttribute('href'),
+// 			w: dimensions[0],
+// 			h: dimensions[1],
+// 			title: $link.getAttribute('title') || ''
+// 		})
+// 	})
+
+// 	$links.forEach(($link, index) => {
+// 		$link.addEventListener('click', function(e) {
+// 			e.preventDefault()
+
+// 			options.index = index
+
+// 			const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, images, options)
+// 			gallery.init()
+// 		})
+// 	})
+// })

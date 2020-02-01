@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 		interval: 100,
 		opacity: 0,
 		delay: 0,
-		viewFactor: 0.5,
+		viewFactor: 0.05,
 		mobile: false
 		//reset: true
 	})

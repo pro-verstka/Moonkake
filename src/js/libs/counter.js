@@ -1,16 +1,15 @@
 class Counter {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			root: '.counter',
 			plus: '.counter-plus',
 			minus: '.counter-minus'
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
 
-		this.options = defaults
 		this.regex = /[^0-9]/gim
 
 		this.handle()

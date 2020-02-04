@@ -1,6 +1,6 @@
 class Sticky {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			selector: '[data-sticky]',
 			breakpoint: 0,
 			offsetTop: 0,
@@ -8,10 +8,8 @@ class Sticky {
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
-
-		this.options = defaults
 
 		const $el =
 			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)

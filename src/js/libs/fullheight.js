@@ -2,16 +2,15 @@ import { isMobile } from '../libs/utils'
 
 class Fullheight {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			item: '[data-fullheight]',
 			offset: 0
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
 
-		this.options = defaults
 		this.$els = document.querySelectorAll(this.options.item)
 
 		this.handle()

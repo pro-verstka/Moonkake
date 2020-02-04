@@ -61,14 +61,14 @@ const plugins = {
 	spoiler: new Spoiler()
 }
 
-Object.assign(window.MK, plugins)
+window.MK = { ...window.MK, ...plugins }
 
-if (isMobile()) document.body.classList.add('-device-mobile')
-if (isTouchDevice()) document.body.classList.add('-device-touch')
-if (isAndroid()) document.body.classList.add('-device-android')
-if (isIOS()) document.body.classList.add('-device-ios')
-if (isIPhone()) document.body.classList.add('-device-iphone')
-if (isIPad()) document.body.classList.add('-device-ipad')
+if (isMobile()) document.documentElement.classList.add('-device-mobile')
+if (isTouchDevice()) document.documentElement.classList.add('-device-touch')
+if (isAndroid()) document.documentElement.classList.add('-device-android')
+if (isIOS()) document.documentElement.classList.add('-device-ios')
+if (isIPhone()) document.documentElement.classList.add('-device-iphone')
+if (isIPad()) document.documentElement.classList.add('-device-ipad')
 
 /* STICKY
 -------------------------------------------------- */

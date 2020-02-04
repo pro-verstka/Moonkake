@@ -2,7 +2,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 class Modal {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			modalSelector: '[data-modal]',
 			modalImageSelector: '[data-modal-image]',
 			modalVideoSelector: '[data-modal-video]',
@@ -22,7 +22,7 @@ class Modal {
 		}
 
 		if (typeof options === 'object') {
-			this.options = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
 
 		this.modals = []

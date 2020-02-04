@@ -1,6 +1,6 @@
 class Tabs {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			root: '.tabs',
 			title: '.tabs-title',
 			content: '.tabs-content',
@@ -10,10 +10,8 @@ class Tabs {
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
-
-		this.options = defaults
 
 		// tab click
 		document.addEventListener('click', e => {

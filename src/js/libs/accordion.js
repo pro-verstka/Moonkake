@@ -1,6 +1,6 @@
 class Accordion {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			root: '.accordion',
 			item: '.accordion-item',
 			handler: '.accordion-header',
@@ -8,10 +8,8 @@ class Accordion {
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
-
-		this.options = defaults
 
 		document.addEventListener('click', e => {
 			if (e.target.matches(`${this.options.root} ${this.options.handler}`) || e.target.closest(this.options.handler)) {

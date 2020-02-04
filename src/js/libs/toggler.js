@@ -1,16 +1,14 @@
 class Toggler {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			toggler: '[data-toggler]',
 			togglerClose: '[data-toggler-close]',
 			activeClass: '-active'
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
-
-		this.options = defaults
 
 		document.querySelectorAll(this.options.toggler).forEach($el => {
 			$el.addEventListener('click', event => {

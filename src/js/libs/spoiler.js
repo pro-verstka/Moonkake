@@ -1,6 +1,6 @@
 class Spoiler {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			rootSelector: '[data-spoiler]',
 			bodySelector: '[data-spoiler-body]',
 			introSelector: '[data-spoiler-intro]',
@@ -12,10 +12,8 @@ class Spoiler {
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
-
-		this.options = defaults
 
 		this.$elements = document.querySelectorAll(`${this.options.rootSelector}:not(.-initialized)`)
 		this.handle(this.$elements)

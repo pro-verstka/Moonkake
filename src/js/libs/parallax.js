@@ -1,16 +1,15 @@
 class Parallax {
 	constructor(options = {}) {
-		let defaults = {
+		this.options = {
 			item: '[data-parallax]',
 			ratio: 5,
 			offset: 0.5
 		}
 
 		if (typeof options === 'object') {
-			defaults = Object.assign(defaults, options)
+			this.options = { ...this.options, ...options }
 		}
 
-		this.options = defaults
 		this.$els = document.querySelectorAll(this.options.item)
 
 		this.handle()

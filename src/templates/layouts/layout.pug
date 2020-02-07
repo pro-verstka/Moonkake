@@ -1,7 +1,7 @@
 include ../blocks/mixins.pug
 
 -
-	var time = new Date().getTime();
+	const time = new Date().getTime();
 
 doctype html
 
@@ -16,7 +16,7 @@ html(lang="ru")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
 		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${time}`)
-		//link(rel="preload" href='assets/css/app.min.css?v=' + time as="style" onload="this.rel='stylesheet'")
+		//link(rel="preload" href=`assets/css/app.min.css?v=${time}` as="style" onload="this.rel='stylesheet'")
 
 	body
 

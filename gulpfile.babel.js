@@ -36,7 +36,8 @@ const glob = require('gulp-sass-glob')
 
 // js
 const webpackStream = require('webpack-stream')
-const uglify = require('gulp-uglify')
+const TerserPlugin = require('terser-webpack-plugin')
+//const uglify = require('gulp-uglify')
 
 // tpl
 const pug = require('gulp-pug')
@@ -258,6 +259,18 @@ let webpackConfig = {
 	},
 	resolve: {
 		extensions: ['.js', '.json']
+	},
+	optimization: {
+		minimize: isProd,
+		minimizer: [
+			new TerserPlugin({
+				parallel: true,
+				extractComments: false,
+				terserOptions: {
+					ecma: 5
+				}
+			})
+		]
 	}
 }
 
@@ -297,16 +310,16 @@ gulp.task('js', () => {
 				})
 			)
 			//.pipe(babel())
-			.pipe(
-				gulpif(
-					isProd,
-					uglify({
-						compress: {
-							collapse_vars: false
-						}
-					})
-				)
-			)
+			// .pipe(
+			// 	gulpif(
+			// 		isProd,
+			// 		uglify({
+			// 			compress: {
+			// 				collapse_vars: false
+			// 			}
+			// 		})
+			// 	)
+			// )
 			.pipe(
 				rename(path => {
 					if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {

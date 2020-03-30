@@ -18,7 +18,7 @@ import Fullheight from './libs/fullheight'
 import Modal from './libs/modal'
 import Parallax from './libs/parallax'
 import Spoiler from './libs/spoiler'
-import Sticky from './libs/sticky'
+//import Sticky from './libs/sticky'
 //import TableColumnHighlight from './libs/table-highlight'
 import Tabs from './libs/tabs'
 import Toggler from './libs/toggler'
@@ -73,11 +73,11 @@ if (isIPad()) document.documentElement.classList.add('-device-ipad')
 /* STICKY
 -------------------------------------------------- */
 
-document.querySelectorAll('[data-sticky]').forEach($el => {
-	const sticky = new Sticky({
-		selector: $el
-	})
-})
+// document.querySelectorAll('[data-sticky]').forEach($el => {
+// 	const sticky = new Sticky({
+// 		selector: $el
+// 	})
+// })
 
 /* TABLE HIGHLIGHT
 -------------------------------------------------- */

@@ -10,7 +10,8 @@ window.addEventListener('load', () => {
 		delay: 0,
 		viewFactor: 0.05,
 		mobile: false
-		//reset: true
+		//reset: true,
+		//afterReveal: $el => $el.removeAttribute('data-sr')
 	})
 
 	// const svg = anime({

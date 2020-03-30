@@ -34,6 +34,8 @@
 		display: inline-block
 		vertical-align: middle
 		text-align: left
+		transform: translateY(-3rem)
+		transition: .25s ease
 
 	&-close
 		position: absolute
@@ -106,6 +108,9 @@
 
 	&.modal--visible
 		opacity: 1
+
+		.modal-container
+			transform: translateY(0)
 
 	&.modal--video
 		.modal-container

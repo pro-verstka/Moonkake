@@ -38,6 +38,9 @@ import './components/animation'
 // Pages
 //import './pages/index'
 
+// React
+//import './react/index'
+
 console.info(
 	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',
 	'padding: 10px; background-color: #282c34; color: #fff;'
@@ -90,11 +93,13 @@ if (isIPad()) document.documentElement.classList.add('-device-ipad')
 -------------------------------------------------- */
 
 document.addEventListener('click', e => {
-	if (e.target.matches('[data-scroll-to]')) {
+	if (e.target.matches('[data-scroll-to]') || e.target.closest('[data-scroll-to]')) {
 		e.preventDefault()
 
-		scrollTo(e.target.dataset.scrollTo, {
-			offset: e.target.dataset.scrollToOffset || 0
+		const $el = e.target.matches('[data-scroll-to]') ? e.target : e.target.closest('[data-scroll-to]')
+
+		scrollTo($el.getAttribute('href'), {
+			offset: $el.dataset.scrollToOffset || 0
 		})
 	}
 })

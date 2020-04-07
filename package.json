@@ -19,7 +19,11 @@
 	],
 	"babel": {
 		"presets": [
-			"@babel/preset-env"
+			"@babel/preset-env",
+			"@babel/preset-react"
+		],
+		"plugins": [
+			"@babel/plugin-proposal-class-properties"
 		]
 	},
 	"prettier": {
@@ -34,8 +38,10 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
 		"@babel/polyfill": "^7.2.5",
 		"@babel/preset-env": "^7.0.0",
+		"@babel/preset-react": "^7.9.4",
 		"@babel/register": "^7.0.0",
 		"babel-loader": "^8.0.0",
 		"browser-sync": "^2.24.7",
@@ -58,6 +64,9 @@
 		"gulp-uglify": "^3.0.1",
 		"node-sass": "^4.9.3",
 		"prettier": "^1.19.1",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-transition-group": "^4.3.0",
 		"terser-webpack-plugin": "^2.3.5",
 		"webpack": "^4.17.1",
 		"webpack-stream": "^5.1.1"

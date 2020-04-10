@@ -43,14 +43,15 @@ document.body.insertAdjacentHTML(
 const pswpElement = document.querySelector('.pswp')
 
 document.addEventListener('click', e => {
-	if (e.target.matches('a[data-size]') && e.target.closest('[data-gallery]')) {
+	if ((e.target.matches('[data-size]') || e.target.closest('[data-size]')) && e.target.closest('[data-gallery]')) {
 		e.preventDefault()
 
 		const $photos = e.target.closest('[data-gallery]').querySelectorAll('[data-size]')
+		const $photo = e.target.matches('[data-size]') ? e.target : e.target.closest('[data-size]')
 
 		if ($photos.length) {
 			const photos = Array.from($photos)
-			const index = photos.indexOf(e.target)
+			const index = photos.indexOf($photo)
 			const images = photos.map($el => {
 				const dimensions = $el.dataset.size.split('x')
 

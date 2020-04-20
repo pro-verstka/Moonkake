@@ -6,7 +6,8 @@ class Tabs {
 			content: '.tabs-content',
 			item: '.tabs-item',
 			active: '-active',
-			useHashNav: true
+			useHashNav: true,
+			equalHeight: true
 		}
 
 		if (typeof options === 'object') {
@@ -54,6 +55,43 @@ class Tabs {
 					this.change($root, Array.from($titles).indexOf($title), false)
 				}
 			}
+		})
+
+		// set tabs equal height
+		if (this.options.equalHeight) {
+			this.setEqualHeight()
+
+			window.addEventListener('load', () => {
+				this.setEqualHeight()
+			})
+
+			window.addEventListener('resize', () => {
+				this.setEqualHeight()
+			})
+		}
+	}
+
+	setEqualHeight() {
+		if (!this.options.equalHeight) return false
+
+		document.querySelectorAll(this.options.root).forEach($root => {
+			const $content = $root.querySelector(this.options.content)
+			const $contents = $content.querySelectorAll(this.options.item)
+			const heights = []
+
+			$content.style.minHeight = ''
+
+			$contents.forEach($el => {
+				if (!$el.classList.contains(this.options.active)) {
+					$el.style.display = 'block'
+					heights.push($el.clientHeight)
+					$el.style.display = ''
+				} else {
+					heights.push($el.clientHeight)
+				}
+			})
+
+			$content.style.minHeight = `${Math.max(...heights)}px`
 		})
 	}
 

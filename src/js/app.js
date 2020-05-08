@@ -1,13 +1,11 @@
 /*!
- * Moonkake 8.1.0
+ * Moonkake 8.2.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
 
 // Vendors
-//import '@babel/polyfill'
 import './vendor/polyfills'
-//import './vendor/detect-preload'
 //import './vendor/swiped-events'
 
 // Libs
@@ -41,6 +39,9 @@ import './components/animation'
 // React
 //import './react/index'
 
+// Vue
+//import './vue/index'
+
 console.info(
 	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',
 	'padding: 10px; background-color: #282c34; color: #fff;'
@@ -66,12 +67,16 @@ const plugins = {
 
 window.MK = { ...window.MK, ...plugins }
 
-if (isMobile()) document.documentElement.classList.add('-device-mobile')
-if (isTouchDevice()) document.documentElement.classList.add('-device-touch')
-if (isAndroid()) document.documentElement.classList.add('-device-android')
-if (isIOS()) document.documentElement.classList.add('-device-ios')
-if (isIPhone()) document.documentElement.classList.add('-device-iphone')
-if (isIPad()) document.documentElement.classList.add('-device-ipad')
+const htmlClasses = []
+
+if (isMobile()) htmlClasses.push('-device-mobile')
+if (isTouchDevice()) htmlClasses.push('-device-touch')
+if (isAndroid()) htmlClasses.push('-device-android')
+if (isIOS()) htmlClasses.push('-device-ios')
+if (isIPhone()) htmlClasses.push('-device-iphone')
+if (isIPad()) htmlClasses.push('-device-ipad')
+
+document.documentElement.classList.add(...htmlClasses)
 
 /* STICKY
 -------------------------------------------------- */

@@ -1,7 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import App from './components/App'
 
-const $app = document.getElementById('app')
-
-if ($app) ReactDOM.render(<App />, $app)
+ReactDOM.render(<App />, document.getElementById('app'))

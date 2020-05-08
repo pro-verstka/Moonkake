@@ -188,3 +188,9 @@ div(data-spoiler)
   div(data-spoiler-body)
     p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto nisi, pariatur nostrum est iste sint recusandae? Consequuntur libero ratione cupiditate numquam saepe, odio delectus aliquam voluptatibus. Dolor quis vel ipsa!
 ```
+
+### Tooltip
+
+```pug
+a(href="#", data-tippy, data-tippy-content="Tippy!") Text
+```

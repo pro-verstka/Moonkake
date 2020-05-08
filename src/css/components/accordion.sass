@@ -3,7 +3,7 @@
 		cursor: pointer
 
 	&-body
-		display: none
+		//display: none
 
 	&-item + &-item
 		margin-top: 2rem
@@ -11,5 +11,20 @@
 	&-item
 		&.-active
 			.accordion-body
-				display: block
-				animation: fadeIn 1s forwards
+				//display: block
+				//animation: fadeIn 1s forwards
+
+	&.-animation
+		.accordion-body
+			overflow: hidden
+			height: 0
+			transition: height .25s ease
+
+	&:not(.-animation)
+		.accordion-body
+			display: none
+
+		.accordion-item
+			&.-active
+				.accordion-body
+					display: block

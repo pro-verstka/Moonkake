@@ -5,6 +5,7 @@ const config = {
 	separateCssToPages: false,
 	separateJsToPages: false,
 	appendFontsToHead: true
+	//usePolyfillInjector: false
 }
 
 /* COMMON
@@ -37,7 +38,8 @@ const glob = require('gulp-sass-glob')
 // js
 const webpackStream = require('webpack-stream')
 const TerserPlugin = require('terser-webpack-plugin')
-//const uglify = require('gulp-uglify')
+//const PolyfillInjectorPlugin = require('webpack-polyfill-injector')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // tpl
 const pug = require('gulp-pug')
@@ -248,7 +250,7 @@ let webpackConfig = {
 				loader: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env', '@babel/preset-react']
+						presets: ['@babel/preset-env', '@babel/preset-react', 'vue']
 					}
 				}
 			},
@@ -259,6 +261,18 @@ let webpackConfig = {
 				query: {
 					presets: ['@babel/preset-env', '@babel/preset-react']
 				}
+			},
+			{
+				test: /\.vue$/,
+				exclude: /node_modules/,
+				loader: 'vue-loader',
+				query: {
+					presets: ['@babel/preset-env', 'vue']
+				}
+			},
+			{
+				test: /\.css$/,
+				use: ['vue-style-loader', 'css-loader']
 			}
 		]
 	},
@@ -279,7 +293,25 @@ let webpackConfig = {
 				}
 			})
 		]
-	}
+	},
+	plugins: [new VueLoaderPlugin()]
+	// plugins: [
+	// 	new PolyfillInjectorPlugin({
+	// 		polyfills: [
+	// 			'Array.from',
+	// 			'Array.prototype.find',
+	// 			'Array.prototype.includes',
+	// 			'Symbol',
+	// 			'Symbol.iterator',
+	// 			'DOMTokenList',
+	// 			'Object.assign',
+	// 			'CustomEvent',
+	// 			'Element.prototype.classList',
+	// 			'Element.prototype.closest',
+	// 			'Element.prototype.dataset'
+	// 		]
+	// 	})
+	// ]
 }
 
 gulp.task('js', () => {
@@ -289,6 +321,14 @@ gulp.task('js', () => {
 		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
 			let filename = path.basename(name, path.extname(name))
 			webpackConfig.entry[filename] = name
+
+			// if (filename == 'app') {
+			// 	webpackConfig.entry[filename] = `webpack-polyfill-injector?${JSON.stringify({
+			// 		modules: [name]
+			// 	})}!`
+			// } else {
+			// 	webpackConfig.entry[filename] = name
+			// }
 		}
 	})
 
@@ -299,6 +339,14 @@ gulp.task('js', () => {
 			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
 				let filename = path.basename(name, path.extname(name))
 				webpackConfig.entry[filename] = name
+
+				// if (filename == 'app') {
+				// 	webpackConfig.entry[filename] = `webpack-polyfill-injector?${JSON.stringify({
+				// 		modules: [name]
+				// 	})}!`
+				// } else {
+				// 	webpackConfig.entry[filename] = name
+				// }
 			}
 		})
 	}
@@ -307,39 +355,26 @@ gulp.task('js', () => {
 		webpackConfig['devtool'] = 'cheap-source-map'
 	}
 
-	return (
-		gulp
-			.src(Object.values(webpackConfig.entry))
-			.pipe(
-				webpackStream(webpackConfig, null, (err, stats) => {
-					if (stats.compilation.errors.length) {
-						notify('Error: <%= stats.compilation.errors[0].error %>')
-					}
-				})
-			)
-			//.pipe(babel())
-			// .pipe(
-			// 	gulpif(
-			// 		isProd,
-			// 		uglify({
-			// 			compress: {
-			// 				collapse_vars: false
-			// 			}
-			// 		})
-			// 	)
-			// )
-			.pipe(
-				rename(path => {
-					if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {
-						path.dirname += '/pages'
-					}
-				})
-			)
-			.pipe(gulp.dest('dist/assets/js/'))
-			.on('end', function() {
-				browserSync.reload()
+	return gulp
+		.src(Object.values(webpackConfig.entry))
+		.pipe(
+			webpackStream(webpackConfig, null, (err, stats) => {
+				if (stats.compilation.errors.length) {
+					notify('Error: <%= stats.compilation.errors[0].error %>')
+				}
 			})
-	)
+		)
+		.pipe(
+			rename(path => {
+				if (path.basename !== 'app.min' && path.basename !== 'app.min.js') {
+					path.dirname += '/pages'
+				}
+			})
+		)
+		.pipe(gulp.dest('dist/assets/js/'))
+		.on('end', function() {
+			browserSync.reload()
+		})
 })
 
 /* Clean */

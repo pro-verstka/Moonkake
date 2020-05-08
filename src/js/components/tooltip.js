@@ -1,13 +1,10 @@
-import Tooltip from 'tooltip.js'
+import tippy from 'tippy.js'
 
-const $tooltips = document.querySelectorAll('[data-tooltip]')
+// https://atomiks.github.io/tippyjs/v6/all-props/
 
-if ($tooltips) {
-	$tooltips.forEach($el => {
-		let tip = new Tooltip($el, {
-			placement: $el.dataset.tooltipPosition || 'top',
-			title: $el.dataset.tooltip,
-			html: true
-		})
-	})
-}
+tippy('[data-tippy]', {
+	allowHTML: true,
+	delay: [100, 100],
+	interactive: true,
+	maxWidth: 200
+})

@@ -10,12 +10,12 @@ const slider = new Swiper('.swiper-container', {
 	effect: 'slide',
 	loop: true,
 
-	// freeMode: true,
-	// freeModeSticky: true,
-	// mousewheel: {
-	// 	forceToAxis: true,
-	// 	invert: true
-	// },
+	freeMode: true,
+	freeModeSticky: true,
+	mousewheel: {
+		forceToAxis: true,
+		invert: true
+	},
 
 	preloadImages: false,
 

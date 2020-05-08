@@ -4,7 +4,9 @@ class Sticky {
 			selector: '[data-sticky]',
 			breakpoint: 0,
 			offsetTop: 0,
-			parent: ''
+			parent: '',
+			disableStickySupport: false,
+			calcOffsetTop: null
 		}
 
 		if (typeof options === 'object') {
@@ -14,6 +16,12 @@ class Sticky {
 		const $el =
 			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)
 		const $elParent = this.options.parent == '' ? $el.parentElement : document.querySelector(this.options.parent)
+
+		if (typeof calcOffsetTop != 'function') {
+			this.options.calcOffsetTop = () => this.options.offsetTop
+		}
+
+		this.options.offsetTop = this.options.calcOffsetTop()
 
 		if (this.isStickySupport()) {
 			$el.style.position = 'sticky'
@@ -40,6 +48,10 @@ class Sticky {
 	}
 
 	isStickySupport() {
+		if (this.disableStickySupport) {
+			return false
+		}
+
 		const $el = document.createElement('div')
 
 		$el.style.cssText = 'position: sticky; position: -webkit-sticky; position: -ms-sticky;'
@@ -53,6 +65,8 @@ class Sticky {
 
 			return false
 		}
+
+		this.options.offsetTop = this.options.calcOffsetTop()
 
 		const { top: bodyTop } = document.body.getBoundingClientRect()
 		const { height: elHeight } = $el.getBoundingClientRect()
@@ -69,6 +83,7 @@ class Sticky {
 		let width = elParentWidth
 		let height = elHeight
 		let display = 'none'
+		let classListMethod = 'remove'
 
 		if (elHeight >= elParentHeight) {
 			return false
@@ -82,6 +97,7 @@ class Sticky {
 			position = 'fixed'
 			positionY = this.options.offsetTop
 			display = 'block'
+			classListMethod = 'add'
 		}
 
 		if (
@@ -92,14 +108,16 @@ class Sticky {
 			positionX = 0
 			positionY = elParentTop - bodyTop + elParentHeight - elHeight - (elParentTop - bodyTop)
 			display = 'block'
+			classListMethod = 'add'
 		}
 
 		$el.style.position = position
 		$el.style.top = `${positionY}px`
 		$el.style.left = `${positionX}px`
 		$el.style.width = `${width}px`
+		$el.clasList[classListMethod]('-sticky')
 
-		$elFake.style.display = `${display}`
+		$elFake.style.display = display
 		$elFake.style.width = `${width}px`
 		$elFake.style.height = `${height}px`
 	}

@@ -1,52 +1,81 @@
-[data-tooltip]
+$tippyColor: #000
+$tippyArrowSize: 1.2rem
+
+[data-tippy]
 	cursor: help
 
-$tooltipColor: #000
+.tippy-box[data-animation='fade'][data-state='hidden']
+	opacity: 0
 
-.tooltip
-	padding: .5rem 1rem
-	border-radius: .4rem
+[data-tippy-root]
+	max-width: calc(100vw - 1rem)
+
+.tippy-box
+	position: relative
+	background-color: $tippyColor
 	color: #fff
-	opacity: 1
-	background-color: $tooltipColor
+	border-radius: .4rem
 	font-size: 1.2rem
-	box-shadow: 0 .4rem 1.1rem .2rem rgba(66, 67, 67, 0.2)
-	max-width: 28rem
+	outline: 0
+	transition-property: transform, visibility, opacity
 
-	&-arrow
+	&[data-placement^='top']
+		& > .tippy-arrow
+			bottom: 0
+
+			&::before
+				bottom: -$tippyArrowSize/2
+				left: 0
+				border-width: $tippyArrowSize/2 $tippyArrowSize/2 0
+				border-top-color: initial
+				transform-origin: center top
+
+	&[data-placement^='bottom']
+		& > .tippy-arrow
+			top: 0
+
+			&::before
+				top: -$tippyArrowSize/2
+				left: 0
+				border-width: 0 $tippyArrowSize/2 $tippyArrowSize/2
+				border-bottom-color: initial
+				transform-origin: center bottom
+
+	&[data-placement^='left']
+		& > .tippy-arrow
+			right: 0
+
+			&::before
+				border-width: $tippyArrowSize/2 0 $tippyArrowSize/2 $tippyArrowSize/2
+				border-left-color: initial
+				right: -$tippyArrowSize/2
+				transform-origin: center left
+
+	&[data-placement^='right']
+		& > .tippy-arrow
+			left: 0
+
+			&::before
+				left: -$tippyArrowSize/2
+				border-width: $tippyArrowSize/2 $tippyArrowSize/2 $tippyArrowSize/2 0
+				border-right-color: initial
+				transform-origin: center right
+
+	&[data-inertia][data-state='visible']
+		transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11)
+
+.tippy-arrow
+	width: $tippyArrowSize
+	height: $tippyArrowSize
+	color: $tippyColor
+
+	&::before
+		content: ''
 		position: absolute
-		width: 0
-		height: 0
+		border-color: transparent
 		border-style: solid
 
-	&[x-placement="top"]
-		margin-bottom: .5rem
-
-		.tooltip-arrow
-			top: 100%
-			border-width: .5rem .5rem 0 .5rem
-			border-color: $tooltipColor transparent transparent transparent
-
-	&[x-placement="bottom"]
-		margin-top: .5rem
-
-		.tooltip-arrow
-			bottom: 100%
-			border-width: 0 .5rem .5rem .5rem
-			border-color: transparent transparent $tooltipColor transparent
-
-	&[x-placement="left"]
-		margin-right: .5rem
-
-		.tooltip-arrow
-			left: 100%
-			border-width: .5rem 0 .5rem .5rem
-			border-color: transparent transparent transparent $tooltipColor
-
-	&[x-placement="right"]
-		margin-left: .5rem
-
-		.tooltip-arrow
-			right: 100%
-			border-width: .5rem .5rem .5rem 0
-			border-color: transparent $tooltipColor transparent transparent
+.tippy-content
+	position: relative
+	padding: .5rem 1rem
+	z-index: 1

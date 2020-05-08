@@ -5,7 +5,6 @@ const config = {
 	separateCssToPages: false,
 	separateJsToPages: false,
 	appendFontsToHead: true
-	//usePolyfillInjector: false
 }
 
 /* COMMON
@@ -38,7 +37,6 @@ const glob = require('gulp-sass-glob')
 // js
 const webpackStream = require('webpack-stream')
 const TerserPlugin = require('terser-webpack-plugin')
-//const PolyfillInjectorPlugin = require('webpack-polyfill-injector')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // tpl
@@ -295,23 +293,6 @@ let webpackConfig = {
 		]
 	},
 	plugins: [new VueLoaderPlugin()]
-	// plugins: [
-	// 	new PolyfillInjectorPlugin({
-	// 		polyfills: [
-	// 			'Array.from',
-	// 			'Array.prototype.find',
-	// 			'Array.prototype.includes',
-	// 			'Symbol',
-	// 			'Symbol.iterator',
-	// 			'DOMTokenList',
-	// 			'Object.assign',
-	// 			'CustomEvent',
-	// 			'Element.prototype.classList',
-	// 			'Element.prototype.closest',
-	// 			'Element.prototype.dataset'
-	// 		]
-	// 	})
-	// ]
 }
 
 gulp.task('js', () => {
@@ -321,14 +302,6 @@ gulp.task('js', () => {
 		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
 			let filename = path.basename(name, path.extname(name))
 			webpackConfig.entry[filename] = name
-
-			// if (filename == 'app') {
-			// 	webpackConfig.entry[filename] = `webpack-polyfill-injector?${JSON.stringify({
-			// 		modules: [name]
-			// 	})}!`
-			// } else {
-			// 	webpackConfig.entry[filename] = name
-			// }
 		}
 	})
 
@@ -339,14 +312,6 @@ gulp.task('js', () => {
 			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
 				let filename = path.basename(name, path.extname(name))
 				webpackConfig.entry[filename] = name
-
-				// if (filename == 'app') {
-				// 	webpackConfig.entry[filename] = `webpack-polyfill-injector?${JSON.stringify({
-				// 		modules: [name]
-				// 	})}!`
-				// } else {
-				// 	webpackConfig.entry[filename] = name
-				// }
 			}
 		})
 	}

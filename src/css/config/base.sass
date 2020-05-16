@@ -56,7 +56,6 @@ $headColor: inherit
 		flex: 0 0 $width
 		max-width: $width
 
-
 =clearfix()
 	&::before,
 	&::after
@@ -110,3 +109,15 @@ $headColor: inherit
 		padding-top: $vgap
 		flex: 0 0 100%/$column
 		max-width: 100%/$column
+
+=grid-calc($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
+	&
+		margin-top: $top - $vgap
+		margin-left: -$hgap
+		margin-bottom: $bottom
+
+	& > *
+		margin-left: $hgap
+		margin-top: $vgap
+		flex: 0 0 calc(100% * 1 / #{$column} - #{$hgap})
+		max-width: calc(100% * 1 / #{$column} - #{$hgap})

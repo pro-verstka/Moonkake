@@ -152,3 +152,7 @@ export function closeFullscreen() {
 		document.msExitFullscreen()
 	}
 }
+
+export function getScrollbarWidth() {
+	return window.innerWidth - document.body.clientWidth
+}

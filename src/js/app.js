@@ -10,6 +10,7 @@ import './vendor/polyfills'
 
 // Libs
 import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, scrollTo } from './libs/utils'
+import Loader from './libs/loader'
 import Accordion from './libs/accordion'
 import Counter from './libs/counter'
 import Fullheight from './libs/fullheight'
@@ -55,6 +56,7 @@ if (typeof window.MK === 'undefined') {
 }
 
 const plugins = {
+	loader: new Loader(),
 	tabs: new Tabs(),
 	counter: new Counter(),
 	accordion: new Accordion(),

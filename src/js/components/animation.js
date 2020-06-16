@@ -1,7 +1,7 @@
 import ScrollReveal from 'scrollreveal'
 //import anime from 'animejs/lib/anime.es'
 
-window.addEventListener('load', () => {
+window.addEventListener(window.MK.events.load, () => {
 	const scrollFX = ScrollReveal().reveal('[data-scroll-fx]', {
 		distance: 0,
 		duration: 1500,

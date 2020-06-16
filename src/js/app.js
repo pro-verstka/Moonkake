@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.2.0
+ * Moonkake 8.3.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -8,9 +8,11 @@
 import './vendor/polyfills'
 //import './vendor/swiped-events'
 
+// Config
+import './config/config'
+
 // Libs
-import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, scrollTo } from './libs/utils'
-import Loader from './libs/loader'
+//import Loader from './libs/loader'
 import Accordion from './libs/accordion'
 import Counter from './libs/counter'
 import Fullheight from './libs/fullheight'
@@ -43,20 +45,11 @@ import './components/animation'
 // Vue
 //import './vue/index'
 
-console.info(
-	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',
-	'padding: 10px; background-color: #282c34; color: #fff;'
-)
-
 /* SETUP
 -------------------------------------------------- */
 
-if (typeof window.MK === 'undefined') {
-	window.MK = {}
-}
-
 const plugins = {
-	loader: new Loader(),
+	//loader: new Loader(),
 	tabs: new Tabs(),
 	counter: new Counter(),
 	accordion: new Accordion(),
@@ -67,18 +60,7 @@ const plugins = {
 	spoiler: new Spoiler()
 }
 
-window.MK = { ...window.MK, ...plugins }
-
-const htmlClasses = []
-
-if (isMobile()) htmlClasses.push('-device-mobile')
-if (isTouchDevice()) htmlClasses.push('-device-touch')
-if (isAndroid()) htmlClasses.push('-device-android')
-if (isIOS()) htmlClasses.push('-device-ios')
-if (isIPhone()) htmlClasses.push('-device-iphone')
-if (isIPad()) htmlClasses.push('-device-ipad')
-
-document.documentElement.classList.add(...htmlClasses)
+window.MK = { ...window.MK.plugins, ...plugins }
 
 /* STICKY
 -------------------------------------------------- */
@@ -95,18 +77,3 @@ document.documentElement.classList.add(...htmlClasses)
 // document.querySelectorAll('[data-table-highlight]').forEach($el => {
 // 	const table = new TableColumnHighlight($el)
 // })
-
-/* SCROLL TO
--------------------------------------------------- */
-
-document.addEventListener('click', e => {
-	if (e.target.matches('[data-scroll-to]') || e.target.closest('[data-scroll-to]')) {
-		e.preventDefault()
-
-		const $el = e.target.matches('[data-scroll-to]') ? e.target : e.target.closest('[data-scroll-to]')
-
-		scrollTo($el.getAttribute('href'), {
-			offset: $el.dataset.scrollToOffset || 0
-		})
-	}
-})

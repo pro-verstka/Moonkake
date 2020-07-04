@@ -36,6 +36,10 @@ $headColor: inherit
 	$vw: ($width * 0.01) * 1px
 	@return ($size / $vw) * 1vw
 
+=vh-height($value)
+	height: #{$value}vh
+	height: calc(var(--vh, 1vh) * #{$value})
+
 =content()
 	content: ''
 	display: block
@@ -48,7 +52,7 @@ $headColor: inherit
 	& > *
 		min-width: 0
 
-=width($width)
+=flex-width($width)
 	@if $width == 'none'
 		flex: none
 		max-width: none

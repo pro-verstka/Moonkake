@@ -1,5 +1,5 @@
 import Loader from './../libs/loader'
-import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice } from './../libs/utils'
+import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewportHeight } from './../libs/utils'
 
 /* SETUP
 -------------------------------------------------- */
@@ -41,6 +41,12 @@ if (isIPad()) htmlClassNames.push('-device-ipad')
 //htmlClassNames.forEach(className => document.documentElement.classList.add(className))
 
 document.documentElement.classList.add(...htmlClassNames)
+
+/* HELPERS
+-------------------------------------------------- */
+
+setViewportHeight()
+window.addEventListener('resize', setViewportHeight)
 
 console.info(
 	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',

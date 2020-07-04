@@ -27,12 +27,16 @@ const prettify = require('gulp-prettify')
 
 // css
 const gcmq = require('gulp-group-css-media-queries')
-const autoprefixer = require('gulp-autoprefixer')
-const cssnano = require('gulp-cssnano')
+const autoprefixer = require('autoprefixer')
+const cssnano = require('cssnano')
 
 //sass
 const sass = require('gulp-sass')
 const glob = require('gulp-sass-glob')
+
+//postcss
+const postcss = require('gulp-postcss')
+const postcssPresetEnv = require('postcss-preset-env')
 
 // js
 const webpackStream = require('webpack-stream')
@@ -157,6 +161,21 @@ gulp.task('css', () => {
 		})
 	}
 
+	let postCssPlugins = [
+		postcssPresetEnv(),
+		autoprefixer({
+			grid: true
+		})
+	]
+
+	if (isProd) {
+		postCssPlugins.push(
+			cssnano({
+				zindex: false
+			})
+		)
+	}
+
 	return gulp
 		.src(src, {
 			base: '.'
@@ -168,21 +187,9 @@ gulp.task('css', () => {
 			})
 		)
 		.on('error', notify.onError('Error: <%= error.message %>'))
-		.pipe(
-			autoprefixer({
-				//browsers: ['last 3 version', 'ie >= 11'],
-				grid: true
-			})
-		)
+		.pipe(postcss(postCssPlugins))
+		.on('error', notify.onError('Error: <%= error.message %>'))
 		.pipe(gcmq())
-		.pipe(
-			gulpif(
-				isProd,
-				cssnano({
-					zindex: false
-				})
-			)
-		)
 		.pipe(flatten())
 		.pipe(
 			rename({

@@ -1,16 +1,16 @@
 .form
 	&-fieldset + &-fieldset
-		margin-top: $gap * 2
+		margin-top: calc(var(--gap) * 2)
 
 	&-group + &-group
-		margin-top: $gap
+		margin-top: var(--gap)
 
 	&-row
 		+flex()
-		margin-left: -$gap
+		margin-left: calc(var(--gap) * -1)
 
 	&-row > &-item
-		padding-left: $gap
+		padding-left: var(--gap)
 		flex: 1
 
 	&-item

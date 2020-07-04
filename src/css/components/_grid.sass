@@ -1,8 +1,9 @@
 .container
-	max-width: $maxViewPortWidth + $gap * 2
+	width: 100%
+	max-width: calc(var(--container-max-width) + var(--gap) * 2)
 	margin: 0 auto
-	padding-left: $gap
-	padding-right: $gap
+	padding-left: var(--gap)
+	padding-right: var(--gap)
 
 .row
 	+flex()
@@ -50,17 +51,3 @@
 			> *
 				width: 100%
 				height: 100%
-
-// .full-width
-// 	left: 50%
-// 	margin-left: -50vw
-// 	margin-right: -50vw
-// 	max-width: 100vw
-// 	position: relative
-// 	right: 50%
-// 	width: 100vw
-
-.full-height
-	min-height: 100vh
-	min-height: -webkit-fill-available
-	//min-height: fill-available

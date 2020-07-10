@@ -1,10 +1,10 @@
 import ScrollReveal from 'scrollreveal'
 //import anime from 'animejs/lib/anime.es'
 
-window.addEventListener(window.MK.events.load, () => {
+window.addEventListener(MK.events.load, () => {
 	const scrollFX = ScrollReveal().reveal('[data-scroll-fx]', {
 		distance: 0,
-		duration: 1500,
+		duration: MK.animation.speed,
 		interval: 100,
 		opacity: 0,
 		delay: 0,
@@ -18,7 +18,7 @@ window.addEventListener(window.MK.events.load, () => {
 	// 	targets: 'svg path',
 	// 	strokeDashoffset: [anime.setDashoffset, 0],
 	// 	easing: 'easeInOutSine',
-	// 	duration: 1500,
+	// 	duration: MK.animation.speed,
 	// 	delay: function(el, i) {
 	// 		return i * 250
 	// 	},

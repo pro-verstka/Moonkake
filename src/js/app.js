@@ -60,7 +60,7 @@ const plugins = {
 	spoiler: new Spoiler()
 }
 
-window.MK = { ...window.MK.plugins, ...plugins }
+MK.plugins = { ...MK.plugins, ...plugins }
 
 /* STICKY
 -------------------------------------------------- */

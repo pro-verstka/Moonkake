@@ -19,10 +19,10 @@ if (typeof window.MK === 'undefined') {
 /* LOADER
 -------------------------------------------------- */
 
-window.MK.plugins.loader = new Loader()
+MK.plugins.loader = new Loader()
 
-if (window.MK.plugins.loader?.isInitialized) {
-	window.MK.events.load = window.MK.plugins.loader.options.eventName
+if (MK.plugins.loader?.isInitialized) {
+	MK.events.load = MK.plugins.loader.options.eventName
 }
 
 /* HTML CLASSNAMES

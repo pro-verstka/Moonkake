@@ -1,4 +1,4 @@
-import { scrollTo } from './../libs/utils'
+import { scrollTo } from '../libs/utils'
 
 /* SCROLL TO
 -------------------------------------------------- */

@@ -1,7 +1,7 @@
 {
 	"name": "moonkake",
-	"version": "8.3.0",
-	"description": "Start template. Supports Pug, Sass, Vue, React, ES6.",
+	"version": "8.3.1",
+	"description": "Start template. Supports Pug, Sass, PostCSS, Vue, React, ES6.",
 	"author": "p1rate",
 	"license": "MIT",
 	"repository": {

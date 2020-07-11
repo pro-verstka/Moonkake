@@ -1,4 +1,4 @@
-import { isMobile } from '../libs/utils'
+import { isMobile } from './utils'
 
 class Fullheight {
 	constructor(options = {}) {
@@ -25,7 +25,7 @@ class Fullheight {
 	}
 
 	setFullheight(event) {
-		if (!this.$els.length || (event.type == 'resize' && isMobile())) return false
+		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
 
 		this.$els.forEach($el => {
 			let minHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('min-height')) || 0

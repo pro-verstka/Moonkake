@@ -1,11 +1,12 @@
-import Loader from './../libs/loader'
-import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewportHeight } from './../libs/utils'
+import Loader from '../libs/loader'
+import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewportHeight } from '../libs/utils'
 
 /* SETUP
 -------------------------------------------------- */
 
 if (typeof window.MK === 'undefined') {
 	window.MK = {
+		version: '8.3.1',
 		events: {
 			load: 'load'
 		},

@@ -15,7 +15,7 @@ class Sticky {
 
 		const $el =
 			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)
-		const $elParent = this.options.parent == '' ? $el.parentElement : document.querySelector(this.options.parent)
+		const $elParent = this.options.parent === '' ? $el.parentElement : document.querySelector(this.options.parent)
 
 		if (typeof calcOffsetTop != 'function') {
 			this.options.calcOffsetTop = () => this.options.offsetTop

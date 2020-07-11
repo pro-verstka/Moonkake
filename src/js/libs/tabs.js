@@ -33,7 +33,7 @@ class Tabs {
 
 		// tab change on history change
 		window.addEventListener('popstate', e => {
-			if (e.state && e.state.hasOwnProperty('source') && e.state.source == 'tabs') {
+			if (e.state && e.state.hasOwnProperty('source') && e.state.source === 'tabs') {
 				const $root = document
 					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
 					.closest(this.options.root)

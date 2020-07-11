@@ -38,9 +38,6 @@ if (isIOS()) htmlClassNames.push('-device-ios')
 if (isIPhone()) htmlClassNames.push('-device-iphone')
 if (isIPad()) htmlClassNames.push('-device-ipad')
 
-// if IE
-//htmlClassNames.forEach(className => document.documentElement.classList.add(className))
-
 document.documentElement.classList.add(...htmlClassNames)
 
 /* HELPERS

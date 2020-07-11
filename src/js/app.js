@@ -12,6 +12,7 @@ import './vendor/polyfills'
 import './config/config'
 
 // Libs
+import { isMobile } from './libs/utils'
 //import Loader from './libs/loader'
 import Accordion from './libs/accordion'
 import Counter from './libs/counter'
@@ -77,3 +78,17 @@ MK.plugins = { ...MK.plugins, ...plugins }
 // document.querySelectorAll('[data-table-highlight]').forEach($el => {
 // 	const table = new TableColumnHighlight($el)
 // })
+
+/* FOOLPROOF
+-------------------------------------------------- */
+
+let currentDevice = isMobile()
+let previousDevice = currentDevice
+
+window.addEventListener('resize', e => {
+	currentDevice = isMobile()
+
+	if (currentDevice !== previousDevice) window.location.reload(true)
+
+	previousDevice = isMobile()
+})

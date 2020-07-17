@@ -6,7 +6,7 @@
 
 // Vendors
 import './vendor/polyfills'
-//import './vendor/swiped-events'
+//import 'swiped-events'
 
 // Config
 import './config/config'
@@ -85,7 +85,7 @@ MK.plugins = { ...MK.plugins, ...plugins }
 let currentDevice = isMobile()
 let previousDevice = currentDevice
 
-window.addEventListener('resize', e => {
+window.addEventListener('resize', () => {
 	currentDevice = isMobile()
 
 	if (currentDevice !== previousDevice) window.location.reload(true)

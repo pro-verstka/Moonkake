@@ -29,7 +29,7 @@ class Counter {
 		document.addEventListener(
 			'focus',
 			e => {
-				if (e.target.matches(`${this.options.root} input`)) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputFocus(e.target)
 				}
 			},
@@ -39,7 +39,7 @@ class Counter {
 		document.addEventListener(
 			'blur',
 			e => {
-				if (e.target.matches(`${this.options.root} input`)) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputBlur(e.target)
 				}
 			},
@@ -49,7 +49,7 @@ class Counter {
 		document.addEventListener(
 			'keyup',
 			e => {
-				if (e.target.matches(`${this.options.root} input`)) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputKeyup(e.target)
 				}
 			},
@@ -112,9 +112,7 @@ class Counter {
 			return false
 		}
 
-		let value = $input.value.replace(this.regex, '')
-
-		$input.value = value
+		$input.value = $input.value.replace(this.regex, '')
 	}
 
 	handleInputBlur($input) {

@@ -8,7 +8,6 @@
 		"type": "git",
 		"url": "git://github.com/detectiveshelby/moonkake.git"
 	},
-	"main": "gulpfile.babel.js",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development gulp",
 		"build": "cross-env NODE_ENV=production gulp build"
@@ -40,7 +39,6 @@
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
 		"@babel/plugin-proposal-class-properties": "^7.8.3",
-		"@babel/polyfill": "^7.2.5",
 		"@babel/preset-env": "^7.0.0",
 		"@babel/preset-react": "^7.9.4",
 		"@babel/register": "^7.0.0",
@@ -57,7 +55,6 @@
 		"gulp-data": "^1.3.1",
 		"gulp-flatten": "^0.4.0",
 		"gulp-group-css-media-queries": "^1.2.2",
-		"gulp-if": "^2.0.2",
 		"gulp-notify": "^3.2.0",
 		"gulp-postcss": "^8.0.0",
 		"gulp-prettify": "^0.5.0",
@@ -65,19 +62,14 @@
 		"gulp-rename": "^1.4.0",
 		"gulp-sass": "^4.0.1",
 		"gulp-sass-glob": "^1.0.9",
-		"gulp-uglify": "^3.0.1",
 		"node-sass": "^4.9.3",
 		"postcss-preset-env": "^6.7.0",
 		"prettier": "^1.19.1",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-transition-group": "^4.3.0",
 		"terser-webpack-plugin": "^2.3.5",
 		"vue-loader": "^15.9.2",
 		"vue-style-loader": "^4.1.2",
 		"vue-template-compiler": "^2.6.11",
 		"webpack": "^4.17.1",
-		"webpack-polyfill-injector": "^3.0.2",
 		"webpack-stream": "^5.1.1"
 	},
 	"dependencies": {
@@ -92,9 +84,10 @@
 		"fontfaceobserver": "^2.1.0",
 		"imask": "^5.2.1",
 		"inputmask": "^4.0.9",
-		"jquery": "^3.3.1",
 		"nodelist-foreach-polyfill": "^1.2.0",
 		"photoswipe": "^4.1.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
 		"scroll-to-element": "^2.0.2",
 		"scrollbooster": "^1.1.0",
 		"scrollreveal": "^4.0.0",

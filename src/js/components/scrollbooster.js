@@ -7,7 +7,7 @@ if ($scrollbooster.length) {
 		const $content = $viewport.querySelector('[data-scrollbooster-content]')
 
 		if ($content) {
-			const scrollboster = new ScrollBooster({
+			new ScrollBooster({
 				viewport: $viewport,
 				content: $content,
 				mode: 'x',

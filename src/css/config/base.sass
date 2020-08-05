@@ -60,14 +60,14 @@ $headColor: inherit
 		flex: 0 0 $width
 		max-width: $width
 
-=clearfix()
-	&::before,
-	&::after
-		content: ' '
-		display: table
-
-	&::after
-		clear: both
+//=clearfix()
+//	&::before,
+//	&::after
+//		content: ' '
+//		display: table
+//
+//	&::after
+//		clear: both
 
 =hidden()
 	position: absolute
@@ -89,6 +89,20 @@ $headColor: inherit
 
 	&:hover
 		border-bottom-color: currentColor
+
+=scroll()
+	&::-webkit-scrollbar
+		width: .4rem
+
+	&::-webkit-scrollbar-track
+		background: transparent
+
+	&::-webkit-scrollbar-thumb
+		background-color: rgba(#000, .25)
+		border-radius: .2rem
+
+		&:hover
+			background-color: rgba(#000, .5)
 
 /* Font-face */
 

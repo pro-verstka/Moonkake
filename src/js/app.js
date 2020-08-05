@@ -36,6 +36,7 @@ import './components/slider'
 import './components/animation'
 //import './components/scrollbooster'
 //import './components/map'
+import './components/scrollto'
 
 // Pages
 //import './pages/index'

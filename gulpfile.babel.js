@@ -19,7 +19,6 @@ const notify = require('gulp-notify')
 const browserSync = require('browser-sync')
 const flatten = require('gulp-flatten')
 const rename = require('gulp-rename')
-const gulpif = require('gulp-if')
 const del = require('del')
 const data = require('gulp-data')
 const cheerio = require('gulp-cheerio')
@@ -29,12 +28,8 @@ const prettify = require('gulp-prettify')
 const gcmq = require('gulp-group-css-media-queries')
 const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
-
-//sass
 const sass = require('gulp-sass')
 const glob = require('gulp-sass-glob')
-
-//postcss
 const postcss = require('gulp-postcss')
 const postcssPresetEnv = require('postcss-preset-env')
 
@@ -46,8 +41,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // tpl
 const pug = require('gulp-pug')
 
-let buildMode = process.env.NODE_ENV === 'production' ? 'production' : 'development'
-let isProd = buildMode === 'production'
+const buildMode = process.env.NODE_ENV === 'production' ? 'production' : 'development'
+const isProd = buildMode === 'production'
 
 /* TASKS
 -------------------------------------------------- */
@@ -73,7 +68,7 @@ gulp.task('templates', () => {
 		fs.readdirSync('./src/fonts').forEach(file => {
 			let name = `./src/fonts/${file}`
 
-			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.woff2') {
+			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.woff2') {
 				fonts.push(path.basename(file, path.extname(name)))
 			}
 		})
@@ -146,7 +141,7 @@ gulp.task('css', () => {
 	fs.readdirSync('./src/css').forEach(file => {
 		let name = `./src/css/${file}`
 
-		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.sass') {
+		if (!fs.statSync(name).isDirectory() && path.extname(name) === '.sass') {
 			src.push(name)
 		}
 	})
@@ -155,7 +150,7 @@ gulp.task('css', () => {
 		fs.readdirSync('./src/css/pages').forEach(file => {
 			let name = `./src/css/pages/${file}`
 
-			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.sass') {
+			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.sass') {
 				src.push(name)
 			}
 		})
@@ -306,7 +301,7 @@ gulp.task('js', () => {
 	fs.readdirSync('./src/js').forEach(file => {
 		let name = `./src/js/${file}`
 
-		if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
+		if (!fs.statSync(name).isDirectory() && path.extname(name) === '.js') {
 			let filename = path.basename(name, path.extname(name))
 			webpackConfig.entry[filename] = name
 		}
@@ -316,7 +311,7 @@ gulp.task('js', () => {
 		fs.readdirSync('./src/js/pages').forEach(file => {
 			let name = `./src/js/pages/${file}`
 
-			if (!fs.statSync(name).isDirectory() && path.extname(name) == '.js') {
+			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.js') {
 				let filename = path.basename(name, path.extname(name))
 				webpackConfig.entry[filename] = name
 			}

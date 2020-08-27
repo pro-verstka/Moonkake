@@ -17,7 +17,7 @@ class Sticky {
 			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)
 		const $elParent = this.options.parent === '' ? $el.parentElement : document.querySelector(this.options.parent)
 
-		if (typeof calcOffsetTop != 'function') {
+		if (typeof calcOffsetTop !== 'function') {
 			this.options.calcOffsetTop = () => this.options.offsetTop
 		}
 
@@ -80,8 +80,8 @@ class Sticky {
 		let position = 'static'
 		let positionX = elParentLeft
 		let positionY = elParentTop - bodyTop
-		let width = elParentWidth
-		let height = elHeight
+		const width = elParentWidth
+		const height = elHeight
 		let display = 'none'
 		let classListMethod = 'remove'
 

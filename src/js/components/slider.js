@@ -3,7 +3,7 @@ import Swiper from 'swiper'
 /* SLIDER
  -------------------------------------------------- */
 
-const slider = new Swiper('.swiper-container', {
+new Swiper('.swiper-container', {
 	slidesPerView: 1,
 	spaceBetween: 0,
 	speed: 1500,

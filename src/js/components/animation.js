@@ -1,8 +1,8 @@
 import ScrollReveal from 'scrollreveal'
-//import anime from 'animejs/lib/anime.es'
+// import anime from 'animejs/lib/anime.es'
 
 window.addEventListener(MK.events.load, () => {
-	const scrollFX = ScrollReveal().reveal('[data-scroll-fx]', {
+	ScrollReveal().reveal('[data-scroll-fx]', {
 		distance: 0,
 		duration: MK.animation.speed,
 		interval: 100,
@@ -10,8 +10,8 @@ window.addEventListener(MK.events.load, () => {
 		delay: 0,
 		viewFactor: 0.05,
 		mobile: false
-		//reset: true,
-		//afterReveal: $el => $el.removeAttribute('data-sr')
+		// reset: true,
+		// afterReveal: $el => $el.removeAttribute('data-sr')
 	})
 
 	// const svg = anime({

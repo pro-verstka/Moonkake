@@ -25,7 +25,7 @@ class Loader {
 	}
 
 	init() {
-		this.$body.style.paddingRight = getScrollbarWidth() + 'px'
+		this.$body.style.paddingRight = `${getScrollbarWidth()}px`
 		this.$body.classList.add(this.options.classnames.lock)
 
 		window.addEventListener('load', e => {

@@ -6,22 +6,22 @@
 
 // Vendors
 import './vendor/polyfills'
-//import 'swiped-events'
+// import 'swiped-events'
 
 // Config
 import './config/config'
 
 // Libs
 import { isMobile } from './libs/utils'
-//import Loader from './libs/loader'
+// import Loader from './libs/loader'
 import Accordion from './libs/accordion'
 import Counter from './libs/counter'
 import Fullheight from './libs/fullheight'
 import Modal from './libs/modal'
 import Parallax from './libs/parallax'
 import Spoiler from './libs/spoiler'
-//import Sticky from './libs/sticky'
-//import TableColumnHighlight from './libs/table-highlight'
+// import Sticky from './libs/sticky'
+// import TableColumnHighlight from './libs/table-highlight'
 import Tabs from './libs/tabs'
 import Toggler from './libs/toggler'
 
@@ -30,28 +30,28 @@ import './components/font'
 import './components/lazyload'
 import './components/inputmask'
 import './components/slider'
-//import './components/gallery'
-//import './components/calendar'
-//import './components/tooltip'
+// import './components/gallery'
+// import './components/calendar'
+// import './components/tooltip'
 import './components/animation'
-//import './components/scrollbooster'
-//import './components/map'
+// import './components/scrollbooster'
+// import './components/map'
 import './components/scrollto'
 
 // Pages
-//import './pages/index'
+// import './pages/index'
 
 // React
-//import './react/index'
+// import './react/index'
 
 // Vue
-//import './vue/index'
+// import './vue/index'
 
 /* SETUP
 -------------------------------------------------- */
 
 const plugins = {
-	//loader: new Loader(),
+	// loader: new Loader(),
 	tabs: new Tabs(),
 	counter: new Counter(),
 	accordion: new Accordion(),

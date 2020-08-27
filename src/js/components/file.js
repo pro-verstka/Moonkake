@@ -2,11 +2,11 @@
 -------------------------------------------------- */
 
 document.querySelectorAll('.file').forEach(el => {
-	let label = el.querySelector('label span')
-	let text = el.dataset.text || 'Выберите файл'
+	const label = el.querySelector('label span')
+	const text = el.dataset.text || 'Выберите файл'
 
 	el.querySelector('input[type="file"]').addEventListener('change', function() {
-		let value = this.value
+		let { value } = this
 
 		if (value) {
 			value = value.split(/(\\|\/)/g).pop()

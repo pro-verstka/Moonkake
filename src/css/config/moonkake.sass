@@ -200,7 +200,7 @@ strike
 abbr,
 acronym
 	cursor: help
-	border-bottom: .1rem dashed #eeeeee
+	border-bottom: .1rem dashed currentColor
 
 mark
 	color: #000000
@@ -262,6 +262,7 @@ blockquote
  * -------------------------------------------------- */
 
 table
+	width: 100%
 	border-collapse: collapse
 	border-spacing: 0
 	font-variant-numeric: tabular-nums
@@ -298,9 +299,11 @@ hgroup,
 main,
 menu,
 nav,
-section,
-summary
+section
 	display: block
+
+summary
+	display: list-item
 
 audio,
 canvas,
@@ -341,7 +344,6 @@ form
 
 label
 	display: block
-	vertical-align: middle
 
 legend
 	padding: 0 .5rem

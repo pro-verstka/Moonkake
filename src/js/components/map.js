@@ -1,6 +1,6 @@
 window.initMap = () => {
 	ymaps.ready(function() {
-		let map = new ymaps.Map('map', {
+		const map = new ymaps.Map('map', {
 			center: [51.507351, -0.12766],
 			zoom: 17,
 			controls: []
@@ -19,7 +19,7 @@ window.initMap = () => {
 			})
 		)
 
-		let pacemark = new ymaps.Placemark(
+		const pacemark = new ymaps.Placemark(
 			map.getCenter(),
 			{
 				balloonContent: 'Адрес',

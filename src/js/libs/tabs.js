@@ -23,7 +23,7 @@ class Tabs {
 				const $root = e.target.closest(this.options.root)
 				const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
 
-				let $el = e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)
+				const $el = e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)
 					? e.target
 					: e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
 
@@ -124,7 +124,7 @@ class Tabs {
 				bubbles: true,
 				detail: {
 					root: $root,
-					index: index
+					index
 				}
 			})
 		)

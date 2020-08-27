@@ -7,6 +7,8 @@ const lazyLoadInstance = new LazyLoad({
 	use_native: true
 })
 
+var test = 'str';
+
 // if (typeof pdoPage === 'object') {
 // 	pdoPage.callbacks['after'] = (config, response) => {
 // 		document.querySelector(config.wrapper).removeAttribute('style')

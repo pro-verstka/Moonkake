@@ -4,7 +4,7 @@ import scrollToElement from 'scroll-to-element'
 -------------------------------------------------- */
 
 export function getPageQuery(key) {
-	let query = {}
+	const query = {}
 
 	if (window.location.search) {
 		let tmp
@@ -26,7 +26,7 @@ export function getPageQuery(key) {
 }
 
 export function scrollTo($target, options = {}, callback) {
-	let defaults = {
+	const defaults = {
 		offset: 0,
 		duration: 500
 	}
@@ -38,7 +38,7 @@ export function scrollTo($target, options = {}, callback) {
 	}
 
 	scrollToElement($target, options).on('end', () => {
-		if (typeof callback == 'function') callback()
+		if (typeof callback === 'function') callback()
 	})
 }
 
@@ -163,5 +163,5 @@ export function setViewportHeight() {
 }
 
 export function isLocal() {
-	return window.location.hostname === 'localhost'
+	return (window.location.hostname === 'localhost' || window.location.hostname === '192.168.1.150')
 }

@@ -15,10 +15,10 @@ class Toggler {
 				event.stopPropagation()
 				event.preventDefault()
 
-				let target = $el.dataset.toggler
+				const target = $el.dataset.toggler
 
 				document.querySelectorAll(this.options.toggler).forEach($element => {
-					let elTarget = $element.dataset.toggler
+					const elTarget = $element.dataset.toggler
 
 					if (elTarget !== target) {
 						$element.classList.remove(this.options.activeClass)
@@ -52,7 +52,7 @@ class Toggler {
 				event.stopPropagation()
 				event.preventDefault()
 
-				let target = $el.dataset.toggler
+				const target = $el.dataset.toggler
 
 				$el.classList.remove(this.options.activeClass)
 				document.getElementById(target).classList.remove(this.options.activeClass)
@@ -69,7 +69,7 @@ class Toggler {
 
 		document.addEventListener('click', event => {
 			document.querySelectorAll(this.options.toggler).forEach($el => {
-				let target = $el.dataset.toggler
+				const target = $el.dataset.toggler
 
 				if (event.target.closest(`#${target}`) && event.target.tagName !== 'A') {
 					return

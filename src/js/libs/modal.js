@@ -63,7 +63,7 @@ class Modal {
 			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
 				e.preventDefault()
 
-				let $el = e.target.matches(this.options.modalSelector) ? e.target : e.target.closest(this.options.modalSelector)
+				const $el = e.target.matches(this.options.modalSelector) ? e.target : e.target.closest(this.options.modalSelector)
 
 				this.open($el.getAttribute('href').substr(1), $el)
 			}
@@ -72,7 +72,7 @@ class Modal {
 			if (e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)) {
 				e.preventDefault()
 
-				let $el = e.target.matches(this.options.modalImageSelector)
+				const $el = e.target.matches(this.options.modalImageSelector)
 					? e.target
 					: e.target.closest(this.options.modalImageSelector)
 
@@ -83,7 +83,7 @@ class Modal {
 			if (e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)) {
 				e.preventDefault()
 
-				let $el = e.target.matches(this.options.modalVideoSelector)
+				const $el = e.target.matches(this.options.modalVideoSelector)
 					? e.target
 					: e.target.closest(this.options.modalVideoSelector)
 
@@ -119,15 +119,15 @@ class Modal {
 		window.dispatchEvent(
 			new CustomEvent(name, {
 				bubbles: true,
-				detail: detail
+				detail
 			})
 		)
 	}
 
-	setImageDimensions(image, ratio) {
+	setImageDimensions(image) {
 		let maxWidth = 0
 		let maxHeight = 0
-		let padding = this.options.imagePadding
+		const padding = this.options.imagePadding
 
 		image.removeAttribute('style')
 
@@ -155,7 +155,7 @@ class Modal {
 
 		this.modals.push(id)
 
-		let modal = document.getElementById(id)
+		const modal = document.getElementById(id)
 
 		document.documentElement.classList.add('-modal-locked')
 
@@ -198,7 +198,7 @@ class Modal {
 		modal.classList.add('modal--opened')
 
 		if (modalCaption) {
-			let title = $trigger.getAttribute('title') || ''
+			const title = $trigger.getAttribute('title') || ''
 
 			if (title) {
 				modalCaption.innerHTML = title
@@ -257,21 +257,21 @@ class Modal {
 
 		this.modals.push(this.options.modalVideoId)
 
-		let modal = document.getElementById(this.options.modalVideoId)
+		const modal = document.getElementById(this.options.modalVideoId)
 
-		let iframe = document.createElement('iframe')
+		const iframe = document.createElement('iframe')
 		iframe.setAttribute('allowfullscreen', 'allowfullscreen')
 		iframe.setAttribute('frameborder', '0')
 		iframe.setAttribute('allow', 'autoplay; fullscreen')
 
 		if (href.indexOf('youtube') > -1) {
-			let src = href.replace(/watch\?v=/g, 'embed/')
+			const src = href.replace(/watch\?v=/g, 'embed/')
 
 			iframe.setAttribute('src', `${src}?autoplay=1`)
 		}
 
 		if (href.indexOf('vimeo') > -1) {
-			let src = href.replace(/[^0-9]/g, '')
+			const src = href.replace(/[^0-9]/g, '')
 
 			iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
 		}
@@ -303,16 +303,16 @@ class Modal {
 
 	close(id) {
 		this.emitEvent('modalBeforeClose', {
-			id: id
+			id
 		})
 
-		let modalIndex = this.modals.indexOf(id)
+		const modalIndex = this.modals.indexOf(id)
 
 		if (modalIndex > -1) {
 			this.modals.splice(modalIndex, 1)
 		}
 
-		let modal = document.getElementById(id)
+		const modal = document.getElementById(id)
 
 		modal.classList.remove('modal--visible')
 
@@ -320,7 +320,7 @@ class Modal {
 			id
 		})
 
-		const handleClose = e => {
+		const handleClose = () => {
 			modal.classList.remove('modal--opened')
 
 			const modalIframe = modal.querySelector('.modal-iframe iframe')
@@ -350,7 +350,7 @@ class Modal {
 
 		modal.addEventListener('transitionend', handleClose)
 
-		//setTimeout(handleClose, this.options.duration)
+		// setTimeout(handleClose, this.options.duration)
 	}
 }
 

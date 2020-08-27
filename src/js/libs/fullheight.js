@@ -28,9 +28,9 @@ class Fullheight {
 		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
 
 		this.$els.forEach($el => {
-			let minHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('min-height')) || 0
-			let maxHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('max-height')) || ''
-			let offset = parseFloat($el.getAttribute('data-fullheight-offset')) || this.options.offset
+			const minHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('min-height')) || 0
+			const maxHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('max-height')) || ''
+			const offset = parseFloat($el.getAttribute('data-fullheight-offset')) || this.options.offset
 			let height = window.innerHeight
 
 			if (minHeight && window.innerHeight <= minHeight) {

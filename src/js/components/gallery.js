@@ -69,8 +69,8 @@ document.addEventListener('click', e => {
 				bgOpacity: 0.8,
 				history: false,
 				index,
-				getThumbBoundsFn: function(index) {
-					const thumbnail = $photos[index]
+				getThumbBoundsFn(idx) {
+					const thumbnail = $photos[idx]
 					const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
 					const rect = thumbnail.getBoundingClientRect()
 					return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }

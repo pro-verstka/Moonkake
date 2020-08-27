@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr'
-import { Russian } from 'flatpickr/dist/l10n/ru.js'
+import { Russian } from 'flatpickr/dist/l10n/ru'
 
-const calendar = flatpickr('[data-calendar]', {
+flatpickr('[data-calendar]', {
 	locale: Russian,
 	dateFormat: 'd.n.Y',
 	disableMobile: true,

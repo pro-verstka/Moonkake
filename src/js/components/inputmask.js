@@ -1,4 +1,4 @@
-//import Inputmask from 'inputmask'
+// import Inputmask from 'inputmask'
 import IMask from 'imask'
 
 /* IMASK https://imask.js.org/guide.html
@@ -13,7 +13,7 @@ if ($maskPhone.length) {
 			lazy: false
 		})
 
-		mask.el.input.addEventListener('blur', e => {
+		mask.el.input.addEventListener('blur', () => {
 			if (!mask.masked.isComplete) mask.value = ''
 		})
 	})
@@ -46,7 +46,7 @@ if ($maskDate.length) {
 			}
 		})
 
-		mask.el.input.addEventListener('blur', e => {
+		mask.el.input.addEventListener('blur', () => {
 			if (!mask.masked.isComplete) mask.value = ''
 		})
 	})

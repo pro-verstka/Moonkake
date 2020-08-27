@@ -11,16 +11,16 @@ html(lang="ru")
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible" content="IE=Edge")
 		title=meta.title
-		meta(name="keywords" content="")
+		//meta(name="keywords" content="")
 		meta(name="description" content="")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
 		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${time}`)
-		//link(rel="preload" href=`assets/css/app.min.css?v=${time}` as="style" onload="this.rel='stylesheet'")
+		//link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${time}` media="print" onload="this.media='all'; this.onload=null;")
 
 	body
 
-		div.loader(data-loader): div ⏳Loading...
+		//div.loader(data-loader): div ⏳Loading...
 
 		div.wrapper
 			header.header

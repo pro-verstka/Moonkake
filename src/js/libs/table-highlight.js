@@ -3,11 +3,11 @@ class TableColumnHighlight {
 		this.$root = $table
 
 		this.$root.querySelectorAll('td').forEach($el => {
-			$el.addEventListener('mouseover', event => {
+			$el.addEventListener('mouseover', () => {
 				this.highlightColumn($el, '#eaeaea')
 			})
 
-			$el.addEventListener('mouseout', event => {
+			$el.addEventListener('mouseout', () => {
 				this.highlightColumn($el)
 			})
 		})
@@ -18,12 +18,12 @@ class TableColumnHighlight {
 	}
 
 	highlightColumn($target, color = null) {
-		let trs = this.$root.querySelectorAll('tr')
-		let tds = $target.closest('tr').querySelectorAll('td')
-		let index = Array.from(tds).indexOf($target)
+		const trs = this.$root.querySelectorAll('tr')
+		const tds = $target.closest('tr').querySelectorAll('td')
+		const index = Array.from(tds).indexOf($target)
 
 		for (let i = 0; i < trs.length; i++) {
-			let item = this.findTdSpan(trs[i], index)
+			const item = this.findTdSpan(trs[i], index)
 
 			if (!item.classList.contains('active')) {
 				item.style.backgroundColor = color
@@ -32,18 +32,18 @@ class TableColumnHighlight {
 	}
 
 	highlightColumnActive($target) {
-		let trs = this.$root.querySelectorAll('tr')
-		let tds = $target.closest('tr').querySelectorAll('td')
-		let index = Array.from(tds).indexOf($target)
+		const trs = this.$root.querySelectorAll('tr')
+		const tds = $target.closest('tr').querySelectorAll('td')
+		const index = Array.from(tds).indexOf($target)
 
 		for (let i = 0; i < trs.length; i++) {
-			let item = this.findTdSpan(trs[i], index)
+			const item = this.findTdSpan(trs[i], index)
 			item.classList.add('active')
 		}
 	}
 
 	findTdSpan(tr, index) {
-		let tds = tr.children
+		const tds = tr.children
 		let num = 0
 
 		for (let i = 0; i < tds.length; i++) {

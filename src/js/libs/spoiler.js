@@ -5,7 +5,7 @@ class Spoiler {
 			bodySelector: '[data-spoiler-body]',
 			introSelector: '[data-spoiler-intro]',
 			toggleSelector: '[data-spoiler-toggle]',
-			mode: 'text', //text, html
+			mode: 'text', // text, html
 			trim: 100,
 			postfix: '...',
 			labels: ['Показать', 'Скрыть']
@@ -95,7 +95,7 @@ class Spoiler {
 	}
 
 	handleToggle($toggle, $spoiler) {
-		let labels = this.options.labels
+		const { labels } = this.options
 
 		$toggle.addEventListener('click', e => {
 			e.preventDefault()

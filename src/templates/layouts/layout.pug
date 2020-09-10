@@ -42,11 +42,25 @@ html(lang="ru")
 		script(data-app-js defer src=`assets/js/app.min.js?v=${time}`)
 
 		block js
-
 		//
 			script.
-				setTimeout(function () {
-					var script = document.createElement('script');
-					script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
-					document.body.appendChild(script);
-				}, 3000);
+				var isMapLoaded = false;
+
+				function loadMap() {
+					if (isMapLoaded) return false;
+
+					if (
+						window.pageYOffset + window.innerHeight * 1.5 >=
+						document.getElementById('map').getBoundingClientRect().top - document.body.getBoundingClientRect().top
+					) {
+						isMapLoaded = true;
+
+						var script = document.createElement('script');
+						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
+						script.defer = true;
+						document.body.appendChild(script);
+					}
+				}
+
+				window.addEventListener('load', loadMap)
+				window.addEventListener('scroll', loadMap)

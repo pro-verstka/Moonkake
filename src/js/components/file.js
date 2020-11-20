@@ -5,11 +5,11 @@ document.querySelectorAll('.file').forEach(el => {
 	const label = el.querySelector('label span')
 	const text = el.dataset.text || 'Выберите файл'
 
-	el.querySelector('input[type="file"]').addEventListener('change', function() {
+	el.querySelector('input[type="file"]').addEventListener('change', () => {
 		let { value } = this
 
 		if (value) {
-			value = value.split(/(\\|\/)/g).pop()
+			value = value.split(/[\\|/]/g).pop()
 		} else {
 			value = text
 		}

@@ -1,4 +1,3 @@
-// import Inputmask from 'inputmask'
 import IMask from 'imask'
 
 /* IMASK https://imask.js.org/guide.html
@@ -8,9 +7,9 @@ const $maskPhone = document.querySelectorAll('input[type="tel"]')
 
 if ($maskPhone.length) {
 	$maskPhone.forEach($el => {
-		const mask = IMask($el, {
+		const mask = IMask($el[0], {
 			mask: '+{7} (000) 000-00-00',
-			lazy: false
+			lazy: true
 		})
 
 		mask.el.input.addEventListener('blur', () => {
@@ -23,7 +22,7 @@ const $maskNumber = document.querySelectorAll('input[data-mask-number]')
 
 if ($maskNumber.length) {
 	$maskNumber.forEach($el =>
-		IMask($el, {
+		IMask($el[0], {
 			mask: Number
 		})
 	)
@@ -33,7 +32,7 @@ const $maskDate = document.querySelectorAll('input[data-mask-date]')
 
 if ($maskDate.length) {
 	$maskDate.forEach($el => {
-		const mask = IMask($el, {
+		const mask = IMask($el[0], {
 			mask: Date,
 			pattern: 'd{.}`m{.}`Y',
 			lazy: false,
@@ -51,24 +50,3 @@ if ($maskDate.length) {
 		})
 	})
 }
-
-/* INPUTMASK
--------------------------------------------------- */
-
-// Inputmask({
-// 	mask: '+7 (999) 999-99-99',
-// 	clearIncomplete: true
-// }).mask(document.querySelectorAll('input[type="tel"]'))
-
-// Inputmask({
-// 	inputFormat: 'dd.mm.yyyy',
-// 	alias: 'datetime',
-// 	placeholder: 'дд.мм.гггг',
-// 	clearIncomplete: true
-// }).mask(document.querySelectorAll('input[data-mask-date]'))
-
-// Inputmask({
-// 	rightAlign: false,
-// 	alias: 'integer',
-// 	allowMinus: false
-// }).mask(document.querySelectorAll('input[data-mask-number]'))

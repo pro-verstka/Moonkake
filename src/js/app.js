@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.3.1
+ * Moonkake 8.3.2
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -13,10 +13,9 @@ import './config/config'
 
 // Libs
 import { isMobile } from './libs/utils'
-// import Loader from './libs/loader'
 import Accordion from './libs/accordion'
 import Counter from './libs/counter'
-import Fullheight from './libs/fullheight'
+import FullHeight from './libs/fullheight'
 import Modal from './libs/modal'
 import Parallax from './libs/parallax'
 import Spoiler from './libs/spoiler'
@@ -50,19 +49,21 @@ import './components/scrollto'
 /* SETUP
 -------------------------------------------------- */
 
-const plugins = {
-	// loader: new Loader(),
-	tabs: new Tabs(),
-	counter: new Counter(),
-	accordion: new Accordion(),
-	toggler: new Toggler(),
-	modal: new Modal(),
-	parallax: new Parallax(),
-	fullheight: new Fullheight(),
-	spoiler: new Spoiler()
-}
+/* global MK */
 
-MK.plugins = { ...MK.plugins, ...plugins }
+MK.plugins = {
+	...MK.plugins,
+	...{
+		tabs: new Tabs(),
+		counter: new Counter(),
+		accordion: new Accordion(),
+		toggler: new Toggler(),
+		modal: new Modal(),
+		parallax: new Parallax(),
+		fullHeight: new FullHeight(),
+		spoiler: new Spoiler()
+	}
+}
 
 /* STICKY
 -------------------------------------------------- */

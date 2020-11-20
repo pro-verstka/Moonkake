@@ -28,7 +28,7 @@ class Loader {
 		this.$body.style.paddingRight = `${getScrollbarWidth()}px`
 		this.$body.classList.add(this.options.classnames.lock)
 
-		window.addEventListener('load', e => {
+		window.addEventListener('load', () => {
 			this.$loader.classList.add(this.options.classnames.closing)
 			this.$loader.addEventListener('transitionend', () => this.handle())
 		})

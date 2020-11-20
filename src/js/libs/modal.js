@@ -1,5 +1,14 @@
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
+const emitEvent = (name, detail) => {
+	window.dispatchEvent(
+		new CustomEvent(name, {
+			bubbles: true,
+			detail
+		})
+	)
+}
+
 class Modal {
 	constructor(options = {}) {
 		this.options = {
@@ -115,40 +124,34 @@ class Modal {
 		})
 	}
 
-	emitEvent(name, detail) {
-		window.dispatchEvent(
-			new CustomEvent(name, {
-				bubbles: true,
-				detail
-			})
-		)
-	}
+
 
 	setImageDimensions(image) {
-		let maxWidth = 0
-		let maxHeight = 0
+		const $element = image
+		let maxWidth
+		let maxHeight
 		const padding = this.options.imagePadding
 
-		image.removeAttribute('style')
+		$element.removeAttribute('style')
 
-		if (image.naturalWidth >= window.innerWidth - padding) {
+		if ($element.naturalWidth >= window.innerWidth - padding) {
 			maxWidth = window.innerWidth - padding
 		} else {
-			maxWidth = image.naturalWidth
+			maxWidth = $element.naturalWidth
 		}
 
-		if (image.naturalHeight >= window.innerHeight - padding) {
+		if ($element.naturalHeight >= window.innerHeight - padding) {
 			maxHeight = window.innerHeight - padding
 		} else {
-			maxHeight = image.naturalHeight
+			maxHeight = $element.naturalHeight
 		}
 
-		image.style.maxWidth = `${maxWidth}px`
-		image.style.maxHeight = `${maxHeight}px`
+		$element.style.maxWidth = `${maxWidth}px`
+		$element.style.maxHeight = `${maxHeight}px`
 	}
 
 	open(id, $trigger) {
-		this.emitEvent('modalBeforeOpen', {
+		emitEvent('modalBeforeOpen', {
 			id,
 			trigger: $trigger
 		})
@@ -161,7 +164,7 @@ class Modal {
 
 		modal.classList.add('modal--opened')
 
-		this.emitEvent('modalOpen', {
+		emitEvent('modalOpen', {
 			id,
 			trigger: $trigger
 		})
@@ -174,14 +177,14 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		this.emitEvent('modalAfterOpen', {
+		emitEvent('modalAfterOpen', {
 			id,
 			trigger: $trigger
 		})
 	}
 
 	openImage(href, $trigger) {
-		this.emitEvent('modalBeforeOpen', {
+		emitEvent('modalBeforeOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -206,7 +209,7 @@ class Modal {
 			}
 		}
 
-		this.emitEvent('modalOpen', {
+		emitEvent('modalOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -219,7 +222,7 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		this.emitEvent('modalAfterOpen', {
+		emitEvent('modalAfterOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -242,7 +245,7 @@ class Modal {
 				this.setImageDimensions(image, ratio)
 			})
 
-			this.emitEvent('modalAfterImageLoad', {
+			emitEvent('modalAfterImageLoad', {
 				id: this.options.modalImageId,
 				trigger: $trigger
 			})
@@ -250,7 +253,7 @@ class Modal {
 	}
 
 	openVideo(href, $trigger) {
-		this.emitEvent('modalBeforeOpen', {
+		emitEvent('modalBeforeOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
@@ -282,7 +285,7 @@ class Modal {
 
 		modal.classList.add('modal--opened')
 
-		this.emitEvent('modalOpen', {
+		emitEvent('modalOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
@@ -295,14 +298,14 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		this.emitEvent('modalAfterOpen', {
+		emitEvent('modalAfterOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
 	}
 
 	close(id) {
-		this.emitEvent('modalBeforeClose', {
+		emitEvent('modalBeforeClose', {
 			id
 		})
 
@@ -316,7 +319,7 @@ class Modal {
 
 		modal.classList.remove('modal--visible')
 
-		this.emitEvent('modalClose', {
+		emitEvent('modalClose', {
 			id
 		})
 
@@ -335,7 +338,7 @@ class Modal {
 				modalCaption.innerHTML = ''
 			}
 
-			this.emitEvent('modalAfterClose', {
+			emitEvent('modalAfterClose', {
 				id
 			})
 

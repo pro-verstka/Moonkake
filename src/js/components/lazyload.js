@@ -2,24 +2,23 @@ import LazyLoad from 'vanilla-lazyload'
 
 // https://www.andreaverlicchi.eu/lazyload/
 
-const lazyLoadInstance = new LazyLoad({
+// eslint-disable-next-line no-unused-vars
+const lazyLoad = new LazyLoad({
 	elements_selector: '.lazy',
 	use_native: true
 })
-
-var test = 'str';
 
 // if (typeof pdoPage === 'object') {
 // 	pdoPage.callbacks['after'] = (config, response) => {
 // 		document.querySelector(config.wrapper).removeAttribute('style')
 // 		document.querySelector(config.wrapper).classList.remove('loading')
 
-// 		lazyLoadInstance.update()
+// 		lazyLoad.update()
 // 	}
 // }
 
 // if (window.jQuery) {
 // 	$(document).on('mse2_load', function(e, data) {
-// 		lazyLoadInstance.update()
+// 		lazyLoad.update()
 // 	})
 // }

@@ -6,15 +6,13 @@
 
 **Шаг 1.** Установить NodeJS - https://nodejs.org/
 
-~~**Шаг 2.** Установить Ruby - https://www.ruby-lang.org/~~
-
-**Шаг 3.** Установить Gulp
+**Шаг 2.** Установить Gulp
 
 ```sh
 npm i gulp -g
 ```
 
-**Шаг 4.** Установить пакеты из package.json
+**Шаг 3.** Установить пакеты из package.json
 
 ```sh
 npm i

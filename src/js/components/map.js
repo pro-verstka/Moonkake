@@ -1,5 +1,7 @@
+/* global ymaps */
+
 window.initMap = () => {
-	ymaps.ready(function() {
+	ymaps.ready(() => {
 		const map = new ymaps.Map('map', {
 			center: [51.507351, -0.12766],
 			zoom: 17,

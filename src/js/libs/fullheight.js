@@ -1,6 +1,6 @@
 import { isMobile } from './utils'
 
-class Fullheight {
+class FullHeight {
 	constructor(options = {}) {
 		this.options = {
 			item: '[data-fullheight]',
@@ -19,31 +19,29 @@ class Fullheight {
 	handle() {
 		;['load', 'resize', 'orientationchange'].forEach(eventName => {
 			window.addEventListener(eventName, event => {
-				this.setFullheight(event)
+				this.setFullHeight(event)
 			})
 		})
 	}
 
-	setFullheight(event) {
+	setFullHeight(event) {
 		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
 
 		this.$els.forEach($el => {
-			const minHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('min-height')) || 0
-			const maxHeight = parseFloat(window.getComputedStyle($el, null).getPropertyValue('max-height')) || ''
-			const offset = parseFloat($el.getAttribute('data-fullheight-offset')) || this.options.offset
+			const $element = $el
+			const minHeight = parseFloat(window.getComputedStyle($element, null).getPropertyValue('min-height')) || 0
+			const maxHeight = parseFloat(window.getComputedStyle($element, null).getPropertyValue('max-height')) || ''
+			const offset = parseFloat($element.getAttribute('data-fullheight-offset')) || this.options.offset
 			let height = window.innerHeight
 
-			if (minHeight && window.innerHeight <= minHeight) {
-				height = minHeight
-			}
+			if (minHeight && window.innerHeight <= minHeight) height = minHeight
+			if (maxHeight && window.innerHeight >= maxHeight) height = maxHeight
 
-			if (maxHeight && window.innerHeight >= maxHeight) {
-				height = maxHeight
-			}
-
-			$el.style.height = `${height + offset}px`
+			$element.style.height = `${height + offset}px`
 		})
+
+		return true
 	}
 }
 
-export default Fullheight
+export default FullHeight

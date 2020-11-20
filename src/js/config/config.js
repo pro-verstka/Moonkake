@@ -4,17 +4,19 @@ import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewpor
 /* SETUP
 -------------------------------------------------- */
 
+const MK = {
+	version: '8.3.2',
+	events: {
+		load: 'load'
+	},
+	animation: {
+		speed: isMobile() ? 500 : 1500
+	},
+	plugins: {}
+}
+
 if (typeof window.MK === 'undefined') {
-	window.MK = {
-		version: '8.3.1',
-		events: {
-			load: 'load'
-		},
-		animation: {
-			speed: isMobile() ? 500 : 1500
-		},
-		plugins: {}
-	}
+	window.MK = MK
 }
 
 /* LOADER
@@ -43,7 +45,7 @@ document.documentElement.classList.add(...htmlClassNames)
 /* HELPERS
 -------------------------------------------------- */
 
-setViewportHeight()
+window.addEventListener('load', setViewportHeight)
 window.addEventListener('resize', setViewportHeight)
 
 console.info(

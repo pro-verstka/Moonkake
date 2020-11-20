@@ -33,7 +33,7 @@ class Tabs {
 
 		// tab change on history change
 		window.addEventListener('popstate', e => {
-			if (e.state && e.state.hasOwnProperty('source') && e.state.source === 'tabs') {
+			if (e.state && Object.prototype.hasOwnProperty.call(e.state, 'source') && e.state.source === 'tabs') {
 				const $root = document
 					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
 					.closest(this.options.root)
@@ -43,7 +43,7 @@ class Tabs {
 		})
 
 		// tab change on window load
-		window.addEventListener('load', e => {
+		window.addEventListener('load', () => {
 			if (window.location.hash) {
 				const hash = window.location.hash.substr(1)
 				const $title = document.querySelector(`${this.options.root} [data-hash="${hash}"]`)
@@ -60,14 +60,11 @@ class Tabs {
 		// set tabs equal height
 		if (this.options.equalHeight) {
 			this.setEqualHeight()
-
-			window.addEventListener('load', () => {
-				this.setEqualHeight()
-			})
-
-			window.addEventListener('resize', () => {
-				this.setEqualHeight()
-			})
+			;['load', 'resize'].forEach(eventType =>
+				window.addEventListener(eventType, () => {
+					this.setEqualHeight()
+				})
+			)
 		}
 	}
 
@@ -93,6 +90,8 @@ class Tabs {
 
 			$content.style.minHeight = `${Math.max(...heights)}px`
 		})
+
+		return true
 	}
 
 	change($root, index, changeHash = true) {
@@ -107,12 +106,12 @@ class Tabs {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
-		if (this.options.useHashNav && changeHash && $titles[index].dataset.hasOwnProperty('hash')) {
+		if (this.options.useHashNav && changeHash && Object.prototype.hasOwnProperty.call($titles[index].dataset, 'hash')) {
 			window.history.pushState(
 				{
 					source: 'tabs',
 					hash: $titles[index].dataset.hash,
-					index: index
+					index
 				},
 				null,
 				`${window.location.pathname}#${$titles[index].dataset.hash}`

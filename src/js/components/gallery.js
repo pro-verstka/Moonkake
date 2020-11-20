@@ -1,5 +1,5 @@
 import PhotoSwipe from 'photoswipe/dist/photoswipe'
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
+import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default'
 
 document.body.insertAdjacentHTML(
 	'beforeend',
@@ -15,9 +15,9 @@ document.body.insertAdjacentHTML(
 			<div class="pswp__ui pswp__ui--hidden">
 				<div class="pswp__top-bar">
 					<div class="pswp__counter"></div>
-					<button class="pswp__button pswp__button--close"></button>
-					<button class="pswp__button pswp__button--fs"></button>
-					<button class="pswp__button pswp__button--zoom"></button>
+					<button class="pswp__button pswp__button--close" />
+					<button class="pswp__button pswp__button--fs" />
+					<button class="pswp__button pswp__button--zoom" />
 					<div class="pswp__preloader">
 						<div class="pswp__preloader__icn">
 							<div class="pswp__preloader__cut">
@@ -29,8 +29,8 @@ document.body.insertAdjacentHTML(
 				<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
 					<div class="pswp__share-tooltip"></div>
 				</div>
-				<button class="pswp__button pswp__button--arrow--left"></button>
-				<button class="pswp__button pswp__button--arrow--right"></button>
+				<button class="pswp__button pswp__button--arrow--left" />
+				<button class="pswp__button pswp__button--arrow--right" />
 				<div class="pswp__caption">
 					<div class="pswp__caption__center"></div>
 				</div>
@@ -63,7 +63,7 @@ document.addEventListener('click', e => {
 				}
 			})
 
-			const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, images, {
+			const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI, images, {
 				closeOnScroll: false,
 				showHideOpacity: true,
 				bgOpacity: 0.8,

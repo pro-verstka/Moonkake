@@ -1,12 +1,15 @@
 import Swiper from 'swiper'
 
+/* global MK */
+
 /* SLIDER
  -------------------------------------------------- */
 
-new Swiper('.swiper-container', {
+// eslint-disable-next-line no-unused-vars
+const slider = new Swiper('.swiper-container', {
 	slidesPerView: 1,
 	spaceBetween: 0,
-	speed: 1500,
+	speed: MK.animation.speed / 2,
 	effect: 'slide',
 	loop: true,
 

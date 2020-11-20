@@ -22,12 +22,13 @@ class Parallax {
 			$el.style.willChange = 'transform'
 		})
 
-		window.addEventListener('load', () => {
-			this.parallax()
-		})
-		window.addEventListener('scroll', () => {
-			this.parallax()
-		})
+		;['load', 'scroll'].forEach(eventName =>
+			window.addEventListener(eventName, () => {
+				this.parallax()
+			})
+		)
+
+		return true
 	}
 
 	parallax() {
@@ -36,9 +37,9 @@ class Parallax {
 			const offset = parseFloat($el.getAttribute('data-parallax-offset')) || this.options.offset
 
 			if ($el.getBoundingClientRect().top - (window.innerHeight - window.innerHeight * offset) < 0) {
-				$el.style.transform = `translateY(${($el.getBoundingClientRect().top -
-					(window.innerHeight - window.innerHeight * offset)) /
-					ratio}px)`
+				$el.style.transform = `translateY(${
+					($el.getBoundingClientRect().top - (window.innerHeight - window.innerHeight * offset)) / ratio
+				}px)`
 			} else {
 				$el.style.transform = `translateY(0px)`
 			}

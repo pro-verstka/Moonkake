@@ -1,3 +1,12 @@
-mixin icon(id, width, height, className = '')
-	svg(class=`icon ${className == '' ? 'icon--'+id : className}` width=width height=height viewBox=`0 0 ${width} ${height}`)
+mixin icon(id, width, height, className)
+	svg(class=`icon ${!className ? 'icon--'+id : className}` width=width height=height viewBox=`0 0 ${width} ${height}`)
 		use(xlink:href=`#${id}`)
+
+mixin breadcrumbs(data)
+	ul.list.breadcrumbs
+		each item, index in data
+			li.list-item
+				if data.length === index + 1
+					span.list-current=item
+				else
+					a.list-link(href="#")=item

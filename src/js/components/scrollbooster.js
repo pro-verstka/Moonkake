@@ -1,19 +1,22 @@
 import ScrollBooster from 'scrollbooster'
 
-const $scrollbooster = document.querySelectorAll('[data-scrollbooster]')
+const $scrollBooster = document.querySelectorAll('[data-scrollbooster]')
 
-if ($scrollbooster.length) {
-	$scrollbooster.forEach($viewport => {
+if ($scrollBooster.length) {
+	$scrollBooster.forEach($viewport => {
 		const $content = $viewport.querySelector('[data-scrollbooster-content]')
 
 		if ($content) {
-			new ScrollBooster({
+			// eslint-disable-next-line no-unused-vars
+			const sb = new ScrollBooster({
 				viewport: $viewport,
 				content: $content,
-				mode: 'x',
-				onUpdate: data => {
-					$content.style.transform = `translateX(${-data.position.x}px)`
-				},
+				scrollMode: 'transform',
+				direction: 'horizontal',
+				emulateScroll: true,
+				// onUpdate: data => {
+				// 	$content.style.transform = `translateX(${-data.position.x}px)`
+				// },
 				shouldScroll: () => $content.clientWidth > $viewport.clientWidth
 			})
 		}

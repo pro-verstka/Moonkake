@@ -79,9 +79,10 @@ class Spoiler {
 	}
 
 	createToggle() {
+		const [label] = this.options.labels
 		const $toggle = document.createElement('button')
 		$toggle.setAttribute('data-spoiler-toggle', '')
-		$toggle.innerText = this.options.labels[0]
+		$toggle.innerText = label
 
 		return $toggle
 	}
@@ -99,8 +100,9 @@ class Spoiler {
 
 		$toggle.addEventListener('click', e => {
 			e.preventDefault()
+			const [label] = labels.reverse()
 			$spoiler.classList.toggle('-active')
-			$toggle.innerHTML = labels.reverse()[0]
+			$toggle.innerHTML = label
 		})
 	}
 }

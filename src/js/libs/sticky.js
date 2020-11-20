@@ -14,7 +14,7 @@ class Sticky {
 		}
 
 		const $el =
-			typeof this.options.selector == 'object' ? this.options.selector : document.querySelector(this.options.selector)
+			typeof this.options.selector === 'object' ? this.options.selector : document.querySelector(this.options.selector)
 		const $elParent = this.options.parent === '' ? $el.parentElement : document.querySelector(this.options.parent)
 
 		if (typeof calcOffsetTop !== 'function') {
@@ -120,6 +120,8 @@ class Sticky {
 		$elFake.style.display = display
 		$elFake.style.width = `${width}px`
 		$elFake.style.height = `${height}px`
+
+		return true
 	}
 }
 

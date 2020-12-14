@@ -93,11 +93,11 @@ gulp.task('templates', () => {
 					const $js = $('[data-app-js]')
 
 					if (fs.existsSync(`./src/css/pages/${name}.sass`) && config.separateCssToPages) {
-						$css.after(`<link rel="stylesheet" href="assets/css/pages/${name}.min.css?v=${time}">`)
+						$css.after(`<link rel="stylesheet" href="assets/css/${name}.min.css?v=${time}">`)
 					}
 
 					if (fs.existsSync(`./src/js/pages/${name}.js`) && config.separateJsToPages) {
-						$js.after(`<script defer src="assets/js/pages/${name}.min.js?v=${time}"></script>`)
+						$js.after(`<script defer src="assets/js/${name}.min.js?v=${time}"></script>`)
 					}
 
 					$css.removeAttr('data-app-css')
@@ -192,13 +192,13 @@ gulp.task('css', () => {
 				suffix: '.min'
 			})
 		)
-		.pipe(
-			rename(obj => {
-				if (obj.basename !== 'app.min') {
-					obj.dirname += '/pages'
-				}
-			})
-		)
+		// .pipe(
+		// 	rename(obj => {
+		// 		if (obj.basename !== 'app.min') {
+		// 			obj.dirname += '/pages'
+		// 		}
+		// 	})
+		// )
 		.pipe(gulp.dest('dist/assets/css'))
 		.pipe(
 			browserSync.reload({
@@ -349,13 +349,13 @@ gulp.task('js', () => {
 				}
 			})
 		)
-		.pipe(
-			rename(obj => {
-				if (obj.basename !== 'app.min' && (obj.basename !== 'app.min.js')) {
-					obj.dirname += '/pages'
-				}
-			})
-		)
+		// .pipe(
+		// 	rename(obj => {
+		// 		if (obj.basename !== 'app.min' && (obj.basename !== 'app.min.js')) {
+		// 			obj.dirname += '/pages'
+		// 		}
+		// 	})
+		// )
 		.pipe(gulp.dest('dist/assets/js/'))
 		.on('end', () => {
 			browserSync.reload()

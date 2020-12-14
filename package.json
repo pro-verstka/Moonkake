@@ -82,7 +82,6 @@
 		"webpack-stream": "^6.1.1"
 	},
 	"dependencies": {
-		"animejs": "^3.2.1",
 		"axios": "^0.21.0",
 		"body-scroll-lock": "^3.1.5",
 		"classlist-polyfill": "^1.2.0",
@@ -91,6 +90,7 @@
 		"element-closest-polyfill": "^1.0.2",
 		"flatpickr": "^4.6.6",
 		"fontfaceobserver": "^2.1.0",
+		"gsap": "^3.5.1",
 		"imask": "^6.0.5",
 		"nodelist-foreach-polyfill": "^1.2.0",
 		"photoswipe": "^4.1.3",

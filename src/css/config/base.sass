@@ -1,30 +1,7 @@
-/* TYPO
+/* VARS
  * -------------------------------------------------- */
-
-$baseSize: 10px
-$maxViewPortWidth: 120rem
-
-$h1FontSize: 5rem
-$h2FontSize: 3rem
-$h3FontSize: 2.8rem
-$h4FontSize: 2.4rem
-$h5FontSize: 2.2rem
-$h6FontSize: 2rem
-
-$textMargin: 1rem
-$headMargin: 2rem
-$textHeadMargin: 3rem
-
-$textFontFamily: sans-serif
-$headFontFamily: sans-serif
 
 $gap: 2rem
-
-/* COLORS
- * -------------------------------------------------- */
-
-$baseColor: #333
-$headColor: inherit
 
 /* MIXINS
  * -------------------------------------------------- */
@@ -60,15 +37,6 @@ $headColor: inherit
 		flex: 0 0 $width
 		max-width: $width
 
-//=clearfix()
-//	&::before,
-//	&::after
-//		content: ' '
-//		display: table
-//
-//	&::after
-//		clear: both
-
 =hidden()
 	position: absolute
 	left: 0
@@ -103,6 +71,14 @@ $headColor: inherit
 
 	scrollbar-color: rgba(#000, .5) transparent
 	scrollbar-width: thin
+
+=scroll-snap($direction: x)
+	scroll-snap-type: #{$direction} mandatory
+	overflow: auto
+	-webkit-overflow-scrolling: touch
+
+	> *
+		scroll-snap-align: start
 
 /* Font-face */
 

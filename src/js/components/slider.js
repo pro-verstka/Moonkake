@@ -1,6 +1,13 @@
-import Swiper from 'swiper'
+import Swiper, { Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade } from 'swiper'
+
+Swiper.use([Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade])
 
 /* global MK */
+
+// MK.plugins = {
+// 	...MK.plugins,
+// 	Swiper
+// }
 
 /* SLIDER
  -------------------------------------------------- */

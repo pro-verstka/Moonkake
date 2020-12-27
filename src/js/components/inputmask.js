@@ -7,7 +7,7 @@ const $maskPhone = document.querySelectorAll('input[type="tel"]')
 
 if ($maskPhone.length) {
 	$maskPhone.forEach($el => {
-		const mask = IMask($el[0], {
+		const mask = IMask($el, {
 			mask: '+{7} (000) 000-00-00',
 			lazy: true
 		})
@@ -22,7 +22,7 @@ const $maskNumber = document.querySelectorAll('input[data-mask-number]')
 
 if ($maskNumber.length) {
 	$maskNumber.forEach($el =>
-		IMask($el[0], {
+		IMask($el, {
 			mask: Number
 		})
 	)
@@ -32,7 +32,7 @@ const $maskDate = document.querySelectorAll('input[data-mask-date]')
 
 if ($maskDate.length) {
 	$maskDate.forEach($el => {
-		const mask = IMask($el[0], {
+		const mask = IMask($el, {
 			mask: Date,
 			pattern: 'd{.}`m{.}`Y',
 			lazy: false,

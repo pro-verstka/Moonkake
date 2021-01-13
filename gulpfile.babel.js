@@ -80,13 +80,11 @@ gulp.task('templates', () => {
 		.src(['src/templates/**/*', '!src/templates/mixins/*', '!src/templates/blocks/*', '!src/templates/layouts/*'], {
 			base: '.'
 		})
-		.pipe(
-			data(() => JSON.parse(fs.readFileSync('src/data.json')))
-		)
+		.pipe(data(() => JSON.parse(fs.readFileSync('src/data.json'))))
 		.pipe(pug())
 		.pipe(
 			cheerio({
-				run ($, file) {
+				run($, file) {
 					const name = path.basename(file.path, path.extname(file.path))
 					const time = new Date().getTime()
 					const $css = $('[data-app-css]')
@@ -171,40 +169,42 @@ gulp.task('css', () => {
 		)
 	}
 
-	return gulp
-		.src(src, {
-			base: '.'
-		})
-		.pipe(glob())
-		.pipe(
-			sass({
-				includePaths: ['node_modules'],
-				importer: packageImporter()
+	return (
+		gulp
+			.src(src, {
+				base: '.'
 			})
-		)
-		.on('error', notify.onError('Error: <%= error.message %>'))
-		.pipe(postcss(postCssPlugins))
-		.on('error', notify.onError('Error: <%= error.message %>'))
-		.pipe(gcmq())
-		.pipe(flatten())
-		.pipe(
-			rename({
-				suffix: '.min'
-			})
-		)
-		// .pipe(
-		// 	rename(obj => {
-		// 		if (obj.basename !== 'app.min') {
-		// 			obj.dirname += '/pages'
-		// 		}
-		// 	})
-		// )
-		.pipe(gulp.dest('dist/assets/css'))
-		.pipe(
-			browserSync.reload({
-				stream: true
-			})
-		)
+			.pipe(glob())
+			.pipe(
+				sass({
+					includePaths: ['node_modules'],
+					importer: packageImporter()
+				})
+			)
+			.on('error', notify.onError('Error: <%= error.message %>'))
+			.pipe(postcss(postCssPlugins))
+			.on('error', notify.onError('Error: <%= error.message %>'))
+			.pipe(gcmq())
+			.pipe(flatten())
+			.pipe(
+				rename({
+					suffix: '.min'
+				})
+			)
+			// .pipe(
+			// 	rename(obj => {
+			// 		if (obj.basename !== 'app.min') {
+			// 			obj.dirname += '/pages'
+			// 		}
+			// 	})
+			// )
+			.pipe(gulp.dest('dist/assets/css'))
+			.pipe(
+				browserSync.reload({
+					stream: true
+				})
+			)
+	)
 })
 
 /* Fonts */
@@ -251,9 +251,10 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'babel-loader',
-						options: {
-							presets: ['@babel/preset-env', '@babel/preset-react', 'vue']
-						}
+						// options: {
+						// 	presets: ['@babel/preset-env', '@babel/preset-react', 'vue'],
+						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
+						// }
 					}
 				]
 			},
@@ -263,9 +264,10 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'babel-loader',
-						options: {
-							presets: ['@babel/preset-env', '@babel/preset-react']
-						}
+						// options: {
+						// 	presets: ['@babel/preset-env', '@babel/preset-react'],
+						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
+						// }
 					}
 				]
 			},
@@ -275,9 +277,9 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'vue-loader',
-						options: {
-							presets: ['@babel/preset-env', 'vue']
-						}
+						// options: {
+						// 	presets: ['@babel/preset-env', 'vue']
+						// }
 					}
 				]
 			},
@@ -340,26 +342,28 @@ gulp.task('js', () => {
 		webpackConfig.devtool = 'cheap-source-map'
 	}
 
-	return gulp
-		.src(Object.values(webpackConfig.entry))
-		.pipe(
-			webpackStream(webpackConfig, webpack, (err, stats) => {
-				if (stats.compilation.errors.length) {
-					notify('Error: <%= stats.compilation.errors[0].error %>')
-				}
+	return (
+		gulp
+			.src(Object.values(webpackConfig.entry))
+			.pipe(
+				webpackStream(webpackConfig, webpack, (err, stats) => {
+					if (stats.compilation.errors.length) {
+						notify('Error: <%= stats.compilation.errors[0].error %>')
+					}
+				})
+			)
+			// .pipe(
+			// 	rename(obj => {
+			// 		if (obj.basename !== 'app.min' && (obj.basename !== 'app.min.js')) {
+			// 			obj.dirname += '/pages'
+			// 		}
+			// 	})
+			// )
+			.pipe(gulp.dest('dist/assets/js/'))
+			.on('end', () => {
+				browserSync.reload()
 			})
-		)
-		// .pipe(
-		// 	rename(obj => {
-		// 		if (obj.basename !== 'app.min' && (obj.basename !== 'app.min.js')) {
-		// 			obj.dirname += '/pages'
-		// 		}
-		// 	})
-		// )
-		.pipe(gulp.dest('dist/assets/js/'))
-		.on('end', () => {
-			browserSync.reload()
-		})
+	)
 })
 
 /* Clean */

@@ -5,7 +5,7 @@ import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewpor
 -------------------------------------------------- */
 
 const MK = {
-	version: '8.3.2',
+	version: '8.4.0',
 	events: {
 		load: 'load'
 	},

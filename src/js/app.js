@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.3.2
+ * Moonkake 8.4.0
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -23,6 +23,7 @@ import Spoiler from './libs/spoiler'
 // import TableColumnHighlight from './libs/table-highlight'
 import Tabs from './libs/tabs'
 import Toggler from './libs/toggler'
+import Field from './libs/field'
 
 // Components
 import './components/font'
@@ -61,7 +62,8 @@ MK.plugins = {
 		modal: new Modal(),
 		parallax: new Parallax(),
 		fullHeight: new FullHeight(),
-		spoiler: new Spoiler()
+		spoiler: new Spoiler(),
+		field: new Field(),
 	}
 }
 

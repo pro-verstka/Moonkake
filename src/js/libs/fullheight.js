@@ -1,4 +1,4 @@
-import { isMobile } from './utils'
+import Device from '../helpers/device'
 
 class FullHeight {
 	constructor(options = {}) {
@@ -25,7 +25,7 @@ class FullHeight {
 	}
 
 	setFullHeight(event) {
-		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
+		if (!this.$els.length || (event.type === 'resize' && Device.isMobile())) return false
 
 		this.$els.forEach($el => {
 			const $element = $el

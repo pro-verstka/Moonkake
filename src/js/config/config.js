@@ -1,16 +1,16 @@
-import Loader from '../libs/loader'
-import { isMobile, isAndroid, isIOS, isIPad, isIPhone, isTouchDevice, setViewportHeight } from '../libs/utils'
+// import Loader from '../libs/loader'
+import { Device, setViewportHeight } from '../helpers'
 
 /* SETUP
 -------------------------------------------------- */
 
 const MK = {
-	version: '8.4.0',
+	version: '8.4.1',
 	events: {
 		load: 'load'
 	},
 	animation: {
-		speed: isMobile() ? 500 : 1500
+		speed: Device.isMobile() ? 500 : 1500
 	},
 	plugins: {}
 }
@@ -22,23 +22,23 @@ if (typeof window.MK === 'undefined') {
 /* LOADER
 -------------------------------------------------- */
 
-MK.plugins.loader = new Loader()
-
-if (MK.plugins.loader?.isInitialized) {
-	MK.events.load = MK.plugins.loader.options.eventName
-}
+// MK.plugins.loader = new Loader()
+//
+// if (MK.plugins.loader?.isInitialized) {
+// 	MK.events.load = MK.plugins.loader.options.eventName
+// }
 
 /* HTML CLASSNAMES
 -------------------------------------------------- */
 
 const htmlClassNames = []
 
-if (isMobile()) htmlClassNames.push('-device-mobile')
-if (isTouchDevice()) htmlClassNames.push('-device-touch')
-if (isAndroid()) htmlClassNames.push('-device-android')
-if (isIOS()) htmlClassNames.push('-device-ios')
-if (isIPhone()) htmlClassNames.push('-device-iphone')
-if (isIPad()) htmlClassNames.push('-device-ipad')
+if (Device.isMobile()) htmlClassNames.push('-device-mobile')
+if (Device.isTouch()) htmlClassNames.push('-device-touch')
+if (Device.isAndroid()) htmlClassNames.push('-device-android')
+if (Device.isIOS()) htmlClassNames.push('-device-ios')
+if (Device.isIPhone()) htmlClassNames.push('-device-iphone')
+if (Device.isIPad()) htmlClassNames.push('-device-ipad')
 
 document.documentElement.classList.add(...htmlClassNames)
 

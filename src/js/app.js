@@ -1,5 +1,5 @@
 /*!
- * Moonkake 8.4.0
+ * Moonkake 8.4.1
  *
  * https://github.com/detectiveshelby/moonkake
  */
@@ -12,18 +12,18 @@ import './vendor/polyfills'
 import './config/config'
 
 // Libs
-import { isMobile } from './libs/utils'
 import Accordion from './libs/accordion'
-import Counter from './libs/counter'
-import FullHeight from './libs/fullheight'
+// import Counter from './libs/counter'
+// import FullHeight from './libs/fullheight'
 import Modal from './libs/modal'
-import Parallax from './libs/parallax'
-import Spoiler from './libs/spoiler'
+// import Parallax from './libs/parallax'
+// import Spoiler from './libs/spoiler'
 // import Sticky from './libs/sticky'
 // import TableColumnHighlight from './libs/table-highlight'
 import Tabs from './libs/tabs'
 import Toggler from './libs/toggler'
 import Field from './libs/field'
+// import Select from './libs/select'
 
 // Components
 import './components/font'
@@ -56,14 +56,15 @@ MK.plugins = {
 	...MK.plugins,
 	...{
 		tabs: new Tabs(),
-		counter: new Counter(),
+		// counter: new Counter(),
 		accordion: new Accordion(),
 		toggler: new Toggler(),
 		modal: new Modal(),
-		parallax: new Parallax(),
-		fullHeight: new FullHeight(),
-		spoiler: new Spoiler(),
-		field: new Field(),
+		// parallax: new Parallax(),
+		// fullHeight: new FullHeight(),
+		// spoiler: new Spoiler(),
+		field: new Field()
+		// select: new Select()
 	}
 }
 
@@ -86,13 +87,13 @@ MK.plugins = {
 /* FOOLPROOF
 -------------------------------------------------- */
 
-let currentDevice = isMobile()
-let previousDevice = currentDevice
-
-window.addEventListener('resize', () => {
-	currentDevice = isMobile()
-
-	if (currentDevice !== previousDevice) window.location.reload(true)
-
-	previousDevice = isMobile()
-})
+// let currentDevice = isMobile()
+// let previousDevice = currentDevice
+//
+// window.addEventListener('resize', () => {
+// 	currentDevice = isMobile()
+//
+// 	if (currentDevice !== previousDevice) window.location.reload(true)
+//
+// 	previousDevice = isMobile()
+// })

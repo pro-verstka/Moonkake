@@ -1,12 +1,11 @@
 /*!
- * Moonkake 8.4.1
+ * Moonkake 8.4.2
  *
  * https://github.com/detectiveshelby/moonkake
  */
 
 // Vendors
 import './vendor/polyfills'
-// import 'swiped-events'
 
 // Config
 import './config/config'
@@ -52,21 +51,7 @@ import './components/scrollto'
 
 /* global MK */
 
-MK.plugins = {
-	...MK.plugins,
-	...{
-		tabs: new Tabs(),
-		// counter: new Counter(),
-		accordion: new Accordion(),
-		toggler: new Toggler(),
-		modal: new Modal(),
-		// parallax: new Parallax(),
-		// fullHeight: new FullHeight(),
-		// spoiler: new Spoiler(),
-		field: new Field()
-		// select: new Select()
-	}
-}
+MK.addPlugins({Tabs, Accordion, Toggler, Modal, Field})
 
 /* STICKY
 -------------------------------------------------- */

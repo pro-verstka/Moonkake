@@ -1,6 +1,6 @@
 {
 	"name": "moonkake",
-	"version": "8.4.0",
+	"version": "8.4.2",
 	"description": "Start template. Supports Pug, Sass, PostCSS, Vue, React, ES6.",
 	"author": "p1rate",
 	"license": "MIT",
@@ -13,7 +13,7 @@
 		"build": "cross-env NODE_ENV=production gulp build"
 	},
 	"browserslist": [
-		"last 2 version",
+		"last 3 version",
 		"ie >= 11"
 	],
 	"babel": {

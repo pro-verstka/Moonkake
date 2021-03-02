@@ -4,10 +4,7 @@ Swiper.use([Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade])
 
 /* global MK */
 
-// MK.plugins = {
-// 	...MK.plugins,
-// 	Swiper
-// }
+// MK.addPlugins({Swiper}, true)
 
 /* SLIDER
  -------------------------------------------------- */
@@ -16,7 +13,7 @@ Swiper.use([Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade])
 const slider = new Swiper('.swiper-container', {
 	slidesPerView: 1,
 	spaceBetween: 0,
-	speed: MK.animation.speed / 2,
+	speed: MK.settings.animation.speed / 2,
 	effect: 'slide',
 	loop: true,
 

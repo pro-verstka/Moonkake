@@ -5,14 +5,53 @@ import { Device, setViewportHeight } from '../helpers'
 -------------------------------------------------- */
 
 const MK = {
-	version: '8.4.1',
-	events: {
-		load: 'load'
+	version: '8.4.2',
+
+	settings: {
+		event: {
+			load: 'load'
+		},
+		animation: {
+			speed: Device.isMobile() ? 500 : 1500
+		},
 	},
-	animation: {
-		speed: Device.isMobile() ? 500 : 1500
+
+	plugins: {},
+	methods: {},
+
+	addMethods(methods = {}) {
+		if (typeof methods !== 'object') {
+			return
+		}
+
+		this.methods = {
+			...this.methods,
+			...methods
+		}
 	},
-	plugins: {}
+
+	addPlugins(plugins = {}, asLink = false) {
+		if (typeof plugins !== 'object') {
+			return
+		}
+
+		Object.keys(plugins).forEach(key => {
+			if (typeof plugins[key] === 'object') {
+				this.plugins = {
+					...this.plugins,
+					[key]: plugins[key]
+				}
+			}
+
+			if (typeof plugins[key] === 'function' && !asLink) {
+				this.plugins[key] = new plugins[key]()
+			}
+
+			if (typeof plugins[key] === 'function' && asLink) {
+				this.plugins[key] = plugins[key]
+			}
+		})
+	}
 }
 
 if (typeof window.MK === 'undefined') {
@@ -22,10 +61,10 @@ if (typeof window.MK === 'undefined') {
 /* LOADER
 -------------------------------------------------- */
 
-// MK.plugins.loader = new Loader()
+// MK.addPlugins({Loader})
 //
-// if (MK.plugins.loader?.isInitialized) {
-// 	MK.events.load = MK.plugins.loader.options.eventName
+// if (MK.plugins.Loader?.isInitialized) {
+// 	MK.settings.events.load = MK.plugins.Loader.options.eventName
 // }
 
 /* HTML CLASSNAMES

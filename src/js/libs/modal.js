@@ -309,11 +309,13 @@ class Modal {
 			id
 		})
 
-		const modalIndex = this.modals.indexOf(id)
+		// const modalIndex = this.modals.indexOf(id)
+		//
+		// if (modalIndex > -1) {
+		// 	this.modals.splice(modalIndex, 1)
+		// }
 
-		if (modalIndex > -1) {
-			this.modals.splice(modalIndex, 1)
-		}
+		this.modals = this.modals.filter(item => item !== id)
 
 		const modal = document.getElementById(id)
 

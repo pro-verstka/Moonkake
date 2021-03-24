@@ -21,5 +21,9 @@
 				"props": false
 			}
 		]
+	},
+	"globals": {
+		"MK": "writable",
+		"ymaps": "readonly"
 	}
 }

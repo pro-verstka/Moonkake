@@ -49,9 +49,7 @@ import './components/scrollto'
 /* SETUP
 -------------------------------------------------- */
 
-/* global MK */
-
-MK.addPlugins({Tabs, Accordion, Toggler, Modal, Field})
+MK.addPlugins({ Tabs, Accordion, Toggler, Modal, Field })
 
 /* STICKY
 -------------------------------------------------- */

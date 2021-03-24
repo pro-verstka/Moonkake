@@ -1,5 +1,3 @@
-/* global ymaps */
-
 window.initMap = () => {
 	ymaps.ready(() => {
 		const map = new ymaps.Map('map', {

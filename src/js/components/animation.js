@@ -1,7 +1,5 @@
 import ScrollReveal from 'scrollreveal'
 
-/* global MK */
-
 window.addEventListener(MK.settings.event.load, () => {
 	ScrollReveal().reveal('[data-scroll-fx]', {
 		distance: 0,

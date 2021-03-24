@@ -2,8 +2,6 @@ import Swiper, { Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade 
 
 Swiper.use([Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade])
 
-/* global MK */
-
 // MK.addPlugins({Swiper}, true)
 
 /* SLIDER

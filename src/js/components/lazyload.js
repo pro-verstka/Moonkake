@@ -2,9 +2,7 @@ import LazyLoad from 'vanilla-lazyload'
 
 // https://www.andreaverlicchi.eu/vanilla-lazyload/
 
-/* global MK */
-
-MK.addPlugins({LazyLoad})
+MK.addPlugins({ LazyLoad })
 
 // if (typeof pdoPage === 'object') {
 // 	pdoPage.callbacks['after'] = (config, response) => {

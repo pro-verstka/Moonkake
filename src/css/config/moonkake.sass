@@ -9,7 +9,7 @@ html
 	box-sizing: border-box
 	font-size: var(--base-font-size)
 	text-size-adjust: 100%
-	//scroll-behavior: smooth
+	scroll-behavior: smooth
 
 *,
 *::before,
@@ -43,7 +43,8 @@ a
 	text-decoration-skip-ink: auto
 
 	&:not([class])
-		+link()
+		&:hover
+			color: var(--color-accent)
 
 	svg,
 	use
@@ -162,13 +163,10 @@ big
 small
 	font-size: 80%
 
-tt,
 pre,
 kbd,
-xmp,
 code,
-samp,
-plaintext
+samp
 	font-family: monospace, sans-serif
 
 pre

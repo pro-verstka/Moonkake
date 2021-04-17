@@ -7,8 +7,8 @@ class Loader {
 			eventName: 'loader',
 			classnames: {
 				lock: '-loader-lock',
-				closing: '-closing',
-				closed: '-closed'
+				closing: 'loader_closing',
+				closed: 'loader_closed'
 			}
 		}
 

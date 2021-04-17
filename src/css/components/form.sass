@@ -1,14 +1,14 @@
 .form
-	&-fieldset + &-fieldset
+	&__fieldset + &__fieldset
 		margin-top: calc(var(--gap) * 2)
 
-	&-group + &-group
+	&__group + &__group
 		margin-top: var(--gap)
 
-	&-row
+	&__group_row
 		+flex()
 		margin-left: calc(var(--gap) * -1)
 
-	&-row > &-item
+	&__group_row > &__item
 		padding-left: var(--gap)
 		flex: 1

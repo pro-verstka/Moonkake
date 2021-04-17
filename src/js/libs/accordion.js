@@ -2,10 +2,11 @@ class Accordion {
 	constructor(options = {}) {
 		this.options = {
 			root: '.accordion',
-			item: '.accordion-item',
-			handler: '.accordion-header',
-			body: '.accordion-body',
-			active: '-active',
+			item: '.accordion__item',
+			handler: '.accordion__header',
+			body: '.accordion__body',
+			active: 'accordion_active',
+			animation: 'accordion_animation',
 			useAnimation: true
 		}
 
@@ -14,7 +15,7 @@ class Accordion {
 		}
 
 		if (this.options.useAnimation) {
-			document.querySelectorAll(this.options.root).forEach($el => $el.classList.add('-animation'))
+			document.querySelectorAll(this.options.root).forEach($el => $el.classList.add(this.options.animation))
 		}
 
 		document.addEventListener('click', e => {

@@ -1,8 +1,8 @@
 mixin breadcrumbs(data)
 	ul.list.breadcrumbs
 		each item, index in data
-			li.list-item
+			li.list__item
 				if data.length === index + 1
-					span.list-current=item
+					span.list__current=item
 				else
-					a.list-link(href="#")=item
+					a.list__link(href="#")=item

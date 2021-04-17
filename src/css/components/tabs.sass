@@ -1,16 +1,16 @@
 .tabs
-	&-title
+	&__title
 		+flex()
 
-		.tabs-item
+		.tabs__item
 			cursor: pointer
 
-			&.-active
+			&.tabs__item_active
 
-	&-content
-		.tabs-item
+	&__content
+		.tabs__item
 			display: none
 
-			&.-active
+			&.tabs__item_active
 				display: block
 				animation: fadeIn 1s forwards

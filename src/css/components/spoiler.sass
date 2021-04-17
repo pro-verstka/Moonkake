@@ -7,14 +7,14 @@
 	[data-spoiler-toggle]
 		display: block
 
-	&.spoiler--text-mode
+	&.spoiler_text-mode
 		[data-spoiler-intro]
 			display: block
 
 		[data-spoiler-body]
 			display: none
 
-		&.-active
+		&.spoiler_active
 			[data-spoiler-intro]
 				display: none
 
@@ -22,23 +22,23 @@
 				display: block
 				//animation: fadeIn 1s forwards
 
-	&.spoiler--html-mode
+	&.spoiler_html-mode
 		[data-spoiler-body]
 			overflow: hidden
 			height: 10rem
 
-		&.-active
+		&.spoiler_active
 			[data-spoiler-body]
 				height: auto
 
-	&.-initialized
+	&..spoiler_initialized
 		visibility: visible
 
 /* THEME
  * -------------------------------------------------- */
 
 .spoiler
-	&.spoiler--custom
+	&.spoiler_custom
 		[data-spoiler-toggle]
 			cursor: pointer
 			background: transparent

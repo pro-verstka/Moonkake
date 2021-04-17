@@ -34,9 +34,9 @@ class Spoiler {
 	handleHtmlMode($elements) {
 		$elements.forEach($spoiler => {
 			$spoiler.classList.add('spoiler')
-			$spoiler.classList.add('spoiler--custom')
-			$spoiler.classList.add('spoiler--html-mode')
-			$spoiler.classList.add('-initialized')
+			$spoiler.classList.add('spoiler_custom')
+			$spoiler.classList.add('spoiler_html-mode')
+			$spoiler.classList.add('spoiler_initialized')
 
 			const $body = $spoiler.querySelector(this.options.bodySelector)
 			const $toggle = this.createToggle()
@@ -50,9 +50,9 @@ class Spoiler {
 	handleTextMode($elements) {
 		$elements.forEach($spoiler => {
 			$spoiler.classList.add('spoiler')
-			$spoiler.classList.add('spoiler--custom')
-			$spoiler.classList.add('spoiler--text-mode')
-			$spoiler.classList.add('-initialized')
+			$spoiler.classList.add('spoiler_custom')
+			$spoiler.classList.add('spoiler_text-mode')
+			$spoiler.classList.add('spoiler_initialized')
 
 			const $body = $spoiler.querySelector(this.options.bodySelector)
 
@@ -71,7 +71,7 @@ class Spoiler {
 	}
 
 	handleNew() {
-		const $new = document.querySelectorAll(`${this.options.rootSelector}:not(.-initialized)`)
+		const $new = document.querySelectorAll(`${this.options.rootSelector}:not(.spoiler_initialized)`)
 
 		this.$elements = [...$new, this.$elements]
 
@@ -101,7 +101,7 @@ class Spoiler {
 		$toggle.addEventListener('click', e => {
 			e.preventDefault()
 			const [label] = labels.reverse()
-			$spoiler.classList.toggle('-active')
+			$spoiler.classList.toggle('spoiler_active')
 			$toggle.innerHTML = label
 		})
 	}

@@ -5,7 +5,7 @@ import { Device, setViewportHeight } from '../helpers'
 -------------------------------------------------- */
 
 const MK = {
-	version: '8.4.2',
+	version: '8.5.0',
 
 	settings: {
 		event: {

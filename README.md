@@ -1,6 +1,6 @@
 # Moonkake
 
-Стартовый шаблон для верстки с использованием Gulp, Sass, Pug, JS/ES6, Vue, React.
+Стартовый шаблон для верстки с использованием BEM, Gulp, Sass, Pug, JS/ES6, Vue, React.
 
 ## Установка
 
@@ -34,13 +34,18 @@ npm run dev
 npm run build
 ```
 
-## Доступные настройки gulpfile.babel.js
+## Доступные настройки gulpfile.js
 
 ```js
 {
-  separateCssToPages: false, // файлы css из папки src/css/pages будут подключаться отдельно в head
-  separateJsToPages: false,  // файлы js из папки src/js/pages будут подключаться отдельно после app.js
-  appendFontsToHead: true   // файлы шрифтов из папки src/fonts будут подключаться в head
+  // файлы css из папки src/css/pages будут подключаться отдельно в head
+  separateCssToPages: true,
+
+  // файлы js из папки src/js/pages будут подключаться отдельно после app.js
+  separateJsToPages: true,
+
+  // файлы шрифтов из папки src/fonts будут подключаться в head
+  appendFontsToHead: true
 }
 ```
 
@@ -81,20 +86,20 @@ select.select(name="select_name")
 
 ```pug
 form.form(action="", mathod="", id="form")
-  div.form-fieldset
-    div.form-group
-      div.form-item
-        input.form-field(type="text", name="", placeholder="Текст", value="")
+  div.form__fieldset
+    div.form__group
+      div.form__item
+        input(type="text", name="", placeholder="Текст", value="")
 
-    div.form-group.form-row
-      div.form-item
-        input.form-field(type="text", name="", placeholder="Текст", value="")
-      div.form-item
-        input.form-field(type="text", name="", placeholder="Текст", value="")
+    div.form__group.form__group_row
+      div.form__item
+        input(type="text", name="", placeholder="Текст", value="")
+      div.form__item
+        input(type="text", name="", placeholder="Текст", value="")
 
-  div.form-fieldset
-    div.form-group
-      div.form-item
+  div.form__fieldset
+    div.form__group
+      div.form__item
         button.button(type="submit") Отправить
 ```
 
@@ -102,54 +107,54 @@ form.form(action="", mathod="", id="form")
 
 ```pug
 div.tabs
-  div.tabs-title
-    div.tabs-item.-active(data-hash="tab1") Таб 1
-    div.tabs-item(data-hash="tab2") Таб 2
-    div.tabs-item(data-hash="tab3") Таб 3
+  div.tabs__title
+    div.tabs__item.tabs__item_active(data-hash="tab1") Таб 1
+    div.tabs__item(data-hash="tab2") Таб 2
+    div.tabs__item(data-hash="tab3") Таб 3
 
-  div.tabs-content
-    div.tabs-item.-active Таб 1
-    div.tabs-item Таб 2
-    div.tabs-item Таб 3
+  div.tabs__content
+    div.tabs__item.tabs__item_active Таб 1
+    div.tabs__item Таб 2
+    div.tabs__item Таб 3
 ```
 
 ### Accordion
 
 ```pug
 div.accordion
-  div.accordion-item
-    div.accordion-header accordion title 1
-    div.accordion-body accordion content 1
-  div.accordion-item
-    div.accordion-header accordion title 2
-    div.accordion-body accordion content 2
+  div.accordion__item
+    div.accordion__header accordion title 1
+    div.accordion__body accordion content 1
+  div.accordion__item
+    div.accordion__header accordion title 2
+    div.accordion__body accordion content 2
 ```
 
 ### Counter
 
 ```pug
 div.counter
-  button.counter-minus -
+  button.counter__minus -
   input(type="text" value="до 5 после" data-prefix="до " data-postfix=" после" data-min="2" data-max="10")
-  button.counter-plus +
+  button.counter__plus +
 ```
 
 ### Breadcrumbs
 
 ```pug
-ul.list.list--flex.breadcrumbs
-  li.list-item: a.list-link(href="#") Главная
-  li.list-item: a.list-link(href="#") Раздел
-  li.list-item: span.list-current Страница
+ul.list.breadcrumbs
+  li.list__item: a.list__link(href="#") Главная
+  li.list__item: a.list__link(href="#") Раздел
+  li.list__item: span.list__current Страница
 ```
 
 ### Pagination
 
 ```pug
-ul.list.list--flex.pagination
-  li.list-item: a.list-link(href="#") 1
-  li.list-item: a.list-link(href="#") 2
-  li.list-item: a.list-link(href="#") 3
+ul.list.pagination
+  li.list__item: a.list__link(href="#") 1
+  li.list__item: a.list__link(href="#") 2
+  li.list__item: a.list__link(href="#") 3
 ```
 
 ### Modal
@@ -158,8 +163,8 @@ ul.list.list--flex.pagination
 a(href="#modal_example" data-modal) Открыть модальное окно
 
 div.modal#modal_example
-  div.modal-container
-    button.modal-close(data-modal-close) &times;
+  div.modal__container
+    button.modal__close(data-modal-close) &times;
     h2 Заголовок
 
 a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Открыть видео YouTube

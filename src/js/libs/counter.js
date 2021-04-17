@@ -2,8 +2,8 @@ class Counter {
 	constructor(options = {}) {
 		this.options = {
 			root: '.counter',
-			plus: '.counter-plus',
-			minus: '.counter-minus'
+			plus: '.counter__plus',
+			minus: '.counter__minus'
 		}
 
 		if (typeof options === 'object') {

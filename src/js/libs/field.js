@@ -17,13 +17,13 @@ class Field {
 		this.options = {
 			classNames: {
 				root: 'field',
-				focus: 'field--focus',
-				touched: 'field--touched',
-				error: 'field--error',
-				success: 'field--success',
-				disabled: 'field--disabled',
-				readonly: 'field--readonly',
-				required: 'field--required'
+				focus: 'field_focus',
+				touched: 'field_touched',
+				error: 'field_error',
+				success: 'field_success',
+				disabled: 'field_disabled',
+				readonly: 'field_readonly',
+				required: 'field_required'
 			}
 		}
 

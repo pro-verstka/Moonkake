@@ -41,11 +41,11 @@ class Modal {
 			document.body.insertAdjacentHTML(
 				'beforeend',
 				`
-				<div class="modal modal--image" id="${this.options.modalImageId}">
-					<div class="modal-container">
-						<button class="modal-close" data-modal-close>&times;</button>
-						<div class="modal-image"></div>
-						<div class="modal-caption"></div>
+				<div class="modal modal_image" id="${this.options.modalImageId}">
+					<div class="modal__container">
+						<button class="modal__close" data-modal-close>&times;</button>
+						<div class="modal__image"></div>
+						<div class="modal__caption"></div>
 					</div>
 				</div>
 			`
@@ -57,10 +57,10 @@ class Modal {
 			document.body.insertAdjacentHTML(
 				'beforeend',
 				`
-				<div class="modal modal--video" id="${this.options.modalVideoId}">
-					<div class="modal-container">
-						<button class="modal-close" data-modal-close>&times;</button>
-						<div class="modal-iframe"></div>
+				<div class="modal modal_video" id="${this.options.modalVideoId}">
+					<div class="modal__container">
+						<button class="modal__close" data-modal-close>&times;</button>
+						<div class="modal__iframe"></div>
 					</div>
 				</div>
 			`
@@ -124,8 +124,6 @@ class Modal {
 		})
 	}
 
-
-
 	setImageDimensions(image) {
 		const $element = image
 		let maxWidth
@@ -150,7 +148,14 @@ class Modal {
 		$element.style.maxHeight = `${maxHeight}px`
 	}
 
-	open(id, $trigger) {
+	open(id, $trigger = null) {
+		const $modal = document.getElementById(id)
+
+		if (!$modal) {
+			console.warn(`Modal "${id}" does not exist`);
+			return
+		}
+
 		emitEvent('modalBeforeOpen', {
 			id,
 			trigger: $trigger
@@ -158,11 +163,9 @@ class Modal {
 
 		this.modals.push(id)
 
-		const modal = document.getElementById(id)
-
 		document.documentElement.classList.add('-modal-locked')
 
-		modal.classList.add('modal--opened')
+		$modal.classList.add('modal_opened')
 
 		emitEvent('modalOpen', {
 			id,
@@ -170,10 +173,10 @@ class Modal {
 		})
 
 		setTimeout(() => {
-			modal.classList.add('modal--visible')
+			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
+		disableBodyScroll($modal, {
 			reserveScrollBarGap: true
 		})
 
@@ -183,7 +186,7 @@ class Modal {
 		})
 	}
 
-	openImage(href, $trigger) {
+	openImage(href, $trigger = null) {
 		emitEvent('modalBeforeOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
@@ -191,21 +194,21 @@ class Modal {
 
 		this.modals.push(this.options.modalImageId)
 
-		const modal = document.getElementById(this.options.modalImageId)
-		const modalImage = modal.querySelector('.modal-image')
-		const modalCaption = modal.querySelector('.modal-caption')
-		modalImage.innerHTML = `<span class="modal-loader">${this.options.language.loadingText}</span>`
+		const $modal = document.getElementById(this.options.modalImageId)
+		const $modalImage = $modal.querySelector('.modal-image')
+		const $modalCaption = $modal.querySelector('.modal-caption')
+		$modalImage.innerHTML = `<span class="modal-loader">${this.options.language.loadingText}</span>`
 
 		document.documentElement.classList.add('-modal-locked')
 
-		modal.classList.add('modal--opened')
+		$modal.classList.add('modal_opened')
 
-		if (modalCaption) {
+		if ($modalCaption) {
 			const title = $trigger.getAttribute('title') || ''
 
 			if (title) {
-				modalCaption.innerHTML = title
-				modalCaption.style.visibility = 'visible'
+				$modalCaption.innerHTML = title
+				$modalCaption.style.visibility = 'visible'
 			}
 		}
 
@@ -215,7 +218,7 @@ class Modal {
 		})
 
 		setTimeout(() => {
-			modal.classList.add('modal--visible')
+			$modal.classList.add('modal_visible')
 		}, 10)
 
 		disableBodyScroll(modal, {
@@ -233,13 +236,13 @@ class Modal {
 		image.onload = () => {
 			const ratio = image.width / image.height
 
-			modalImage.classList.toggle('modal-image--portrait', image.width > image.height)
-			modalImage.classList.toggle('modal-image--landscape', image.width < image.height)
+			$modalImage.classList.toggle('modal-image_portrait', image.width > image.height)
+			$modalImage.classList.toggle('modal-image_landscape', image.width < image.height)
 
 			this.setImageDimensions(image, ratio)
 
-			modalImage.innerHTML = ''
-			modalImage.appendChild(image)
+			$modalImage.innerHTML = ''
+			$modalImage.appendChild(image)
 
 			window.addEventListener('resize', () => {
 				this.setImageDimensions(image, ratio)
@@ -252,7 +255,7 @@ class Modal {
 		}
 	}
 
-	openVideo(href, $trigger) {
+	openVideo(href, $trigger = null) {
 		emitEvent('modalBeforeOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
@@ -260,30 +263,30 @@ class Modal {
 
 		this.modals.push(this.options.modalVideoId)
 
-		const modal = document.getElementById(this.options.modalVideoId)
+		const $modal = document.getElementById(this.options.modalVideoId)
 
-		const iframe = document.createElement('iframe')
-		iframe.setAttribute('allowfullscreen', 'allowfullscreen')
-		iframe.setAttribute('frameborder', '0')
-		iframe.setAttribute('allow', 'autoplay; fullscreen')
+		const $iframe = document.createElement('iframe')
+		$iframe.setAttribute('allowfullscreen', 'allowfullscreen')
+		$iframe.setAttribute('frameborder', '0')
+		$iframe.setAttribute('allow', 'autoplay; fullscreen')
 
 		if (href.indexOf('youtube') > -1) {
 			const src = href.replace(/watch\?v=/g, 'embed/')
 
-			iframe.setAttribute('src', `${src}?autoplay=1`)
+			$iframe.setAttribute('src', `${src}?autoplay=1`)
 		}
 
 		if (href.indexOf('vimeo') > -1) {
 			const src = href.replace(/[^0-9]/g, '')
 
-			iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
+			$iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
 		}
 
-		modal.querySelector('.modal-iframe').appendChild(iframe)
+		$modal.querySelector('.modal-iframe').appendChild($iframe)
 
 		document.documentElement.classList.add('-modal-locked')
 
-		modal.classList.add('modal--opened')
+		$modal.classList.add('modal_opened')
 
 		emitEvent('modalOpen', {
 			id: this.options.modalVideoId,
@@ -291,10 +294,10 @@ class Modal {
 		})
 
 		setTimeout(() => {
-			modal.classList.add('modal--visible')
+			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
+		disableBodyScroll($modal, {
 			reserveScrollBarGap: true
 		})
 
@@ -305,39 +308,38 @@ class Modal {
 	}
 
 	close(id) {
+		const $modal = document.getElementById(id)
+
+		if (!$modal || this.modals.indexOf(id) < 0) {
+			console.warn(`Modal "${id}" does not exist`);
+			return
+		}
+
 		emitEvent('modalBeforeClose', {
 			id
 		})
 
-		// const modalIndex = this.modals.indexOf(id)
-		//
-		// if (modalIndex > -1) {
-		// 	this.modals.splice(modalIndex, 1)
-		// }
-
 		this.modals = this.modals.filter(item => item !== id)
 
-		const modal = document.getElementById(id)
-
-		modal.classList.remove('modal--visible')
+		$modal.classList.remove('modal_visible')
 
 		emitEvent('modalClose', {
 			id
 		})
 
 		const handleClose = () => {
-			modal.classList.remove('modal--opened')
+			$modal.classList.remove('modal_opened')
 
-			const modalIframe = modal.querySelector('.modal-iframe iframe')
-			const modalCaption = modal.querySelector('.modal-caption')
+			const $modalIframe = $modal.querySelector('.modal-iframe iframe')
+			const $modalCaption = $modal.querySelector('.modal-caption')
 
-			if (modalIframe) {
-				modalIframe.remove()
+			if ($modalIframe) {
+				$modalIframe.remove()
 			}
 
-			if (modalCaption) {
-				modalCaption.style.visibility = 'hidden'
-				modalCaption.innerHTML = ''
+			if ($modalCaption) {
+				$modalCaption.style.visibility = 'hidden'
+				$modalCaption.innerHTML = ''
 			}
 
 			emitEvent('modalAfterClose', {
@@ -345,7 +347,7 @@ class Modal {
 			})
 
 			window.removeEventListener('resize', this.setImageDimensions)
-			modal.removeEventListener('transitionend', handleClose)
+			$modal.removeEventListener('transitionend', handleClose)
 
 			if (!this.modals.length) {
 				document.documentElement.classList.remove('-modal-locked')
@@ -353,9 +355,7 @@ class Modal {
 			}
 		}
 
-		modal.addEventListener('transitionend', handleClose)
-
-		// setTimeout(handleClose, this.options.duration)
+		$modal.addEventListener('transitionend', handleClose)
 	}
 }
 

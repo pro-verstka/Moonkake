@@ -1,15 +1,15 @@
 class Tabs {
-	constructor(options = {}) {
-		this.options = {
-			root: '.tabs',
-			title: '.tabs-title',
-			content: '.tabs-content',
-			item: '.tabs-item',
-			active: '-active',
-			useHashNav: true,
-			equalHeight: true
-		}
+	options = {
+		root: '.tabs',
+		title: '.tabs__title',
+		content: '.tabs__content',
+		item: '.tabs__item',
+		active: 'tabs__item_active',
+		useHashNav: true,
+		equalHeight: true
+	}
 
+	constructor(options = {}) {
 		if (typeof options === 'object') {
 			this.options = { ...this.options, ...options }
 		}

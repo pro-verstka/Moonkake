@@ -1,8 +1,8 @@
 .field
-	&-label
+	&__label
 		margin-bottom: 0.5rem
 
-	&-input
+	&__input
 		width: 100%
 		border: .1rem solid #eeeeee
 		border-radius: 0
@@ -17,10 +17,10 @@
 		&:-webkit-autofill:active
 			transition: background-color 36000s ease-in-out 0s
 
-	&--error
-		.field-input
-			border-color: red
+.field_error
+	.field__input
+		border-color: red
 
-	&--success
-		.field-input
-			border-color: green
+.field_success
+	.field__input
+		border-color: green

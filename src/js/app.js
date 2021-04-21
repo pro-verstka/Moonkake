@@ -22,7 +22,7 @@ import Modal from './libs/modal'
 import Tabs from './libs/tabs'
 import Toggler from './libs/toggler'
 import Field from './libs/field'
-// import Select from './libs/select'
+import Validation from './libs/validation'
 
 // Components
 import './components/font'
@@ -49,7 +49,7 @@ import './components/scrollto'
 /* SETUP
 -------------------------------------------------- */
 
-MK.addPlugins({ Tabs, Accordion, Toggler, Modal, Field })
+MK.addPlugins({ Tabs, Accordion, Toggler, Modal, Field, Validation })
 
 /* STICKY
 -------------------------------------------------- */

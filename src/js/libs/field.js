@@ -1,17 +1,3 @@
-import validate from 'validate.js'
-
-const schema = {
-	email: {
-		email: true
-	},
-	phone: {
-		length: {
-			is: 18
-		}
-		// type: 'number'
-	}
-}
-
 class Field {
 	constructor(options = {}) {
 		this.options = {
@@ -33,11 +19,11 @@ class Field {
 
 		this.$fields = null
 
-		this.setListeners()
+		this.#setListeners()
 		this.update()
 	}
 
-	setListeners() {
+	#setListeners() {
 		document.addEventListener(
 			'focus',
 			e => {
@@ -65,8 +51,6 @@ class Field {
 							this.options.classNames.error,
 							this.options.classNames.success
 						)
-				} else {
-					this.validate($el)
 				}
 
 				$el.closest(`.${this.options.classNames.root}`).classList.remove(this.options.classNames.focus)
@@ -85,8 +69,6 @@ class Field {
 				$el
 					.closest(`.${this.options.classNames.root}`)
 					.classList.remove(this.options.classNames.error, this.options.classNames.success)
-
-				this.validate($el)
 			},
 			true
 		)
@@ -108,24 +90,7 @@ class Field {
 				if ($el.required) classNames.push(this.options.classNames.required)
 
 				$field.classList.add(...classNames)
-
-				this.validate($el)
 			})
-		}
-	}
-
-	validate($el) {
-		if (!$el.value || !schema[$el.name]) return
-
-		const errors = validate.single($el.value, schema[$el.name])
-		const $field = $el.closest(`.${this.options.classNames.root}`)
-
-		if (errors) {
-			$field.classList.add(this.options.classNames.error)
-			$field.classList.remove(this.options.classNames.success)
-		} else {
-			$field.classList.remove(this.options.classNames.error)
-			$field.classList.add(this.options.classNames.success)
 		}
 	}
 }

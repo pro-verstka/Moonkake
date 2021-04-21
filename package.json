@@ -1,6 +1,6 @@
 {
   "name": "moonkake",
-  "version": "8.4.2",
+  "version": "8.5.0",
   "description": "Start template. Supports Pug, Sass, PostCSS, Vue, React, ES6.",
   "author": "p1rate",
   "license": "MIT",
@@ -23,6 +23,7 @@
       "vue"
     ],
     "plugins": [
+      "@babel/plugin-proposal-private-methods",
       "@babel/plugin-proposal-class-properties",
       [
         "@babel/plugin-transform-react-jsx",
@@ -45,7 +46,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/eslint-parser": "^7.13.14",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-private-methods": "^7.13.0",
     "@babel/plugin-transform-react-jsx": "^7.12.5",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",

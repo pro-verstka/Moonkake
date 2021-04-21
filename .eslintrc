@@ -2,7 +2,7 @@
 	"extends": ["airbnb", "prettier"],
 	"plugins": ["prettier", "react"],
 	"parserOptions": {
-		"ecmaVersion": 2020,
+		"ecmaVersion": 2021,
 		"sourceType": "module"
 	},
 	"env": {
@@ -12,6 +12,7 @@
 	"ecmaFeatures": {
 		"jsx": true
 	},
+	"parser": "@babel/eslint-parser",
 	"rules": {
 		"radix": "off",
 		"no-console": "off",

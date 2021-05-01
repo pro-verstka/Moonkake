@@ -1,4 +1,4 @@
-import scrollTo from '../helpers/scrollTo'
+import { scrollTo } from '../helpers'
 
 /* SCROLL TO
 -------------------------------------------------- */

@@ -1,5 +1,7 @@
 export default function getPageQuery(key) {
-	if (!window.location.search) return
+	if (!window.location.search) {
+		return undefined
+	}
 
 	const query = {}
 
@@ -13,7 +15,9 @@ export default function getPageQuery(key) {
 		query[tmp[0]] = decodeURIComponent(tmp[1])
 	}
 
-	if (key) return query[key]
+	if (key) {
+		return query[key]
+	}
 
 	return query
 }

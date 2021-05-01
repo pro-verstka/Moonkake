@@ -1,4 +1,4 @@
-import Device from '../helpers/device'
+import { Device } from '../helpers'
 
 class FullHeight {
 	constructor(options = {}) {

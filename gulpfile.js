@@ -57,7 +57,8 @@ gulp.task('browser', () => {
 			baseDir: './dist/',
 			directory: true
 		},
-		notify: false
+		notify: false,
+		open: false
 	})
 })
 
@@ -250,7 +251,7 @@ const webpackConfig = {
 				exclude: [/node_modules\/(?!(swiper|dom7)\/).*/, /\.test\.jsx?$/],
 				use: [
 					{
-						loader: 'babel-loader',
+						loader: 'babel-loader'
 						// options: {
 						// 	presets: ['@babel/preset-env', '@babel/preset-react', 'vue'],
 						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
@@ -263,7 +264,7 @@ const webpackConfig = {
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: 'babel-loader',
+						loader: 'babel-loader'
 						// options: {
 						// 	presets: ['@babel/preset-env', '@babel/preset-react'],
 						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
@@ -276,7 +277,7 @@ const webpackConfig = {
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: 'vue-loader',
+						loader: 'vue-loader'
 						// options: {
 						// 	presets: ['@babel/preset-env', 'vue']
 						// }

@@ -1,4 +1,4 @@
-import getScrollbarWidth from '../helpers/getScrollbarWidth'
+import { getScrollbarWidth } from '../helpers'
 
 class Loader {
 	constructor(options = {}) {

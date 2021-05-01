@@ -13,7 +13,7 @@ const MK = {
 		},
 		animation: {
 			speed: Device.isMobile() ? 500 : 1500
-		},
+		}
 	},
 
 	plugins: {},
@@ -88,6 +88,6 @@ window.addEventListener('load', setViewportHeight)
 window.addEventListener('resize', setViewportHeight)
 
 console.info(
-	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.ru',
+	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.io',
 	'padding: 10px; background-color: #282c34; color: #fff;'
 )

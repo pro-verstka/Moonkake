@@ -1,17 +1,8 @@
-import Device from './device'
-import declension from './declension'
-import getPageQuery from './getPageQuery'
-import getScrollbarWidth from './getScrollbarWidth'
-import getSection from './getSection'
-import scrollTo from './scrollTo'
-import setViewportHeight from './setViewportHeight'
-
-export {
-	Device,
-	declension,
-	getPageQuery,
-	getScrollbarWidth,
-	getSection,
-	scrollTo,
-	setViewportHeight
-}
+export { default as Device } from './device'
+export { default as declension } from './declension'
+export { default as getPageQuery } from './getPageQuery'
+export { default as getScrollbarWidth } from './getScrollbarWidth'
+export { default as getSection } from './getSection'
+export { default as scrollTo } from './scrollTo'
+export { default as setViewportHeight } from './setViewportHeight'
+export { default as smoothScroll } from './smoothScroll'

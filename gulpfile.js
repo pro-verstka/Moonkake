@@ -14,17 +14,6 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const gulp = require('gulp')
 
-// utils
-const fs = require('fs')
-const path = require('path')
-const browserSync = require('browser-sync').create()
-const flatten = require('gulp-flatten')
-const rename = require('gulp-rename')
-const del = require('del')
-const data = require('gulp-data')
-const cheerio = require('gulp-cheerio')
-const prettify = require('gulp-prettify')
-
 // css
 const gcmq = require('gulp-group-css-media-queries')
 // const autoprefixer = require('autoprefixer')
@@ -42,6 +31,18 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // tpl
 const pug = require('gulp-pug')
+
+// utils
+const fs = require('fs')
+const path = require('path')
+const browserSync = require('browser-sync').create()
+const flatten = require('gulp-flatten')
+const rename = require('gulp-rename')
+const del = require('del')
+const data = require('gulp-data')
+const cheerio = require('gulp-cheerio')
+const prettify = require('gulp-prettify')
+const parseSassToObject = require('./gulp/parseSassToObject.js')
 
 /* TASKS
 -------------------------------------------------- */
@@ -154,16 +155,24 @@ function styles() {
 		postcssPresetEnv({
 			autoprefixer: {
 				grid: true
-			}
+			},
+			importFrom: [
+				{
+					customProperties: parseSassToObject('./src/css/config/_root.sass')
+				}
+			]
 		})
 	]
 
 	if (isProd) {
 		plugins.push(
 			cssnano({
-				preset: ['default', {
-					zindex: false
-				}]
+				preset: [
+					'default',
+					{
+						zindex: false
+					}
+				]
 			})
 		)
 	}

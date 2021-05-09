@@ -1,6 +1,6 @@
 {
   "name": "moonkake",
-  "version": "8.5.1",
+  "version": "8.5.2",
   "description": "Start template. Supports Pug, Sass, PostCSS, Vue, React, ES6.",
   "author": {
     "name": "DevBrains",

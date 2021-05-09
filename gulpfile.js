@@ -7,6 +7,8 @@ const config = {
 	appendFontsToHead: true
 }
 
+const isProd = process.env.NODE_ENV === 'production'
+
 /* COMMON
 -------------------------------------------------- */
 
@@ -15,8 +17,7 @@ const gulp = require('gulp')
 // utils
 const fs = require('fs')
 const path = require('path')
-const notify = require('gulp-notify')
-const browserSync = require('browser-sync')
+const browserSync = require('browser-sync').create()
 const flatten = require('gulp-flatten')
 const rename = require('gulp-rename')
 const del = require('del')
@@ -26,11 +27,10 @@ const prettify = require('gulp-prettify')
 
 // css
 const gcmq = require('gulp-group-css-media-queries')
-const autoprefixer = require('autoprefixer')
+// const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
 const sass = require('gulp-sass')
 const packageImporter = require('node-sass-package-importer')
-const glob = require('gulp-sass-glob')
 const postcss = require('gulp-postcss')
 const postcssPresetEnv = require('postcss-preset-env')
 
@@ -43,36 +43,33 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // tpl
 const pug = require('gulp-pug')
 
-const buildMode = process.env.NODE_ENV === 'production' ? 'production' : 'development'
-const isProd = buildMode === 'production'
-
 /* TASKS
 -------------------------------------------------- */
 
 /* Browser */
 
-gulp.task('browser', () => {
-	return browserSync({
+function browser() {
+	browserSync.init({
 		server: {
-			baseDir: './dist/',
+			baseDir: './dist',
 			directory: true
 		},
 		notify: false,
 		open: false
 	})
-})
+}
 
 /* Templates */
 
-gulp.task('templates', () => {
-	const fonts = []
+function templates() {
+	const fontFiles = []
 
 	if (config.appendFontsToHead) {
 		fs.readdirSync('./src/fonts').forEach(file => {
 			const name = `./src/fonts/${file}`
 
 			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.woff2') {
-				fonts.push(path.basename(file, path.extname(name)))
+				fontFiles.push(path.basename(file, path.extname(name)))
 			}
 		})
 	}
@@ -103,7 +100,7 @@ gulp.task('templates', () => {
 					$js.removeAttr('data-app-js')
 
 					if (config.appendFontsToHead) {
-						fonts.forEach(filename => {
+						fontFiles.forEach(filename => {
 							$('[rel="stylesheet"]')
 								.eq(0)
 								.before(
@@ -124,17 +121,15 @@ gulp.task('templates', () => {
 				indent_inner_html: true
 			})
 		)
-		.on('error', notify.onError('Error: <%= error.message %>'))
 		.pipe(flatten())
 		.pipe(gulp.dest('dist/'))
-		.on('end', () => {
-			browserSync.reload()
-		})
-})
+		.pipe(browserSync.stream())
+	// .on('end', done)
+}
 
 /* Styles */
 
-gulp.task('css', () => {
+function styles() {
 	const src = []
 
 	fs.readdirSync('./src/css').forEach(file => {
@@ -155,91 +150,76 @@ gulp.task('css', () => {
 		})
 	}
 
-	const postCssPlugins = [
-		postcssPresetEnv(),
-		autoprefixer({
-			grid: true
+	const plugins = [
+		postcssPresetEnv({
+			autoprefixer: {
+				grid: true
+			}
 		})
 	]
 
 	if (isProd) {
-		postCssPlugins.push(
+		plugins.push(
 			cssnano({
-				zindex: false
+				preset: ['default', {
+					zindex: false
+				}]
 			})
 		)
 	}
 
-	return (
-		gulp
-			.src(src, {
-				base: '.'
+	return gulp
+		.src(src, {
+			base: '.'
+		})
+		.pipe(
+			sass({
+				includePaths: ['node_modules'],
+				importer: packageImporter()
 			})
-			.pipe(glob())
-			.pipe(
-				sass({
-					includePaths: ['node_modules'],
-					importer: packageImporter()
-				})
-			)
-			.on('error', notify.onError('Error: <%= error.message %>'))
-			.pipe(postcss(postCssPlugins))
-			.on('error', notify.onError('Error: <%= error.message %>'))
-			.pipe(gcmq())
-			.pipe(flatten())
-			.pipe(
-				rename({
-					suffix: '.min'
-				})
-			)
-			// .pipe(
-			// 	rename(obj => {
-			// 		if (obj.basename !== 'app.min') {
-			// 			obj.dirname += '/pages'
-			// 		}
-			// 	})
-			// )
-			.pipe(gulp.dest('dist/assets/css'))
-			.pipe(
-				browserSync.reload({
-					stream: true
-				})
-			)
-	)
-})
+		)
+		.pipe(gcmq())
+		.pipe(postcss(plugins))
+		.pipe(flatten())
+		.pipe(
+			rename({
+				suffix: '.min'
+			})
+		)
+		.pipe(gulp.dest('dist/assets/css'))
+		.pipe(browserSync.stream())
+}
 
 /* Fonts */
 
-gulp.task('fonts', () => {
+function fonts() {
 	return gulp
 		.src('src/fonts/**/*', {
 			base: './src/fonts/'
 		})
 		.pipe(gulp.dest('dist/assets/fonts/'))
-		.on('error', notify.onError('Error: <%= error.message %>'))
 		.on('end', () => {
 			browserSync.reload()
 		})
-})
+}
 
 /* Images */
 
-gulp.task('img', () => {
+function images() {
 	return gulp
 		.src('src/img/**/*', {
 			base: './src/img/'
 		})
 		.pipe(gulp.dest('dist/assets/img/'))
-		.on('error', notify.onError('Error: <%= error.message %>'))
 		.on('end', () => {
 			browserSync.reload()
 		})
-})
+}
 
 /* Scripts */
 
 const webpackConfig = {
-	mode: buildMode,
+	mode: isProd ? 'production' : 'development',
 	entry: {},
 	output: {
 		filename: '[name].min.js'
@@ -252,10 +232,6 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'babel-loader'
-						// options: {
-						// 	presets: ['@babel/preset-env', '@babel/preset-react', 'vue'],
-						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
-						// }
 					}
 				]
 			},
@@ -265,10 +241,6 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'babel-loader'
-						// options: {
-						// 	presets: ['@babel/preset-env', '@babel/preset-react'],
-						// 	plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'react' }]]
-						// }
 					}
 				]
 			},
@@ -278,9 +250,6 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'vue-loader'
-						// options: {
-						// 	presets: ['@babel/preset-env', 'vue']
-						// }
 					}
 				]
 			},
@@ -318,7 +287,7 @@ const webpackConfig = {
 	plugins: [new VueLoaderPlugin()]
 }
 
-gulp.task('js', () => {
+function scripts() {
 	fs.readdirSync('./src/js').forEach(file => {
 		const name = `./src/js/${file}`
 
@@ -343,51 +312,32 @@ gulp.task('js', () => {
 		webpackConfig.devtool = 'cheap-source-map'
 	}
 
-	return (
-		gulp
-			.src(Object.values(webpackConfig.entry))
-			.pipe(
-				webpackStream(webpackConfig, webpack, (err, stats) => {
-					if (stats.compilation.errors.length) {
-						notify('Error: <%= stats.compilation.errors[0].error %>')
-					}
-				})
-			)
-			// .pipe(
-			// 	rename(obj => {
-			// 		if (obj.basename !== 'app.min' && (obj.basename !== 'app.min.js')) {
-			// 			obj.dirname += '/pages'
-			// 		}
-			// 	})
-			// )
-			.pipe(gulp.dest('dist/assets/js/'))
-			.on('end', () => {
-				browserSync.reload()
-			})
-	)
-})
+	return gulp
+		.src(Object.values(webpackConfig.entry))
+		.pipe(webpackStream(webpackConfig, webpack))
+		.pipe(gulp.dest('dist/assets/js/'))
+		.pipe(browserSync.stream())
+}
 
 /* Clean */
 
-gulp.task('clean', () => {
-	return del(['dist/*'])
-})
+function clean() {
+	return del(['./dist/*'])
+}
 
 /* Common */
 
-gulp.task('watch', () => {
-	gulp.watch('src/css/**/*', gulp.series('css'))
-	gulp.watch('src/js/**/*', gulp.series('js'))
-	gulp.watch('src/img/**/*', gulp.series('img'))
-	gulp.watch('src/fonts/**/*', gulp.series('fonts'))
-	gulp.watch(['src/templates/**/*', 'src/img/**/*.svg'], gulp.series('templates'))
-	gulp.watch('src/data.json', gulp.series('templates'))
+function watch() {
+	gulp.watch(['src/css/**/*'], styles)
+	gulp.watch(['src/js/**/*'], scripts)
+	gulp.watch(['src/fonts/**/*'], fonts)
+	gulp.watch(['src/img/**/*'], images)
+	gulp.watch(['src/templates/**/*', 'src/img/**/*.svg', 'src/data.json'], templates)
+}
 
-	notify('Project is running!')
-})
-
-gulp.task('build', gulp.series('clean', 'css', 'js', 'img', 'fonts', 'templates'), () => {
-	notify('Project building done!')
-})
-
-gulp.task('default', gulp.parallel('browser', 'watch'))
+exports.images = images
+exports.fonts = fonts
+exports.scripts = scripts
+exports.styles = styles
+exports.build = gulp.series(clean, gulp.parallel(fonts, images, styles, scripts), templates)
+exports.default = gulp.parallel(browser, watch)

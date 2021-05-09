@@ -1,82 +1,24 @@
-/*!
- * Moonkake 8.5.0
- *
- * https://github.com/detectiveshelby/moonkake
+/*
+ Package Name: Moonkake
+ Package URI: https://github.com/detectiveshelby/moonkake
+ Version: 8.5.1
+ Author: DevBrains
+ Author URI: https://devbrains.io/
  */
 
 // Vendors
 import './vendor/polyfills'
 
 // Config
-import './config/config'
+import './config'
 
 // Libs
-import Accordion from './libs/accordion'
-// import Counter from './libs/counter'
-// import FullHeight from './libs/fullheight'
-import Modal from './libs/modal'
-// import Parallax from './libs/parallax'
-// import Spoiler from './libs/spoiler'
-// import Sticky from './libs/sticky'
-// import TableColumnHighlight from './libs/table-highlight'
-import Tabs from './libs/tabs'
-import Toggler from './libs/toggler'
-import Field from './libs/field'
-import Validation from './libs/validation'
+import * as Libs from './libs'
 
 // Components
-import './components/font'
-import './components/lazyload'
-import './components/inputmask'
-import './components/slider'
-// import './components/gallery'
-// import './components/calendar'
-// import './components/tooltip'
-import './components/animation'
-// import './components/scrollbooster'
-// import './components/map'
-import './components/scrollto'
-
-// Pages
-// import './pages/index'
-
-// React
-// import './react/index'
-
-// Vue
-// import './vue/index'
+import './components'
 
 /* SETUP
 -------------------------------------------------- */
 
-MK.addPlugins({ Tabs, Accordion, Toggler, Modal, Field, Validation })
-
-/* STICKY
--------------------------------------------------- */
-
-// document.querySelectorAll('[data-sticky]').forEach($el => {
-// 	const sticky = new Sticky({
-// 		selector: $el
-// 	})
-// })
-
-/* TABLE HIGHLIGHT
--------------------------------------------------- */
-
-// document.querySelectorAll('[data-table-highlight]').forEach($el => {
-// 	const table = new TableColumnHighlight($el)
-// })
-
-/* FOOLPROOF
--------------------------------------------------- */
-
-// let currentDevice = isMobile()
-// let previousDevice = currentDevice
-//
-// window.addEventListener('resize', () => {
-// 	currentDevice = isMobile()
-//
-// 	if (currentDevice !== previousDevice) window.location.reload(true)
-//
-// 	previousDevice = isMobile()
-// })
+MK.addPlugins({ ...Libs })

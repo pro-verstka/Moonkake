@@ -80,6 +80,15 @@ $gap: 2rem
 	> *
 		scroll-snap-align: start
 
+=hide-scroll()
+	scrollbar-width: none
+	-ms-overflow-style: none
+
+	&::-webkit-scrollbar
+		display: none
+			width: 0
+			height: 0
+
 /* Font-face */
 
 =font-face($family, $filename: $family, $weight: normal, $style: normal)

@@ -1,3 +1,7 @@
 mixin icon(id, width, height, className)
-	svg(class=`icon ${!className ? 'icon_'+id : className}` width=width height=height viewBox=`0 0 ${width} ${height}`)
+	svg(
+		class=`icon ${!className ? 'icon_'+id : className}`
+		viewBox=`0 0 ${width} ${height}`
+		style=`width: ${width/10}rem; height: ${height/10}rem;`
+	)
 		use(xlink:href=`#${id}`)

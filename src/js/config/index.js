@@ -1,11 +1,17 @@
-// import Loader from '../libs/loader'
 import { Device, setViewportHeight } from '../helpers'
+// import { Loader } from '../libs'
 
 /* SETUP
 -------------------------------------------------- */
 
 const MK = {
-	version: '8.5.0',
+	info: {
+		packageName: 'Moonkake',
+		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
+		version: '8.5.1',
+		author: 'DevBrains',
+		authorUrl: 'https://devbrains.io'
+	},
 
 	settings: {
 		event: {
@@ -88,6 +94,6 @@ window.addEventListener('load', setViewportHeight)
 window.addEventListener('resize', setViewportHeight)
 
 console.info(
-	'%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на https://devbrains.io',
+	`%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на ${MK.info.authorUrl}`,
 	'padding: 10px; background-color: #282c34; color: #fff;'
 )

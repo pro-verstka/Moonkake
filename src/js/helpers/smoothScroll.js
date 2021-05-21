@@ -2,7 +2,7 @@
 // 	console.log(scroll)
 // })
 
-export default function smoothScroll(callback) {
+export default function smoothScroll(callback = () => {}) {
 	const ease = 0.075
 	let current = 0
 	let target = 0

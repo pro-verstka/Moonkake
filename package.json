@@ -1,11 +1,13 @@
 {
   "name": "moonkake",
-  "version": "8.5.3",
+  "version": "8.5.31",
   "description": "Start template. Supports Pug, Sass, PostCSS, ES6.",
   "author": {
     "name": "DevBrains",
     "url": "https://devbrains.io"
   },
+	"keywords": ["moonkake","css", "html", "pug", "js", "es6", "sass", "gulp", "template", "start template", "boilerplate", "modal", "accordion", "counter", "custom input", "loader", "parallax", "tabs", "spoiler", "postcss"],
+	"homepage": "https://github.com/detectiveshelby/moonkake#readme",
   "license": "MIT",
   "repository": "git://github.com/detectiveshelby/moonkake.git",
   "scripts": {

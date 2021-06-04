@@ -1,9 +1,12 @@
 {
 	"presets": [
-		"@babel/preset-env"
-	],
-	"plugins": [
-		"@babel/plugin-proposal-private-methods",
-		"@babel/plugin-proposal-class-properties"
+		[
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": "10"
+				}
+			}
+		]
 	]
 }

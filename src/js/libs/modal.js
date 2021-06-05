@@ -221,7 +221,7 @@ class Modal {
 			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll(modal, {
+		disableBodyScroll($modal, {
 			reserveScrollBarGap: true
 		})
 

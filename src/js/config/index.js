@@ -8,7 +8,7 @@ const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
-		version: '8.5.4',
+		version: '8.5.5',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io'
 	},
@@ -24,6 +24,18 @@ const MK = {
 
 	plugins: {},
 	methods: {},
+	data: {},
+
+	addData(data = {}) {
+		if (typeof data !== 'object') {
+			return
+		}
+
+		this.data = {
+			...this.data,
+			...data
+		}
+	},
 
 	addMethods(methods = {}) {
 		if (typeof methods !== 'object') {
@@ -62,6 +74,8 @@ const MK = {
 
 if (typeof window.MK === 'undefined') {
 	window.MK = MK
+} else {
+	window.MK = { ...window.MK, ...MK }
 }
 
 /* LOADER

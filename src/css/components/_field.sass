@@ -10,12 +10,17 @@
 		color: #000000
 		box-shadow: none
 		appearance: none
+		text-overflow: ellipsis
 
 		&:-webkit-autofill,
 		&:-webkit-autofill:hover,
 		&:-webkit-autofill:focus,
 		&:-webkit-autofill:active
 			transition: background-color 36000s ease-in-out 0s
+
+		&::placeholder
+			opacity: 1
+			color: #ccc
 
 .field_error
 	.field__input

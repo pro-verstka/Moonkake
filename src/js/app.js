@@ -1,7 +1,7 @@
 /*
  Package Name: Moonkake
  Package URI: https://github.com/detectiveshelby/moonkake
- Version: 8.5.4
+ Version: 8.5.5
  Author: DevBrains
  Author URI: https://devbrains.io/
  */
@@ -13,7 +13,7 @@ import './vendor/polyfills'
 import './config'
 
 // Libs
-import * as Libs from './libs'
+import { Modal, Tabs } from './libs'
 
 // Components
 import './components'
@@ -21,4 +21,4 @@ import './components'
 /* SETUP
 -------------------------------------------------- */
 
-MK.addPlugins({ ...Libs })
+MK.addPlugins({ Modal, Tabs })

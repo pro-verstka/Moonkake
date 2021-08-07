@@ -7,9 +7,3 @@ const loadFonts = async () => {
 loadFonts().then(() => {
 	document.documentElement.classList.add('-fonts-ready')
 })
-
-// const font = new FontFaceObserver('FONT_NAME')
-//
-// Promise.all([font.load()]).then(() => {
-// 	document.documentElement.classList.add('-fonts-ready')
-// })

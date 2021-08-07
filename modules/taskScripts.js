@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const TerserPlugin = require('terser-webpack-plugin')
 const { config, isProd } = require('./config')
+// const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 function scripts() {
 	const webpackConfig = {
@@ -18,10 +19,28 @@ function scripts() {
 			rules: [
 				{
 					test: /\.(js)$/,
-					exclude: [/node_modules\/(?!(swiper|dom7)\/).*/, /\.test\.jsx?$/],
+					exclude: [/node_modules\/(?!(swiper|ssr-window|dom7)\/).*/, /\.test\.jsx?$/],
 					use: [
+						// {
+						// 	loader: 'esbuild-loader',
+						// 	options: {
+						// 		target: 'es2015'
+						// 	}
+						// }
 						{
-							loader: 'babel-loader'
+							loader: 'babel-loader',
+							options: {
+								presets: [
+									[
+										'@babel/preset-env',
+										{
+											useBuiltIns: 'usage',
+											corejs: 3,
+											targets: 'last 3 version, ie >= 11'
+										}
+									]
+								]
+							}
 						}
 					]
 				}
@@ -32,7 +51,13 @@ function scripts() {
 		},
 		optimization: {
 			minimize: isProd,
+			// splitChunks: {
+			// 	chunks: 'all',
+			// },
 			minimizer: [
+				// new ESBuildMinifyPlugin({
+				// 	target: 'es2015'
+				// })
 				new TerserPlugin({
 					parallel: true,
 					extractComments: false,

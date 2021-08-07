@@ -1,4 +1,4 @@
-window.initMap = () => {
+const initMap = () => {
 	ymaps.ready(() => {
 		const map = new ymaps.Map('map', {
 			center: [51.507351, -0.12766],
@@ -38,3 +38,5 @@ window.initMap = () => {
 		map.geoObjects.add(pacemark)
 	})
 }
+
+MK.addMethods({ initMap })

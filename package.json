@@ -1,6 +1,6 @@
 {
   "name": "moonkake",
-  "version": "8.5.4",
+  "version": "8.5.5",
   "description": "Start template. Supports Pug, Sass, PostCSS, ES6.",
   "author": {
     "name": "DevBrains",
@@ -46,6 +46,7 @@
     "cssnano": "^5.0.5",
     "cssnano-preset-default": "^5.1.2",
     "del": "^6.0.0",
+    "esbuild-loader": "^2.13.1",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -73,6 +74,7 @@
     "classlist-polyfill": "^1.2.0",
     "core-js": "^3.13.1",
     "custom-event-polyfill": "^1.0.7",
+    "delegated-events": "^1.1.2",
     "element-closest-polyfill": "^1.0.4",
     "flatpickr": "^4.6.9",
     "fontfaceobserver": "^2.1.0",
@@ -84,6 +86,7 @@
     "scrollbooster": "^3.0.2",
     "scrollreveal": "^4.0.9",
     "swiper": "^6.7.0",
+    "tippy.js": "^6.3.1",
     "validate.js": "^0.13.1",
     "vanilla-lazyload": "^17.3.2"
   }

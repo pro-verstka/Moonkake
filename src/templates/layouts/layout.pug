@@ -1,8 +1,5 @@
 include ../blocks/mixins.pug
 
--
-	const time = new Date().getTime()
-
 doctype html
 
 html(lang="ru")
@@ -15,7 +12,7 @@ html(lang="ru")
 		meta(name="description" content="")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
-		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${time}`)
+		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${new Date().getTime()}`)
 
 	body
 
@@ -35,10 +32,10 @@ html(lang="ru")
 			// footer
 		// wrapper
 
-		// include ../../img/icons.svg
+		include ../../img/icons.svg
 
 		// JS
-		script(data-app-js defer src=`assets/js/app.min.js?v=${time}`)
+		script(data-app-js defer src=`assets/js/app.min.js?v=${new Date().getTime()}`)
 
 		block js
 		//
@@ -55,7 +52,7 @@ html(lang="ru")
 						isMapLoaded = true;
 
 						var script = document.createElement('script');
-						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initMap';
+						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=MK.methods.initMap';
 						script.defer = true;
 						document.body.appendChild(script);
 					}

@@ -72,7 +72,9 @@ class Modal {
 			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
 				e.preventDefault()
 
-				const $el = e.target.matches(this.options.modalSelector) ? e.target : e.target.closest(this.options.modalSelector)
+				const $el = e.target.matches(this.options.modalSelector)
+					? e.target
+					: e.target.closest(this.options.modalSelector)
 
 				this.open($el.getAttribute('href').substr(1), $el)
 			}
@@ -100,7 +102,7 @@ class Modal {
 			}
 
 			// close by button
-			if (e.target.matches(this.options.modalCloseSelector)) {
+			if (e.target.matches(this.options.modalCloseSelector) || e.target.closest(this.options.modalCloseSelector)) {
 				e.preventDefault()
 
 				this.close(e.target.closest('.modal').getAttribute('id'))
@@ -152,7 +154,7 @@ class Modal {
 		const $modal = document.getElementById(id)
 
 		if (!$modal) {
-			console.warn(`Modal "${id}" does not exist`);
+			console.warn(`Modal "${id}" does not exist`)
 			return
 		}
 
@@ -311,7 +313,7 @@ class Modal {
 		const $modal = document.getElementById(id)
 
 		if (!$modal || this.modals.indexOf(id) < 0) {
-			console.warn(`Modal "${id}" does not exist`);
+			console.warn(`Modal "${id}" does not exist`)
 			return
 		}
 

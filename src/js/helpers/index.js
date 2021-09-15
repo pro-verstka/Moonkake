@@ -1,5 +1,3 @@
-export * as DOM from './dom'
-
 export { default as Device } from './device'
 export { default as declension } from './declension'
 export { default as getPageQuery } from './getPageQuery'

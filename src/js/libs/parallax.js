@@ -21,7 +21,6 @@ class Parallax {
 		this.$els.forEach($el => {
 			$el.style.willChange = 'transform'
 		})
-
 		;['load', 'scroll'].forEach(eventName =>
 			window.addEventListener(eventName, () => {
 				this.parallax()

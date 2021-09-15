@@ -33,7 +33,7 @@ class Validation {
 			classNames: {
 				root: 'field',
 				error: 'field_error',
-				success: 'field_success',
+				success: 'field_success'
 			}
 		}
 

@@ -17,7 +17,7 @@ Element.prototype.remove = function () {
 
 // eslint-disable-next-line func-names,no-multi-assign
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
-	for (let i = this.length - 1; i >= 0; i-=1) {
+	for (let i = this.length - 1; i >= 0; i -= 1) {
 		if (this[i] && this[i].parentElement) {
 			this[i].parentElement.removeChild(this[i])
 		}

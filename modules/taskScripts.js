@@ -22,18 +22,18 @@ function scripts() {
 					use: [
 						{
 							loader: 'babel-loader',
-							options: {
-								presets: [
-									[
-										'@babel/preset-env',
-										{
-											useBuiltIns: 'usage',
-											corejs: 3,
-											targets: 'last 3 version, ie >= 11'
-										}
-									]
-								]
-							}
+							// options: {
+							// 	presets: [
+							// 		[
+							// 			'@babel/preset-env',
+							// 			{
+							// 				useBuiltIns: 'usage',
+							// 				corejs: 3,
+							// 				targets: 'last 3 version, ie >= 11'
+							// 			}
+							// 		]
+							// 	]
+							// }
 						}
 					]
 				}

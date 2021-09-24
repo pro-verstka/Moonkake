@@ -3,10 +3,10 @@
 		[
 			"@babel/preset-env",
 			{
-				"useBuiltIns": "usage",
-				"corejs": 3,
-				"targets": "last 3 version, ie >= 11"
+				"useBuiltIns": "entry",
+				"corejs": 3
 			}
 		]
-	]
+	],
+	"plugins": ["@babel/plugin-transform-runtime"]
 }

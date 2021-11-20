@@ -8,7 +8,7 @@ const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
-		version: '8.5.5',
+		version: '8.5.61',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io'
 	},

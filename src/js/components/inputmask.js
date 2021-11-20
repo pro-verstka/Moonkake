@@ -12,8 +12,18 @@ if ($maskPhone.length) {
 			lazy: true
 		})
 
+		mask.el.input.addEventListener('focus', () => {
+			mask.updateOptions({
+				lazy: false
+			})
+		})
+
 		mask.el.input.addEventListener('blur', () => {
 			if (!mask.masked.isComplete) mask.value = ''
+
+			mask.updateOptions({
+				lazy: true
+			})
 		})
 	})
 }

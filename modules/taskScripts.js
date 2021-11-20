@@ -32,7 +32,8 @@ function scripts() {
 							// 				targets: 'last 3 version, ie >= 11'
 							// 			}
 							// 		]
-							// 	]
+							// 	],
+							// 	"plugins": ["@babel/plugin-transform-runtime"]
 							// }
 						}
 					]

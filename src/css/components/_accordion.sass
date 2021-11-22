@@ -1,28 +1,28 @@
 .accordion
-	&__header
-		cursor: pointer
+  &__header
+    cursor: pointer
 
-	&__body
-		//display: none
+  &__body
+    //display: none
 
-	&__item + &__item
-		margin-top: 2rem
+  &__item + &__item
+    margin-top: 2rem
 
-	&__item_active
-		.accordion__body
-			//display: block
-			//animation: fadeIn 1s forwards
+  &__item_active
+    .accordion__body
+      //display: block
+      //animation: fadeIn 1s forwards
 
-	&.accordion_animation
-		.accordion__body
-			overflow: hidden
-			height: 0
-			transition: height .25s ease
+  &.accordion_animation
+    .accordion__body
+      overflow: hidden
+      height: 0
+      transition: height .25s ease
 
-	&:not(.accordion_animation)
-		.accordion__body
-			display: none
+  &:not(.accordion_animation)
+    .accordion__body
+      display: none
 
-		.accordion__item_active
-			.accordion__body
-				display: block
+    .accordion__item_active
+      .accordion__body
+        display: block

@@ -1,6 +1,6 @@
 {
   "name": "moonkake",
-  "version": "8.5.61",
+  "version": "8.5.7",
   "description": "Start template. Supports Pug, Sass, PostCSS, ES6.",
   "author": {
     "name": "DevBrains",
@@ -54,17 +54,16 @@
     "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-cheerio": "^1.0.0",
+		"gulp-dart-sass": "^1.0.2",
     "gulp-flatten": "^0.4.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-postcss": "^9.0.1",
     "gulp-pug": "^5.0.0",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^5.0.0",
-    "node-sass": "^6.0.1",
-    "node-sass-package-importer": "^5.3.2",
     "postcss": "^8.3.11",
     "postcss-preset-env": "^7.0.1",
     "prettier": "^2.4.1",
+    "sass": "^1.43.4",
     "terser-webpack-plugin": "^5.2.5",
     "webpack": "^5.64.2",
     "webpack-stream": "^7.0.0"
@@ -78,6 +77,7 @@
     "flatpickr": "^4.6.9",
     "fontfaceobserver": "^2.1.0",
     "gsap": "^3.8.0",
+
     "imask": "^6.2.2",
     "nodelist-foreach-polyfill": "^1.2.0",
     "photoswipe": "^4.1.3",

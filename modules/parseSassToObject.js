@@ -1,5 +1,5 @@
 const valueParser = require('postcss-values-parser')
-const sass = require('node-sass')
+const sass = require('sass')
 const postcss = require('postcss')
 
 function parse(string) {

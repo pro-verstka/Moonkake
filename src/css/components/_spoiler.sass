@@ -2,47 +2,47 @@
  * -------------------------------------------------- */
 
 [data-spoiler]
-	visibility: hidden
+  visibility: hidden
 
-	[data-spoiler-toggle]
-		display: block
+  [data-spoiler-toggle]
+    display: block
 
-	&.spoiler_text-mode
-		[data-spoiler-intro]
-			display: block
+  &.spoiler_text-mode
+    [data-spoiler-intro]
+      display: block
 
-		[data-spoiler-body]
-			display: none
+    [data-spoiler-body]
+      display: none
 
-		&.spoiler_active
-			[data-spoiler-intro]
-				display: none
+    &.spoiler_active
+      [data-spoiler-intro]
+        display: none
 
-			[data-spoiler-body]
-				display: block
-				//animation: fadeIn 1s forwards
+      [data-spoiler-body]
+        display: block
+        //animation: fadeIn 1s forwards
 
-	&.spoiler_html-mode
-		[data-spoiler-body]
-			overflow: hidden
-			height: 10rem
+  &.spoiler_html-mode
+    [data-spoiler-body]
+      overflow: hidden
+      height: 10rem
 
-		&.spoiler_active
-			[data-spoiler-body]
-				height: auto
+    &.spoiler_active
+      [data-spoiler-body]
+        height: auto
 
-	&.spoiler_initialized
-		visibility: visible
+  &.spoiler_initialized
+    visibility: visible
 
 /* THEME
  * -------------------------------------------------- */
 
 .spoiler
-	&.spoiler_custom
-		[data-spoiler-toggle]
-			cursor: pointer
-			background: transparent
-			padding: 0
-			margin: 0
-			border: 0
-			border-bottom: .1rem dashed currentColor
+  &.spoiler_custom
+    [data-spoiler-toggle]
+      cursor: pointer
+      background: transparent
+      padding: 0
+      margin: 0
+      border: 0
+      border-bottom: .1rem dashed currentColor

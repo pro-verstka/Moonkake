@@ -1,23 +1,23 @@
 .container
-	width: 100%
-	max-width: calc(var(--container-max-width) + var(--gap) * 2)
-	margin: 0 auto
-	padding-left: var(--gap)
-	padding-right: var(--gap)
+  width: 100%
+  max-width: calc(var(--container-max-width) + var(--gap) * 2)
+  margin: 0 auto
+  padding-left: var(--gap)
+  padding-right: var(--gap)
 
 .row
-	+flex()
+  +flex()
 
-	> .row__item
-		flex: 1
+  > .row__item
+    flex: 1
 
 .list
-	list-style: none
-	padding: 0
-	margin: 0
+  list-style: none
+  padding: 0
+  margin: 0
 
-	> &__item
-		list-style: none
+  > &__item
+    list-style: none
 
-	&__link
-		display: block
+  &__link
+    display: block

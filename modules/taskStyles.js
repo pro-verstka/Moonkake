@@ -6,8 +6,7 @@ const flatten = require('gulp-flatten')
 const rename = require('gulp-rename')
 const gcmq = require('gulp-group-css-media-queries')
 const cssnano = require('cssnano')
-const sass = require('gulp-sass')(require('node-sass'))
-const packageImporter = require('node-sass-package-importer')
+const sass = require('gulp-dart-sass')
 const postcss = require('gulp-postcss')
 const postcssPresetEnv = require('postcss-preset-env')
 const parseSassToObject = require('./parseSassToObject')
@@ -67,8 +66,10 @@ function styles() {
 		})
 		.pipe(
 			sass({
-				includePaths: ['node_modules'],
-				importer: packageImporter()
+				includePaths: ['node_modules']
+				// indentedSyntax: true,
+				// indentType: 'tab',
+				// indentWidth: 2
 			})
 		)
 		.pipe(gcmq())

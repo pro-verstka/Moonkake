@@ -10,118 +10,118 @@ $gap: 2rem
 
 // width: vw(20px)
 @function vw($size, $width: 1920)
-	$vw: ($width * 0.01) * 1px
-	@return ($size / $vw) * 1vw
+  $vw: ($width * 0.01) * 1px
+  @return ($size / $vw) * 1vw
 
 =vh-height($value)
-	height: #{$value}vh
-	height: calc(var(--vh, 1vh) * #{$value})
+  height: #{$value}vh
+  height: calc(var(--vh, 1vh) * #{$value})
 
 =content()
-	content: ''
-	display: block
-	position: absolute
+  content: ''
+  display: block
+  position: absolute
 
 =flex()
-	display: flex
-	flex-wrap: wrap
+  display: flex
+  flex-wrap: wrap
 
-	& > *
-		min-width: 0
+  & > *
+    min-width: 0
 
 =flex-width($width)
-	@if $width == 'none'
-		flex: none
-		max-width: none
-	@else
-		flex: 0 0 $width
-		max-width: $width
+  @if $width == 'none'
+    flex: none
+    max-width: none
+  @else
+    flex: 0 0 $width
+    max-width: $width
 
 =hidden()
-	position: absolute
-	left: 0
-	top: 0
-	width: 0
-	height: 0
-	visibility: hidden
-	overflow: hidden
+  position: absolute
+  left: 0
+  top: 0
+  width: 0
+  height: 0
+  visibility: hidden
+  overflow: hidden
 
 =link()
-	border-bottom: .1rem solid currentColor
+  border-bottom: .1rem solid currentColor
 
-	&:hover
-		border-bottom-color: transparent
+  &:hover
+    border-bottom-color: transparent
 
 =link-invert()
-	border-bottom: .1rem solid transparent
+  border-bottom: .1rem solid transparent
 
-	&:hover
-		border-bottom-color: currentColor
+  &:hover
+    border-bottom-color: currentColor
 
 =scroll()
-	&::-webkit-scrollbar
-		width: .4rem
+  &::-webkit-scrollbar
+    width: .4rem
 
-	&::-webkit-scrollbar-track
-		background: transparent
+  &::-webkit-scrollbar-track
+    background: transparent
 
-	&::-webkit-scrollbar-thumb
-		background-color: rgba(#000, .5)
-		border-radius: .2rem
+  &::-webkit-scrollbar-thumb
+    background-color: rgba(#000, .5)
+    border-radius: .2rem
 
-	scrollbar-color: rgba(#000, .5) transparent
-	scrollbar-width: thin
+  scrollbar-color: rgba(#000, .5) transparent
+  scrollbar-width: thin
 
 =scroll-snap($direction: x)
-	scroll-snap-type: #{$direction} mandatory
-	overflow: auto
-	-webkit-overflow-scrolling: touch
+  scroll-snap-type: #{$direction} mandatory
+  overflow: auto
+  -webkit-overflow-scrolling: touch
 
-	> *
-		scroll-snap-align: start
+  > *
+    scroll-snap-align: start
 
 =hide-scroll()
-	scrollbar-width: none
-	-ms-overflow-style: none
+  scrollbar-width: none
+  -ms-overflow-style: none
 
-	&::-webkit-scrollbar
-		display: none
-		width: 0
-		height: 0
+  &::-webkit-scrollbar
+    display: none
+    width: 0
+    height: 0
 
 /* Font-face */
 
 =font-face($family, $filename: $family, $weight: normal, $style: normal)
-	@font-face
-		font-family: "#{$family}"
-		font-display: swap
-		src: url('../fonts/#{$filename}.woff2') format('woff2'), url('../fonts/#{$filename}.woff') format('woff')
-		font-weight: $weight
-		font-style: $style
+  @font-face
+    font-family: "#{$family}"
+    font-display: swap
+    src: url('../fonts/#{$filename}.woff2') format('woff2'), url('../fonts/#{$filename}.woff') format('woff')
+    font-weight: $weight
+    font-style: $style
 
 /* Grid */
 
 =grid($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
-	&
-		margin-top: $top - $vgap
-		margin-left: -$hgap
-		margin-bottom: $bottom
+  &
+    margin-top: $top - $vgap
+    margin-left: -$hgap
+    margin-bottom: $bottom
 
-	& > *
-		padding-left: $hgap
-		padding-top: $vgap
-		flex: 0 0 100%/$column
-		max-width: 100%/$column
+  & > *
+    padding-left: $hgap
+    padding-top: $vgap
+    flex: 0 0 100%/$column
+    max-width: 100%/$column
 
 =grid-calc($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
-	&
-		margin-top: $top - $vgap
-		margin-left: -$hgap
-		margin-bottom: $bottom
+  &
+    margin-top: $top - $vgap
+    margin-left: -$hgap
+    margin-bottom: $bottom
 
-	& > *
-		width: 100%
-		margin-left: $hgap
-		margin-top: $vgap
-		flex: 0 0 calc(100% * 1 / #{$column} - #{$hgap})
-		max-width: calc(100% * 1 / #{$column} - #{$hgap})
+  & > *
+    width: 100%
+    margin-left: $hgap
+    margin-top: $vgap
+    flex: 0 0 calc(100% * 1 / #{$column} - #{$hgap})
+    max-width: calc(100% * 1 / #{$column} - #{$hgap})

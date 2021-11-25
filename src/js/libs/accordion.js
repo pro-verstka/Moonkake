@@ -5,9 +5,9 @@ class Accordion {
 			item: '.accordion__item',
 			handler: '.accordion__header',
 			body: '.accordion__body',
-			active: 'accordion_active',
+			active: 'accordion__item_active',
 			animation: 'accordion_animation',
-			useAnimation: true
+			useAnimation: false
 		}
 
 		if (typeof options === 'object') {

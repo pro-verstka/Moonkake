@@ -197,9 +197,9 @@ class Modal {
 		this.modals.push(this.options.modalImageId)
 
 		const $modal = document.getElementById(this.options.modalImageId)
-		const $modalImage = $modal.querySelector('.modal-image')
-		const $modalCaption = $modal.querySelector('.modal-caption')
-		$modalImage.innerHTML = `<span class="modal-loader">${this.options.language.loadingText}</span>`
+		const $modalImage = $modal.querySelector('.modal__image')
+		const $modalCaption = $modal.querySelector('.modal__caption')
+		$modalImage.innerHTML = `<span class="modal__loader">${this.options.language.loadingText}</span>`
 
 		document.documentElement.classList.add('-modal-locked')
 
@@ -238,8 +238,8 @@ class Modal {
 		image.onload = () => {
 			const ratio = image.width / image.height
 
-			$modalImage.classList.toggle('modal-image_portrait', image.width > image.height)
-			$modalImage.classList.toggle('modal-image_landscape', image.width < image.height)
+			$modalImage.classList.toggle('modal__image_portrait', image.width > image.height)
+			$modalImage.classList.toggle('modal__image_landscape', image.width < image.height)
 
 			this.setImageDimensions(image, ratio)
 
@@ -284,7 +284,7 @@ class Modal {
 			$iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
 		}
 
-		$modal.querySelector('.modal-iframe').appendChild($iframe)
+		$modal.querySelector('.modal__iframe').appendChild($iframe)
 
 		document.documentElement.classList.add('-modal-locked')
 
@@ -332,8 +332,8 @@ class Modal {
 		const handleClose = () => {
 			$modal.classList.remove('modal_opened')
 
-			const $modalIframe = $modal.querySelector('.modal-iframe iframe')
-			const $modalCaption = $modal.querySelector('.modal-caption')
+			const $modalIframe = $modal.querySelector('.modal__iframe iframe')
+			const $modalCaption = $modal.querySelector('.modal__caption')
 
 			if ($modalIframe) {
 				$modalIframe.remove()

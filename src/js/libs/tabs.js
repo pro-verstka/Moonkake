@@ -6,8 +6,8 @@ class Tabs {
 			content: '.tabs__content',
 			item: '.tabs__item',
 			active: 'tabs__item_active',
-			useHashNav: true,
-			equalHeight: true
+			useHashNav: false,
+			equalHeight: false
 		}
 
 		if (typeof options === 'object') {

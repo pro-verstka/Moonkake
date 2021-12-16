@@ -9,25 +9,30 @@ $gap: 2rem
 /* Common */
 
 // width: vw(20px)
-@function vw($size, $width: 1920)
-  $vw: ($width * 0.01) * 1px
-  @return ($size / $vw) * 1vw
-
-=vh-height($value)
-  height: #{$value}vh
-  height: calc(var(--vh, 1vh) * #{$value})
+//@function vw($size, $width: 1920)
+//  $vw: ($width * 0.01) * 1px
+//  @return ($size / $vw) * 1vw
+//
+//=vh-height($value)
+//  height: #{$value}vh
+//  height: calc(var(--vh, 1vh) * #{$value})
 
 =content()
   content: ''
   display: block
   position: absolute
 
-=flex()
-  display: flex
-  flex-wrap: wrap
+=grid-type($type: 'flex')
+  @if $type == 'flex'
+    display: flex
+    flex-wrap: wrap
+
+  @if $type == 'grid'
+    display: grid
 
   & > *
-    min-width: 0
+    min-width: 1px
+    min-height: 1px
 
 =flex-width($width)
   @if $width == 'none'
@@ -89,6 +94,12 @@ $gap: 2rem
     width: 0
     height: 0
 
+=line-clamp($number)
+  display: -webkit-box
+  -webkit-line-clamp: $number
+  -webkit-box-orient: vertical
+  overflow: hidden
+
 /* Font-face */
 
 =font-face($family, $filename: $family, $weight: normal, $style: normal)
@@ -99,29 +110,16 @@ $gap: 2rem
     font-weight: $weight
     font-style: $style
 
-/* Grid */
-
-=grid($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
-  &
-    margin-top: $top - $vgap
-    margin-left: -$hgap
-    margin-bottom: $bottom
-
-  & > *
-    padding-left: $hgap
-    padding-top: $vgap
-    flex: 0 0 100%/$column
-    max-width: 100%/$column
-
-=grid-calc($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
-  &
-    margin-top: $top - $vgap
-    margin-left: -$hgap
-    margin-bottom: $bottom
-
-  & > *
-    width: 100%
-    margin-left: $hgap
-    margin-top: $vgap
-    flex: 0 0 calc(100% * 1 / #{$column} - #{$hgap})
-    max-width: calc(100% * 1 / #{$column} - #{$hgap})
+///* Grid */
+//
+//=grid($column: 2, $vgap: $gap, $hgap: $gap, $top: 0, $bottom: 0)
+//  &
+//    margin-top: $top - $vgap
+//    margin-left: -$hgap
+//    margin-bottom: $bottom
+//
+//  & > *
+//    padding-left: $hgap
+//    padding-top: $vgap
+//    flex: 0 0 100%/$column
+//    max-width: 100%/$column

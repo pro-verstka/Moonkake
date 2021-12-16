@@ -21,7 +21,7 @@ function scripts() {
 					exclude: [/node_modules\/(?!(swiper|ssr-window|dom7)\/).*/, /\.test\.jsx?$/],
 					use: [
 						{
-							loader: 'babel-loader',
+							loader: 'babel-loader'
 							// options: {
 							// 	presets: [
 							// 		[
@@ -41,7 +41,13 @@ function scripts() {
 			]
 		},
 		resolve: {
-			extensions: ['.js', '.json']
+			extensions: ['.js', '.json'],
+			alias: {
+				react: 'preact/compat',
+				'react-dom/test-utils': 'preact/test-utils',
+				'react-dom': 'preact/compat',
+				'react/jsx-runtime': 'preact/jsx-runtime'
+			}
 		},
 		optimization: {
 			minimize: isProd,

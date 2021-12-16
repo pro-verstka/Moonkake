@@ -1,12 +1,12 @@
 .container
   width: 100%
-  max-width: calc(var(--container-max-width) + var(--gap) * 2)
+  max-width: calc(var(--container-max-width) + var(--container-gap) * 2)
   margin: 0 auto
-  padding-left: var(--gap)
-  padding-right: var(--gap)
+  padding-left: var(--container-gap)
+  padding-right: var(--container-gap)
 
 .row
-  +flex()
+  +grid-type('flex')
 
   > .row__item
     flex: 1

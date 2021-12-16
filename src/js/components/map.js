@@ -11,6 +11,7 @@ const initMap = () => {
 		map.controls.add(
 			new ymaps.control.ZoomControl({
 				options: {
+					size: 'small',
 					position: {
 						right: 10,
 						bottom: 30
@@ -19,7 +20,7 @@ const initMap = () => {
 			})
 		)
 
-		const pacemark = new ymaps.Placemark(
+		const placeMark = new ymaps.Placemark(
 			map.getCenter(),
 			{
 				balloonContent: 'Адрес',
@@ -35,7 +36,7 @@ const initMap = () => {
 			}
 		)
 
-		map.geoObjects.add(pacemark)
+		map.geoObjects.add(placeMark)
 	})
 }
 

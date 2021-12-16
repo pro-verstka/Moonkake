@@ -16,8 +16,12 @@ html
 *::after
   box-sizing: inherit
 
+#root,
+#__next
+  isolation: isolate
+
 body
-  min-width: 320px
+  min-width: 375px
   line-height: var(--base-text-line-height)
   font-size: var(--content-text-font-size)
   margin: 0
@@ -62,11 +66,12 @@ h6,
 .h4,
 .h5,
 .h6
-  margin: 0 0 var(--header-text-bottom-offset) 0
+  margin: 0
+  //margin: 0 0 var(--header-text-bottom-offset) 0
   font-family: var(--header-text-font-family)
-  font-weight: var(--header-text-font-weight)
+  //font-weight: var(--header-text-font-weight)
   color: var(--header-text-color)
-  line-height: var(--header-text-line-height)
+  //line-height: var(--header-text-line-height)
   hyphens: none
 
   a
@@ -76,26 +81,44 @@ h6,
 h1,
 .h1
   font-size: var(--header-text-font-size-1)
+  margin-bottom: var(--header-text-bottom-offset-1)
+  font-weight: var(--header-text-font-weight-1)
+  line-height: var(--header-text-line-height-1)
 
 h2,
 .h2
   font-size: var(--header-text-font-size-2)
+  margin-bottom: var(--header-text-bottom-offset-2)
+  font-weight: var(--header-text-font-weight-2)
+  line-height: var(--header-text-line-height-2)
 
 h3,
 .h3
   font-size: var(--header-text-font-size-3)
+  margin-bottom: var(--header-text-bottom-offset-3)
+  font-weight: var(--header-text-font-weight-3)
+  line-height: var(--header-text-line-height-3)
 
 h4,
 .h4
   font-size: var(--header-text-font-size-4)
+  margin-bottom: var(--header-text-bottom-offset-4)
+  font-weight: var(--header-text-font-weight-4)
+  line-height: var(--header-text-line-height-4)
 
 h5,
 .h5
   font-size: var(--header-text-font-size-5)
+  margin-bottom: var(--header-text-bottom-offset-5)
+  font-weight: var(--header-text-font-weight-5)
+  line-height: var(--header-text-line-height-5)
 
 h6,
 .h6
   font-size: var(--header-text-font-size-6)
+  margin-bottom: var(--header-text-bottom-offset-6)
+  font-weight: var(--header-text-font-weight-6)
+  line-height: var(--header-text-line-height-6)
 
 p,
 ul,
@@ -122,7 +145,7 @@ p
 ul,
 ol
   padding: 0
-  margin: 0 0 var(--content-text-bottom-offset) 2.5rem
+  margin: 0 0 var(--content-text-bottom-offset) 0
 
 ul,
 ol
@@ -130,17 +153,17 @@ ol
   ol
     margin-bottom: 0
 
-ul,
-ol
-  &:not([class])
-    li + li
-      margin-top: var(--content-text-list-offset)
+//ul,
+//ol
+//  &:not([class])
+//    li + li
+//      margin-top: var(--content-text-list-offset)
 
 dl
   margin: 0 0 var(--content-text-bottom-offset) 0
 
-dt
-  font-weight: bold
+//dt
+//  font-weight: bold
 
 dd
   margin-left: 0
@@ -167,7 +190,7 @@ pre,
 kbd,
 code,
 samp
-  font-family: monospace, sans-serif
+  font-family: monospace
 
 pre
   overflow: auto
@@ -175,46 +198,46 @@ pre
 address
   font-style: normal
 
-i,
-em,
-dfn,
-cite
-  font-style: italic
+//i,
+//em,
+//dfn,
+//cite
+//  font-style: italic
 
-u,
-ins,
-var
-  text-decoration: underline
+//u,
+//ins,
+//var
+//  text-decoration: underline
 
-b,
-strong
-  font-weight: bold
+//b,
+//strong
+//  font-weight: bold
 
-s,
-del,
-strike
-  text-decoration: line-through
+//s,
+//del,
+//strike
+//  text-decoration: line-through
 
-abbr,
-acronym
-  cursor: help
-  border-bottom: .1rem dashed currentColor
+//abbr,
+//acronym
+//  cursor: help
+//  border-bottom: .1rem dashed currentColor
 
-mark
-  color: #000000
-  background: #ffff00
+//mark
+//  color: #000000
+//  background: #ffff00
 
-q,
-blockquote
-  quotes: '' ''
-  font-style: normal
-  padding: 1rem 2rem
-  margin: 0 0 1rem 0
-  border-left: .5rem solid #eeeeee
-
-  &::after,
-  &::before
-    content: ''
+//q,
+//blockquote
+//  quotes: '' ''
+//  font-style: normal
+//  padding: 1rem 2rem
+//  margin: 0 0 1rem 0
+//  border-left: .5rem solid #eeeeee
+//
+//  &::after,
+//  &::before
+//    content: ''
 
 img
   vertical-align: top
@@ -253,6 +276,8 @@ h6,
 .h6,
 q,
 blockquote
+  overflow-wrap: break-word
+
   &:last-child
     margin-bottom: 0
 
@@ -265,8 +290,8 @@ table
   border-spacing: 0
   font-variant-numeric: tabular-nums
 
-  th
-    font-weight: bold
+  //th
+  //  font-weight: bold
 
   caption
     text-align: center
@@ -307,20 +332,21 @@ audio,
 canvas,
 progress,
 video
-  display: inline-block
-  vertical-align: baseline
+  display: block
+  //display: inline-block
+  //vertical-align: baseline
 
 video
   max-width: 100%
   height: auto
 
-audio:not([controls])
-  display: none
-  height: 0
+//audio:not([controls])
+//  display: none
+//  height: 0
 
-[hidden],
-template
-  display: none
+//[hidden],
+//template
+//  display: none
 
 figure
   margin: 0
@@ -357,8 +383,8 @@ textarea
   vertical-align: baseline
   outline: none
 
-button
-  overflow: visible
+//button
+//  overflow: visible
 
 button,
 select
@@ -369,35 +395,39 @@ input[type='number']::-webkit-outer-spin-button
   opacity: 1
   height: auto
 
-*::-webkit-input-placeholder
-  color: inherit
-  opacity: 1
+input
+  &::placeholder
+    color: inherit
+    opacity: 1
 
-*:-moz-placeholder
-  color: inherit
-  opacity: 1
-
-*::-moz-placeholder
-  color: inherit
-  opacity: 1
-
-*:-ms-input-placeholder
-  color: inherit
-  opacity: 1
+//*::-webkit-input-placeholder
+//  color: inherit
+//  opacity: 1
+//
+//*:-moz-placeholder
+//  color: inherit
+//  opacity: 1
+//
+//*::-moz-placeholder
+//  color: inherit
+//  opacity: 1
+//
+//*:-ms-input-placeholder
+//  color: inherit
+//  opacity: 1
 
 button,
 input[type='button'],
 input[type='reset'],
 input[type='submit']
   cursor: pointer
-  appearance: button
 
 button[disabled],
 input[disabled],
 textarea[disabled],
 select[disabled]
   cursor: default
-  filter: grayscale(100%)
+  //filter: grayscale(100%)
 
 input[type='checkbox'],
 input[type='radio']
@@ -421,5 +451,5 @@ textarea
   resize: none
   height: auto
 
-optgroup
-  font-weight: bold
+//optgroup
+//  font-weight: bold

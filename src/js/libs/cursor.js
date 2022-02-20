@@ -5,6 +5,8 @@ class Cursor {
 		this.$cursor = document.querySelector('.cursor')
 		this.$follower = document.querySelector('.cursor-follower')
 
+		if (!this.$cursor && !this.$follower) return
+
 		this.init()
 	}
 

@@ -80,6 +80,13 @@ div.file
 ```pug
 select.select(name="select_name")
   option(value="") текст
+
+div.select
+  select(data-placeholder="Select...")
+    option(value="")
+    option(value="") All
+    option(value="One") One
+    option(value="Two") Two
 ```
 
 ### Form

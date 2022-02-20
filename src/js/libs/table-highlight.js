@@ -2,6 +2,8 @@ class TableColumnHighlight {
 	constructor($table) {
 		this.$root = $table
 
+		if (!this.$root) return
+
 		this.$root.querySelectorAll('td').forEach($el => {
 			$el.addEventListener('mouseover', () => {
 				this.highlightColumn($el, '#eaeaea')

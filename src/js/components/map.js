@@ -1,12 +1,19 @@
 const initMap = () => {
 	ymaps.ready(() => {
-		const map = new ymaps.Map('map', {
-			center: [51.507351, -0.12766],
-			zoom: 17,
-			controls: []
-		})
+		const map = new ymaps.Map(
+			'map',
+			{
+				center: [51.507351, -0.12766],
+				zoom: 17,
+				controls: []
+			},
+			{
+				suppressMapOpenBlock: true
+			}
+		)
 
 		map.behaviors.disable('scrollZoom')
+		// map.behaviors.disable('drag')
 
 		map.controls.add(
 			new ymaps.control.ZoomControl({
@@ -37,6 +44,8 @@ const initMap = () => {
 		)
 
 		map.geoObjects.add(placeMark)
+
+		// map.panes.get('ground').getElement().style.filter = 'grayscale(1) brightness(0.4) contrast(1.5)'
 	})
 }
 

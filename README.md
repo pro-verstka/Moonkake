@@ -2,17 +2,15 @@
 
 Стартовый шаблон для верстки с использованием BEM, Gulp, Sass, Pug, JS/ES6.
 
-## Установка
-
-**Шаг 1.** Установить NodeJS - https://nodejs.org/
-
-**Шаг 2.** Установить Gulp
+## Скачать
 
 ```sh
-npm i gulp -g
+npx degit detectiveshelby/moonkake
 ```
 
-**Шаг 3.** Установить пакеты из package.json
+## Установка
+
+Установить пакеты из package.json
 
 ```sh
 npm i

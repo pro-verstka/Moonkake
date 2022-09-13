@@ -1,15 +1,15 @@
 /*
  Package Name: Moonkake
  Package URI: https://github.com/detectiveshelby/moonkake
- Version: 8.5.9
+ Version: 8.6.0
  Author: DevBrains
  Author URI: https://devbrains.io/
  */
 
 /* Config */
 
+@import "mixins"
 @import "config/root"
-@import "config/base"
 
 /* Font */
 
@@ -21,14 +21,11 @@
 
 /* Vendor */
 
-@import "swiper/swiper-bundle"
-@import "photoswipe/dist/photoswipe"
-//@import "~flatpickr/dist/flatpickr"
-//@import "~flatpickr/dist/themes/airbnb"
+@import "vendors"
 
 /* Common */
 
-@import "common/grid"
+@import "utils"
 @import "common/common"
 @import "common/header"
 @import "common/footer"
@@ -57,3 +54,5 @@
 @import "components/spoiler"
 @import "components/tabs"
 @import "components/tooltip"
+@import "components/drawer"
+@import "components/scroll-lock"

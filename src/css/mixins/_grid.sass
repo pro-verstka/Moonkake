@@ -1,0 +1,11 @@
+=grid($type: 'flex')
+  @if $type == 'flex'
+    display: flex
+    flex-wrap: wrap
+
+  @if $type == 'grid'
+    display: grid
+
+  & > *
+    min-width: 1px
+    min-height: 1px

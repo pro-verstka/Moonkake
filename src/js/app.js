@@ -1,13 +1,13 @@
 /*
  Package Name: Moonkake
  Package URI: https://github.com/detectiveshelby/moonkake
- Version: 8.5.9
+ Version: 8.6.0
  Author: DevBrains
  Author URI: https://devbrains.io/
  */
 
 // Vendors
-import './vendor/polyfills'
+// import './vendor/polyfills'
 
 // Config
 import './config'

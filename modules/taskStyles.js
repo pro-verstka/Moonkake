@@ -37,13 +37,18 @@ function styles() {
 	const plugins = [
 		postcssPresetEnv({
 			autoprefixer: {
-				grid: true
+				// grid: true
 			},
 			importFrom: [
 				{
 					customProperties: parseSassToObject('./src/css/config/_root.sass')
 				}
-			]
+			],
+			features: {
+				'custom-properties': {
+					disableDeprecationNotice: true
+				}
+			}
 		})
 	]
 

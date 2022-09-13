@@ -202,3 +202,19 @@ div(data-spoiler)
 ```pug
 a(href="#", data-tippy, data-tippy-content="Tippy!") Text
 ```
+
+### Drawer
+
+```pug
+button(data-drawer-toggle) Open
+
+div.drawer(data-drawer)
+```
+
+### SyncScroll
+
+```pug
+div(data-sync-scroll)
+  div(data-sync-scroll-item)
+  div(data-sync-scroll-item)
+```

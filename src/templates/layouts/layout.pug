@@ -1,4 +1,4 @@
-include ../blocks/mixins.pug
+include ../mixins/mixins
 
 doctype html
 
@@ -14,23 +14,28 @@ html(lang="ru")
 		meta(name="format-detection" content="telephone=no")
 		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${new Date().getTime()}`)
 
-	body
+		block css
+
+		script.
+			if (sessionStorage.fontsLoaded) {
+				document.documentElement.classList.add('-fonts-ready')
+			}
+
+	body(data-scroll-lock-fix-shift)
 
 		//div.loader(data-loader): div ⏳Loading...
 
 		div.wrapper
-			header.header
-				div.container
-			// header
+			include ../blocks/header
 
 			main.main
 				block main
 			// main
 
-			footer.footer
-				div.container
-			// footer
+			include ../blocks/footer
 		// wrapper
+
+		block bottom
 
 		include ../../img/icons.svg
 

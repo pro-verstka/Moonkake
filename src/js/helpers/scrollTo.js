@@ -1,6 +1,6 @@
 import scrollToElement from 'scroll-to-element'
 
-export default function scrollTo($target, options = {}, callback = () => {}) {
+const scrollTo = ($target, options = {}, callback = () => {}) => {
 	let defaults = {
 		offset: 0,
 		duration: 500
@@ -12,3 +12,5 @@ export default function scrollTo($target, options = {}, callback = () => {}) {
 
 	scrollToElement($target, defaults).on('end', callback)
 }
+
+export default scrollTo

@@ -13,6 +13,11 @@ class Drawer {
 		}
 
 		this.$drawer = document.querySelector(this.options.selector)
+
+		if (!this.$drawer) {
+			return
+		}
+
 		this.$toggleButton = document.querySelector(this.options.toggleButton)
 		this.$html = document.documentElement
 

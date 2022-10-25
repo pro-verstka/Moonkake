@@ -8,7 +8,7 @@ const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
-		version: '8.5.8',
+		version: '8.6.0',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io'
 	},
@@ -18,7 +18,7 @@ const MK = {
 			load: 'load'
 		},
 		animation: {
-			speed: Device.isMobile() ? 500 : 1500
+			speed: 1000
 		}
 	},
 
@@ -72,11 +72,7 @@ const MK = {
 	}
 }
 
-if (typeof window.MK === 'undefined') {
-	window.MK = MK
-} else {
-	window.MK = { ...window.MK, ...MK }
-}
+window.MK = { ...MK, ...(window.MK || {}) }
 
 /* LOADER
 -------------------------------------------------- */

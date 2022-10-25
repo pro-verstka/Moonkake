@@ -1,4 +1,4 @@
-export default function getPageQuery(key) {
+const getPageQuery = key => {
 	if (!window.location.search) {
 		return undefined
 	}
@@ -21,3 +21,5 @@ export default function getPageQuery(key) {
 
 	return query
 }
+
+export default getPageQuery

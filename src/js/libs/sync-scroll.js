@@ -1,11 +1,12 @@
 class SyncScroll {
 	constructor() {
 		this.$root = document.querySelector('[data-sync-scroll]')
-		this.$items = this.$root.querySelectorAll('[data-sync-scroll-item]')
 
 		if (!this.$root) {
 			return
 		}
+
+		this.$items = this.$root.querySelectorAll('[data-sync-scroll-item]')
 
 		this.init()
 	}

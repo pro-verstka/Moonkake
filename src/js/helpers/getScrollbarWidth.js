@@ -1,3 +1,3 @@
-export default function getScrollbarWidth() {
-	return window.innerWidth - document.body.clientWidth
-}
+const getScrollbarWidth = () => window.innerWidth - document.body.clientWidth
+
+export default getScrollbarWidth

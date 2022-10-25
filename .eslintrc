@@ -1,20 +1,12 @@
 {
-	"extends": ["preact", "airbnb-base", "prettier"],
+	"extends": ["airbnb-base", "prettier"],
 
 	"env": {
-		"browser": true,
-		"es2021": true
-	},
-
-	"settings": {
-		"jest": {
-			"version": 27
-		}
+		"browser": true
 	},
 
 	"parserOptions": {
-		"ecmaVersion": 12,
-		"sourceType": "module"
+		"ecmaVersion": "latest"
 	},
 
 	"globals": {
@@ -24,12 +16,6 @@
 	},
 
 	"plugins": ["prettier"],
-
-	"ecmaFeatures": {
-		"jsx": false
-	},
-
-	"parser": "@babel/eslint-parser",
 
 	"rules": {
 		"prettier/prettier": "error",

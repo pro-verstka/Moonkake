@@ -10,6 +10,10 @@ class Header {
 		this.$header = document.querySelector('[data-header]')
 		this.$themes = document.querySelectorAll('[data-header-theme]')
 
+		if (!this.$header && !this.$themes.length) {
+			return
+		}
+
 		this.init()
 	}
 

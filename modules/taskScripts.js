@@ -17,37 +17,16 @@ function scripts() {
 		module: {
 			rules: [
 				{
-					test: /\.(js)$/,
-					exclude: [/node_modules\/(?!(swiper|ssr-window|dom7)\/).*/, /\.test\.jsx?$/],
-					use: [
-						{
-							loader: 'babel-loader'
-							// options: {
-							// 	presets: [
-							// 		[
-							// 			'@babel/preset-env',
-							// 			{
-							// 				useBuiltIns: 'usage',
-							// 				corejs: 3,
-							// 				targets: 'last 3 version, ie >= 11'
-							// 			}
-							// 		]
-							// 	],
-							// 	"plugins": ["@babel/plugin-transform-runtime"]
-							// }
-						}
-					]
+					test: /\.js$/,
+					exclude: /(node_modules)/,
+					use: {
+						loader: 'swc-loader'
+					}
 				}
 			]
 		},
 		resolve: {
 			extensions: ['.js', '.json'],
-			alias: {
-				react: 'preact/compat',
-				'react-dom/test-utils': 'preact/test-utils',
-				'react-dom': 'preact/compat',
-				'react/jsx-runtime': 'preact/jsx-runtime'
-			}
 		},
 		optimization: {
 			minimize: isProd,

@@ -36,9 +36,6 @@ function styles() {
 
 	const plugins = [
 		postcssPresetEnv({
-			autoprefixer: {
-				// grid: true
-			},
 			importFrom: [
 				{
 					customProperties: parseSassToObject('./src/css/config/_root.sass')
@@ -72,9 +69,6 @@ function styles() {
 		.pipe(
 			sass({
 				includePaths: ['node_modules']
-				// indentedSyntax: true,
-				// indentType: 'tab',
-				// indentWidth: 2
 			})
 		)
 		.pipe(gcmq())

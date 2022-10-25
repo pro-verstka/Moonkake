@@ -13,13 +13,4 @@ const isAndroid = () => /Android/i.test(navigator.userAgent)
 const isIPhone = () => /iPhone|iPod/i.test(navigator.userAgent)
 const isIPad = () => /iPad/i.test(navigator.userAgent)
 
-const Device = {
-	isTouch,
-	isMobile,
-	isIOS,
-	isAndroid,
-	isIPhone,
-	isIPad
-}
-
-export default Device
+export { isTouch, isMobile, isIOS, isAndroid, isIPhone, isIPad }

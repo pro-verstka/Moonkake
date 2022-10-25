@@ -1,4 +1,4 @@
-export default function declension(oneNominative, severalGenitive, severalNominative, number) {
+const declension = (oneNominative, severalGenitive, severalNominative, number) => {
 	let num = number % 100
 
 	// eslint-disable-next-line no-return-assign,no-nested-ternary,no-cond-assign
@@ -14,3 +14,5 @@ export default function declension(oneNominative, severalGenitive, severalNomina
 			: severalNominative
 		: severalGenitive
 }
+
+export default declension

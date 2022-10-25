@@ -4,12 +4,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const initScrollAnimation = () => {
-	ScrollTrigger.batch('[data-scroll-fx]:not(.is-visible)', {
+	ScrollTrigger.batch('[data-scroll-fx]:not(.-is-visible)', {
 		start: 'top bottom-=10%',
 		onEnter: batch => {
-			batch.forEach(el => {
-				el.classList.add('is-visible')
-			})
+			batch.forEach(el => el.classList.add('-is-visible'))
 
 			gsap.to(batch, {
 				y: 0,

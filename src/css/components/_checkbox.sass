@@ -1,0 +1,43 @@
+.radio,
+.checkbox
+  overflow: hidden
+  position: relative
+  display: inline-block
+
+  input
+    +hidden()
+
+    &:checked + span::after
+      opacity: 1
+
+  span
+    display: block
+    line-height: 2rem
+    padding-left: 3rem
+    position: relative
+    font-size: 1.4rem
+
+    &::before
+      +content()
+      width: 2rem
+      height: 2rem
+      background: #ccc
+      top: 0
+      left: 0
+      transition: background-color .25s, opacity .25s, border-color .25s
+
+    &::after
+      +content()
+      width: 1rem
+      height: 1rem
+      background: #ddd
+      left: .5rem
+      top: .5rem
+      opacity: 0
+      transition: background-color .25s, opacity .25s, border-color .25s
+
+.radio
+  span
+    &::before,
+    &::after
+      border-radius: 50%

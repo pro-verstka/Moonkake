@@ -1,0 +1,43 @@
+.bars
+  display: block
+  width: 4rem
+  height: 4rem
+  position: relative
+  padding: 0
+  margin: 0
+  border: 0
+  background: none
+
+  &::before,
+  &::after,
+  span
+    +content()
+    left: 0
+    width: 100%
+    height: .2rem
+    background: currentColor
+    transition: all .25s ease
+
+  &::before
+    top: 0
+
+  span
+    top: 50%
+    margin-top: -.1rem
+
+  &::after
+    bottom: 0
+
+  &.-active
+    &::before
+      transform: rotate(45deg)
+      top: 50%
+      margin-top: -.1rem
+
+    span
+      opacity: 0
+
+    &::after
+      transform: rotate(-45deg)
+      bottom: 50%
+      margin-bottom: -.1rem

@@ -1,0 +1,67 @@
+include ../mixins/mixins
+
+doctype html
+
+html(lang="ru")
+
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=Edge")
+		title=data.meta.title
+		meta(name="keywords" content="")
+		meta(name="description" content="")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="format-detection" content="telephone=no")
+		//link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${new Date().getTime()}`)
+
+		block css
+
+		script.
+			if (sessionStorage.fontsLoaded) {
+				document.documentElement.classList.add('-fonts-ready')
+			}
+
+	body(data-scroll-lock-fix-shift)
+
+		//div.loader(data-loader): div ⏳Loading...
+
+		div.wrapper
+			include ../blocks/header
+
+			main.main
+				block main
+			// main
+
+			include ../blocks/footer
+		// wrapper
+
+		block bottom
+
+		include ../../img/icons.svg
+
+		// JS
+		//script(data-app-js defer src=`assets/js/app.min.js?v=${new Date().getTime()}`)
+
+		block js
+		//
+			script.
+				var isMapLoaded = false;
+
+				function loadMap() {
+					if (isMapLoaded) return false;
+
+					if (
+						window.pageYOffset + window.innerHeight * 1.5 >=
+						document.getElementById('map').getBoundingClientRect().top - document.body.getBoundingClientRect().top
+					) {
+						isMapLoaded = true;
+
+						var script = document.createElement('script');
+						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=MK.methods.initMap';
+						script.defer = true;
+						document.body.appendChild(script);
+					}
+				}
+
+				window.addEventListener('load', loadMap)
+				window.addEventListener('scroll', loadMap)

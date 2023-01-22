@@ -10,10 +10,7 @@
 
 @import "mixins";
 @import "config/root";
-
-/* Font */
-
-@import "font/font";
+@import "config/font";
 
 /* Core */
 
@@ -21,7 +18,7 @@
 
 /* Vendor */
 
-@import "vendors/index";
+@import "vendors";
 
 /* Common */
 

@@ -13,7 +13,7 @@ npx degit detectiveshelby/moonkake
 Установить пакеты из package.json
 
 ```sh
-npm i
+npm install
 ```
 
 ## Запуск
@@ -147,19 +147,19 @@ div.counter
 ### Breadcrumbs
 
 ```pug
-ul.list.breadcrumbs
-  li.list__item: a.list__link(href="#") Главная
-  li.list__item: a.list__link(href="#") Раздел
-  li.list__item: span.list__current Страница
+ul.breadcrumbs
+  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Главная
+  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Раздел
+  li.breadcrumbs__item: span.breadcrumbs__current Страница
 ```
 
 ### Pagination
 
 ```pug
-ul.list.pagination
-  li.list__item: a.list__link(href="#") 1
-  li.list__item: a.list__link(href="#") 2
-  li.list__item: a.list__link(href="#") 3
+ul.pagination
+  li.pagination__item: a.pagination__link(href="#") 1
+  li.pagination__item: a.pagination__link(href="#") 2
+  li.pagination__item: a.pagination__link(href="#") 3
 ```
 
 ### Modal

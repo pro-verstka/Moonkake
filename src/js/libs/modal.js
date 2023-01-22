@@ -1,4 +1,4 @@
-import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
+import ScrollLock from './scroll-lock'
 import { emitEvent } from '../helpers'
 
 class Modal {
@@ -25,6 +25,8 @@ class Modal {
 		if (typeof options === 'object') {
 			this.options = { ...this.options, ...options }
 		}
+
+		this.scrollLock = new ScrollLock()
 
 		this.modals = []
 
@@ -170,9 +172,7 @@ class Modal {
 			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll($modal, {
-			reserveScrollBarGap: true
-		})
+		this.scrollLock.lockScroll()
 
 		emitEvent('mk:modal:afterOpen', {
 			id,
@@ -215,9 +215,7 @@ class Modal {
 			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll($modal, {
-			reserveScrollBarGap: true
-		})
+		this.scrollLock.lockScroll()
 
 		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalImageId,
@@ -291,9 +289,7 @@ class Modal {
 			$modal.classList.add('modal_visible')
 		}, 10)
 
-		disableBodyScroll($modal, {
-			reserveScrollBarGap: true
-		})
+		this.scrollLock.lockScroll()
 
 		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalVideoId,
@@ -345,7 +341,7 @@ class Modal {
 
 			if (!this.modals.length) {
 				document.documentElement.classList.remove('-modal-locked')
-				clearAllBodyScrollLocks()
+				this.scrollLock.unlockScroll()
 			}
 		}
 

@@ -1,32 +1,43 @@
-import { getScrollbarWidth } from '../helpers'
+import { getScrollbarWidth, Device } from '../helpers'
 
 class ScrollLock {
 	constructor() {
 		this.scrollY = 0
-		this.$body = document.body
-		this.$fixShift = document.querySelectorAll('[data-scroll-lock-fix-shift]')
+		this.$elements = document.querySelectorAll('[data-scroll-lock-fix-shift]')
 	}
 
-	disable() {
-		this.scrollY = window.scrollY
+	lockScroll() {
+		const scrollBarWidth = getScrollbarWidth()
 
-		this.$fixShift.forEach($el => {
-			$el.style.paddingRight = `${getScrollbarWidth()}px`
+		document.body.style.overflow = 'hidden'
+
+		this.$elements?.forEach($el => {
+			const paddingRight = parseInt(window.getComputedStyle($el).paddingRight)
+
+			$el.style.paddingRight = `${paddingRight + scrollBarWidth}px`
 		})
 
-		this.$body.classList.add('-scroll-lock')
-		this.$body.style.top = `-${this.scrollY}px`
+		if (Device.isIOS()) {
+			this.scrollY = window.scrollY
+			document.body.style.position = 'fixed'
+			document.body.style.top = `-${this.scrollY}px`
+			document.body.style.width = '100%'
+		}
 	}
 
-	enable() {
-		this.$body.classList.remove('-scroll-lock')
-		this.$body.style.top = ''
-
-		window.scrollTo(0, this.scrollY)
-
-		this.$fixShift.forEach($el => {
+	unlockScroll() {
+		this.$elements?.forEach($el => {
 			$el.style.paddingRight = ''
 		})
+
+		document.body.style.overflow = ''
+
+		if (Device.isIOS()) {
+			document.body.style.position = ''
+			document.body.style.top = ''
+			document.body.style.width = ''
+			window.scrollTo(0, this.scrollY)
+		}
 	}
 }
 

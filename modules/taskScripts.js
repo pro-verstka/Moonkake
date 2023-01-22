@@ -26,7 +26,7 @@ function scripts() {
 			]
 		},
 		resolve: {
-			extensions: ['.js', '.json'],
+			extensions: ['.js', '.json']
 		},
 		optimization: {
 			minimize: isProd,

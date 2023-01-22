@@ -1,0 +1,13 @@
+.article {
+	hyphens: auto;
+
+	table {
+		margin-bottom: var(--content-text-bottom-offset);
+
+		td,
+		th {
+			border: 1px solid #ccc;
+			padding: var(--spacing-12);
+		}
+	}
+}

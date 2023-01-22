@@ -24,7 +24,7 @@ class TableColumnHighlight {
 		const tds = $target.closest('tr').querySelectorAll('td')
 		const index = Array.from(tds).indexOf($target)
 
-		for (let i = 0; i < trs.length; i+=1) {
+		for (let i = 0; i < trs.length; i += 1) {
 			const item = TableColumnHighlight.findTdSpan(trs[i], index)
 
 			if (!item.classList.contains('active')) {
@@ -38,7 +38,7 @@ class TableColumnHighlight {
 		const tds = $target.closest('tr').querySelectorAll('td')
 		const index = Array.from(tds).indexOf($target)
 
-		for (let i = 0; i < trs.length; i+=1) {
+		for (let i = 0; i < trs.length; i += 1) {
 			const item = TableColumnHighlight.findTdSpan(trs[i], index)
 			item.classList.add('active')
 		}
@@ -48,7 +48,7 @@ class TableColumnHighlight {
 		const tds = tr.children
 		let num = 0
 
-		for (let i = 0; i < tds.length; i+=1) {
+		for (let i = 0; i < tds.length; i += 1) {
 			num += tds[i].colSpan
 
 			if (num >= index + 1) {

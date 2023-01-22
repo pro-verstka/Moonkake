@@ -19,7 +19,7 @@ function styles() {
 	fs.readdirSync('./src/css').forEach(file => {
 		const name = `./src/css/${file}`
 
-		if (!fs.statSync(name).isDirectory() && path.extname(name) === '.sass') {
+		if (!fs.statSync(name).isDirectory() && path.extname(name) === '.scss') {
 			src.push(name)
 		}
 	})
@@ -28,7 +28,7 @@ function styles() {
 		fs.readdirSync('./src/css/pages').forEach(file => {
 			const name = `./src/css/pages/${file}`
 
-			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.sass') {
+			if (!fs.statSync(name).isDirectory() && path.extname(name) === '.scss') {
 				src.push(name)
 			}
 		})
@@ -38,7 +38,7 @@ function styles() {
 		postcssPresetEnv({
 			importFrom: [
 				{
-					customProperties: parseSassToObject('./src/css/config/_root.sass')
+					customProperties: parseSassToObject('./src/css/config/_root.scss')
 				}
 			],
 			features: {

@@ -1,13 +1,5 @@
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-
-const emitEvent = (name, detail) => {
-	window.dispatchEvent(
-		new CustomEvent(name, {
-			bubbles: true,
-			detail
-		})
-	)
-}
+import { emitEvent } from '../helpers'
 
 class Modal {
 	constructor(options = {}) {
@@ -158,7 +150,7 @@ class Modal {
 			return
 		}
 
-		emitEvent('modalBeforeOpen', {
+		emitEvent('mk:modal:beforeOpen', {
 			id,
 			trigger: $trigger
 		})
@@ -169,7 +161,7 @@ class Modal {
 
 		$modal.classList.add('modal_opened')
 
-		emitEvent('modalOpen', {
+		emitEvent('mk:modal:open', {
 			id,
 			trigger: $trigger
 		})
@@ -182,14 +174,14 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		emitEvent('modalAfterOpen', {
+		emitEvent('mk:modal:afterOpen', {
 			id,
 			trigger: $trigger
 		})
 	}
 
 	openImage(href, $trigger = null) {
-		emitEvent('modalBeforeOpen', {
+		emitEvent('mk:modal:beforeOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -214,7 +206,7 @@ class Modal {
 			}
 		}
 
-		emitEvent('modalOpen', {
+		emitEvent('mk:modal:open', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -227,7 +219,7 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		emitEvent('modalAfterOpen', {
+		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalImageId,
 			trigger: $trigger
 		})
@@ -250,7 +242,7 @@ class Modal {
 				this.setImageDimensions(image, ratio)
 			})
 
-			emitEvent('modalAfterImageLoad', {
+			emitEvent('mk:modal:afterImageLoad', {
 				id: this.options.modalImageId,
 				trigger: $trigger
 			})
@@ -258,7 +250,7 @@ class Modal {
 	}
 
 	openVideo(href, $trigger = null) {
-		emitEvent('modalBeforeOpen', {
+		emitEvent('mk:modal:beforeOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
@@ -290,7 +282,7 @@ class Modal {
 
 		$modal.classList.add('modal_opened')
 
-		emitEvent('modalOpen', {
+		emitEvent('mk:modal:open', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
@@ -303,7 +295,7 @@ class Modal {
 			reserveScrollBarGap: true
 		})
 
-		emitEvent('modalAfterOpen', {
+		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalVideoId,
 			trigger: $trigger
 		})
@@ -317,7 +309,7 @@ class Modal {
 			return
 		}
 
-		emitEvent('modalBeforeClose', {
+		emitEvent('mk:modal:beforeClose', {
 			id
 		})
 
@@ -325,7 +317,7 @@ class Modal {
 
 		$modal.classList.remove('modal_visible')
 
-		emitEvent('modalClose', {
+		emitEvent('mk:modal:close', {
 			id
 		})
 
@@ -344,7 +336,7 @@ class Modal {
 				$modalCaption.innerHTML = ''
 			}
 
-			emitEvent('modalAfterClose', {
+			emitEvent('mk:modal:afterClose', {
 				id
 			})
 

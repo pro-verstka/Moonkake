@@ -1,0 +1,42 @@
+$block: '.accordion';
+
+#{$block} {
+  &__header {
+    cursor: pointer;
+	}
+
+  &__body {
+    //display: none;
+	}
+
+  &__item + &__item {
+    margin-top: var(--spacing-20);
+	}
+
+  &__item_active {
+		#{$block}__body {
+      //display: block;
+      //animation: fadeIn 1s forwards;
+		}
+	}
+
+  &#{$block}_animation {
+		#{$block}__body {
+      overflow: hidden;
+      height: 0;
+      transition: height .25s ease;
+		}
+	}
+
+  &:not(#{$block}_animation) {
+		#{$block}__body {
+      display: none;
+		}
+
+		#{$block}__item_active {
+			#{$block}__body {
+        display: block;
+			}
+		}
+	}
+}

@@ -1,4 +1,5 @@
 import PhotoSwipe from 'photoswipe'
+// eslint-disable-next-line import/no-unresolved
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 
 const lightbox = new PhotoSwipeLightbox({

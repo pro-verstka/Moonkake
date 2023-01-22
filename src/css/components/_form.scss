@@ -1,0 +1,19 @@
+.form {
+	&__fieldset + &__fieldset {
+		margin-top: calc(var(--spacing-16) * 2);
+	}
+
+	&__group + &__group {
+		margin-top: var(--spacing-16);
+	}
+
+	&__group_row {
+		@include grid('flex');
+		margin-left: calc(var(--spacing-16) * -1);
+	}
+
+	&__group_row > &__item {
+		padding-left: var(--spacing-16);
+		flex: 1;
+	}
+}

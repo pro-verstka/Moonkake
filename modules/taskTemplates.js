@@ -1,10 +1,10 @@
 const gulp = require('gulp')
 const fs = require('fs')
 const path = require('path')
-const { browserSync } = require('./taskBrowser')
 const pug = require('gulp-pug')
 const flatten = require('gulp-flatten')
 const cheerio = require('gulp-cheerio')
+const { browserSync } = require('./taskBrowser')
 const { config } = require('./config')
 
 function templates() {
@@ -52,7 +52,7 @@ function templates() {
 					const $css = $('[data-app-css]')
 					const $js = $('[data-app-js]')
 
-					if (fs.existsSync(`./src/css/pages/${name}.sass`) && config.separateCssToPages) {
+					if (fs.existsSync(`./src/css/pages/${name}.scss`) && config.separateCssToPages) {
 						$css.after(`\n\t\t<link rel="stylesheet" href="assets/css/${name}.min.css?v=${time}">`)
 					}
 

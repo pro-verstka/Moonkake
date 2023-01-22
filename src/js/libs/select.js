@@ -1,4 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
+import { emitEvent } from '../helpers'
+
 class Select {
 	$originalSelect = null
 
@@ -123,11 +125,8 @@ class Select {
 				this.$select.classList.add('select_touched')
 
 				this.$originalSelect.value = value
-				this.$originalSelect.dispatchEvent(
-					new CustomEvent('change', {
-						bubbles: true
-					})
-				)
+
+				emitEvent('change', {}, this.$originalSelect)
 			})
 		})
 	}

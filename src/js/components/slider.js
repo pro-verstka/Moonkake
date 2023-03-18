@@ -1,6 +1,6 @@
-import Swiper, { Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade } from 'swiper'
+import Swiper, { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper'
 
-Swiper.use([Navigation, Pagination, Autoplay, Lazy, Mousewheel, EffectFade])
+Swiper.use([Navigation, Pagination, Autoplay, Mousewheel, EffectFade])
 
 // MK.addPlugins({Swiper}, true)
 
@@ -23,11 +23,6 @@ const slider = new Swiper('.swiper-container', {
 	},
 
 	preloadImages: false,
-
-	lazy: {
-		loadPrevNext: true,
-		loadOnTransitionStart: true
-	},
 
 	autoplay: {
 		delay: 5000,

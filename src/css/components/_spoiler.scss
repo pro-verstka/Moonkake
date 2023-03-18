@@ -1,0 +1,63 @@
+$block: '.spoiler';
+
+[data-spoiler] {
+  visibility: hidden;
+
+  [data-spoiler-toggle] {
+    display: block;
+	}
+
+  &#{$block}_text-mode {
+    [data-spoiler-intro] {
+      display: block;
+		}
+
+    [data-spoiler-body] {
+      display: none;
+		}
+
+    &#{$block}_active {
+      [data-spoiler-intro] {
+        display: none;
+			}
+
+      [data-spoiler-body] {
+        display: block;
+        //animation: fadeIn 1s forwards
+			}
+		}
+	}
+
+  &#{$block}_html-mode {
+    [data-spoiler-body] {
+      overflow: hidden;
+      height: 10rem;
+		}
+
+    &#{$block}_active {
+      [data-spoiler-body] {
+        height: auto;
+			}
+		}
+	}
+
+  &#{$block}_initialized {
+    visibility: visible;
+	}
+}
+
+/* THEME
+ * -------------------------------------------------- */
+
+#{$block} {
+  &#{$block}_custom {
+    [data-spoiler-toggle] {
+      cursor: pointer;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-bottom: .1rem dashed currentColor;
+		}
+	}
+}

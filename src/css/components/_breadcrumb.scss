@@ -1,0 +1,20 @@
+.breadcrumbs {
+	@include grid('flex');
+
+	&__item {
+		&::after {
+			content: '/';
+			margin: 0 var(--spacing-8);
+		}
+
+		&:last-child {
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	&__link {
+		display: inline-block;
+	}
+}

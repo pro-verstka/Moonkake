@@ -1,0 +1,4 @@
+@mixin vh-height($value: 100) {
+	height: #{$value}vh;
+	height: calc(var(--vh, 1vh) * #{$value});
+}

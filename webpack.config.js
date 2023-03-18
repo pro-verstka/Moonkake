@@ -12,6 +12,10 @@ const parseSassToObject = require('./modules/parseSassToObject')
 
 const isDev = process.env.NODE_ENV === 'development'
 
+const config = {
+	stylesExtension: 'scss'
+}
+
 const keys = fs
 	.readdirSync(path.resolve(__dirname, './src/templates/'))
 	.filter(el => el.endsWith('.pug'))
@@ -31,7 +35,7 @@ const getEntries = () => {
 		}
 
 		// styles
-		const styleFileName = `./src/css/pages/${key}.sass`
+		const styleFileName = `./src/css/pages/${key}.${config.stylesExtension}`
 
 		if (fs.existsSync(styleFileName)) {
 			entry.push(styleFileName)
@@ -94,7 +98,7 @@ module.exports = {
 	// target: isDev ? "web" : "browserslist",
 
 	entry: {
-		app: ['./src/js/app.js', './src/css/app.sass'],
+		app: ['./src/js/app.js', `./src/css/app.${config.stylesExtension}`],
 		...getEntries()
 	},
 
@@ -133,7 +137,7 @@ module.exports = {
 										{
 											importFrom: [
 												{
-													customProperties: parseSassToObject('./src/css/config/_root.sass')
+													customProperties: parseSassToObject(`./src/css/config/_root.${config.stylesExtension}`)
 												}
 											],
 											features: {
@@ -206,7 +210,7 @@ module.exports = {
 				parallel: true,
 				extractComments: false,
 				terserOptions: {
-					ecma: 2016,
+					ecma: 2021,
 					module: true
 				}
 			}),
@@ -233,12 +237,9 @@ module.exports = {
 		new ESLintPlugin()
 	],
 
-	stats: 'minimal',
+	stats: 'errors-only',
 
 	devServer: {
-		// contentBase: path.join(__dirname, 'src'),
-		// index: 'index.html',
-		// host: '0.0.0.0',
 		hot: true
 	}
 }

@@ -1,10 +1,10 @@
-import { getScrollbarWidth } from '../helpers'
+import { emitEvent, getScrollbarWidth } from '../helpers'
 
 class Loader {
 	constructor(options = {}) {
 		this.options = {
 			selector: '[data-loader]',
-			eventName: 'loader',
+			eventName: 'mk:loader:end',
 			classnames: {
 				lock: '-loader-lock',
 				closing: 'loader_closing',
@@ -42,11 +42,7 @@ class Loader {
 		this.$body.style.paddingRight = ''
 		this.$body.classList.remove(this.options.classnames.lock)
 
-		window.dispatchEvent(
-			new CustomEvent(this.options.eventName, {
-				bubbles: true
-			})
-		)
+		emitEvent(this.options.eventName)
 	}
 }
 

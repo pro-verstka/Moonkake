@@ -1,0 +1,9 @@
+@mixin hidden() {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	overflow: hidden;
+}

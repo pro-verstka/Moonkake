@@ -18,6 +18,7 @@
 	"plugins": ["prettier"],
 
 	"rules": {
+		"import/prefer-default-export": 0,
 		"prettier/prettier": "error",
 		"radix": "off",
 		"no-console": "off",

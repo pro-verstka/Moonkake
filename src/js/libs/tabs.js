@@ -1,3 +1,5 @@
+import { emitEvent } from '../helpers'
+
 class Tabs {
 	constructor(options = {}) {
 		this.options = {
@@ -118,15 +120,10 @@ class Tabs {
 			)
 		}
 
-		window.dispatchEvent(
-			new CustomEvent('tabChange', {
-				bubbles: true,
-				detail: {
-					root: $root,
-					index
-				}
-			})
-		)
+		emitEvent('mk:tabs:change', {
+			root: $root,
+			index
+		})
 	}
 }
 

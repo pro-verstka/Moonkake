@@ -1,0 +1,11 @@
+@mixin device-touch() {
+	@media (any-pointer: coarse) {
+		@content;
+	}
+}
+
+@mixin device-pointer() {
+	@media (any-pointer: fine) {
+		@content;
+	}
+}

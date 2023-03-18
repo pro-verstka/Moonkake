@@ -2,7 +2,7 @@
 // import './calendar'
 // import './file'
 import './font'
-// import './gallery'
+import './gallery'
 import './inputmask'
 import './lazyload'
 import './map'

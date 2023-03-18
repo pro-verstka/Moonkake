@@ -1,0 +1,54 @@
+.radio,
+.checkbox {
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+
+	input {
+		@include hidden;
+
+		&:checked + span::after {
+			opacity: 1;
+		}
+	}
+
+	span {
+		display: block;
+		padding-left: var(--spacing-32);
+		position: relative;
+
+		&::before {
+			@include content;
+			width: 2rem;
+			height: 2rem;
+			background: #ccc;
+			top: 0;
+			left: 0;
+			transition-property: color, background-color, opacity, border-color;
+			transition-duration: var(--transition-duration);
+			transition-timing-function: var(--transition-timing-function);
+		}
+
+		&::after {
+			@include content;
+			width: 1rem;
+			height: 1rem;
+			background: #ddd;
+			left: .5rem;
+			top: .5rem;
+			opacity: 0;
+			transition-property: color, background-color, opacity, border-color;
+			transition-duration: var(--transition-duration);
+			transition-timing-function: var(--transition-timing-function);
+		}
+	}
+}
+
+.radio {
+	span {
+		&::before,
+		&::after {
+			border-radius: 50%;
+		}
+	}
+}

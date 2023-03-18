@@ -1,0 +1,9 @@
+@mixin scroll-snap($direction: x) {
+	scroll-snap-type: #{$direction} mandatory;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+
+	> * {
+		scroll-snap-align: start;
+	}
+}

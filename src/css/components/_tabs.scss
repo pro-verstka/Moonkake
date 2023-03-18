@@ -1,0 +1,22 @@
+$block: '.tabs';
+
+#{$block} {
+  &__title {
+    @include grid('flex');
+
+		#{$block}__item {
+      cursor: pointer;
+		}
+	}
+
+  &__content {
+		#{$block}__item {
+      display: none;
+
+      &#{$block}__item_active {
+        display: block;
+        animation: fadeIn 1s forwards;
+			}
+		}
+	}
+}

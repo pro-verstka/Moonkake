@@ -7,11 +7,22 @@ html(lang="ru")
 	head
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible" content="IE=Edge")
-		title=data.meta.title
-		meta(name="keywords" content="")
-		meta(name="description" content="")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
+
+		title=data.meta.title
+		meta(name="keywords" content="Moonkake")
+		meta(name="description" content="Moonkake")
+
+		//meta(property="og:title" content="")
+		//meta(property="og:type" content="")
+		//meta(property="og:url" content="")
+		//meta(property="og:image" content="")
+
+		//link(rel="icon" href="/favicon.ico" sizes="any")
+		//link(rel="icon" href="/icon.svg" type="image/svg+xml")
+		//link(rel="apple-touch-icon" href="icon.png")
+
 		//link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${new Date().getTime()}`)
 
 		block css
@@ -43,9 +54,10 @@ html(lang="ru")
 		//script(data-app-js defer src=`assets/js/app.min.js?v=${new Date().getTime()}`)
 
 		block js
+
 		//
 			script.
-				var isMapLoaded = false;
+				let isMapLoaded = false;
 
 				function loadMap() {
 					if (isMapLoaded) return false;
@@ -56,7 +68,7 @@ html(lang="ru")
 					) {
 						isMapLoaded = true;
 
-						var script = document.createElement('script');
+						const script = document.createElement('script');
 						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=MK.methods.initMap';
 						script.defer = true;
 						document.body.appendChild(script);

@@ -1,3 +1,5 @@
+import { emitEvent } from '../helpers'
+
 class Accordion {
 	constructor(options = {}) {
 		this.options = {
@@ -50,15 +52,10 @@ class Accordion {
 			$el.closest(this.options.item).classList.toggle(this.options.active)
 		}
 
-		window.dispatchEvent(
-			new CustomEvent('accordionToggle', {
-				bubbles: true,
-				detail: {
-					root: $el.closest(this.options.root),
-					item: $el.closest(this.options.item)
-				}
-			})
-		)
+		emitEvent('mk:accordion:toggle', {
+			root: $el.closest(this.options.root),
+			item: $el.closest(this.options.item)
+		})
 	}
 }
 

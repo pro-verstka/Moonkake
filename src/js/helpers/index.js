@@ -1,6 +1,6 @@
 export * as Device from './device'
 export { default as declension } from './declension'
-// export { default as getPageQuery } from './getPageQuery'
 export { default as getScrollbarWidth } from './getScrollbarWidth'
 export { default as scrollTo } from './scrollTo'
 export { default as setViewportHeight } from './setViewportHeight'
+export { default as emitEvent } from './emitEvent'

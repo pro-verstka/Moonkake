@@ -1,0 +1,34 @@
+$block: '.loader';
+
+#{$block} {
+	position: fixed;
+	z-index: 9999;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: #1d1e22;
+	color: #fff;
+	overflow: hidden;
+	opacity: 1;
+	transition: width .5s ease-in, transform .5s ease-in, opacity .5s ease-in;
+
+	> div {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100vw;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&#{$block}_closing {
+		width: 0;
+	}
+
+	&#{$block}_closed {
+		display: none;
+	}
+}

@@ -1,12 +1,8 @@
-const valueParser = require('postcss-values-parser')
-const sass = require('sass')
-const postcss = require('postcss')
+import sass from 'sass'
+import postcss from 'postcss'
 
-function parse(string) {
-	return valueParser(string).parse()
-}
 function isBlockIgnored(ruleOrDeclaration) {
-	var rule = ruleOrDeclaration.selector ? ruleOrDeclaration : ruleOrDeclaration.parent
+	const rule = ruleOrDeclaration.selector ? ruleOrDeclaration : ruleOrDeclaration.parent
 	return /(!\s*)?postcss-custom-properties:\s*off\b/i.test(rule.toString())
 }
 
@@ -51,7 +47,7 @@ function getCustomPropertiesFromRoot(root, opts = {}) {
 	return Object.assign({}, customPropertiesFromHtmlElement, customPropertiesFromRootPseudo)
 }
 
-const parseSassToObject = file => {
+export const parseSassToObject = file => {
 	const raw = sass.renderSync({
 		file
 	})
@@ -60,5 +56,3 @@ const parseSassToObject = file => {
 
 	return getCustomPropertiesFromRoot(node)
 }
-
-module.exports = parseSassToObject

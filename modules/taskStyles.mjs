@@ -1,19 +1,18 @@
-const gulp = require('gulp')
-const fs = require('fs')
-const path = require('path')
-const { browserSync } = require('./taskBrowser')
-const flatten = require('gulp-flatten')
-const rename = require('gulp-rename')
-const gcmq = require('gulp-group-css-media-queries')
-const cssnano = require('cssnano')
-const sass = require('gulp-dart-sass')
-const postcss = require('gulp-postcss')
-const postcssPresetEnv = require('postcss-preset-env')
-const parseSassToObject = require('./parseSassToObject')
+import gulp from 'gulp'
+import fs from 'fs'
+import path from 'path'
+import flatten from 'gulp-flatten'
+import rename from 'gulp-rename'
+import gcmq from 'gulp-group-css-media-queries'
+import cssnano from 'cssnano'
+import sass from 'gulp-dart-sass'
+import postcss from 'gulp-postcss'
+import postcssPresetEnv from 'postcss-preset-env'
+import { browserSync } from './taskBrowser.mjs'
+import { parseSassToObject } from './parseSassToObject.mjs'
+import { config, isProd } from './config.mjs'
 
-const { config, isProd } = require('./config')
-
-function styles() {
+export function styles() {
 	const src = []
 
 	fs.readdirSync('./src/css').forEach(file => {
@@ -82,5 +81,3 @@ function styles() {
 		.pipe(gulp.dest('dist/assets/css'))
 		.pipe(browserSync.stream())
 }
-
-module.exports = styles

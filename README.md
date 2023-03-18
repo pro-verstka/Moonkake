@@ -32,7 +32,7 @@ npm run dev
 npm run build
 ```
 
-## Доступные настройки gulpfile.js
+## Доступные настройки gulpfile.mjs
 
 ```js
 {

@@ -1,7 +1,7 @@
-const gulp = require('gulp')
-const { browserSync } = require('./taskBrowser')
+import gulp from 'gulp'
+import { browserSync } from './taskBrowser.mjs'
 
-function fonts() {
+export function fonts() {
 	return gulp
 		.src('src/fonts/**/*', {
 			base: './src/fonts/'
@@ -11,5 +11,3 @@ function fonts() {
 			browserSync.reload()
 		})
 }
-
-module.exports = fonts

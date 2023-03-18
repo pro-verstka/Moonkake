@@ -1,13 +1,13 @@
-const gulp = require('gulp')
-const fs = require('fs')
-const path = require('path')
-const { browserSync } = require('./taskBrowser')
-const webpack = require('webpack')
-const webpackStream = require('webpack-stream')
-const TerserPlugin = require('terser-webpack-plugin')
-const { config, isProd } = require('./config')
+import gulp from 'gulp'
+import fs from 'fs'
+import path from 'path'
+import webpack from 'webpack'
+import webpackStream from 'webpack-stream'
+import TerserPlugin from 'terser-webpack-plugin'
+import { browserSync } from './taskBrowser.mjs'
+import { config, isProd } from './config.mjs'
 
-function scripts() {
+export function scripts() {
 	const webpackConfig = {
 		mode: isProd ? 'production' : 'development',
 		entry: {},
@@ -72,5 +72,3 @@ function scripts() {
 		.pipe(gulp.dest('dist/assets/js/'))
 		.pipe(browserSync.stream())
 }
-
-module.exports = scripts

@@ -1,7 +1,7 @@
-const gulp = require('gulp')
-const { browserSync } = require('./taskBrowser')
+import gulp from 'gulp'
+import { browserSync } from './taskBrowser.mjs'
 
-function images() {
+export function images() {
 	return gulp
 		.src('src/img/**/*', {
 			base: './src/img/'
@@ -11,5 +11,3 @@ function images() {
 			browserSync.reload()
 		})
 }
-
-module.exports = images

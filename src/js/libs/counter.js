@@ -113,6 +113,8 @@ class Counter {
 		}
 
 		$input.value = $input.value.replace(this.regex, '')
+
+		return true
 	}
 
 	handleInputBlur($input) {
@@ -147,6 +149,8 @@ class Counter {
 		setTimeout(() => {
 			$input.value = prefix + value + postfix
 		}, 300)
+
+		return true
 	}
 
 	handleInputKeyup($input) {

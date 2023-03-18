@@ -1,13 +1,13 @@
-const gulp = require('gulp')
-const fs = require('fs')
-const path = require('path')
-const pug = require('gulp-pug')
-const flatten = require('gulp-flatten')
-const cheerio = require('gulp-cheerio')
-const { browserSync } = require('./taskBrowser')
-const { config } = require('./config')
+import gulp from 'gulp'
+import fs from 'fs'
+import path from 'path'
+import pug from 'gulp-pug'
+import flatten from 'gulp-flatten'
+import cheerio from 'gulp-cheerio'
+import { browserSync } from './taskBrowser.mjs'
+import { config } from './config.mjs'
 
-function templates() {
+export function templates() {
 	const fontFiles = []
 
 	if (config.appendFontsToHead) {
@@ -39,7 +39,7 @@ function templates() {
 			pug({
 				pretty: true,
 				data: {
-					require,
+					// require,
 					...jsonFiles
 				}
 			})
@@ -82,5 +82,3 @@ function templates() {
 		.pipe(gulp.dest('dist/'))
 		.pipe(browserSync.stream())
 }
-
-module.exports = templates

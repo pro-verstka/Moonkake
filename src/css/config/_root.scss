@@ -111,6 +111,7 @@
 	--spacing-200: 20rem;
 
 	// responsive
+	// in template set 1vw, then template size / design size
 	@include bp-desktop-only {
 		--base-font-size: 10px;
 	}

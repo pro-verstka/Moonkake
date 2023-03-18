@@ -77,5 +77,8 @@
     "swiper": "^9.1.1",
     "validate.js": "^0.13.1",
     "vanilla-lazyload": "^17.8.3"
+  },
+  "volta": {
+    "node": "18.15.0"
   }
 }

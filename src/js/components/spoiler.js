@@ -1,4 +1,4 @@
-class Spoiler {
+export class Spoiler {
 	constructor(options = {}) {
 		this.options = {
 			rootSelector: '[data-spoiler]',
@@ -106,5 +106,3 @@ class Spoiler {
 		})
 	}
 }
-
-export default Spoiler

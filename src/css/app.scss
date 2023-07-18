@@ -1,53 +1,48 @@
 /*
  Package Name: Moonkake
  Package URI: https://github.com/detectiveshelby/moonkake
- Version: 8.8.0
+ Version: 8.9.0
  Author: DevBrains
  Author URI: https://devbrains.io/
  */
-
-/* Config */
-
-@import "mixins";
-@import "config/root";
-@import "config/font";
-
-/* Core */
-
-@import "config/moonkake";
 
 /* Vendor */
 
 @import "vendors";
 
-/* Common */
+/* Core */
 
+@import "mixins";
 @import "utils";
-@import "common/common";
-@import "common/header";
-@import "common/footer";
+@import "config";
 
 /* Components */
 
 @import "components/accordion";
 @import "components/animation";
 @import "components/article";
+@import "components/bars";
 @import "components/breadcrumb";
 @import "components/button";
 @import "components/checkbox";
 @import "components/cursor";
 @import "components/drawer";
 @import "components/field";
-@import "components/file";
+@import "components/field-file";
 @import "components/form";
 @import "components/gallery";
 @import "components/loader";
 @import "components/modal";
-@import "components/bars";
 @import "components/pagination";
-@import "components/select";
 @import "components/section";
+@import "components/select";
 @import "components/slider";
 @import "components/spoiler";
 @import "components/tabs";
 @import "components/tooltip";
+
+/* Widgets */
+
+@import "widgets/common";
+@import "widgets/header";
+@import "widgets/footer";

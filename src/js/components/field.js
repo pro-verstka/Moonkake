@@ -1,4 +1,4 @@
-class Field {
+export class Field {
 	constructor(options = {}) {
 		this.options = {
 			classNames: {
@@ -94,5 +94,3 @@ class Field {
 		}
 	}
 }
-
-export default Field

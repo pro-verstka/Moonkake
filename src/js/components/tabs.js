@@ -1,6 +1,6 @@
 import { emitEvent } from '../helpers'
 
-class Tabs {
+export class Tabs {
 	constructor(options = {}) {
 		this.options = {
 			root: '.tabs',
@@ -126,5 +126,3 @@ class Tabs {
 		})
 	}
 }
-
-export default Tabs

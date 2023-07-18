@@ -68,9 +68,10 @@ label.radio
 ### File
 
 ```pug
-div.file
-  input(type="file", id="file", name="file_name")
-  label(for="file"): span(data-label="Выберите файл") Выберите файл
+label.field-file
+	input(type="file")
+	span.field-file__placeholder Приложить файл
+	span.field-file__value
 ```
 
 ### Select

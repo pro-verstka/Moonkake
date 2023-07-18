@@ -1,7 +1,7 @@
-import ScrollLock from './scroll-lock'
+import { ScrollLock } from './scroll-lock'
 import { emitEvent } from '../helpers'
 
-class Modal {
+export class Modal {
 	constructor(options = {}) {
 		this.options = {
 			modalSelector: '[data-modal]',
@@ -348,5 +348,3 @@ class Modal {
 		$modal.addEventListener('transitionend', handleClose)
 	}
 }
-
-export default Modal

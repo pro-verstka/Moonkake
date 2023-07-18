@@ -1,6 +1,6 @@
-import { Device } from '../helpers'
+import { device } from '../helpers'
 
-class FullHeight {
+export class FullHeight {
 	constructor(options = {}) {
 		this.options = {
 			item: '[data-fullheight]',
@@ -25,7 +25,7 @@ class FullHeight {
 	}
 
 	setFullHeight(event) {
-		if (!this.$els.length || (event.type === 'resize' && Device.isMobile())) return false
+		if (!this.$els.length || (event.type === 'resize' && device.isMobile())) return false
 
 		this.$els.forEach($el => {
 			const $element = $el
@@ -43,5 +43,3 @@ class FullHeight {
 		return true
 	}
 }
-
-export default FullHeight

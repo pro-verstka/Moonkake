@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .pagination {
 	@include grid('flex');
 	margin: var(--spacing-16) 0 var(--spacing-16) calc(var(--spacing-8) * -1);

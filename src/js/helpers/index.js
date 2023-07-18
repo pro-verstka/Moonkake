@@ -1,4 +1,4 @@
-export * as Device from './device'
+export * as device from './device'
 export { declension } from './declension'
 export { getScrollbarWidth } from './getScrollbarWidth'
 export { scrollTo } from './scrollTo'

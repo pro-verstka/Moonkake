@@ -1,6 +1,6 @@
 import { emitEvent, getScrollbarWidth } from '../helpers'
 
-class Loader {
+export class Loader {
 	constructor(options = {}) {
 		this.options = {
 			selector: '[data-loader]',
@@ -45,5 +45,3 @@ class Loader {
 		emitEvent(this.options.eventName)
 	}
 }
-
-export default Loader

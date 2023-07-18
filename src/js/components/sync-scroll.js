@@ -1,4 +1,4 @@
-class SyncScroll {
+export class SyncScroll {
 	constructor() {
 		this.$root = document.querySelector('[data-sync-scroll]')
 
@@ -29,5 +29,3 @@ class SyncScroll {
 		})
 	}
 }
-
-export default SyncScroll

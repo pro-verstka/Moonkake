@@ -1,4 +1,4 @@
-class Counter {
+export class Counter {
 	constructor(options = {}) {
 		this.options = {
 			root: '.counter',
@@ -160,5 +160,3 @@ class Counter {
 		$input.value = value
 	}
 }
-
-export default Counter

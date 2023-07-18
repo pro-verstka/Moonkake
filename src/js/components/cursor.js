@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 
-class Cursor {
+export class Cursor {
 	constructor() {
 		this.$cursor = document.querySelector('.cursor')
 		this.$follower = document.querySelector('.cursor-follower')
@@ -59,5 +59,3 @@ class Cursor {
 		})
 	}
 }
-
-export default Cursor

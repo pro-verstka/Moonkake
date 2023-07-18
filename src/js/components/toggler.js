@@ -1,6 +1,6 @@
 import { emitEvent } from '../helpers'
 
-class Toggler {
+export class Toggler {
 	constructor(options = {}) {
 		this.options = {
 			toggler: '[data-toggler]',
@@ -81,5 +81,3 @@ class Toggler {
 		})
 	}
 }
-
-export default Toggler

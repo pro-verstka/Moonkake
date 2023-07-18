@@ -1,6 +1,6 @@
-import { getScrollbarWidth, Device } from '../helpers'
+import { getScrollbarWidth, device } from '../helpers'
 
-class ScrollLock {
+export class ScrollLock {
 	constructor() {
 		this.scrollY = 0
 		this.$elements = document.querySelectorAll('[data-scroll-lock-fix-shift]')
@@ -17,7 +17,7 @@ class ScrollLock {
 			$el.style.paddingRight = `${paddingRight + scrollBarWidth}px`
 		})
 
-		if (Device.isIOS()) {
+		if (device.isIOS()) {
 			this.scrollY = window.scrollY
 			document.body.style.position = 'fixed'
 			document.body.style.top = `-${this.scrollY}px`
@@ -32,7 +32,7 @@ class ScrollLock {
 
 		document.body.style.overflow = ''
 
-		if (Device.isIOS()) {
+		if (device.isIOS()) {
 			document.body.style.position = ''
 			document.body.style.top = ''
 			document.body.style.width = ''
@@ -40,5 +40,3 @@ class ScrollLock {
 		}
 	}
 }
-
-export default ScrollLock

@@ -13,7 +13,7 @@ const defaultSchema = {
 	}
 }
 
-class Validation {
+export class Validation {
 	constructor(selector = 'form', schema = {}, options = {}) {
 		if (typeof selector !== 'string') {
 			console.error('[Validation] Selector must be string')
@@ -71,5 +71,3 @@ class Validation {
 		}
 	}
 }
-
-export default Validation

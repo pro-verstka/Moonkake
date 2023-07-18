@@ -1,6 +1,6 @@
 import { emitEvent } from '../helpers'
 
-class Accordion {
+export class Accordion {
 	constructor(options = {}) {
 		this.options = {
 			root: '.accordion',
@@ -58,5 +58,3 @@ class Accordion {
 		})
 	}
 }
-
-export default Accordion

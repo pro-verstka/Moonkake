@@ -1,5 +1,9 @@
+@import "../mixins";
+
 .breadcrumbs {
 	@include grid('flex');
+	list-style: none;
+	margin: 0;
 
 	&__item {
 		&::after {

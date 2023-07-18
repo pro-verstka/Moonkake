@@ -1,43 +1,25 @@
-// eslint-disable-next-line max-classes-per-file
-import { emitEvent } from '../helpers'
-
-class Select {
-	$originalSelect = null
-
-	$originalOptions = []
-
-	$select = null
-
-	$label = null
-
-	$labelPlaceholder = null
-
-	$labelValue = null
-
-	$dropdown = null
-
-	$options = []
-
-	constructor($select, config = {}) {
-		this.$select = $select
-
-		if (!this.$select) return
-
-		this.config = {
-			...config
+export class Select {
+	constructor($el) {
+		if (!$el) {
+			return
 		}
 
+		this.$select = $el
 		this.$originalSelect = this.$select.querySelector('select')
+		this.$options = []
 
 		this.#init()
 	}
 
 	#init() {
+		this.$select.classList.add('select_initialized')
+
 		this.#buildSelect()
 		this.#buildOptions()
 		this.#setupState()
-		this.#handleCommonEvents()
-		this.#handleOptionsEvents()
+		this.#setupCommonListeners()
+		this.#setupOptionsListeners()
+		this.#setupResetListener()
 	}
 
 	#buildSelect() {
@@ -83,6 +65,7 @@ class Select {
 	#setupState() {
 		this.$select.classList.toggle('select_disabled', this.$originalSelect.disabled)
 		this.$select.classList.toggle('select_multiple', this.$originalSelect.multiple)
+		this.$select.classList.toggle('select_touched', !!this.$originalSelect.value)
 
 		this.$labelPlaceholder.innerHTML = this.$originalSelect.dataset.placeholder || ''
 		this.$labelValue.innerHTML =
@@ -93,19 +76,25 @@ class Select {
 			''
 	}
 
-	#handleCommonEvents() {
+	#setupCommonListeners() {
 		this.$label?.addEventListener('click', e => {
 			e.stopPropagation()
 
-			this.closeAll()
-
 			if (this.$originalSelect.disabled) return
+
+			if (!this.$select.classList.contains('select_opened')) {
+				Select.closeAll()
+			}
 
 			this.$select.classList.toggle('select_opened')
 		})
+
+		document.addEventListener('click', () => {
+			Select.closeAll()
+		})
 	}
 
-	#handleOptionsEvents() {
+	#setupOptionsListeners() {
 		this.$options?.forEach($option => {
 			$option.addEventListener('click', () => {
 				const { disabled, selected, value, label } = $option.dataset
@@ -125,9 +114,20 @@ class Select {
 				this.$select.classList.add('select_touched')
 
 				this.$originalSelect.value = value
-
-				emitEvent('change', {}, this.$originalSelect)
+				this.$originalSelect.dispatchEvent(
+					new CustomEvent('change', {
+						bubbles: true
+					})
+				)
 			})
+		})
+	}
+
+	#setupResetListener() {
+		this.$select?.closest('form')?.addEventListener('reset', () => {
+			setTimeout(() => {
+				this.update()
+			}, 10)
 		})
 	}
 
@@ -137,47 +137,12 @@ class Select {
 
 		this.#buildOptions()
 		this.#setupState()
-		this.#handleOptionsEvents()
+		this.#setupOptionsListeners()
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	closeAll() {
+	static closeAll() {
 		document.querySelectorAll('.select_opened')?.forEach($select => {
 			$select.classList.remove('select_opened')
 		})
 	}
 }
-
-class CustomSelect {
-	constructor(selector = '.select', config = {}) {
-		this.selector = selector
-		this.$selects = []
-
-		document.querySelectorAll(selector).forEach($select => {
-			const select = new Select($select, config)
-
-			this.$selects.push(select)
-		})
-
-		this.#init()
-	}
-
-	#init() {
-		this.#handleEvents()
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	#handleEvents() {
-		document.addEventListener('click', () => {
-			this.$selects[0].closeAll()
-		})
-	}
-
-	update() {
-		this.$selects.forEach(select => {
-			select.update()
-		})
-	}
-}
-
-export default CustomSelect

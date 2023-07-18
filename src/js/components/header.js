@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const DEFAULT_THEME = 'color-dark,background-light'
 
-class Header {
+export class Header {
 	constructor() {
 		this.$header = document.querySelector('[data-header]')
 		this.$themes = document.querySelectorAll('[data-header-theme]')
@@ -52,5 +52,3 @@ class Header {
 		})
 	}
 }
-
-export default Header

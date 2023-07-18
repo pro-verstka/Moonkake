@@ -1,7 +1,7 @@
 import gsap from 'gsap'
-import ScrollLock from './scroll-lock'
+import { ScrollLock } from './scroll-lock'
 
-class Drawer {
+export class Drawer {
 	constructor(options = {}) {
 		this.options = {
 			selector: '[data-drawer]',
@@ -66,7 +66,7 @@ class Drawer {
 		this.$html.classList.add('-drawer-opened')
 		this.$toggleButton.classList.add('-active')
 
-		this.scrollLock.disable()
+		this.scrollLock.lockScroll()
 
 		gsap
 			.fromTo(
@@ -93,12 +93,10 @@ class Drawer {
 			y: '-100%',
 
 			onComplete: () => {
-				this.scrollLock.enable()
+				this.scrollLock.unlockScroll()
 
 				this.isOpened = false
 			}
 		})
 	}
 }
-
-export default Drawer

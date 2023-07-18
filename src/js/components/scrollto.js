@@ -1,16 +1,27 @@
 import { scrollTo } from '../helpers'
 
-/* SCROLL TO
--------------------------------------------------- */
+export class ScrollTo {
+	constructor(selector = '[data-scroll-to]') {
+		this.selector = selector
 
-document.addEventListener('click', e => {
-	if (e.target.matches('[data-scroll-to]') || e.target.closest('[data-scroll-to]')) {
-		e.preventDefault()
+		this.#init()
+	}
 
-		const $el = e.target.matches('[data-scroll-to]') ? e.target : e.target.closest('[data-scroll-to]')
+	#init() {
+		this.#setupListeners()
+	}
 
-		scrollTo($el.getAttribute('href'), {
-			offset: $el.dataset.scrollToOffset || 0
+	#setupListeners() {
+		document.addEventListener('click', e => {
+			if (e.target.matches(this.selector) || e.target.closest(this.selector)) {
+				e.preventDefault()
+
+				const $el = e.target.matches(this.selector) ? e.target : e.target.closest(this.selector)
+
+				scrollTo($el.getAttribute('href'), {
+					offset: $el.dataset.scrollToOffset || 0
+				})
+			}
 		})
 	}
-})
+}

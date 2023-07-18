@@ -1,6 +1,6 @@
 import gulp from 'gulp'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import pug from 'gulp-pug'
 import flatten from 'gulp-flatten'
 import cheerio from 'gulp-cheerio'
@@ -32,7 +32,7 @@ export function templates() {
 	})
 
 	return gulp
-		.src(['src/templates/**/*', '!src/templates/mixins/*', '!src/templates/blocks/*', '!src/templates/layouts/*'], {
+		.src(['src/templates/**/*', '!src/templates/mixins/*', '!src/templates/widgets/*', '!src/templates/layouts/*'], {
 			base: '.'
 		})
 		.pipe(

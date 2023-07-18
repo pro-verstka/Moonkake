@@ -1,4 +1,4 @@
-class TableColumnHighlight {
+export class TableColumnHighlight {
 	constructor($table) {
 		this.$root = $table
 
@@ -59,5 +59,3 @@ class TableColumnHighlight {
 		return true
 	}
 }
-
-export default TableColumnHighlight

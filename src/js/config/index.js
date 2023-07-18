@@ -1,5 +1,4 @@
-import { Device, setViewportHeight } from '../helpers'
-// import { Loader } from '../libs'
+import { device, setViewportHeight } from '../helpers'
 
 /* SETUP
 -------------------------------------------------- */
@@ -8,18 +7,9 @@ const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
-		version: '8.8.0',
+		version: '8.9.0',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io'
-	},
-
-	settings: {
-		event: {
-			load: 'load'
-		},
-		animation: {
-			speed: 1000
-		}
 	},
 
 	plugins: {},
@@ -74,26 +64,17 @@ const MK = {
 
 window.MK = { ...MK, ...(window.MK || {}) }
 
-/* LOADER
--------------------------------------------------- */
-
-// MK.addPlugins({Loader})
-//
-// if (MK.plugins.Loader?.isInitialized) {
-// 	MK.settings.events.load = MK.plugins.Loader.options.eventName
-// }
-
 /* HTML CLASSNAMES
 -------------------------------------------------- */
 
 const htmlClassNames = []
 
-if (Device.isMobile()) htmlClassNames.push('-device-mobile')
-if (Device.isTouch()) htmlClassNames.push('-device-touch')
-if (Device.isAndroid()) htmlClassNames.push('-device-android')
-if (Device.isIOS()) htmlClassNames.push('-device-ios')
-if (Device.isIPhone()) htmlClassNames.push('-device-iphone')
-if (Device.isIPad()) htmlClassNames.push('-device-ipad')
+if (device.isMobile()) htmlClassNames.push('-device-mobile')
+if (device.isTouch()) htmlClassNames.push('-device-touch')
+if (device.isAndroid()) htmlClassNames.push('-device-android')
+if (device.isIOS()) htmlClassNames.push('-device-ios')
+if (device.isIPhone()) htmlClassNames.push('-device-iphone')
+if (device.isIPad()) htmlClassNames.push('-device-ipad')
 
 document.documentElement.classList.add(...htmlClassNames)
 

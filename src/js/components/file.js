@@ -1,19 +1,32 @@
-/* FILE
--------------------------------------------------- */
-
-document.querySelectorAll('.file').forEach(el => {
-	const label = el.querySelector('label span')
-	const text = el.dataset.text || 'Выберите файл'
-
-	el.querySelector('input[type="file"]').addEventListener('change', () => {
-		let { value } = this
-
-		if (value) {
-			value = value.split(/[\\|/]/g).pop()
-		} else {
-			value = text
+export class File {
+	constructor($el) {
+		if (!$el) {
+			return
 		}
 
-		label.innerText = value
-	})
-})
+		this.$root = $el
+		this.$input = this.$root.querySelector('input')
+		this.$value = this.$root.querySelector('.field-file__value')
+
+		this.#init()
+	}
+
+	#init() {
+		this.#setupListeners()
+	}
+
+	#setupListeners() {
+		this.$input.addEventListener('change', this.#onChangeHandler.bind(this))
+	}
+
+	#onChangeHandler(event) {
+		const file = event.target.files[0]
+
+		if (!file) {
+			this.$root.classList.remove('field-file_active')
+		} else {
+			this.$root.classList.add('field-file_active')
+			this.$value.innerText = file.name
+		}
+	}
+}

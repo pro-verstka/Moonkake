@@ -34,9 +34,9 @@ export function scripts() {
 				new TerserPlugin({
 					parallel: true,
 					extractComments: false,
-					terserOptions: {
-						ecma: 5
-					}
+					// terserOptions: {
+					// 	ecma: 5
+					// }
 				})
 			]
 		}

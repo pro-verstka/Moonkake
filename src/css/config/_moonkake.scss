@@ -12,12 +12,12 @@ html {
 	box-sizing: border-box;
 	font-size: var(--base-font-size);
 	text-size-adjust: 100%;
-	//scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 *,
-*::before,
-*::after {
+::before,
+::after {
   box-sizing: inherit;
 }
 
@@ -61,8 +61,7 @@ a {
 		}
 	}
 
-  svg,
-  use {
+  svg {
     pointer-events: none;
 	}
 }

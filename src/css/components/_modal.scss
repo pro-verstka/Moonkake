@@ -1,4 +1,4 @@
-$block: '.block';
+$block: '.modal';
 
 #{$block} {
 	position: fixed;
@@ -8,7 +8,6 @@ $block: '.block';
 	height: 100%;
 	background: rgba(#000, .5);
 	z-index: 1000;
-	text-align: center;
 	display: none;
 	opacity: 0;
 	overflow: auto;
@@ -19,24 +18,13 @@ $block: '.block';
 	padding: var(--spacing-20);
 	overscroll-behavior: contain;
 
-	&::before {
-		content: '';
-		display: inline-block;
-		height: 100%;
-		vertical-align: middle;
-		margin-left: -.28em;
-	}
-
 	&__container {
 		width: 100%;
+		margin: auto;
 		max-width: 70rem;
-		margin: 0 auto;
 		padding: var(--spacing-40);
-		background: #fff;
+		background: var(--color-white);
 		position: relative;
-		display: inline-block;
-		vertical-align: middle;
-		text-align: left;
 		transform: translateY(-3rem);
 		transition: .25s ease;
 	}
@@ -111,13 +99,13 @@ $block: '.block';
 	}
 
 	&#{$block}_opened {
-		display: block;
+		display: flex;
 	}
 
 	&#{$block}_visible {
 		opacity: 1;
 
-		#{$block}_container {
+		#{$block}__container {
 			transform: translateY(0);
 		}
 	}

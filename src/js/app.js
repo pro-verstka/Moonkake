@@ -10,11 +10,11 @@
 import './config'
 
 // Components
-import * as Components from './components'
+import { Modal } from './components'
 
 /* SETUP
 -------------------------------------------------- */
 
-const modal = new Components.Modal()
+const modal = new Modal()
 
-// MK.addPlugins({ Modal })
+MK.addPlugins({ modal }, true)

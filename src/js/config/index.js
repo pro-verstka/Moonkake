@@ -1,6 +1,6 @@
 import { device, setViewportHeight } from '../helpers'
 
-/* SETUP
+/* CONFIG
 -------------------------------------------------- */
 
 const MK = {
@@ -38,7 +38,7 @@ const MK = {
 		}
 	},
 
-	addPlugins(plugins = {}, asLink = false) {
+	addPlugins(plugins = {}, asLink = true) {
 		if (typeof plugins !== 'object') {
 			return
 		}
@@ -51,12 +51,8 @@ const MK = {
 				}
 			}
 
-			if (typeof plugins[key] === 'function' && !asLink) {
-				this.plugins[key] = new plugins[key]()
-			}
-
-			if (typeof plugins[key] === 'function' && asLink) {
-				this.plugins[key] = plugins[key]
+			if (typeof plugins[key] === 'function') {
+				this.plugins[key] = asLink ? plugins[key] : new plugins[key]()
 			}
 		})
 	}
@@ -84,7 +80,10 @@ document.documentElement.classList.add(...htmlClassNames)
 window.addEventListener('load', setViewportHeight)
 window.addEventListener('resize', setViewportHeight)
 
+/* CREDENTIALS
+-------------------------------------------------- */
+
 console.info(
-	`%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на ${MK.info.authorUrl}`,
+	`%c Yay, you found what you were looking for! You want a cool website, check out ${MK.info.authorUrl}`,
 	'padding: 10px; background-color: #282c34; color: #fff;'
 )

@@ -6,15 +6,15 @@
  Author URI: https://devbrains.io/
  */
 
+/* Core */
+
+@import "config";
+@import "mixins";
+@import "utils";
+
 /* Vendor */
 
 @import "vendors";
-
-/* Core */
-
-@import "mixins";
-@import "utils";
-@import "config";
 
 /* Components */
 

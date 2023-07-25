@@ -17,4 +17,4 @@ import { Modal } from './components'
 
 const modal = new Modal()
 
-MK.addPlugins({ modal }, true)
+MK.addPlugins({ modal })

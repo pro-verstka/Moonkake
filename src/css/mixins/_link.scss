@@ -1,5 +1,5 @@
 @mixin link() {
-	border-bottom: 1px solid currentColor;
+	border-bottom: 1px solid currentcolor;
 
 	&:hover {
 		border-bottom-color: transparent;
@@ -10,6 +10,6 @@
 	border-bottom: 1px solid transparent;
 
 	&:hover {
-		border-bottom-color: currentColor;
+		border-bottom-color: currentcolor;
 	}
 }

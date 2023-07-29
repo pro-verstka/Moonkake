@@ -1,23 +1,24 @@
-@import "../mixins";
+@import '../mixins';
 
 $block: '.tabs';
 
 #{$block} {
-  &__title {
-    @include grid('flex');
+	&__title {
+		@include grid('flex');
 
 		#{$block}__item {
-      cursor: pointer;
+			cursor: pointer;
 		}
 	}
 
-  &__content {
+	&__content {
 		#{$block}__item {
-      display: none;
+			display: none;
 
-      &#{$block}__item_active {
-        display: block;
-        //animation: fadeIn 1s forwards;
+			&#{$block}__item_active {
+				display: block;
+
+				// animation: fade-in 1s forwards;
 			}
 		}
 	}

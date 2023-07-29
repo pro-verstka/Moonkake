@@ -4,11 +4,11 @@
 
 .section_intro {
 	display: flex;
-	place-items: center;
 	height: 100%;
-	text-align: center;
 	background-color: #f2f2f2;
 	color: #282c34;
+	place-items: center;
+	text-align: center;
 
 	a {
 		color: inherit;
@@ -22,6 +22,6 @@
 
 	@media (prefers-color-scheme: dark) {
 		background: #282c34;
-		color: #ffffff;
+		color: #fff;
 	}
 }

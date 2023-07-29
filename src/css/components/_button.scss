@@ -1,13 +1,13 @@
 .button {
 	display: inline-flex;
-	text-decoration: none;
 	padding: var(--spacing-12) var(--spacing-20);
 	border: 0;
 	border-radius: 0;
 	background: #ccc;
 	color: #000;
 	text-align: center;
-	transition-property: color, background-color, opacity, border-color;
+	text-decoration: none;
 	transition-duration: var(--transition-duration);
+	transition-property: color, background-color, opacity, border-color;
 	transition-timing-function: var(--transition-timing-function);
 }

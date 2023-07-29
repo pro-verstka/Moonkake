@@ -1,14 +1,15 @@
-@import "../mixins";
+@import '../mixins';
 
 .breadcrumbs {
 	@include grid('flex');
-	list-style: none;
+
 	margin: 0;
+	list-style: none;
 
 	&__item {
 		&::after {
-			content: '/';
 			margin: 0 var(--spacing-8);
+			content: '/';
 		}
 
 		&:last-child {

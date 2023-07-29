@@ -1,7 +1,7 @@
 .gallery {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
 	grid-gap: var(--spacing-32);
+	grid-template-columns: 1fr 1fr;
 
 	&:not(:first-child) {
 		margin-top: var(--spacing-32);
@@ -16,7 +16,7 @@
 	}
 
 	img {
-		width: 100%;
 		display: block;
+		width: 100%;
 	}
 }

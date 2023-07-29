@@ -1,30 +1,30 @@
 .swiper {
-  box-sizing: inherit;
+	box-sizing: inherit;
 
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
-    outline: none;
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+		outline: none;
 	}
 
-  img {
-    width: 100%;
-    display: block;
+	img {
+		display: block;
+		width: 100%;
 	}
 }
 
 .slider {
-  .swiper-pagination {
-    .swiper-pagination-bullet {
-      opacity: 1;
+	.swiper-pagination {
+		.swiper-pagination-bullet {
+			opacity: 1;
 		}
 	}
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    &::before {
-      display: none;
+	.swiper-button-prev,
+	.swiper-button-next {
+		&::before {
+			display: none;
 		}
 	}
 }

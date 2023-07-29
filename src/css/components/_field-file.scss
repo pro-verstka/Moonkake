@@ -1,13 +1,13 @@
-@import "../mixins";
+@import '../mixins';
 
 $block: '.field-file';
 
 #{$block} {
 	display: block;
 	width: 100%;
+	padding: var(--spacing-16) var(--spacing-20);
 	border: 1px solid transparent;
 	border-radius: 1.4rem;
-	padding: var(--spacing-16) var(--spacing-20);
 	cursor: pointer;
 
 	input {
@@ -15,8 +15,8 @@ $block: '.field-file';
 	}
 
 	&__placeholder {
-		opacity: 0.5;
 		display: block;
+		opacity: 0.5;
 	}
 
 	&__value {

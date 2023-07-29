@@ -1,7 +1,7 @@
-@use "sass:math";
+@use 'sass:math';
 
-$tippyColor: #000;
-$tippyArrowSize: 1.2rem;
+$tippy-color: #000;
+$tippy-arrow-size: 1.2rem;
 
 [data-tippy] {
 	cursor: help;
@@ -17,9 +17,9 @@ $tippyArrowSize: 1.2rem;
 
 .tippy-box {
 	position: relative;
-	background-color: $tippyColor;
+	border-radius: 0.4rem;
+	background-color: $tippy-color;
 	color: #fff;
-	border-radius: .4rem;
 	font-size: 1.2rem;
 	outline: 0;
 	transition-property: transform, visibility, opacity;
@@ -29,9 +29,9 @@ $tippyArrowSize: 1.2rem;
 			bottom: 0;
 
 			&::before {
-				bottom: math.div(-$tippyArrowSize, 2);
+				bottom: math.div(-$tippy-arrow-size, 2);
 				left: 0;
-				border-width: math.div($tippyArrowSize, 2) math.div($tippyArrowSize, 2) 0;
+				border-width: math.div($tippy-arrow-size, 2) math.div($tippy-arrow-size, 2) 0;
 				border-top-color: initial;
 				transform-origin: center top;
 			}
@@ -43,9 +43,9 @@ $tippyArrowSize: 1.2rem;
 			top: 0;
 
 			&::before {
-				top: math.div(-$tippyArrowSize, 2);
+				top: math.div(-$tippy-arrow-size, 2);
 				left: 0;
-				border-width: 0 math.div($tippyArrowSize, 2) math.div($tippyArrowSize, 2);
+				border-width: 0 math.div($tippy-arrow-size, 2) math.div($tippy-arrow-size, 2);
 				border-bottom-color: initial;
 				transform-origin: center bottom;
 			}
@@ -57,9 +57,9 @@ $tippyArrowSize: 1.2rem;
 			right: 0;
 
 			&::before {
-				border-width: math.div($tippyArrowSize, 2) 0 math.div($tippyArrowSize, 2) math.div($tippyArrowSize, 2);
+				right: math.div(-$tippy-arrow-size, 2);
+				border-width: math.div($tippy-arrow-size, 2) 0 math.div($tippy-arrow-size, 2) math.div($tippy-arrow-size, 2);
 				border-left-color: initial;
-				right: math.div(-$tippyArrowSize, 2);
 				transform-origin: center left;
 			}
 		}
@@ -70,8 +70,8 @@ $tippyArrowSize: 1.2rem;
 			left: 0;
 
 			&::before {
-				left: math.div(-$tippyArrowSize, 2);
-				border-width: math.div($tippyArrowSize, 2) math.div($tippyArrowSize, 2) math.div($tippyArrowSize, 2) 0;
+				left: math.div(-$tippy-arrow-size, 2);
+				border-width: math.div($tippy-arrow-size, 2) math.div($tippy-arrow-size, 2) math.div($tippy-arrow-size, 2) 0;
 				border-right-color: initial;
 				transform-origin: center right;
 			}
@@ -84,20 +84,20 @@ $tippyArrowSize: 1.2rem;
 }
 
 .tippy-arrow {
-	width: $tippyArrowSize;
-	height: $tippyArrowSize;
-	color: $tippyColor;
+	width: $tippy-arrow-size;
+	height: $tippy-arrow-size;
+	color: $tippy-color;
 
 	&::before {
-		content: '';
 		position: absolute;
-		border-color: transparent;
 		border-style: solid;
+		border-color: transparent;
+		content: '';
 	}
 }
 
 .tippy-content {
 	position: relative;
-	padding: .5rem 1rem;
 	z-index: 1;
+	padding: 0.5rem 1rem;
 }

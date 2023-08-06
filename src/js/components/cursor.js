@@ -11,15 +11,15 @@ export class Cursor {
 	}
 
 	init() {
-		window.addEventListener('mousemove', this.move.bind(this))
+		window.addEventListener('pointermove', this.move.bind(this))
 
-		document.addEventListener('mouseover', e => {
+		document.addEventListener('pointerover', e => {
 			if (e.target.tagName === 'A') {
 				this.over()
 			}
 		})
 
-		document.addEventListener('mouseout', e => {
+		document.addEventListener('pointerout', e => {
 			if (e.target.tagName === 'A') {
 				this.out()
 			}

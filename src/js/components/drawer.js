@@ -5,7 +5,8 @@ export class Drawer {
 	constructor(options = {}) {
 		this.options = {
 			selector: '[data-drawer]',
-			toggleButton: '[data-drawer-toggle]'
+			toggleButton: '[data-drawer-toggle]',
+			closeButton: '[data-drawer-close]'
 		}
 
 		if (typeof options === 'object') {
@@ -19,16 +20,17 @@ export class Drawer {
 		}
 
 		this.$toggleButton = document.querySelector(this.options.toggleButton)
+		this.$closeButton = document.querySelector(this.options.closeButton)
 		this.$html = document.documentElement
 
 		this.isOpened = false
 
 		this.scrollLock = new ScrollLock()
 
-		this.init()
+		this.#init()
 	}
 
-	init() {
+	#init() {
 		this.$toggleButton.addEventListener('click', e => {
 			e.preventDefault()
 
@@ -39,6 +41,12 @@ export class Drawer {
 			if (this.isOpened) {
 				this.close()
 			}
+		})
+
+		this.$closeButton.addEventListener('click', e => {
+			e.preventDefault()
+
+			this.close()
 		})
 
 		document.addEventListener('keyup', e => {

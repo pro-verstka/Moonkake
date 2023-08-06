@@ -77,6 +77,7 @@ h6 {
 	color: var(--header-text-color);
 	font-family: var(--header-text-font-family);
 	hyphens: none;
+	text-wrap: balance;
 
 	a {
 		color: inherit;

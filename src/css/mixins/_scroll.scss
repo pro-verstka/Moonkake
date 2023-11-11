@@ -8,7 +8,9 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		border-radius: 0.2rem;
+		border-radius: 0.8rem;
+		border: 0.4rem solid transparent;
+		background-clip: content-box;
 		background-color: rgba(#000, 0.5);
 	}
 

@@ -7,25 +7,27 @@ $block: '.field';
 
 	&__input {
 		width: 100%;
-		border: 1px solid #eeeeee;
-		border-radius: 0;
 		padding: var(--spacing-12) var(--spacing-20);
-		color: #000000;
-		box-shadow: none;
+		border: 1px solid #eee;
+		border-radius: 0;
 		appearance: none;
+		box-shadow: none;
+		color: #000;
 		text-overflow: ellipsis;
-		//color-scheme: dark
+
+		// color-scheme: dark
 
 		&:-webkit-autofill,
 		&:-webkit-autofill:hover,
 		&:-webkit-autofill:focus,
 		&:-webkit-autofill:active {
-			transition: background-color 600000s 0s, color 600000s 0s;
+			transition: background-color 600000s 0s,
+			color 600000s 0s;
 		}
 
 		&::placeholder {
-			opacity: 1;
 			color: #ccc;
+			opacity: 1;
 		}
 	}
 }

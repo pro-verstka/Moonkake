@@ -1,7 +1,5 @@
-.grid {
-  @include grid('grid');
+@import '../mixins/index';
 
-	//> .grid__column {
-	//	flex: 1;
-	//}
+.grid {
+	@include grid('grid');
 }

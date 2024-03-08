@@ -1,4 +1,4 @@
-const declension = (oneNominative, severalGenitive, severalNominative, number) => {
+export const declension = (oneNominative, severalGenitive, severalNominative, number) => {
 	let num = number % 100
 
 	if (num <= 14 && num >= 11) return severalGenitive
@@ -15,5 +15,3 @@ const declension = (oneNominative, severalGenitive, severalNominative, number) =
 
 	return severalGenitive
 }
-
-export default declension

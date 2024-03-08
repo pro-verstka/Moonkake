@@ -1,0 +1,16 @@
+mixin gallery(data)
+	div.gallery(data-gallery)
+		each item in data
+			a.gallery__item(
+				href=item.full.src,
+				data-pswp-width=item.full.width,
+				data-pswp-height=item.full.height
+			)
+				img(
+					src=item.thumb.src,
+					width=item.thumb.width,
+					height=item.thumb.height,
+					alt="",
+					loading="lazy"
+				)
+	// gallery

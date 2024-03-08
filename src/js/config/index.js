@@ -1,25 +1,15 @@
-import { Device, setViewportHeight } from '../helpers'
-// import { Loader } from '../libs'
+import { device, setViewportHeight } from '../helpers'
 
-/* SETUP
+/* CONFIG
 -------------------------------------------------- */
 
 const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
-		version: '9.0.0',
+		version: '8.9.0',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io'
-	},
-
-	settings: {
-		event: {
-			load: 'load'
-		},
-		animation: {
-			speed: 1000
-		}
 	},
 
 	plugins: {},
@@ -48,7 +38,7 @@ const MK = {
 		}
 	},
 
-	addPlugins(plugins = {}, asLink = false) {
+	addPlugins(plugins = {}, asLink = true) {
 		if (typeof plugins !== 'object') {
 			return
 		}
@@ -61,12 +51,8 @@ const MK = {
 				}
 			}
 
-			if (typeof plugins[key] === 'function' && !asLink) {
-				this.plugins[key] = new plugins[key]()
-			}
-
-			if (typeof plugins[key] === 'function' && asLink) {
-				this.plugins[key] = plugins[key]
+			if (typeof plugins[key] === 'function') {
+				this.plugins[key] = asLink ? plugins[key] : new plugins[key]()
 			}
 		})
 	}
@@ -74,26 +60,17 @@ const MK = {
 
 window.MK = { ...MK, ...(window.MK || {}) }
 
-/* LOADER
--------------------------------------------------- */
-
-// MK.addPlugins({Loader})
-//
-// if (MK.plugins.Loader?.isInitialized) {
-// 	MK.settings.events.load = MK.plugins.Loader.options.eventName
-// }
-
 /* HTML CLASSNAMES
 -------------------------------------------------- */
 
 const htmlClassNames = []
 
-if (Device.isMobile()) htmlClassNames.push('-device-mobile')
-if (Device.isTouch()) htmlClassNames.push('-device-touch')
-if (Device.isAndroid()) htmlClassNames.push('-device-android')
-if (Device.isIOS()) htmlClassNames.push('-device-ios')
-if (Device.isIPhone()) htmlClassNames.push('-device-iphone')
-if (Device.isIPad()) htmlClassNames.push('-device-ipad')
+if (device.isMobile()) htmlClassNames.push('-device-mobile')
+if (device.isTouch()) htmlClassNames.push('-device-touch')
+if (device.isAndroid()) htmlClassNames.push('-device-android')
+if (device.isIOS()) htmlClassNames.push('-device-ios')
+if (device.isIPhone()) htmlClassNames.push('-device-iphone')
+if (device.isIPad()) htmlClassNames.push('-device-ipad')
 
 document.documentElement.classList.add(...htmlClassNames)
 
@@ -103,7 +80,10 @@ document.documentElement.classList.add(...htmlClassNames)
 window.addEventListener('load', setViewportHeight)
 window.addEventListener('resize', setViewportHeight)
 
+/* CREDENTIALS
+-------------------------------------------------- */
+
 console.info(
-	`%c Ура, вы нашли то, что искали! Хотите крутой сайт - заходите на ${MK.info.authorUrl}`,
+	`%c Yay, you found what you were looking for! You want a cool website, check out ${MK.info.authorUrl}`,
 	'padding: 10px; background-color: #282c34; color: #fff;'
 )

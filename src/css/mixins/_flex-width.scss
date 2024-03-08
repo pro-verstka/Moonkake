@@ -1,9 +1,9 @@
 @mixin flex-width($width) {
 	@if $width == 'none' {
-		flex: none;
 		max-width: none;
-	}  @else {
-		flex: 0 0 $width;
+		flex: none;
+	} @else {
 		max-width: $width;
+		flex: 0 0 $width;
 	}
 }

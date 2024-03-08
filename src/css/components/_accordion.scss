@@ -1,41 +1,41 @@
 $block: '.accordion';
 
 #{$block} {
-  &__header {
-    cursor: pointer;
+	&__header {
+		cursor: pointer;
 	}
 
-  &__body {
-    //display: none;
+	&__body {
+		// display: none;
 	}
 
-  &__item + &__item {
-    margin-top: var(--spacing-20);
+	&__item + &__item {
+		margin-top: var(--spacing-20);
 	}
 
-  &__item_active {
+	&__item_active {
 		#{$block}__body {
-      //display: block;
-      //animation: fadeIn 1s forwards;
+			// display: block;
+			// animation: fade-in 1s forwards;
 		}
 	}
 
-  &#{$block}_animation {
+	&#{$block}_animation {
 		#{$block}__body {
-      overflow: hidden;
-      height: 0;
-      transition: height .25s ease;
+			overflow: hidden;
+			height: 0;
+			transition: height 0.25s ease;
 		}
 	}
 
-  &:not(#{$block}_animation) {
+	&:not(#{$block}_animation) {
 		#{$block}__body {
-      display: none;
+			display: none;
 		}
 
 		#{$block}__item_active {
 			#{$block}__body {
-        display: block;
+				display: block;
 			}
 		}
 	}

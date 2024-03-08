@@ -1,20 +1,24 @@
-import ScrollBooster from 'scrollbooster'
+import SB from 'scrollbooster'
 
-document.querySelectorAll('[data-scrollbooster]').forEach($viewport => {
-	const $content = $viewport.querySelector('[data-scrollbooster-content]')
+export class ScrollBooster {
+	constructor($el) {
+		this.$viewport = $el || document.querySelector('[data-scrollbooster]')
+		this.$content = this.$viewport.querySelector('[data-scrollbooster-content]')
 
-	if (!$content) return
+		this.#init()
+	}
 
-	// eslint-disable-next-line no-unused-vars
-	const sb = new ScrollBooster({
-		viewport: $viewport,
-		content: $content,
-		scrollMode: 'transform',
-		direction: 'horizontal',
-		emulateScroll: true,
-		// onUpdate: data => {
-		// 	$content.style.transform = `translateX(${-data.position.x}px)`
-		// },
-		shouldScroll: () => $content.clientWidth > $viewport.clientWidth
-	})
-})
+	#init() {
+		this.scrollBooster = new SB({
+			viewport: this.$viewport,
+			content: this.$content,
+			scrollMode: 'transform',
+			direction: 'horizontal',
+			emulateScroll: true,
+			// onUpdate: data => {
+			// 	this.$content.style.transform = `translateX(${-data.position.x}px)`
+			// },
+			shouldScroll: () => this.$content.clientWidth > this.$viewport.clientWidth
+		})
+	}
+}

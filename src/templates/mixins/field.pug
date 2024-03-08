@@ -1,0 +1,16 @@
+mixin field(data)
+	div(class=`field field_appearance_${data.appearance || 'light'}`)
+		if (data.useTextarea)
+			textarea.field__input(
+				placeholder=`${data.placeholder || ''}`,
+				name=`${data.name || ''}`
+				rows=`${data.rows || 5}`
+			)=data.value
+		else
+			input.field__input(
+				type=`${data.type || 'text'}`,
+				placeholder=`${data.placeholder || ''}`,
+				name=`${data.name || ''}`,
+				value=`${data.value || ''}`
+			)
+	// field

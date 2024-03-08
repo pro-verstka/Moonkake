@@ -1,46 +1,58 @@
-import Swiper, { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper'
+import Swiper from 'swiper'
+import { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper/modules'
 
-Swiper.use([Navigation, Pagination, Autoplay, Mousewheel, EffectFade])
+export class Slider {
+	constructor($el) {
+		if (!$el) {
+			return
+		}
 
-// MK.addPlugins({Swiper}, true)
+		this.$root = $el
 
-/* SLIDER
- -------------------------------------------------- */
-
-// eslint-disable-next-line no-unused-vars
-const slider = new Swiper('.swiper-container', {
-	slidesPerView: 1,
-	spaceBetween: 0,
-	speed: MK.settings.animation.speed / 2,
-	effect: 'slide',
-	loop: true,
-
-	freeMode: true,
-	freeModeSticky: true,
-	mousewheel: {
-		forceToAxis: true,
-		invert: true
-	},
-
-	preloadImages: false,
-
-	autoplay: {
-		delay: 5000,
-		disableOnInteraction: false
-	},
-
-	// fadeEffect: {
-	// 	crossFade: true
-	// },
-
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev'
-	},
-
-	pagination: {
-		el: '.swiper-pagination',
-		type: 'bullets',
-		clickable: true
+		this.#init()
 	}
-})
+
+	#init() {
+		this.#initSlider()
+	}
+
+	#initSlider() {
+		this.slider = new Swiper(this.$root, {
+			modules: [Navigation, Pagination, Autoplay, Mousewheel, EffectFade],
+			slidesPerView: 1,
+			spaceBetween: 0,
+			speed: 1000,
+			effect: 'slide',
+			loop: true,
+
+			freeMode: true,
+			freeModeSticky: true,
+			mousewheel: {
+				forceToAxis: true,
+				invert: true
+			},
+
+			preloadImages: false,
+
+			autoplay: {
+				delay: 5000,
+				disableOnInteraction: false
+			},
+
+			// fadeEffect: {
+			// 	crossFade: true
+			// },
+
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			},
+
+			pagination: {
+				el: '.swiper-pagination',
+				type: 'bullets',
+				clickable: true
+			}
+		})
+	}
+}

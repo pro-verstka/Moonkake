@@ -1,4 +1,5 @@
 @function vw($size, $width: 1920) {
 	$vw: ($width * 0.01) * 1px;
+
 	@return ($size / $vw) * 1vw;
-};
+}

@@ -62,7 +62,7 @@ const getTemplates = () => {
 	keys.forEach(key => {
 		const chunks = ['app']
 
-		if (getEntries()[key].some(el => el.endsWith('.js'))) {
+		if (entries[key].some(el => el.endsWith('.js'))) {
 			chunks.push(key)
 		}
 
@@ -102,12 +102,14 @@ const getFonts = () =>
 		.map(fileName => `<link rel="preload" href="assets/fonts/${fileName}" as="font" type="font/woff2" crossorigin>`)
 		.join('')
 
+const entries = getEntries()
+
 export default {
 	// target: IS_DEV ? "web" : "browserslist",
 
 	entry: {
 		app: ['./src/js/app.js', `./src/css/app.${config.stylesExtension}`],
-		...getEntries()
+		...entries
 	},
 
 	output: {
@@ -259,7 +261,7 @@ export default {
 
 						const jsFileName = `./dist/assets/js/${jsKey}.bundle.js`
 
-						if (!getEntries()[jsKey]?.some(el => el.endsWith('.js'))) {
+						if (!entries[jsKey]?.some(el => el.endsWith('.js'))) {
 							if (fs.existsSync(jsFileName)) {
 								fs.unlinkSync(jsFileName)
 							}

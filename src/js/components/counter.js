@@ -3,7 +3,7 @@ export class Counter {
 		this.options = {
 			root: '.counter',
 			plus: '.counter__plus',
-			minus: '.counter__minus'
+			minus: '.counter__minus',
 		}
 
 		if (typeof options === 'object') {
@@ -29,42 +29,51 @@ export class Counter {
 		document.addEventListener(
 			'focus',
 			e => {
-				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
+				if (
+					e.target?.tagName.toLowerCase() === 'input' &&
+					e.target.matches(`${this.options.root} input`)
+				) {
 					this.handleInputFocus(e.target)
 				}
 			},
-			true
+			true,
 		)
 
 		document.addEventListener(
 			'blur',
 			e => {
-				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
+				if (
+					e.target?.tagName.toLowerCase() === 'input' &&
+					e.target.matches(`${this.options.root} input`)
+				) {
 					this.handleInputBlur(e.target)
 				}
 			},
-			true
+			true,
 		)
 
 		document.addEventListener(
 			'keyup',
 			e => {
-				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
+				if (
+					e.target?.tagName.toLowerCase() === 'input' &&
+					e.target.matches(`${this.options.root} input`)
+				) {
 					this.handleInputKeyup(e.target)
 				}
 			},
-			true
+			true,
 		)
 	}
 
 	handlePlus($el) {
 		const $input = $el.closest(this.options.root).querySelector('input')
-		const max = parseInt($input.dataset.max) || ''
+		const max = Number($input.dataset.max) || ''
 		const prefix = $input.dataset.prefix || ''
 		const postfix = $input.dataset.postfix || ''
 
 		let value = $input.value.replace(this.regex, '')
-		value = parseInt(value)
+		value = Number(value)
 
 		value += 1
 
@@ -76,19 +85,19 @@ export class Counter {
 
 		$input.dispatchEvent(
 			new CustomEvent('change', {
-				bubbles: true
-			})
+				bubbles: true,
+			}),
 		)
 	}
 
 	handleMinus($el) {
 		const $input = $el.closest(this.options.root).querySelector('input')
-		const min = parseInt($input.dataset.min) || ''
+		const min = Number($input.dataset.min) || ''
 		const prefix = $input.dataset.prefix || ''
 		const postfix = $input.dataset.postfix || ''
 
 		let value = $input.value.replace(this.regex, '')
-		value = parseInt(value)
+		value = Number(value)
 
 		value -= 1
 
@@ -102,8 +111,8 @@ export class Counter {
 
 		$input.dispatchEvent(
 			new CustomEvent('change', {
-				bubbles: true
-			})
+				bubbles: true,
+			}),
 		)
 	}
 
@@ -118,8 +127,8 @@ export class Counter {
 	}
 
 	handleInputBlur($input) {
-		const min = parseInt($input.dataset.min) || ''
-		const max = parseInt($input.dataset.max) || ''
+		const min = Number($input.dataset.min) || ''
+		const max = Number($input.dataset.max) || ''
 		const prefix = $input.dataset.prefix || ''
 		const postfix = $input.dataset.postfix || ''
 
@@ -128,7 +137,7 @@ export class Counter {
 		}
 
 		let value = $input.value.replace(this.regex, '')
-		value = parseInt(value)
+		value = Number(value)
 
 		if (!value) {
 			if (min) {
@@ -155,7 +164,7 @@ export class Counter {
 
 	handleInputKeyup($input) {
 		let value = $input.value.replace(this.regex, '')
-		if (value) value = parseInt(value)
+		if (value) value = Number(value)
 
 		$input.value = value
 	}

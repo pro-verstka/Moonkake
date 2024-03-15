@@ -6,7 +6,7 @@ export class Drawer {
 		this.options = {
 			selector: '[data-drawer]',
 			toggleButton: '[data-drawer-toggle]',
-			closeButton: '[data-drawer-close]'
+			closeButton: '[data-drawer-close]',
 		}
 
 		if (typeof options === 'object') {
@@ -60,7 +60,10 @@ export class Drawer {
 				return
 			}
 
-			if (e.target.closest(this.options.selector) || e.target.closest(this.options.toggleButton)) {
+			if (
+				e.target.closest(this.options.selector) ||
+				e.target.closest(this.options.toggleButton)
+			) {
 				return
 			}
 
@@ -80,12 +83,12 @@ export class Drawer {
 			.fromTo(
 				this.$drawer,
 				{
-					y: '-100%'
+					y: '-100%',
 				},
 				{
 					duration: 0.25,
-					y: '0%'
-				}
+					y: '0%',
+				},
 			)
 			.eventCallback('onComplete', () => {
 				this.isOpened = true
@@ -104,7 +107,7 @@ export class Drawer {
 				this.scrollLock.unlockScroll()
 
 				this.isOpened = false
-			}
+			},
 		})
 	}
 }

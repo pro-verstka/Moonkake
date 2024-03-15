@@ -9,7 +9,7 @@ const MK = {
 		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
 		version: '8.9.0',
 		author: 'DevBrains',
-		authorUrl: 'https://devbrains.io'
+		authorUrl: 'https://devbrains.io',
 	},
 
 	plugins: {},
@@ -23,7 +23,7 @@ const MK = {
 
 		this.data = {
 			...this.data,
-			...data
+			...data,
 		}
 	},
 
@@ -34,7 +34,7 @@ const MK = {
 
 		this.methods = {
 			...this.methods,
-			...methods
+			...methods,
 		}
 	},
 
@@ -43,19 +43,19 @@ const MK = {
 			return
 		}
 
-		Object.keys(plugins).forEach(key => {
+		for (const key of Object.keys(plugins)) {
 			if (typeof plugins[key] === 'object') {
 				this.plugins = {
 					...this.plugins,
-					[key]: plugins[key]
+					[key]: plugins[key],
 				}
 			}
 
 			if (typeof plugins[key] === 'function') {
 				this.plugins[key] = asLink ? plugins[key] : new plugins[key]()
 			}
-		})
-	}
+		}
+	},
 }
 
 window.MK = { ...MK, ...(window.MK || {}) }
@@ -85,5 +85,5 @@ window.addEventListener('resize', setViewportHeight)
 
 console.info(
 	`%c Yay, you found what you were looking for! You want a cool website, check out ${MK.info.authorUrl}`,
-	'padding: 10px; background-color: #282c34; color: #fff;'
+	'padding: 10px; background-color: #282c34; color: #fff;',
 )

@@ -9,8 +9,8 @@ export class Field {
 				success: 'field_success',
 				disabled: 'field_disabled',
 				readonly: 'field_readonly',
-				required: 'field_required'
-			}
+				required: 'field_required',
+			},
 		}
 
 		if (typeof options === 'object') {
@@ -31,9 +31,11 @@ export class Field {
 
 				if (!$el.matches(`.${this.options.classNames.root} input`)) return
 
-				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.focus)
+				$el
+					.closest(`.${this.options.classNames.root}`)
+					.classList.add(this.options.classNames.focus)
 			},
-			true
+			true,
 		)
 
 		document.addEventListener(
@@ -49,13 +51,15 @@ export class Field {
 						.classList.remove(
 							this.options.classNames.touched,
 							this.options.classNames.error,
-							this.options.classNames.success
+							this.options.classNames.success,
 						)
 				}
 
-				$el.closest(`.${this.options.classNames.root}`).classList.remove(this.options.classNames.focus)
+				$el
+					.closest(`.${this.options.classNames.root}`)
+					.classList.remove(this.options.classNames.focus)
 			},
-			true
+			true,
 		)
 
 		document.addEventListener(
@@ -65,20 +69,27 @@ export class Field {
 
 				if (!$el.matches(`.${this.options.classNames.root} input`)) return
 
-				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.touched)
 				$el
 					.closest(`.${this.options.classNames.root}`)
-					.classList.remove(this.options.classNames.error, this.options.classNames.success)
+					.classList.add(this.options.classNames.touched)
+				$el
+					.closest(`.${this.options.classNames.root}`)
+					.classList.remove(
+						this.options.classNames.error,
+						this.options.classNames.success,
+					)
 			},
-			true
+			true,
 		)
 	}
 
 	update() {
-		this.$fields = document.querySelectorAll(`.${this.options.classNames.root} input`)
+		this.$fields = document.querySelectorAll(
+			`.${this.options.classNames.root} input`,
+		)
 
 		if (this.$fields.length) {
-			this.$fields.forEach($el => {
+			for (const $el of this.$fields) {
 				const $field = $el.closest(`.${this.options.classNames.root}`)
 				const classNames = []
 
@@ -90,7 +101,7 @@ export class Field {
 				if ($el.required) classNames.push(this.options.classNames.required)
 
 				$field.classList.add(...classNames)
-			})
+			}
 		}
 	}
 }

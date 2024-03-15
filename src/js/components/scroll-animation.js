@@ -14,7 +14,9 @@ export class ScrollAnimation {
 		ScrollTrigger.batch(this.selector, {
 			start: 'top bottom-=10%',
 			onEnter: batch => {
-				batch.forEach(el => el.classList.add('-is-visible'))
+				for (const $el of batch) {
+					$el.classList.add('-is-visible')
+				}
 
 				gsap.to(batch, {
 					y: 0,
@@ -22,10 +24,10 @@ export class ScrollAnimation {
 					duration: 1,
 					stagger: {
 						each: 0.15,
-						overwrite: true
-					}
+						overwrite: true,
+					},
 				})
-			}
+			},
 		})
 	}
 }

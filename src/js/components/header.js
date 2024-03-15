@@ -35,7 +35,7 @@ export class Header {
 			return
 		}
 
-		this.$themes.forEach($theme => {
+		for (const $theme of this.$themes) {
 			const theme = $theme.dataset.headerTheme || DEFAULT_THEME
 			const $parent = $theme.parentElement.closest('[data-header-theme]')
 			const parentTheme = $parent ? $parent.dataset.headerTheme : DEFAULT_THEME
@@ -47,8 +47,8 @@ export class Header {
 				invalidateOnRefresh: true,
 				onToggle: () => this.setTheme(theme),
 				onLeave: () => this.setTheme(parentTheme),
-				onLeaveBack: () => this.setTheme()
+				onLeaveBack: () => this.setTheme(),
 			})
-		})
+		}
 	}
 }

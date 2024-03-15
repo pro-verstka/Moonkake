@@ -4,7 +4,7 @@ export class TableColumnHighlight {
 
 		if (!this.$root) return
 
-		this.$root.querySelectorAll('td').forEach($el => {
+		for (const $el of this.$root.querySelectorAll('td')) {
 			$el.addEventListener('mouseover', () => {
 				this.highlightColumn($el, '#eaeaea')
 			})
@@ -12,7 +12,7 @@ export class TableColumnHighlight {
 			$el.addEventListener('mouseout', () => {
 				this.highlightColumn($el)
 			})
-		})
+		}
 
 		if (this.$root.querySelector('.active')) {
 			this.highlightColumnActive(this.$root.querySelector('.active'))

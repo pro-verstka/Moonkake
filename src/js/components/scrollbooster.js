@@ -18,7 +18,8 @@ export class ScrollBooster {
 			// onUpdate: data => {
 			// 	this.$content.style.transform = `translateX(${-data.position.x}px)`
 			// },
-			shouldScroll: () => this.$content.clientWidth > this.$viewport.clientWidth
+			shouldScroll: () =>
+				this.$content.clientWidth > this.$viewport.clientWidth,
 		})
 	}
 }

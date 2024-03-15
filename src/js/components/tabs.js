@@ -9,7 +9,7 @@ export class Tabs {
 			item: '.tabs__item',
 			active: 'tabs__item_active',
 			useHashNav: false,
-			equalHeight: false
+			equalHeight: false,
 		}
 
 		if (typeof options === 'object') {
@@ -19,15 +19,25 @@ export class Tabs {
 		// tab click
 		document.addEventListener('click', e => {
 			if (
-				e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`) ||
-				e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
+				e.target.matches(
+					`${this.options.root} ${this.options.title} ${this.options.item}`,
+				) ||
+				e.target.closest(
+					`${this.options.root} ${this.options.title} ${this.options.item}`,
+				)
 			) {
 				const $root = e.target.closest(this.options.root)
-				const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
+				const $titles = $root.querySelectorAll(
+					`${this.options.title} ${this.options.item}`,
+				)
 
-				const $el = e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)
+				const $el = e.target.matches(
+					`${this.options.root} ${this.options.title} ${this.options.item}`,
+				)
 					? e.target
-					: e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
+					: e.target.closest(
+							`${this.options.root} ${this.options.title} ${this.options.item}`,
+					  )
 
 				this.change($root, Array.from($titles).indexOf($el))
 			}
@@ -35,7 +45,11 @@ export class Tabs {
 
 		// tab change on history change
 		window.addEventListener('popstate', e => {
-			if (e.state && Object.prototype.hasOwnProperty.call(e.state, 'source') && e.state.source === 'tabs') {
+			if (
+				e.state &&
+				Object.prototype.hasOwnProperty.call(e.state, 'source') &&
+				e.state.source === 'tabs'
+			) {
 				const $root = document
 					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
 					.closest(this.options.root)
@@ -48,11 +62,15 @@ export class Tabs {
 		window.addEventListener('load', () => {
 			if (window.location.hash) {
 				const hash = window.location.hash.substr(1)
-				const $title = document.querySelector(`${this.options.root} [data-hash="${hash}"]`)
+				const $title = document.querySelector(
+					`${this.options.root} [data-hash="${hash}"]`,
+				)
 
 				if ($title) {
 					const $root = $title.closest(this.options.root)
-					const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
+					const $titles = $root.querySelectorAll(
+						`${this.options.title} ${this.options.item}`,
+					)
 
 					this.change($root, Array.from($titles).indexOf($title), false)
 				}
@@ -62,25 +80,26 @@ export class Tabs {
 		// set tabs equal height
 		if (this.options.equalHeight) {
 			this.setEqualHeight()
-			;['load', 'resize'].forEach(eventType =>
+
+			for (const eventType of ['load', 'resize']) {
 				window.addEventListener(eventType, () => {
 					this.setEqualHeight()
 				})
-			)
+			}
 		}
 	}
 
 	setEqualHeight() {
 		if (!this.options.equalHeight) return false
 
-		document.querySelectorAll(this.options.root).forEach($root => {
+		for (const $root of document.querySelectorAll(this.options.root)) {
 			const $content = $root.querySelector(this.options.content)
 			const $contents = $content.querySelectorAll(this.options.item)
 			const heights = []
 
 			$content.style.minHeight = ''
 
-			$contents.forEach($el => {
+			for (const $el of $contents) {
 				if (!$el.classList.contains(this.options.active)) {
 					$el.style.display = 'block'
 					heights.push($el.clientHeight)
@@ -88,17 +107,21 @@ export class Tabs {
 				} else {
 					heights.push($el.clientHeight)
 				}
-			})
+			}
 
 			$content.style.minHeight = `${Math.max(...heights)}px`
-		})
+		}
 
 		return true
 	}
 
 	change($root, index, changeHash = true) {
-		const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
-		const $contents = $root.querySelectorAll(`${this.options.content} ${this.options.item}`)
+		const $titles = $root.querySelectorAll(
+			`${this.options.title} ${this.options.item}`,
+		)
+		const $contents = $root.querySelectorAll(
+			`${this.options.content} ${this.options.item}`,
+		)
 
 		$titles.forEach(($el, key) => {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
@@ -108,21 +131,25 @@ export class Tabs {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
-		if (this.options.useHashNav && changeHash && Object.prototype.hasOwnProperty.call($titles[index].dataset, 'hash')) {
+		if (
+			this.options.useHashNav &&
+			changeHash &&
+			Object.prototype.hasOwnProperty.call($titles[index].dataset, 'hash')
+		) {
 			window.history.pushState(
 				{
 					source: 'tabs',
 					hash: $titles[index].dataset.hash,
-					index
+					index,
 				},
 				null,
-				`${window.location.pathname}#${$titles[index].dataset.hash}`
+				`${window.location.pathname}#${$titles[index].dataset.hash}`,
 			)
 		}
 
 		emitEvent('mk:tabs:change', {
 			root: $root,
-			index
+			index,
 		})
 	}
 }

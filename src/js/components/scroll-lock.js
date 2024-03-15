@@ -1,4 +1,4 @@
-import { getScrollbarWidth, device } from '../helpers'
+import { device, getScrollbarWidth } from '../helpers'
 
 export class ScrollLock {
 	constructor() {
@@ -11,11 +11,13 @@ export class ScrollLock {
 
 		document.body.style.overflow = 'hidden'
 
-		this.$elements?.forEach($el => {
-			const paddingRight = parseInt(window.getComputedStyle($el).paddingRight)
+		for (const $el of this.$elements) {
+			const paddingRight = Number.parseInt(
+				window.getComputedStyle($el).paddingRight,
+			)
 
 			$el.style.paddingRight = `${paddingRight + scrollBarWidth}px`
-		})
+		}
 
 		if (device.isIOS()) {
 			this.scrollY = window.scrollY
@@ -26,9 +28,9 @@ export class ScrollLock {
 	}
 
 	unlockScroll() {
-		this.$elements?.forEach($el => {
+		for (const $el of this.$elements) {
 			$el.style.paddingRight = ''
-		})
+		}
 
 		document.body.style.overflow = ''
 

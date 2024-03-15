@@ -8,8 +8,8 @@ export class Loader {
 			classnames: {
 				lock: '-loader-lock',
 				closing: 'loader_closing',
-				closed: 'loader_closed'
-			}
+				closed: 'loader_closed',
+			},
 		}
 
 		if (typeof options === 'object') {

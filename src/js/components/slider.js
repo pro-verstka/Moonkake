@@ -1,5 +1,11 @@
 import Swiper from 'swiper'
-import { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper/modules'
+import {
+	Navigation,
+	Pagination,
+	Autoplay,
+	Mousewheel,
+	EffectFade,
+} from 'swiper/modules'
 
 export class Slider {
 	constructor($el) {
@@ -29,14 +35,14 @@ export class Slider {
 			freeModeSticky: true,
 			mousewheel: {
 				forceToAxis: true,
-				invert: true
+				invert: true,
 			},
 
 			preloadImages: false,
 
 			autoplay: {
 				delay: 5000,
-				disableOnInteraction: false
+				disableOnInteraction: false,
 			},
 
 			// fadeEffect: {
@@ -45,14 +51,14 @@ export class Slider {
 
 			navigation: {
 				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev'
+				prevEl: '.swiper-button-prev',
 			},
 
 			pagination: {
 				el: '.swiper-pagination',
 				type: 'bullets',
-				clickable: true
-			}
+				clickable: true,
+			},
 		})
 	}
 }

@@ -43,14 +43,19 @@ export class Select {
 	}
 
 	#buildOptions() {
-		this.$originalOptions = Array.from(this.$originalSelect.querySelectorAll('option'))
+		this.$originalOptions = Array.from(
+			this.$originalSelect.querySelectorAll('option'),
+		)
 
-		this.$originalOptions?.forEach(option => {
+		for (const option of this.$originalOptions) {
 			const $option = document.createElement('div')
 			$option.classList.add('select__option')
 			$option.classList.toggle('select__option_selected', option.selected)
 			$option.classList.toggle('select__option_disabled', option.disabled)
-			$option.classList.toggle('select__option_hidden', option.innerText === '' && option.value === '')
+			$option.classList.toggle(
+				'select__option_hidden',
+				option.innerText === '' && option.value === '',
+			)
 			$option.innerHTML = option.innerText
 			$option.dataset.value = option.value
 			$option.dataset.label = option.innerText
@@ -59,18 +64,30 @@ export class Select {
 
 			this.$options.push($option)
 			this.$dropdown.appendChild($option)
-		})
+		}
 	}
 
 	#setupState() {
-		this.$select.classList.toggle('select_disabled', this.$originalSelect.disabled)
-		this.$select.classList.toggle('select_multiple', this.$originalSelect.multiple)
-		this.$select.classList.toggle('select_touched', !!this.$originalSelect.value)
+		this.$select.classList.toggle(
+			'select_disabled',
+			this.$originalSelect.disabled,
+		)
+		this.$select.classList.toggle(
+			'select_multiple',
+			this.$originalSelect.multiple,
+		)
+		this.$select.classList.toggle(
+			'select_touched',
+			!!this.$originalSelect.value,
+		)
 
-		this.$labelPlaceholder.innerHTML = this.$originalSelect.dataset.placeholder || ''
+		this.$labelPlaceholder.innerHTML =
+			this.$originalSelect.dataset.placeholder || ''
 		this.$labelValue.innerHTML =
 			this.$originalOptions.filter(
-				el => el.value === this.$originalSelect.value || el.innerText === this.$originalSelect.value
+				el =>
+					el.value === this.$originalSelect.value ||
+					el.innerText === this.$originalSelect.value,
 			)[0].innerText ||
 			this.$originalSelect.value ||
 			''
@@ -95,7 +112,7 @@ export class Select {
 	}
 
 	#setupOptionsListeners() {
-		this.$options?.forEach($option => {
+		for (const $option of this.$options) {
 			$option.addEventListener('click', () => {
 				const { disabled, selected, value, label } = $option.dataset
 
@@ -103,7 +120,9 @@ export class Select {
 
 				this.$labelValue.innerHTML = label
 
-				const $prevOption = this.$options.find($el => $el.dataset.selected === 'true')
+				const $prevOption = this.$options.find(
+					$el => $el.dataset.selected === 'true',
+				)
 				$prevOption.dataset.selected = 'false'
 				$prevOption.classList.remove('select__option_selected')
 
@@ -116,11 +135,11 @@ export class Select {
 				this.$originalSelect.value = value
 				this.$originalSelect.dispatchEvent(
 					new CustomEvent('change', {
-						bubbles: true
-					})
+						bubbles: true,
+					}),
 				)
 			})
-		})
+		}
 	}
 
 	#setupResetListener() {
@@ -141,8 +160,8 @@ export class Select {
 	}
 
 	static closeAll() {
-		document.querySelectorAll('.select_opened')?.forEach($select => {
+		for (const $select of document.querySelectorAll('.select_opened')) {
 			$select.classList.remove('select_opened')
-		})
+		}
 	}
 }

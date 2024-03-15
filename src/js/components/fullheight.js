@@ -4,7 +4,7 @@ export class FullHeight {
 	constructor(options = {}) {
 		this.options = {
 			item: '[data-fullheight]',
-			offset: 0
+			offset: 0,
 		}
 
 		if (typeof options === 'object') {
@@ -17,28 +17,40 @@ export class FullHeight {
 	}
 
 	handle() {
-		;['load', 'resize', 'orientationchange'].forEach(eventName => {
+		for (const eventName of ['load', 'resize', 'orientationchange']) {
 			window.addEventListener(eventName, event => {
 				this.setFullHeight(event)
 			})
-		})
+		}
 	}
 
 	setFullHeight(event) {
-		if (!this.$els.length || (event.type === 'resize' && device.isMobile())) return false
+		if (!this.$els.length || (event.type === 'resize' && device.isMobile()))
+			return false
 
-		this.$els.forEach($el => {
-			const $element = $el
-			const minHeight = parseFloat(window.getComputedStyle($element, null).getPropertyValue('min-height')) || 0
-			const maxHeight = parseFloat(window.getComputedStyle($element, null).getPropertyValue('max-height')) || ''
-			const offset = parseFloat($element.getAttribute('data-fullheight-offset')) || this.options.offset
+		for (const $element of this.$els) {
+			const minHeight =
+				Number.parseFloat(
+					window
+						.getComputedStyle($element, null)
+						.getPropertyValue('min-height'),
+				) || 0
+			const maxHeight =
+				Number.parseFloat(
+					window
+						.getComputedStyle($element, null)
+						.getPropertyValue('max-height'),
+				) || ''
+			const offset =
+				Number.parseFloat($element.getAttribute('data-fullheight-offset')) ||
+				this.options.offset
 			let height = window.innerHeight
 
 			if (minHeight && window.innerHeight <= minHeight) height = minHeight
 			if (maxHeight && window.innerHeight >= maxHeight) height = maxHeight
 
 			$element.style.height = `${height + offset}px`
-		})
+		}
 
 		return true
 	}

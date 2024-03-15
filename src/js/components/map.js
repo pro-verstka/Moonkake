@@ -5,11 +5,11 @@ const initMap = () => {
 			{
 				center: [51.507351, -0.12766],
 				zoom: 17,
-				controls: []
+				controls: [],
 			},
 			{
-				suppressMapOpenBlock: true
-			}
+				suppressMapOpenBlock: true,
+			},
 		)
 
 		map.behaviors.disable('scrollZoom')
@@ -21,26 +21,26 @@ const initMap = () => {
 					size: 'small',
 					position: {
 						right: 10,
-						bottom: 30
-					}
-				}
-			})
+						bottom: 30,
+					},
+				},
+			}),
 		)
 
 		const placeMark = new ymaps.Placemark(
 			map.getCenter(),
 			{
 				balloonContent: 'Адрес',
-				iconCaption: 'Заголовок'
+				iconCaption: 'Заголовок',
 			},
 			{
 				preset: 'islands#redIcon',
-				iconCaptionMaxWidth: '200'
+				iconCaptionMaxWidth: '200',
 				// iconLayout: 'default#image',
 				// iconImageHref: 'assets/img/marker.png',
 				// iconImageSize: [54, 70],
 				// iconImageOffset: [-27, -70]
-			}
+			},
 		)
 
 		map.geoObjects.add(placeMark)

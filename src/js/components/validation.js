@@ -1,16 +1,17 @@
 import validate from 'validate.js'
 
-const isEmpty = obj => obj && Object.keys(obj).length === 0 && obj.constructor === Object
+const isEmpty = obj =>
+	obj && Object.keys(obj).length === 0 && obj.constructor === Object
 
 const defaultSchema = {
 	email: {
-		email: true
+		email: true,
 	},
 	phone: {
 		length: {
-			is: 18
-		}
-	}
+			is: 18,
+		},
+	},
 }
 
 export class Validation {
@@ -33,8 +34,8 @@ export class Validation {
 			classNames: {
 				root: 'field',
 				error: 'field_error',
-				success: 'field_success'
-			}
+				success: 'field_success',
+			},
 		}
 
 		if (typeof options === 'object') {
@@ -47,11 +48,13 @@ export class Validation {
 	}
 
 	#addListeners() {
-		this.$form.querySelectorAll(this.options.selectors).forEach($field => {
+		for (const $field of this.$form.querySelectorAll(this.options.selectors)) {
 			const events = this.options.events.split(',')
 
-			events.forEach(event => $field.addEventListener(event, this.validate($field).bind(this)))
-		})
+			for (const event of events) {
+				$field.addEventListener(event, this.validate($field).bind(this))
+			}
+		}
 	}
 
 	validate($el) {

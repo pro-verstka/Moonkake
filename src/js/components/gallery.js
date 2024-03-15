@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 
 export class Gallery {
@@ -16,7 +15,7 @@ export class Gallery {
 		this.gallery = new PhotoSwipeLightbox({
 			gallery: this.selector,
 			children: 'a',
-			pswpModule: import('photoswipe')
+			pswpModule: import('photoswipe'),
 		})
 
 		this.gallery.init()

@@ -1,11 +1,11 @@
 # Moonkake
 
-Стартовый шаблон для верстки с использованием BEM, Gulp, Sass, Pug, JS/ES6.
+Стартовый шаблон для верстки с использованием BEM, Scss, Pug, JS/ES6.
 
 ## Скачать
 
 ```sh
-npx degit detectiveshelby/moonkake
+bunx degit pro-verstka/moonkake
 ```
 
 ## Установка
@@ -13,23 +13,23 @@ npx degit detectiveshelby/moonkake
 Установить пакеты из package.json
 
 ```sh
-npm install
+bun install
 ```
 
 ## Запуск
 
 ```sh
-npm run dev
+bun run dev
 ```
 
 ## Доступные команды
 
 ```sh
 // Задача по-умолчанию для разработки проекта
-npm run dev
+bun run dev
 
 // Сборка проекта
-npm run build
+bun run build
 ```
 
 ## Доступные настройки gulpfile.mjs

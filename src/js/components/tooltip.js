@@ -12,7 +12,7 @@ export class Tooltip {
 			allowHTML: true,
 			delay: [100, 100],
 			interactive: true,
-			maxWidth: 200
+			maxWidth: 200,
 		})
 	}
 }

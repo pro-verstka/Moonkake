@@ -8,14 +8,16 @@ export class Spoiler {
 			mode: 'text', // text, html
 			trim: 100,
 			postfix: '...',
-			labels: ['Показать', 'Скрыть']
+			labels: ['Показать', 'Скрыть'],
 		}
 
 		if (typeof options === 'object') {
 			this.options = { ...this.options, ...options }
 		}
 
-		this.$elements = document.querySelectorAll(`${this.options.rootSelector}:not(.-initialized)`)
+		this.$elements = document.querySelectorAll(
+			`${this.options.rootSelector}:not(.-initialized)`,
+		)
 		this.handle(this.$elements)
 	}
 
@@ -32,7 +34,7 @@ export class Spoiler {
 	}
 
 	handleHtmlMode($elements) {
-		$elements.forEach($spoiler => {
+		for (const $spoiler of $elements) {
 			$spoiler.classList.add('spoiler')
 			$spoiler.classList.add('spoiler_custom')
 			$spoiler.classList.add('spoiler_html-mode')
@@ -44,11 +46,11 @@ export class Spoiler {
 			$spoiler.insertBefore($toggle, $body.nextSibling)
 
 			this.handleToggle($toggle, $spoiler)
-		})
+		}
 	}
 
 	handleTextMode($elements) {
-		$elements.forEach($spoiler => {
+		for (const $spoiler of $elements) {
 			$spoiler.classList.add('spoiler')
 			$spoiler.classList.add('spoiler_custom')
 			$spoiler.classList.add('spoiler_text-mode')
@@ -67,11 +69,13 @@ export class Spoiler {
 
 				this.handleToggle($toggle, $spoiler)
 			}
-		})
+		}
 	}
 
 	handleNew() {
-		const $new = document.querySelectorAll(`${this.options.rootSelector}:not(.spoiler_initialized)`)
+		const $new = document.querySelectorAll(
+			`${this.options.rootSelector}:not(.spoiler_initialized)`,
+		)
 
 		this.$elements = [...$new, this.$elements]
 

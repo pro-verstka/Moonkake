@@ -245,7 +245,7 @@ export default {
 			patterns: [{ from: './src/img/', to: 'assets/img/' }]
 		}),
 		new BeautifyHtmlWebpackPlugin(),
-		new ESLintPlugin(),
+		// new ESLintPlugin(),
 		{
 			apply: compiler => {
 				compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {

@@ -15,11 +15,11 @@ export class Modal {
 			modalVideoId: 'modal_video',
 
 			language: {
-				loadingText: 'Loading...'
+				loadingText: 'Loading...',
 			},
 
 			duration: 300,
-			imagePadding: 40
+			imagePadding: 40,
 		}
 
 		if (typeof options === 'object') {
@@ -42,7 +42,7 @@ export class Modal {
 						<div class="modal__caption"></div>
 					</div>
 				</div>
-			`
+			`,
 			)
 		}
 
@@ -57,13 +57,16 @@ export class Modal {
 						<div class="modal__iframe"></div>
 					</div>
 				</div>
-			`
+			`,
 			)
 		}
 
 		document.addEventListener('click', e => {
 			// open by button
-			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
+			if (
+				e.target.matches(this.options.modalSelector) ||
+				e.target.closest(this.options.modalSelector)
+			) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalSelector)
@@ -74,7 +77,10 @@ export class Modal {
 			}
 
 			// open image by link
-			if (e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)) {
+			if (
+				e.target.matches(this.options.modalImageSelector) ||
+				e.target.closest(this.options.modalImageSelector)
+			) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalImageSelector)
@@ -85,7 +91,10 @@ export class Modal {
 			}
 
 			// open video by button
-			if (e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)) {
+			if (
+				e.target.matches(this.options.modalVideoSelector) ||
+				e.target.closest(this.options.modalVideoSelector)
+			) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalVideoSelector)
@@ -96,7 +105,10 @@ export class Modal {
 			}
 
 			// close by button
-			if (e.target.matches(this.options.modalCloseSelector) || e.target.closest(this.options.modalCloseSelector)) {
+			if (
+				e.target.matches(this.options.modalCloseSelector) ||
+				e.target.closest(this.options.modalCloseSelector)
+			) {
 				e.preventDefault()
 
 				this.close(e.target.closest('.modal').getAttribute('id'))
@@ -112,7 +124,10 @@ export class Modal {
 
 		// close by Esc
 		document.addEventListener('keydown', e => {
-			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode === 27) {
+			if (
+				document.documentElement.classList.contains('-modal-locked') &&
+				e.keyCode === 27
+			) {
 				if (this.modals.length) {
 					this.close(this.modals[this.modals.length - 1])
 				}
@@ -154,7 +169,7 @@ export class Modal {
 
 		emitEvent('mk:modal:beforeOpen', {
 			id,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		this.modals.push(id)
@@ -165,7 +180,7 @@ export class Modal {
 
 		emitEvent('mk:modal:open', {
 			id,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		setTimeout(() => {
@@ -176,14 +191,14 @@ export class Modal {
 
 		emitEvent('mk:modal:afterOpen', {
 			id,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 	}
 
 	openImage(href, $trigger = null) {
 		emitEvent('mk:modal:beforeOpen', {
 			id: this.options.modalImageId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		this.modals.push(this.options.modalImageId)
@@ -208,7 +223,7 @@ export class Modal {
 
 		emitEvent('mk:modal:open', {
 			id: this.options.modalImageId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		setTimeout(() => {
@@ -219,7 +234,7 @@ export class Modal {
 
 		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalImageId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		const image = new Image()
@@ -228,8 +243,14 @@ export class Modal {
 		image.onload = () => {
 			const ratio = image.width / image.height
 
-			$modalImage.classList.toggle('modal__image_portrait', image.width > image.height)
-			$modalImage.classList.toggle('modal__image_landscape', image.width < image.height)
+			$modalImage.classList.toggle(
+				'modal__image_portrait',
+				image.width > image.height,
+			)
+			$modalImage.classList.toggle(
+				'modal__image_landscape',
+				image.width < image.height,
+			)
 
 			this.setImageDimensions(image, ratio)
 
@@ -242,7 +263,7 @@ export class Modal {
 
 			emitEvent('mk:modal:afterImageLoad', {
 				id: this.options.modalImageId,
-				trigger: $trigger
+				trigger: $trigger,
 			})
 		}
 	}
@@ -250,7 +271,7 @@ export class Modal {
 	openVideo(href, $trigger = null) {
 		emitEvent('mk:modal:beforeOpen', {
 			id: this.options.modalVideoId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		this.modals.push(this.options.modalVideoId)
@@ -271,7 +292,10 @@ export class Modal {
 		if (href.indexOf('vimeo') > -1) {
 			const src = href.replace(/[^0-9]/g, '')
 
-			$iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
+			$iframe.setAttribute(
+				'src',
+				`https://player.vimeo.com/video/${src}?autoplay=1`,
+			)
 		}
 
 		$modal.querySelector('.modal__iframe').appendChild($iframe)
@@ -282,7 +306,7 @@ export class Modal {
 
 		emitEvent('mk:modal:open', {
 			id: this.options.modalVideoId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 
 		setTimeout(() => {
@@ -293,7 +317,7 @@ export class Modal {
 
 		emitEvent('mk:modal:afterOpen', {
 			id: this.options.modalVideoId,
-			trigger: $trigger
+			trigger: $trigger,
 		})
 	}
 
@@ -306,7 +330,7 @@ export class Modal {
 		}
 
 		emitEvent('mk:modal:beforeClose', {
-			id
+			id,
 		})
 
 		this.modals = this.modals.filter(item => item !== id)
@@ -314,7 +338,7 @@ export class Modal {
 		$modal.classList.remove('modal_visible')
 
 		emitEvent('mk:modal:close', {
-			id
+			id,
 		})
 
 		const handleClose = () => {
@@ -333,7 +357,7 @@ export class Modal {
 			}
 
 			emitEvent('mk:modal:afterClose', {
-				id
+				id,
 			})
 
 			window.removeEventListener('resize', this.setImageDimensions)

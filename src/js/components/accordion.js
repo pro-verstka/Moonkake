@@ -9,7 +9,7 @@ export class Accordion {
 			body: '.accordion__body',
 			active: 'accordion__item_active',
 			animation: 'accordion_animation',
-			useAnimation: false
+			useAnimation: false,
 		}
 
 		if (typeof options === 'object') {
@@ -17,11 +17,16 @@ export class Accordion {
 		}
 
 		if (this.options.useAnimation) {
-			document.querySelectorAll(this.options.root).forEach($el => $el.classList.add(this.options.animation))
+			for (const $el of document.querySelectorAll(this.options.root)) {
+				$el.classList.add(this.options.animation)
+			}
 		}
 
 		document.addEventListener('click', e => {
-			if (e.target.matches(`${this.options.root} ${this.options.handler}`) || e.target.closest(this.options.handler)) {
+			if (
+				e.target.matches(`${this.options.root} ${this.options.handler}`) ||
+				e.target.closest(this.options.handler)
+			) {
 				this.toggle(e.target)
 			}
 		})
@@ -54,7 +59,7 @@ export class Accordion {
 
 		emitEvent('mk:accordion:toggle', {
 			root: $el.closest(this.options.root),
-			item: $el.closest(this.options.item)
+			item: $el.closest(this.options.item),
 		})
 	}
 }

@@ -13,7 +13,7 @@ export class Calendar {
 			locale: Russian,
 			dateFormat: 'd.n.Y',
 			disableMobile: true,
-			monthSelectorType: 'static'
+			monthSelectorType: 'static',
 		})
 	}
 }

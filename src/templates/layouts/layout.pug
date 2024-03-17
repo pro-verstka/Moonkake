@@ -10,7 +10,7 @@ html(lang="ru")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="format-detection" content="telephone=no")
 
-		title=data.meta.title
+		title=title
 		meta(name="keywords" content="")
 		meta(name="description" content="")
 
@@ -19,11 +19,13 @@ html(lang="ru")
 		meta(property="og:url" content="")
 		meta(property="og:image" content="")
 
-		link(rel="icon" href="/favicon.ico" sizes="any")
-		link(rel="icon" href="/icon.svg" type="image/svg+xml")
-		link(rel="apple-touch-icon" href="icon.png")
+		//link(rel="icon" href="/favicon.ico" sizes="any")
+		//link(rel="icon" href="/icon.svg" type="image/svg+xml")
+		//link(rel="apple-touch-icon" href="icon.png")
 
-		link(data-app-css rel="stylesheet" href=`assets/css/app.min.css?v=${new Date().getTime()}`)
+		//link(rel="preload" href="/fonts/FILE_NAME.woff2" as="font" type="font/woff2" crossorigin)
+
+		link(rel="stylesheet" href="/styles/app.scss")
 
 		block css
 
@@ -48,10 +50,10 @@ html(lang="ru")
 
 		block bottom
 
-		include ../../img/icons.svg
+		include ../../assets/icons.svg
 
 		// JS
-		script(data-app-js defer src=`assets/js/app.min.js?v=${new Date().getTime()}`)
+		script(type="module" src="/scripts/app.js")
 
 		block js
 

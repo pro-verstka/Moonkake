@@ -1,60 +1,45 @@
 # Moonkake
 
-A starter template for layout using BEM, Gulp, Sass, Pug, JS/ES6.
+Стартовый шаблон для верстки с использованием Vite, Scss, Pug, JS.
 
-## Download
+## Скачать
 
 ```sh
-npx degit detectiveshelby/moonkake
+npx degit pro-verstka/moonkake
 ```
 
-## Installation
+## Установка
 
-Install packages from package.json
+Установить пакеты из package.json
 
 ```sh
 npm install
 ```
 
-## Run
+## Запуск
 
 ```sh
 npm run dev
 ```
 
-## Available scripts
+## Доступные команды
 
 ```sh
-// Default task for project development
+// Задача по-умолчанию для разработки проекта
 npm run dev
 
-// Build project
+// Сборка проекта
 npm run build
 ```
 
-## Available settings for gulpfile.mjs
-
-```js
-{
-  // css files from src/css/pages folder will be attached separately in head
-  separateCssToPages: true,
-
-  // js files from src/js/pages folder will be attached separately after app.js
-  separateJsToPages: true,
-
-  // font files from src/fonts folder will be connected in head
-  appendFontsToHead: true
-}
-```
-
-# Components
+# Разметка
 
 ### Сheckbox
 
 ```pug
 label.checkbox
   input(type="checkbox", name="checkbox_name")
-  span text
+  span Текст
 ```
 
 ### Radio
@@ -62,23 +47,22 @@ label.checkbox
 ```pug
 label.radio
   input(type="radio", name="radio_name")
-  span text
+  span Текст
 ```
 
 ### File
 
 ```pug
-label.field-file
-	input(type="file")
-	span.field-file__placeholder Attach File
-	span.field-file__value
+div.file
+  input(type="file", id="file", name="file_name")
+  label(for="file"): span(data-label="Выберите файл") Выберите файл
 ```
 
 ### Select
 
 ```pug
 select.select(name="select_name")
-  option(value="") text
+  option(value="") текст
 
 div.select
   select(data-placeholder="Select...")
@@ -95,18 +79,18 @@ form.form(action="", mathod="", id="form")
   div.form__fieldset
     div.form__group
       div.form__item
-        input(type="text", name="", placeholder="Text", value="")
+        input(type="text", name="", placeholder="Текст", value="")
 
     div.form__group.form__group_row
       div.form__item
-        input(type="text", name="", placeholder="Text", value="")
+        input(type="text", name="", placeholder="Текст", value="")
       div.form__item
-        input(type="text", name="", placeholder="Text", value="")
+        input(type="text", name="", placeholder="Текст", value="")
 
   div.form__fieldset
     div.form__group
       div.form__item
-        button.button(type="submit") Submit
+        button.button(type="submit") Отправить
 ```
 
 ### Tabs
@@ -114,14 +98,14 @@ form.form(action="", mathod="", id="form")
 ```pug
 div.tabs
   div.tabs__title
-    div.tabs__item.tabs__item_active(data-hash="tab1") Tab 1
-    div.tabs__item(data-hash="tab2") Tab 2
-    div.tabs__item(data-hash="tab3") Tab 3
+    div.tabs__item.tabs__item_active(data-hash="tab1") Таб 1
+    div.tabs__item(data-hash="tab2") Таб 2
+    div.tabs__item(data-hash="tab3") Таб 3
 
   div.tabs__content
-    div.tabs__item.tabs__item_active Tab content 1
-    div.tabs__item Tab content 2
-    div.tabs__item Tab content 3
+    div.tabs__item.tabs__item_active Таб 1
+    div.tabs__item Таб 2
+    div.tabs__item Таб 3
 ```
 
 ### Accordion
@@ -141,7 +125,7 @@ div.accordion
 ```pug
 div.counter
   button.counter__minus -
-  input(type="text" value="before 5 after" data-prefix="before " data-postfix=" after" data-min="2" data-max="10")
+  input(type="text" value="до 5 после" data-prefix="до " data-postfix=" после" data-min="2" data-max="10")
   button.counter__plus +
 ```
 
@@ -149,9 +133,9 @@ div.counter
 
 ```pug
 ul.breadcrumbs
-  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Home
-  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Category
-  li.breadcrumbs__item: span.breadcrumbs__current Page
+  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Главная
+  li.breadcrumbs__item: a.breadcrumbs__link(href="#") Раздел
+  li.breadcrumbs__item: span.breadcrumbs__current Страница
 ```
 
 ### Pagination
@@ -166,28 +150,28 @@ ul.pagination
 ### Modal
 
 ```pug
-a(href="#modal_example" data-modal) Open modal
+a(href="#modal_example" data-modal) Открыть модальное окно
 
 div.modal#modal_example
   div.modal__container
     button.modal__close(data-modal-close) &times;
-    h2 Title
+    h2 Заголовок
 
-a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Open YouTube video
-a(href="https://vimeo.com/191947042" data-modal-video) Open Vimeo video
-a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image, title="Image Caption") Open image
+a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Открыть видео YouTube
+a(href="https://vimeo.com/191947042" data-modal-video) Открыть видео Vimeo
+a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image, title="Image Caption") Открыть изображение
 ```
 
 ### Calendar
 
 ```pug
-input(type="text", name="", data-calendar, placeholder="dd.mm.yyyy")
+input(type="text", name="", data-calendar, placeholder="дд.мм.гггг")
 ```
 
 ### Scroll to element
 
 ```pug
-a(href="#" data-scroll-to="div_id") Scroll to ID
+a(href="#" data-scroll-to="div_id") Прокрутка к ID
 ```
 
 ### Spoiler

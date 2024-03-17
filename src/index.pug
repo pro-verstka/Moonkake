@@ -1,0 +1,10 @@
+extends templates/layouts/layout
+
+block css
+	link(rel="stylesheet" href="/styles/pages/index.scss")
+
+block js
+	script(type="module" src="/scripts/pages/index.js")
+
+block main
+	include templates/widgets/section-intro

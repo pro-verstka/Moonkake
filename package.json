@@ -1,19 +1,26 @@
 {
 	"name": "moonkake",
 	"description": "Start template. Supports Pug, Scss, PostCSS, ES6.",
+	"version": "10.0.0",
 	"author": {
 		"name": "DevBrains",
 		"url": "https://devbrains.io"
 	},
 	"private": true,
-	"version": "10.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview",
-		"biome:format": "npx @biomejs/biome format ./src --write",
-		"biome:lint": "npx @biomejs/biome lint ./src"
+		"format": "npx @biomejs/biome format ./src --write",
+		"lint": "npx @biomejs/biome lint ./src"
+	},
+	"dependencies": {
+		"gsap": "^3.12.5",
+		"imask": "^7.5.0",
+		"photoswipe": "^5.4.3",
+		"scroll-to-element": "^2.0.3",
+		"scrollbooster": "^3.0.2",
+		"swiper": "^11.0.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.6.1",
@@ -24,13 +31,5 @@
 	},
 	"volta": {
 		"node": "20.11.1"
-	},
-	"dependencies": {
-		"gsap": "^3.12.5",
-		"imask": "^7.5.0",
-		"photoswipe": "^5.4.3",
-		"scroll-to-element": "^2.0.3",
-		"scrollbooster": "^3.0.2",
-		"swiper": "^11.0.7"
 	}
 }

@@ -1,10 +1,7 @@
-extends templates/layouts/layout
-
-block css
-	link(rel="stylesheet" href="/styles/pages/index.scss")
-
-block js
-	script(type="module" src="/scripts/pages/index.js")
-
-block main
-	include templates/widgets/section-intro
+doctype html
+html(lang="ru")
+	head
+		meta(charset="utf-8")
+	body
+		ol
+			li: a(href="main.html") main

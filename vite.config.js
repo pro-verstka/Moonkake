@@ -18,13 +18,18 @@ const getInput = entries => {
 
 const generateIndexPage = entries => {
 	const INDEX_PAGE = 'index.pug'
-	let content = `doctype html\nhtml(lang="ru")\n\thead\n\t\tmeta(charset="utf-8")\n\tbody\n\t\tol`
+	let content = `doctype html\nhtml(lang="ru")\n\thead\n\t\tmeta(charset="utf-8")\n\t\tstyle.
+			* {margin: 0; padding: 0; font-size: 1.2rem; font-family: Arial, Helvetica, sans-serif; font-variant-numeric: tabular-nums;} body {background:#fafafa;} a {padding: 1rem 1.2rem; display: block; color: #4846FE; text-decoration: none; border-bottom: 1px solid #f0f0f0; text-transform: capitalize;} a:visited {color: #333;} a:hover {background: #4846FE; color: #fff;}\n\tbody\n\t\tul`
 
-	for (const tpl of entries) {
-		if (tpl === INDEX_PAGE) continue
+	for (const [index, tpl] of entries.entries()) {
+		if (tpl === INDEX_PAGE) {
+			continue
+		}
 
 		const [name] = tpl.split('.')
-		content += `\n\t\t\tli: a(href="${name}.html") ${name}`
+		content += `\n\t\t\tli: a(href="${name}.html") ${
+			index < 10 ? `0${index}` : index
+		}. ${name}`
 	}
 
 	fs.writeFileSync(`${ROOT_DIR}/${INDEX_PAGE}`, content)

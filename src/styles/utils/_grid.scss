@@ -1,4 +1,4 @@
-@import '../mixins/index';
+@import '../mixins';
 
 .grid {
 	@include grid('grid');

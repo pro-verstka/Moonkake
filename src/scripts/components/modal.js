@@ -1,5 +1,5 @@
-import { ScrollLock } from './scroll-lock'
 import { emitEvent } from '../helpers'
+import { ScrollLock } from '../utils'
 
 export class Modal {
 	constructor(options = {}) {

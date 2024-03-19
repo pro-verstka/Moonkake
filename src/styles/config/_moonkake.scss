@@ -11,18 +11,9 @@ body {
 html {
 	box-sizing: border-box;
 	font-size: var(--base-font-size);
-
-	// scroll-behavior: smooth;
+	scroll-behavior: smooth;
 	text-size-adjust: 100%;
 }
-
-// fix safari bug on smooth scroll
-
-/*
-	[style*="transform"] {
-		pointer-events: none;
-	}
- */
 
 *,
 ::before,
@@ -33,12 +24,11 @@ html {
 body {
 	min-width: 375px;
 	margin: 0;
-	background: #fff;
+	background: var(--color-white);
 	color: var(--base-text-color);
 	direction: ltr;
 	font-family: var(--base-font-family);
 	font-size: var(--content-text-font-size);
-
 	// font-smooth: always;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -49,6 +39,7 @@ body {
 
 ::selection {
 	background: var(--color-accent);
+	color: var(--color-white);
 	text-shadow: none;
 }
 
@@ -221,8 +212,6 @@ hr {
 svg:not(:root) {
 	overflow: hidden;
 }
-
-
 
 /* TABLE
  * -------------------------------------------------- */

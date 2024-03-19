@@ -10,12 +10,9 @@
 import './config'
 
 // Components
-import { Modal, ScrollAnimation } from './components'
+import * as Components from './components'
 
 /* SETUP
 -------------------------------------------------- */
 
-const modal = new Modal()
-const animation = new ScrollAnimation()
-
-MK.addPlugins({ modal, animation })
+MK.addPlugins({ ...Components }, true)

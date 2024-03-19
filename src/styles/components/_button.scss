@@ -3,8 +3,9 @@
 	padding: var(--spacing-12) var(--spacing-20);
 	border: 0;
 	border-radius: 0;
-	background: #ccc;
-	color: #000;
+	background: var(--color-accent);
+	color: var(--color-white);
+	justify-content: center;
 	text-align: center;
 	text-decoration: none;
 	transition-duration: var(--transition-duration);

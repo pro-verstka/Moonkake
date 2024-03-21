@@ -8,7 +8,7 @@ const PUBLIC_DIR = 'assets'
 
 const getEntries = () => {
 	return fs
-		.readdirSync(path.resolve(__dirname, ROOT_DIR))
+		.readdirSync(path.resolve(import.meta.dirname, ROOT_DIR))
 		.filter(file => file.endsWith('.pug'))
 }
 
@@ -21,14 +21,12 @@ const generateIndexPage = entries => {
 	let content = `doctype html\nhtml(lang="ru")\n\thead\n\t\tmeta(charset="utf-8")\n\t\tstyle.
 			* {margin: 0; padding: 0; font-size: 1.2rem; font-family: Arial, Helvetica, sans-serif; font-variant-numeric: tabular-nums;} body {background:#fafafa;} a {padding: 1rem 1.2rem; display: block; color: #4846FE; text-decoration: none; border-bottom: 1px solid #f0f0f0; text-transform: capitalize;} a:visited {color: #333;} a:hover {background: #4846FE; color: #fff;}\n\tbody\n\t\tul`
 
-	for (const [index, tpl] of entries.entries()) {
-		if (tpl === INDEX_PAGE) {
-			continue
-		}
+	const templates = entries.filter(tpl => tpl !== INDEX_PAGE).entries()
 
+	for (const [index, tpl] of templates) {
 		const [name] = tpl.split('.')
 		content += `\n\t\t\tli: a(href="${name}.html") ${
-			index < 10 ? `0${index}` : index
+			index < 10 ? `0${index + 1}` : index + 1
 		}. ${name}`
 	}
 
@@ -46,7 +44,7 @@ export default defineConfig({
 	plugins: [
 		pug({
 			root: ROOT_DIR,
-			data: path.resolve(__dirname, `${ROOT_DIR}/data/*.json`),
+			data: path.resolve(import.meta.dirname, `${ROOT_DIR}/data/*.json`),
 			options: {
 				pretty: true,
 			},
@@ -84,8 +82,8 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, ROOT_DIR),
-			'@@': path.resolve(__dirname, './node_modules'),
+			'@': path.resolve(import.meta.dirname, ROOT_DIR),
+			'@@': path.resolve(import.meta.dirname, './node_modules'),
 		},
 	},
 })

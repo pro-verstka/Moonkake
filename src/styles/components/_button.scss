@@ -1,5 +1,6 @@
 .button {
-	display: inline-flex;
+	display: inline-grid;
+	gap: 0 var(--spacing-8);
 	padding: var(--spacing-12) var(--spacing-20);
 	border: 0;
 	border-radius: 0;

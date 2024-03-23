@@ -51,6 +51,7 @@ export default defineConfig({
 		}),
 	],
 	build: {
+		appType: 'mpa',
 		target: 'modules',
 		outDir: '../dist',
 		emptyOutDir: true,

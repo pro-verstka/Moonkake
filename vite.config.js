@@ -52,9 +52,10 @@ export default defineConfig({
 	],
 	build: {
 		target: 'modules',
-		assetsDir: PUBLIC_DIR,
 		outDir: '../dist',
 		emptyOutDir: true,
+		assetsDir: PUBLIC_DIR,
+		assetsInlineLimit: 0,
 		cssMinify: 'lightningcss',
 		rollupOptions: {
 			input,

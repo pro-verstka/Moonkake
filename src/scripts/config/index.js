@@ -6,7 +6,7 @@ import { device, setViewportHeight } from '../helpers'
 const MK = {
 	info: {
 		packageName: 'Moonkake',
-		packageUrl: 'https://github.com/detectiveshelby/Moonkake',
+		packageUrl: 'https://github.com/pro-verstka/Moonkake',
 		version: '10.0.0',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io',

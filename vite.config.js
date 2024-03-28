@@ -88,4 +88,7 @@ export default defineConfig({
 			'@@': path.resolve(import.meta.dirname, './node_modules'),
 		},
 	},
+	server: {
+		host: true,
+	},
 })

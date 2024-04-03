@@ -74,6 +74,17 @@ if (device.isIPad()) htmlClassNames.push('-device-ipad')
 
 document.documentElement.classList.add(...htmlClassNames)
 
+/* FONTS
+-------------------------------------------------- */
+
+if (!sessionStorage.fontsLoaded) {
+	await Promise.all([document.fonts.load('FONT_NAME')]).then(() => {
+		document.documentElement.classList.add('-fonts-ready')
+
+		sessionStorage.fontsLoaded = true
+	})
+}
+
 /* HELPERS
 -------------------------------------------------- */
 

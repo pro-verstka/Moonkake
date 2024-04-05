@@ -37,7 +37,7 @@ export class Tabs {
 					? e.target
 					: e.target.closest(
 							`${this.options.root} ${this.options.title} ${this.options.item}`,
-					  )
+						)
 
 				this.change($root, Array.from($titles).indexOf($el))
 			}

@@ -60,10 +60,7 @@ export class Drawer {
 				return
 			}
 
-			if (
-				e.target.closest(this.options.selector) ||
-				e.target.closest(this.options.toggleButton)
-			) {
+			if (e.target.closest(this.options.selector) || e.target.closest(this.options.toggleButton)) {
 				return
 			}
 

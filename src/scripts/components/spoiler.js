@@ -15,9 +15,7 @@ export class Spoiler {
 			this.options = { ...this.options, ...options }
 		}
 
-		this.$elements = document.querySelectorAll(
-			`${this.options.rootSelector}:not(.-initialized)`,
-		)
+		this.$elements = document.querySelectorAll(`${this.options.rootSelector}:not(.-initialized)`)
 		this.handle(this.$elements)
 	}
 
@@ -73,9 +71,7 @@ export class Spoiler {
 	}
 
 	handleNew() {
-		const $new = document.querySelectorAll(
-			`${this.options.rootSelector}:not(.spoiler_initialized)`,
-		)
+		const $new = document.querySelectorAll(`${this.options.rootSelector}:not(.spoiler_initialized)`)
 
 		this.$elements = [...$new, this.$elements]
 

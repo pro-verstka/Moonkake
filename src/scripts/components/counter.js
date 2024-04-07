@@ -29,10 +29,7 @@ export class Counter {
 		document.addEventListener(
 			'focus',
 			e => {
-				if (
-					e.target?.tagName.toLowerCase() === 'input' &&
-					e.target.matches(`${this.options.root} input`)
-				) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputFocus(e.target)
 				}
 			},
@@ -42,10 +39,7 @@ export class Counter {
 		document.addEventListener(
 			'blur',
 			e => {
-				if (
-					e.target?.tagName.toLowerCase() === 'input' &&
-					e.target.matches(`${this.options.root} input`)
-				) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputBlur(e.target)
 				}
 			},
@@ -55,10 +49,7 @@ export class Counter {
 		document.addEventListener(
 			'keyup',
 			e => {
-				if (
-					e.target?.tagName.toLowerCase() === 'input' &&
-					e.target.matches(`${this.options.root} input`)
-				) {
+				if (e.target?.tagName.toLowerCase() === 'input' && e.target.matches(`${this.options.root} input`)) {
 					this.handleInputKeyup(e.target)
 				}
 			},

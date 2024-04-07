@@ -19,19 +19,13 @@ export class Toggler {
 
 				const target = $el.dataset.toggler
 
-				for (const $element of document.querySelectorAll(
-					this.options.toggler,
-				)) {
+				for (const $element of document.querySelectorAll(this.options.toggler)) {
 					const elTarget = $element.dataset.toggler
 
 					if (elTarget !== target) {
 						$element.classList.remove(this.options.activeClass)
-						document
-							.getElementById(elTarget)
-							.classList.remove(this.options.activeClass)
-						document.body.classList.remove(
-							`-${elTarget + this.options.activeClass}`,
-						)
+						document.getElementById(elTarget).classList.remove(this.options.activeClass)
+						document.body.classList.remove(`-${elTarget + this.options.activeClass}`)
 
 						emitEvent('mk:toggler:close', {
 							element: $element,
@@ -40,9 +34,7 @@ export class Toggler {
 				}
 
 				$el.classList.toggle(this.options.activeClass)
-				document
-					.getElementById(target)
-					.classList.toggle(this.options.activeClass)
+				document.getElementById(target).classList.toggle(this.options.activeClass)
 				document.body.classList.toggle(`-${target + this.options.activeClass}`)
 
 				emitEvent('mk:toggler:change', {
@@ -59,9 +51,7 @@ export class Toggler {
 				const target = $el.dataset.toggler
 
 				$el.classList.remove(this.options.activeClass)
-				document
-					.getElementById(target)
-					.classList.remove(this.options.activeClass)
+				document.getElementById(target).classList.remove(this.options.activeClass)
 				document.body.classList.remove(`-${target + this.options.activeClass}`)
 
 				emitEvent('mk:toggler:close', {
@@ -74,21 +64,14 @@ export class Toggler {
 			for (const $el of document.querySelectorAll(this.options.toggler)) {
 				const target = $el.dataset.toggler
 
-				if (
-					event.target.closest(`#${target}`) &&
-					event.target.tagName !== 'A'
-				) {
+				if (event.target.closest(`#${target}`) && event.target.tagName !== 'A') {
 					return
 				}
 
 				if ($el.classList.contains(this.options.activeClass)) {
 					$el.classList.remove(this.options.activeClass)
-					document
-						.getElementById(target)
-						.classList.remove(this.options.activeClass)
-					document.body.classList.remove(
-						`-${target + this.options.activeClass}`,
-					)
+					document.getElementById(target).classList.remove(this.options.activeClass)
+					document.body.classList.remove(`-${target + this.options.activeClass}`)
 
 					emitEvent('mk:toggler:close', {
 						element: $el,

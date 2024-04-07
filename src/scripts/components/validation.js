@@ -1,7 +1,6 @@
 import validate from 'validate.js'
 
-const isEmpty = obj =>
-	obj && Object.keys(obj).length === 0 && obj.constructor === Object
+const isEmpty = obj => obj && Object.keys(obj).length === 0 && obj.constructor === Object
 
 const defaultSchema = {
 	email: {

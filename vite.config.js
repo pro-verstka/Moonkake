@@ -6,33 +6,6 @@ import { defineConfig } from 'vite'
 const ROOT_DIR = './src'
 const PUBLIC_DIR = 'assets'
 
-const getEntries = () => {
-	return fs
-		.readdirSync(path.resolve(import.meta.dirname, ROOT_DIR))
-		.filter(file => file.endsWith('.pug'))
-}
-
-const getInput = entries => {
-	return entries.map(tpl => `${ROOT_DIR}/${tpl}.html`)
-}
-
-const generateIndexPage = entries => {
-	const INDEX_PAGE = 'index.pug'
-	let content = `doctype html\nhtml(lang="ru")\n\thead\n\t\tmeta(charset="utf-8")\n\t\tstyle.
-			* {margin: 0; padding: 0; font-size: 1.2rem; font-family: Arial, Helvetica, sans-serif; font-variant-numeric: tabular-nums;} body {background:#fafafa;} a {padding: 1rem 1.2rem; display: block; color: #4846FE; text-decoration: none; border-bottom: 1px solid #f0f0f0; text-transform: capitalize;} a:visited {color: #333;} a:hover {background: #4846FE; color: #fff;}\n\tbody\n\t\tul`
-
-	const templates = entries.filter(tpl => tpl !== INDEX_PAGE).entries()
-
-	for (const [index, tpl] of templates) {
-		const [name] = tpl.split('.')
-		content += `\n\t\t\tli: a(href="${name}.html") ${
-			index < 10 ? `0${index + 1}` : index + 1
-		}. ${name}`
-	}
-
-	fs.writeFileSync(`${ROOT_DIR}/${INDEX_PAGE}`, content)
-}
-
 const entries = getEntries()
 const input = getInput(entries)
 generateIndexPage(entries)
@@ -92,3 +65,61 @@ export default defineConfig({
 		host: true,
 	},
 })
+
+function getEntries() {
+	return fs.readdirSync(path.resolve(import.meta.dirname, ROOT_DIR)).filter(file => file.endsWith('.pug'))
+}
+
+function getInput(entries) {
+	return entries.map(tpl => `${ROOT_DIR}/${tpl}.html`)
+}
+
+function generateIndexPage(entries) {
+	const INDEX_PAGE = 'index.pug'
+	const templates = entries.filter(tpl => tpl !== INDEX_PAGE).entries()
+
+	let html = `doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width,initial-scale=1")
+		style.
+			* {
+				margin: 0; padding: 0;
+			}
+
+			body {
+				background: #fafafa;
+				font-size: 1.2rem;
+				font-family: Arial, Helvetica, sans-serif;
+				font-variant-numeric: tabular-nums;
+			}
+
+			a {
+				padding: 1rem 1.2rem;
+				display: block;
+				color: #4846FE;
+				text-decoration: none;
+				border-bottom: 1px solid #f0f0f0;
+				text-transform: capitalize;
+			}
+
+			a:visited {
+				color: #333;
+			}
+
+			a:hover {
+				background: #4846FE;
+				color: #fff;
+			}
+	body
+		ul
+`
+
+	for (const [index, tpl] of templates) {
+		const [name] = tpl.split('.')
+		html += `\t\t\tli: a(href="${name}.html") ${index < 10 ? `0${index + 1}` : index + 1}. ${name}\n`
+	}
+
+	fs.writeFileSync(`${ROOT_DIR}/${INDEX_PAGE}`, html)
+}

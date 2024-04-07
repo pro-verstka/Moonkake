@@ -63,10 +63,7 @@ export class Modal {
 
 		document.addEventListener('click', e => {
 			// open by button
-			if (
-				e.target.matches(this.options.modalSelector) ||
-				e.target.closest(this.options.modalSelector)
-			) {
+			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalSelector)
@@ -77,10 +74,7 @@ export class Modal {
 			}
 
 			// open image by link
-			if (
-				e.target.matches(this.options.modalImageSelector) ||
-				e.target.closest(this.options.modalImageSelector)
-			) {
+			if (e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalImageSelector)
@@ -91,10 +85,7 @@ export class Modal {
 			}
 
 			// open video by button
-			if (
-				e.target.matches(this.options.modalVideoSelector) ||
-				e.target.closest(this.options.modalVideoSelector)
-			) {
+			if (e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)) {
 				e.preventDefault()
 
 				const $el = e.target.matches(this.options.modalVideoSelector)
@@ -105,10 +96,7 @@ export class Modal {
 			}
 
 			// close by button
-			if (
-				e.target.matches(this.options.modalCloseSelector) ||
-				e.target.closest(this.options.modalCloseSelector)
-			) {
+			if (e.target.matches(this.options.modalCloseSelector) || e.target.closest(this.options.modalCloseSelector)) {
 				e.preventDefault()
 
 				this.close(e.target.closest('.modal').getAttribute('id'))
@@ -124,10 +112,7 @@ export class Modal {
 
 		// close by Esc
 		document.addEventListener('keydown', e => {
-			if (
-				document.documentElement.classList.contains('-modal-locked') &&
-				e.keyCode === 27
-			) {
+			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode === 27) {
 				if (this.modals.length) {
 					this.close(this.modals[this.modals.length - 1])
 				}
@@ -243,14 +228,8 @@ export class Modal {
 		image.onload = () => {
 			const ratio = image.width / image.height
 
-			$modalImage.classList.toggle(
-				'modal__image_portrait',
-				image.width > image.height,
-			)
-			$modalImage.classList.toggle(
-				'modal__image_landscape',
-				image.width < image.height,
-			)
+			$modalImage.classList.toggle('modal__image_portrait', image.width > image.height)
+			$modalImage.classList.toggle('modal__image_landscape', image.width < image.height)
 
 			this.setImageDimensions(image, ratio)
 
@@ -292,10 +271,7 @@ export class Modal {
 		if (href.indexOf('vimeo') > -1) {
 			const src = href.replace(/[^0-9]/g, '')
 
-			$iframe.setAttribute(
-				'src',
-				`https://player.vimeo.com/video/${src}?autoplay=1`,
-			)
+			$iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
 		}
 
 		$modal.querySelector('.modal__iframe').appendChild($iframe)

@@ -23,10 +23,7 @@ export class Accordion {
 		}
 
 		document.addEventListener('click', e => {
-			if (
-				e.target.matches(`${this.options.root} ${this.options.handler}`) ||
-				e.target.closest(this.options.handler)
-			) {
+			if (e.target.matches(`${this.options.root} ${this.options.handler}`) || e.target.closest(this.options.handler)) {
 				this.toggle(e.target)
 			}
 		})

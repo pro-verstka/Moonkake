@@ -7,7 +7,7 @@ const MK = {
 	info: {
 		packageName: 'Moonkake',
 		packageUrl: 'https://github.com/pro-verstka/Moonkake',
-		version: '10.0.12',
+		version: '10.0.13',
 		author: 'DevBrains',
 		authorUrl: 'https://devbrains.io',
 	},
@@ -78,7 +78,7 @@ document.documentElement.classList.add(...htmlClassNames)
 -------------------------------------------------- */
 
 if (!sessionStorage.fontsLoaded) {
-	await Promise.all([document.fonts.load('FONT_NAME')]).then(() => {
+	Promise.all([document.fonts.load('FONT_NAME')]).then(() => {
 		document.documentElement.classList.add('-fonts-ready')
 
 		sessionStorage.fontsLoaded = true

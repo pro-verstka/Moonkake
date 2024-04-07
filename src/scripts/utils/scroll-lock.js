@@ -12,9 +12,7 @@ export class ScrollLock {
 		document.body.style.overflow = 'hidden'
 
 		for (const $el of this.$elements) {
-			const paddingRight = Number.parseInt(
-				window.getComputedStyle($el).paddingRight,
-			)
+			const paddingRight = Number.parseInt(window.getComputedStyle($el).paddingRight)
 
 			$el.style.paddingRight = `${paddingRight + scrollBarWidth}px`
 		}

@@ -31,9 +31,7 @@ export class Field {
 
 				if (!$el.matches(`.${this.options.classNames.root} input`)) return
 
-				$el
-					.closest(`.${this.options.classNames.root}`)
-					.classList.add(this.options.classNames.focus)
+				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.focus)
 			},
 			true,
 		)
@@ -55,9 +53,7 @@ export class Field {
 						)
 				}
 
-				$el
-					.closest(`.${this.options.classNames.root}`)
-					.classList.remove(this.options.classNames.focus)
+				$el.closest(`.${this.options.classNames.root}`).classList.remove(this.options.classNames.focus)
 			},
 			true,
 		)
@@ -69,24 +65,17 @@ export class Field {
 
 				if (!$el.matches(`.${this.options.classNames.root} input`)) return
 
+				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.touched)
 				$el
 					.closest(`.${this.options.classNames.root}`)
-					.classList.add(this.options.classNames.touched)
-				$el
-					.closest(`.${this.options.classNames.root}`)
-					.classList.remove(
-						this.options.classNames.error,
-						this.options.classNames.success,
-					)
+					.classList.remove(this.options.classNames.error, this.options.classNames.success)
 			},
 			true,
 		)
 	}
 
 	update() {
-		this.$fields = document.querySelectorAll(
-			`.${this.options.classNames.root} input`,
-		)
+		this.$fields = document.querySelectorAll(`.${this.options.classNames.root} input`)
 
 		if (this.$fields.length) {
 			for (const $el of this.$fields) {

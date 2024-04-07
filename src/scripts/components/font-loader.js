@@ -20,9 +20,7 @@ export class FontLoader {
 	}
 
 	async #loadFonts() {
-		const queue = this.fonts.map(fontName =>
-			new FontFaceObserver(fontName).load(),
-		)
+		const queue = this.fonts.map(fontName => new FontFaceObserver(fontName).load())
 
 		await Promise.all(queue)
 	}

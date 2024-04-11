@@ -8,14 +8,14 @@ export class SyncScroll {
 
 		this.$items = this.$root.querySelectorAll('[data-sync-scroll-item]')
 
-		this.init()
+		this.#init()
 	}
 
-	init() {
-		this.setListeners()
+	#init() {
+		this.#setListeners()
 	}
 
-	setListeners() {
+	#setListeners() {
 		this.$items.forEach(($item, currentIndex) => {
 			$item.addEventListener('scroll', () => {
 				const { scrollLeft } = $item

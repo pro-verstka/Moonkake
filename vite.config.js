@@ -118,7 +118,7 @@ html(lang="en")
 
 	for (const [index, tpl] of templates) {
 		const [name] = tpl.split('.')
-		html += `\t\t\tli: a(href="${name}.html") ${index < 10 ? `0${index + 1}` : index + 1}. ${name}\n`
+		html += `\t\t\tli: a(href="${name}.html") ${index < 9 ? '0' : ''}${index + 1}. ${name}\n`
 	}
 
 	fs.writeFileSync(`${ROOT_DIR}/${INDEX_PAGE}`, html)

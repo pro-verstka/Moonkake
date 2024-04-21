@@ -1,4 +1,4 @@
-import { device } from '../helpers'
+import { isMobile } from '../helpers'
 
 export class FullHeight {
 	constructor(options = {}) {
@@ -25,7 +25,7 @@ export class FullHeight {
 	}
 
 	setFullHeight(event) {
-		if (!this.$els.length || (event.type === 'resize' && device.isMobile())) return false
+		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
 
 		for (const $element of this.$els) {
 			const minHeight = Number.parseFloat(window.getComputedStyle($element, null).getPropertyValue('min-height')) || 0

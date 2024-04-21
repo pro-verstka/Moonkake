@@ -1,5 +1,4 @@
 export const isTouch = () => {
-	/* global DocumentTouch */
 	if ('ontouchstart' in window || (window.DocumentTouch && document instanceof DocumentTouch)) return true
 
 	const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')

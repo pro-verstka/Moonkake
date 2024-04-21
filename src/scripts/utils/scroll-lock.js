@@ -1,4 +1,4 @@
-import { device, getScrollbarWidth } from '../helpers'
+import { getScrollbarWidth, isIOS } from '../helpers'
 
 export class ScrollLock {
 	constructor() {
@@ -17,7 +17,7 @@ export class ScrollLock {
 			$el.style.paddingRight = `${paddingRight + scrollBarWidth}px`
 		}
 
-		if (device.isIOS()) {
+		if (isIOS()) {
 			this.scrollY = window.scrollY
 			document.body.style.position = 'fixed'
 			document.body.style.top = `-${this.scrollY}px`

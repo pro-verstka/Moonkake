@@ -5,19 +5,22 @@ A starter template for layout using Vite, Scss, Pug, JS.
 ## Setup
 
 ```sh
-npx degit pro-verstka/moonkake
-npm install
-npm run dev
+pnpx degit pro-verstka/moonkake
+pnpm install
+pnpm run dev
 ```
 
 ## Available commands
 
 ```sh
 // Default task for project development
-npm run dev
+pnpm dev
 
 // Build the project
-npm run build
+pnpm build
+
+// Generate components
+pnpm mk
 ```
 
 # Markup

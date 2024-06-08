@@ -1,5 +1,5 @@
 import Swiper from 'swiper'
-import { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper/modules'
+import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from 'swiper/modules'
 
 export class Slider {
 	constructor($el) {

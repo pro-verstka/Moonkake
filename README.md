@@ -11,17 +11,11 @@ pnpm run dev
 ```
 
 ## Available commands
-
-```sh
-// Default task for project development
-pnpm dev
-
-// Build the project
-pnpm build
-
-// Generate components
-pnpm mk
-```
+1. `pnpm run dev` - Default task for project development
+2. `pnpm run build` - Build the project
+3. `pnpm run tools:generate` - Generate components
+4. `pnpm run tools:lint` - Run linter
+5. `pnpm run tools:format` - Run formatter
 
 # Markup
 

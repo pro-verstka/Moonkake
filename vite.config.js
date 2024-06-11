@@ -4,7 +4,8 @@ import pug from '@vituum/vite-plugin-pug'
 import { defineConfig } from 'vite'
 
 const ROOT_DIR = './src'
-const PUBLIC_DIR = 'assets'
+const ASSETS_DIR = 'assets'
+const BUILD_DIR = 'build'
 
 const entries = getEntries()
 const input = getInput(entries)
@@ -13,7 +14,7 @@ generateIndexPage(entries)
 export default defineConfig({
 	base: './',
 	root: ROOT_DIR,
-	publicDir: `${ROOT_DIR}/${PUBLIC_DIR}`,
+	publicDir: `${ROOT_DIR}/${ASSETS_DIR}`,
 	plugins: [
 		pug({
 			root: ROOT_DIR,
@@ -25,32 +26,35 @@ export default defineConfig({
 	],
 	build: {
 		appType: 'mpa',
-		target: 'modules',
-		outDir: '../dist',
-		emptyOutDir: true,
-		assetsDir: PUBLIC_DIR,
+		assetsDir: ASSETS_DIR,
 		assetsInlineLimit: 0,
+		copyPublicDir: true,
+		cssCodeSplit: false,
 		cssMinify: 'lightningcss',
+		emptyOutDir: true,
+		modulePreload: false,
+		outDir: `../${BUILD_DIR}`,
+		target: 'modules',
 		rollupOptions: {
 			input,
 			output: {
-				dir: './dist',
-				chunkFileNames: `${PUBLIC_DIR}/js/[name].js`,
+				dir: `./${BUILD_DIR}`,
+				chunkFileNames: `${ASSETS_DIR}/js/[name].js`,
 
 				entryFileNames: chunk => {
 					const name = chunk.name.replace(/\.pug$/, '')
 
-					return `${PUBLIC_DIR}/js/${name}.js`
+					return `${ASSETS_DIR}/js/${name}.js`
 				},
 
 				assetFileNames: chunk => {
 					const extname = path.extname(chunk.name)
-					let type = 'media'
+					let type
 
 					if (['.css'].includes(extname)) type = 'css'
 					if (['.woff', '.woff2'].includes(extname)) type = 'fonts'
 
-					return `${PUBLIC_DIR}/${type}/${chunk.name}`
+					return [ASSETS_DIR, type, chunk.name].filter(Boolean).join('/')
 				},
 			},
 		},

@@ -3,11 +3,13 @@
 .pagination {
 	@include grid('grid');
 
-	justify-content: center;
-	margin: 0;
-	gap: var(--spacing-16);
-	grid-auto-flow: column;
-	list-style: none;
+	& {
+		justify-content: center;
+		margin: 0;
+		gap: var(--spacing-16);
+		grid-auto-flow: column;
+		list-style: none;
+	}
 
 	&__link {
 		padding: var(--spacing-4) var(--spacing-8);

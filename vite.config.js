@@ -29,7 +29,7 @@ export default defineConfig({
 		assetsDir: ASSETS_DIR,
 		assetsInlineLimit: 0,
 		copyPublicDir: true,
-		cssCodeSplit: false,
+		cssCodeSplit: true,
 		cssMinify: 'lightningcss',
 		emptyOutDir: true,
 		modulePreload: false,

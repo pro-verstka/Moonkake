@@ -1,6 +1,6 @@
 mixin image(props)
 	picture
-		each source in props.sources
+		each source in props.sources || []
 			source(
 				srcset=source.srcset
 				media=source.media

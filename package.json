@@ -20,15 +20,15 @@
 	"dependencies": {
 		"gsap": "3.12.5",
 		"imask": "7.6.1",
-		"swiper": "11.1.4"
+		"swiper": "11.1.5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.8.1",
+		"@biomejs/biome": "1.8.3",
 		"@vituum/vite-plugin-pug": "1.1.0",
 		"lightningcss": "1.25.1",
 		"plop": "4.0.1",
-		"sass": "1.77.4",
-		"vite": "5.2.13"
+		"sass": "1.77.8",
+		"vite": "5.3.4"
 	},
 	"engines": {
 		"node": ">=20.10.0"

@@ -27,7 +27,7 @@ pnpm run dev
 		src: "path/to/image",
 		srcset: "path/to/image@1x.jpg 1x, path/to/image@2x.jpg 2x",
 		width: 500,
-		heigt: 500,
+		height: 500,
 		alt: ""
 	},
 	sources: [

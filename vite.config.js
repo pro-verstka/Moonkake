@@ -1,11 +1,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
-import { defineConfig } from 'vite'
+import { defineConfig, normalizePath } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 const ROOT_DIR = './src'
 const ASSETS_DIR = 'assets'
 const BUILD_DIR = 'build'
+const PUBLIC_DIR = `${ROOT_DIR}/${ASSETS_DIR}`
 
 const entries = getEntries()
 const input = getInput(entries)
@@ -14,7 +16,7 @@ generateIndexPage(entries)
 export default defineConfig({
 	base: './',
 	root: ROOT_DIR,
-	publicDir: `${ROOT_DIR}/${ASSETS_DIR}`,
+	publicDir: PUBLIC_DIR,
 	plugins: [
 		pug({
 			root: ROOT_DIR,
@@ -22,6 +24,14 @@ export default defineConfig({
 			options: {
 				pretty: true,
 			},
+		}),
+		viteStaticCopy({
+			targets: [
+				{
+					src: normalizePath(path.resolve(import.meta.dirname, PUBLIC_DIR)),
+					dest: '',
+				},
+			],
 		}),
 	],
 	build: {

@@ -34,13 +34,13 @@ export default defineConfig({
 			],
 		}),
 	],
-	css: {
-		preprocessorOptions: {
-			scss: {
-				api: 'modern-compiler',
-			},
-		},
-	},
+	// css: {
+	// 	preprocessorOptions: {
+	// 		scss: {
+	// 			api: 'modern-compiler',
+	// 		},
+	// 	},
+	// },
 	build: {
 		appType: 'mpa',
 		assetsDir: ASSETS_DIR,

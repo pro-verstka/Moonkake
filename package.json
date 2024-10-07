@@ -23,7 +23,7 @@
 		"swiper": "11.1.14"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.2",
+		"@biomejs/biome": "1.9.3",
 		"@vituum/vite-plugin-pug": "1.1.0",
 		"lightningcss": "1.27.0",
 		"plop": "4.0.1",

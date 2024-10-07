@@ -32,7 +32,7 @@ export class ScrollLock {
 
 		document.body.style.overflow = ''
 
-		if (device.isIOS()) {
+		if (isIOS()) {
 			document.body.style.position = ''
 			document.body.style.top = ''
 			document.body.style.width = ''

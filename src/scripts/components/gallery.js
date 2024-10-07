@@ -1,3 +1,4 @@
+import PhotoSwipe from 'photoswipe'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 
 export class Gallery {
@@ -15,7 +16,8 @@ export class Gallery {
 		this.gallery = new PhotoSwipeLightbox({
 			gallery: this.selector,
 			children: 'a',
-			pswpModule: import('photoswipe'),
+			pswpModule: PhotoSwipe,
+			showHideAnimationType: 'fade',
 		})
 
 		this.gallery.init()

@@ -1,5 +1,6 @@
-@import '../mixins';
+@use '../mixins';
+@use "../mixins/grid";
 
 .grid {
-	@include grid('grid');
+	@include grid.grid('grid');
 }

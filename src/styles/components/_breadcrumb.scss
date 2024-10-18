@@ -1,7 +1,8 @@
-@import '../mixins';
+@use '../mixins';
+@use "../mixins/grid";
 
 .breadcrumbs {
-	@include grid('flex');
+	@include grid.grid('flex');
 
 	& {
 		margin: 0;

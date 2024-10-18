@@ -1,4 +1,5 @@
-@import '../mixins';
+@use '../mixins';
+@use "../mixins/content";
 
 .bars {
 	position: relative;
@@ -13,7 +14,7 @@
 	&::before,
 	&::after,
 	span {
-		@include content;
+		@include content.content;
 
 		left: 0;
 		width: 100%;

@@ -8,42 +8,42 @@
 
 /* Core */
 
-@import 'mixins';
-@import 'config';
-@import 'utils';
+@use 'mixins';
+@use 'config';
+@use 'utils';
 
 /* Vendor */
 
-@import 'vendors';
+@use 'vendors';
 
 /* Components */
 
-@import 'components/accordion';
-@import 'components/animation';
-@import 'components/article';
-@import 'components/bars';
-@import 'components/breadcrumb';
-@import 'components/button';
-@import 'components/checkbox';
-@import 'components/cursor';
-@import 'components/drawer';
-@import 'components/field';
-@import 'components/field-file';
-@import 'components/form';
-@import 'components/gallery';
-@import 'components/icon';
-@import 'components/loader';
-@import 'components/modal';
-@import 'components/pagination';
-@import 'components/section';
-@import 'components/select';
-@import 'components/slider';
-@import 'components/spoiler';
-@import 'components/tabs';
-@import 'components/tooltip';
+@use 'components/accordion';
+@use 'components/animation';
+@use 'components/article';
+@use 'components/bars';
+@use 'components/breadcrumb';
+@use 'components/button';
+@use 'components/checkbox';
+@use 'components/cursor';
+@use 'components/drawer';
+@use 'components/field';
+@use 'components/field-file';
+@use 'components/form';
+@use 'components/gallery';
+@use 'components/icon';
+@use 'components/loader';
+@use 'components/modal';
+@use 'components/pagination';
+@use 'components/section';
+@use 'components/select';
+@use 'components/slider';
+@use 'components/spoiler';
+@use 'components/tabs';
+@use 'components/tooltip';
 
 /* Widgets */
 
-@import 'widgets/common';
-@import 'widgets/header';
-@import 'widgets/footer';
+@use 'widgets/common';
+@use 'widgets/header';
+@use 'widgets/footer';

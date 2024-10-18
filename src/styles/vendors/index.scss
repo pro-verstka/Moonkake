@@ -1,7 +1,7 @@
-@import '@@/swiper/swiper';
-@import '@@/swiper/modules/effect-fade';
-@import '@@/swiper/modules/navigation';
-@import '@@/swiper/modules/pagination';
-//@import '@@/photoswipe/dist/photoswipe';
-//@import "@@/flatpickr/dist/flatpickr";
-//@import "@@/flatpickr/dist/themes/airbnb";
+@use '@@/swiper/swiper';
+@use '@@/swiper/modules/effect-fade';
+@use '@@/swiper/modules/navigation';
+@use '@@/swiper/modules/pagination';
+//@use '@@/photoswipe/dist/photoswipe';
+//@use "@@/flatpickr/dist/flatpickr";
+//@use "@@/flatpickr/dist/themes/airbnb";

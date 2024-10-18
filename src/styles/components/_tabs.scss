@@ -1,10 +1,11 @@
-@import '../mixins';
+@use '../mixins';
+@use "../mixins/grid";
 
 $block: '.tabs';
 
 #{$block} {
 	&__title {
-		@include grid('flex');
+		@include grid.grid('flex');
 
 		#{$block}__item {
 			cursor: pointer;

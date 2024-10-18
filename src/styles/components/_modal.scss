@@ -1,3 +1,5 @@
+@use "accordion";
+
 $block: '.modal';
 
 #{$block} {
@@ -118,7 +120,7 @@ $block: '.modal';
 			box-shadow: 0 0.5rem 0.5rem rgba(#000, 0.25);
 		}
 
-		#{$block}__close {
+		#{accordion.$block}__close {
 			top: -4rem;
 			right: -1.5rem;
 		}

@@ -1,8 +1,7 @@
 @use '../mixins';
-@use "../mixins/grid";
 
 .pagination {
-	@include grid.grid('grid');
+	@include mixins.grid('grid');
 
 	& {
 		justify-content: center;

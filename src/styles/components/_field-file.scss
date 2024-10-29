@@ -1,5 +1,4 @@
 @use '../mixins';
-@use "../mixins/hidden";
 
 $block: '.field-file';
 
@@ -12,7 +11,7 @@ $block: '.field-file';
 	cursor: pointer;
 
 	input {
-		@include hidden.hidden;
+		@include mixins.hidden;
 	}
 
 	&__placeholder {

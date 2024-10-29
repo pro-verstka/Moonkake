@@ -1,6 +1,4 @@
 @use '../mixins';
-@use "../mixins/content";
-@use "../mixins/hidden";
 
 /* select {
 	appearance: none;
@@ -26,7 +24,7 @@ $block: '.select';
 	text-align: left;
 
 	select {
-		@include hidden.hidden;
+		@include mixins.hidden;
 	}
 
 	&__label {
@@ -38,7 +36,7 @@ $block: '.select';
 		cursor: pointer;
 
 		&::after {
-			@include content.content;
+			@include mixins.content;
 
 			top: 50%;
 			right: 2rem;

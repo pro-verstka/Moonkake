@@ -1,5 +1,4 @@
 @use '../mixins';
-@use "../mixins/breakpoints";
 
 :root {
 	// base
@@ -111,19 +110,19 @@
 	--spacing-200: 20rem;
 
 	// responsive
-	@include breakpoints.bp-desktop-only {
+	@include mixins.bp-desktop-only {
 		--base-font-size: 10px;
 	}
 
-	@include breakpoints.bp-laptop-only {
+	@include mixins.bp-laptop-only {
 		--base-font-size: 0.6944444444vw;
 	}
 
-	@include breakpoints.bp-tablet-only {
+	@include mixins.bp-tablet-only {
 		--base-font-size: 1.3020833333vw;
 	}
 
-	@include breakpoints.bp-mobile-only {
+	@include mixins.bp-mobile-only {
 		--base-font-size: 2.6666666667vw;
 	}
 }

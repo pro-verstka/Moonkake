@@ -1,5 +1,4 @@
 @use '../mixins';
-@use "../mixins/text";
 
 /* COMMON
  * -------------------------------------------------- */
@@ -88,27 +87,27 @@ h6 {
 }
 
 h1 {
-	@include text.h1;
+	@include mixins.h1;
 }
 
 h2 {
-	@include text.h2;
+	@include mixins.h2;
 }
 
 h3 {
-	@include text.h3;
+	@include mixins.h3;
 }
 
 h4 {
-	@include text.h4;
+	@include mixins.h4;
 }
 
 h5 {
-	@include text.h5;
+	@include mixins.h5;
 }
 
 h6 {
-	@include text.h6;
+	@include mixins.h6;
 }
 
 p,

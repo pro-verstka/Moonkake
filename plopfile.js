@@ -12,8 +12,7 @@ export default function (plop) {
 			{
 				type: 'add',
 				path: 'src/{{name}}.pug',
-				template: `
-extends templates/layouts/layout
+				template: `extends templates/layouts/layout
 
 block css
 	link(rel="stylesheet" href="/styles/pages/{{name}}.scss")
@@ -32,7 +31,7 @@ block main
 			{
 				type: 'add',
 				path: 'src/styles/pages/{{name}}.scss',
-				template: `@import '../mixins';`,
+				template: `@use '../mixins';`,
 			},
 		],
 	})

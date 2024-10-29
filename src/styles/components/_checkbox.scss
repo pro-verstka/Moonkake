@@ -1,6 +1,4 @@
 @use '../mixins';
-@use "../mixins/content";
-@use "../mixins/hidden";
 
 .radio,
 .checkbox {
@@ -9,7 +7,7 @@
 	overflow: hidden;
 
 	input {
-		@include hidden.hidden;
+		@include mixins.hidden;
 
 		&:checked + span::after {
 			opacity: 1;
@@ -22,7 +20,7 @@
 		padding-left: var(--spacing-32);
 
 		&::before {
-			@include content.content;
+			@include mixins.content;
 
 			top: 0;
 			left: 0;
@@ -35,7 +33,7 @@
 		}
 
 		&::after {
-			@include content.content;
+			@include mixins.content;
 
 			top: 0.5rem;
 			left: 0.5rem;

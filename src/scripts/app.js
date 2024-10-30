@@ -1,6 +1,6 @@
 /*
  Package Name: Moonkake
- Package URI: https://github.com/detectiveshelby/moonkake
+ Package URI: https://github.com/pro-verstka/moonkake
  Version: 10.1.0
  Author: DevBrains
  Author URI: https://devbrains.io/

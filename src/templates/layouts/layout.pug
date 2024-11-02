@@ -19,13 +19,13 @@ html(lang="ru" class="notranslate" translate="no")
 		meta(property="og:url" content="")
 		meta(property="og:image" content="")
 
-		//link(rel="icon" href="/favicon.ico" sizes="any")
-		//link(rel="icon" href="/icon.svg" type="image/svg+xml")
+		//link(rel="icon" href="favicon.ico" sizes="any")
+		//link(rel="icon" href="icon.svg" type="image/svg+xml")
 		//link(rel="apple-touch-icon" href="icon.png")
 
-		//link(rel="preload" href="/fonts/FILE_NAME.woff2" as="font" type="font/woff2" crossorigin)
+		//link(rel="preload" href="fonts/FILE_NAME.woff2" as="font" type="font/woff2" crossorigin)
 
-		link(rel="stylesheet" href="/styles/app.scss")
+		link(rel="stylesheet" href="styles/app.scss")
 
 		block css
 
@@ -51,29 +51,6 @@ html(lang="ru" class="notranslate" translate="no")
 		block bottom
 
 		// JS
-		script(type="module" src="/scripts/app.js")
+		script(type="module" src="scripts/app.js")
 
 		block js
-
-		//
-			script.
-				let isMapLoaded = false;
-
-				function loadMap() {
-					if (isMapLoaded) return false;
-
-					if (
-						window.pageYOffset + window.innerHeight * 1.5 >=
-						document.getElementById('map').getBoundingClientRect().top - document.body.getBoundingClientRect().top
-					) {
-						isMapLoaded = true;
-
-						const script = document.createElement('script');
-						script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=MK.methods.initMap';
-						script.defer = true;
-						document.body.appendChild(script);
-					}
-				}
-
-				window.addEventListener('load', loadMap)
-				window.addEventListener('scroll', loadMap)

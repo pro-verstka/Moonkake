@@ -1,35 +1,46 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
-import { defineConfig, normalizePath } from 'vite'
+import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
-const ROOT_DIR = './src'
-const ASSETS_DIR = 'assets'
-const BUILD_DIR = 'build'
-const PUBLIC_DIR = `${ROOT_DIR}/${ASSETS_DIR}`
+const config = {
+	base: path.relative(import.meta.dirname, './'),
+	root: path.relative(import.meta.dirname, './src'),
+	dist: path.resolve(import.meta.dirname, './build'),
+	public: path.resolve(import.meta.dirname, './public'),
+	withAssets: url => path.relative(import.meta.dirname, `assets/${url}`),
+
+	indexPageName: 'index.pug',
+
+	assetsDirFromExt: {
+		styles: ['.css'],
+		fonts: ['.woff', '.woff2'],
+	},
+}
 
 const entries = getEntries()
 const input = getInput(entries)
 generateIndexPage(entries)
 
 export default defineConfig({
-	base: './',
-	root: ROOT_DIR,
-	publicDir: PUBLIC_DIR,
+	base: config.base,
+	root: config.root,
 	plugins: [
 		pug({
-			root: ROOT_DIR,
-			data: path.resolve(import.meta.dirname, `${ROOT_DIR}/data/*.json`),
+			root: config.root,
+			data: path.resolve(config.root, 'data/*.json'),
 			options: {
 				pretty: true,
 			},
 		}),
 		viteStaticCopy({
+			silent: true,
+			structured: false,
 			targets: [
 				{
-					src: normalizePath(path.resolve(import.meta.dirname, PUBLIC_DIR)),
-					dest: '',
+					src: path.resolve(config.public, '*'),
+					dest: config.dist,
 				},
 			],
 		}),
@@ -43,42 +54,43 @@ export default defineConfig({
 	},
 	build: {
 		appType: 'mpa',
-		assetsDir: ASSETS_DIR,
 		assetsInlineLimit: 0,
-		copyPublicDir: true,
+		copyPublicDir: false,
 		cssCodeSplit: true,
 		cssMinify: 'lightningcss',
 		emptyOutDir: true,
 		modulePreload: false,
-		outDir: `../${BUILD_DIR}`,
+		outDir: config.dist,
 		target: 'modules',
 		rollupOptions: {
 			input,
 			output: {
-				dir: `./${BUILD_DIR}`,
-				chunkFileNames: `${ASSETS_DIR}/js/[name].js`,
+				dir: config.dist,
+				chunkFileNames: config.withAssets('scripts/[name].js'),
 
 				entryFileNames: chunk => {
 					const name = chunk.name.replace(/\.pug$/, '')
 
-					return `${ASSETS_DIR}/js/${name}.js`
+					return config.withAssets(`scripts/${name}.js`)
 				},
 
 				assetFileNames: chunk => {
-					const extname = path.extname(chunk.name)
-					let type
+					const pathToChunk = ['media', chunk.name]
 
-					if (['.css'].includes(extname)) type = 'css'
-					if (['.woff', '.woff2'].includes(extname)) type = 'fonts'
+					for (const [dir, extname] of Object.entries(config.assetsDirFromExt)) {
+						if (extname.includes(path.extname(chunk.name))) {
+							pathToChunk[0] = dir
+						}
+					}
 
-					return [ASSETS_DIR, type, chunk.name].filter(Boolean).join('/')
+					return config.withAssets(pathToChunk.filter(Boolean).join('/'))
 				},
 			},
 		},
 	},
 	resolve: {
 		alias: {
-			'@': path.resolve(import.meta.dirname, ROOT_DIR),
+			'@': path.resolve(config.root),
 			'@@': path.resolve(import.meta.dirname, './node_modules'),
 		},
 	},
@@ -88,16 +100,15 @@ export default defineConfig({
 })
 
 function getEntries() {
-	return fs.readdirSync(path.resolve(import.meta.dirname, ROOT_DIR)).filter(file => file.endsWith('.pug'))
+	return fs.readdirSync(config.root).filter(file => file.endsWith('.pug'))
 }
 
 function getInput(entries) {
-	return entries.map(tpl => `${ROOT_DIR}/${tpl}.html`)
+	return entries.map(tpl => path.resolve(config.root, `${tpl}.html`))
 }
 
 function generateIndexPage(entries) {
-	const INDEX_PAGE = 'index.pug'
-	const templates = entries.filter(tpl => tpl !== INDEX_PAGE).entries()
+	const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
 
 	let html = `doctype html
 html(lang="en")
@@ -139,8 +150,8 @@ html(lang="en")
 
 	for (const [index, tpl] of templates) {
 		const [name] = tpl.split('.')
-		html += `\t\t\tli: a(href="${name}.html") ${index < 9 ? '0' : ''}${index + 1}. ${name}\n`
+		html += `\t\t\tli: a(href="${name}.html") ${String(index + 1).padStart(2, '0')}. ${name}\n`
 	}
 
-	fs.writeFileSync(`${ROOT_DIR}/${INDEX_PAGE}`, html)
+	fs.writeFileSync(path.resolve(config.root, config.indexPageName), html)
 }

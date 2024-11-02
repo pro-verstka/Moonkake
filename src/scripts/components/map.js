@@ -1,7 +1,9 @@
+const MAP_ID = 'map'
+
 const initMap = () => {
 	ymaps.ready(() => {
 		const map = new ymaps.Map(
-			'map',
+			MAP_ID,
 			{
 				center: [51.507351, -0.12766],
 				zoom: 17,
@@ -50,3 +52,26 @@ const initMap = () => {
 }
 
 MK.addMethods({ initMap })
+
+let isMapLoaded = false
+
+const loadMap = () => {
+	if (isMapLoaded) {
+		return
+	}
+
+	if (
+		window.scrollY + window.innerHeight * 1.5 >=
+		document.getElementById(MAP_ID).getBoundingClientRect().top - document.body.getBoundingClientRect().top
+	) {
+		isMapLoaded = true
+
+		const script = document.createElement('script')
+		script.src = '//api-maps.yandex.ru/2.1/?lang=ru_RU&onload=MK.methods.initMap'
+		script.defer = true
+		document.body.appendChild(script)
+	}
+}
+
+window.addEventListener('load', loadMap)
+window.addEventListener('scroll', loadMap)

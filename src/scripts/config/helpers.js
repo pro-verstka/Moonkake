@@ -1,4 +1,4 @@
-import { isMobile, isTouch, setViewportHeight } from '@/scripts/helpers/index.js'
+import { isMobile, isTouch, setViewportHeight } from '../helpers'
 
 /* HTML CLASSNAMES
 -------------------------------------------------- */

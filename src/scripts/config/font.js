@@ -1,5 +1,9 @@
+import FontFaceObserver from 'fontfaceobserver'
+
 if (!sessionStorage.fontsLoaded) {
-	Promise.all([document.fonts.load('FONT_NAME')]).then(() => {
+	const fontName = new FontFaceObserver('FONT_NAME')
+
+	Promise.all([fontName.load()]).then(() => {
 		document.documentElement.classList.add('-fonts-ready')
 
 		sessionStorage.fontsLoaded = true

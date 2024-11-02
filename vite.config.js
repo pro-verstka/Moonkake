@@ -13,9 +13,21 @@ const config = {
 
 	indexPageName: 'index.pug',
 
-	assetsDirFromExt: {
-		styles: ['.css'],
-		fonts: ['.woff', '.woff2'],
+	assets: {
+		styles: {
+			dir: 'styles',
+			ext: ['.css']
+		},
+		fonts: {
+			dir: 'fonts',
+			ext: ['.woff', '.woff2']
+		},
+		scripts: {
+			dir: 'scripts',
+		},
+		media: {
+			dir: 'media',
+		}
 	},
 }
 
@@ -66,20 +78,24 @@ export default defineConfig({
 			input,
 			output: {
 				dir: config.dist,
-				chunkFileNames: config.withAssets('scripts/[name].js'),
+				chunkFileNames: config.withAssets(`${config.assets.scripts.dir}/[name].js`),
 
 				entryFileNames: chunk => {
 					const name = chunk.name.replace(/\.pug$/, '')
 
-					return config.withAssets(`scripts/${name}.js`)
+					return config.withAssets(`${config.assets.scripts.dir}/${name}.js`)
 				},
 
 				assetFileNames: chunk => {
-					const pathToChunk = ['media', chunk.name]
+					const pathToChunk = [config.assets.media.dir, chunk.name]
 
-					for (const [dir, extname] of Object.entries(config.assetsDirFromExt)) {
-						if (extname.includes(path.extname(chunk.name))) {
-							pathToChunk[0] = dir
+					for (const asset of Object.values(config.assets)) {
+						if (!asset.ext || !asset.ext.length) {
+							continue
+						}
+
+						if (asset.ext.includes(path.extname(chunk.name))) {
+							pathToChunk[0] = asset.dir
 						}
 					}
 

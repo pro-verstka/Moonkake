@@ -38,6 +38,7 @@ generateIndexPage(entries)
 export default defineConfig({
 	base: config.base,
 	root: config.root,
+	publicDir: config.public,
 	plugins: [
 		pug({
 			root: config.root,

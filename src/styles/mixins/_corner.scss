@@ -1,0 +1,21 @@
+@mixin corner($pos: 'bl') {
+	& {
+		aspect-ratio: 1 / 1;
+
+		@if $pos == 'bl' {
+			mask: radial-gradient(circle at 100% 0, transparent 71%, black 71%);
+		}
+
+		@if $pos == 'br' {
+			mask: radial-gradient(circle at 0 0, transparent 71%, black 71%);
+		}
+
+		@if $pos == 'tl' {
+			mask: radial-gradient(circle at 100% 100%, transparent 71%, black 71%);
+		}
+
+		@if $pos == 'tr' {
+			mask: radial-gradient(circle at 0 100%, transparent 71%, black 71%);
+		}
+	}
+}

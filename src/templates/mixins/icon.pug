@@ -2,6 +2,6 @@ mixin icon(id, width, height, className)
 	svg(
 		class=`icon ${!className ? 'icon_'+id : className}`
 		viewBox=`0 0 ${width} ${height}`
-		style=`width: ${width/10}rem; height: ${height/10}rem;`
+		style=`aspect-ratio: ${width/10} / ${height/10};`
 	)
 		use(xlink:href=`assets/media/icons.svg#${id}`)

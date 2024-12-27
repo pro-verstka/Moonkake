@@ -1,0 +1,7 @@
+@mixin transition($property: 'color, background-color, opacity, border-color') {
+	& {
+		transition-property: #{$property};
+		transition-duration: var(--transition-duration);
+		transition-timing-function: var(--transition-timing-function);
+	}
+}

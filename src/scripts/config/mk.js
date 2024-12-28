@@ -1,14 +1,5 @@
-/* CONFIG
--------------------------------------------------- */
-
 const MK = {
-	info: {
-		packageName: 'Moonkake',
-		packageUrl: 'https://github.com/pro-verstka/moonkake',
-		version: '10.3.0',
-		author: 'DevBrains',
-		authorUrl: 'https://devbrains.io',
-	},
+	info: __APP_INFO__,
 
 	plugins: {},
 	methods: {},
@@ -62,6 +53,6 @@ window.MK = { ...MK, ...(window.MK || {}) }
 -------------------------------------------------- */
 
 console.info(
-	`%c Yay, you found what you were looking for! You want a cool website, check out ${MK.info.authorUrl}`,
+	`%c Yay, you found what you were looking for! You want a cool website, check out ${MK.info.author.url}`,
 	'padding: 10px; background-color: #282c34; color: #fff;',
 )

@@ -3,6 +3,7 @@ import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
 import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import packageJson from './package.json'
 
 const config = {
 	base: path.relative(import.meta.dirname, './'),
@@ -66,7 +67,7 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
-				api: 'modern',
+				api: 'modern-compiler',
 			},
 		},
 	},
@@ -75,7 +76,6 @@ export default defineConfig({
 		assetsInlineLimit: 0,
 		copyPublicDir: false,
 		cssCodeSplit: true,
-		cssMinify: 'lightningcss',
 		emptyOutDir: true,
 		modulePreload: false,
 		outDir: config.dist,
@@ -135,6 +135,14 @@ export default defineConfig({
 	server: {
 		host: true,
 	},
+	define: {
+		__APP_INFO__: {
+			name: packageJson.name,
+			homepage: packageJson.homepage,
+			version: packageJson.version,
+			author: packageJson.author
+		}
+	}
 })
 
 function getEntries() {

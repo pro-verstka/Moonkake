@@ -1,4 +1,4 @@
-import { scrollTo } from '../helpers'
+import { scrollTo } from '$helpers'
 
 export class ScrollTo {
 	constructor(selector = '[data-scroll-to]') {

@@ -1,4 +1,4 @@
-import { isMobile, isTouch, setViewportHeight } from '../helpers'
+import { isMobile, isTouch, setViewportHeight } from '$helpers'
 
 /* HTML CLASSNAMES
 -------------------------------------------------- */

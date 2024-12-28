@@ -9,7 +9,6 @@ const config = {
 	root: path.relative(import.meta.dirname, './src'),
 	dist: path.resolve(import.meta.dirname, './build'),
 	public: path.resolve(import.meta.dirname, './public'),
-	withAssets: url => path.relative(import.meta.dirname, `assets/${url}`),
 
 	indexPageName: 'index.pug',
 
@@ -29,6 +28,12 @@ const config = {
 			dir: 'media',
 		}
 	},
+}
+
+const utils = {
+	withAssets: url => path.relative(import.meta.dirname, `assets/${url}`),
+	withStyles: url => path.resolve(config.root, `${config.assets.styles.dir}/${url}`),
+	withScripts: url => path.resolve(config.root, `${config.assets.scripts.dir}/${url}`),
 }
 
 const entries = getEntries()
@@ -79,12 +84,12 @@ export default defineConfig({
 			input,
 			output: {
 				dir: config.dist,
-				chunkFileNames: config.withAssets(`${config.assets.scripts.dir}/[name].js`),
+				chunkFileNames: utils.withAssets(`${config.assets.scripts.dir}/[name].js`),
 
 				entryFileNames: chunk => {
 					const name = chunk.name.replace(/\.pug$/, '')
 
-					return config.withAssets(`${config.assets.scripts.dir}/${name}.js`)
+					return utils.withAssets(`${config.assets.scripts.dir}/${name}.js`)
 				},
 
 				assetFileNames: chunk => {
@@ -100,7 +105,7 @@ export default defineConfig({
 						}
 					}
 
-					return config.withAssets(pathToChunk.filter(Boolean).join('/'))
+					return utils.withAssets(pathToChunk.filter(Boolean).join('/'))
 				},
 			},
 		},
@@ -109,6 +114,22 @@ export default defineConfig({
 		alias: {
 			'@': path.resolve(config.root),
 			'@@': path.resolve(import.meta.dirname, './node_modules'),
+
+			'_styles': utils.withStyles(''),
+			'_components': utils.withStyles('components'),
+			'_config': utils.withStyles('config'),
+			'_mixins': utils.withStyles('mixins'),
+			'_utils': utils.withStyles('utils'),
+			'_vendors': utils.withStyles('vendors'),
+			'_widgets': utils.withStyles('widgets'),
+			'_pages': utils.withStyles('pages'),
+
+			'$scripts': utils.withScripts(''),
+			'$components': utils.withScripts('components'),
+			'$config': utils.withScripts('config'),
+			'$helpers': utils.withScripts('helpers'),
+			'$utils': utils.withScripts('utils'),
+			'$pages': utils.withScripts('pages'),
 		},
 	},
 	server: {

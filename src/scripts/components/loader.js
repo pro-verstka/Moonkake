@@ -1,4 +1,4 @@
-import { emitEvent, getScrollbarWidth } from '../helpers'
+import { emitEvent, getScrollbarWidth } from '$helpers'
 
 export class Loader {
 	constructor(options = {}) {

@@ -1,7 +1,7 @@
 {
 	"name": "moonkake",
 	"description": "Site starter template based on Vite, Scss, Pug, JS",
-	"version": "10.2.0",
+	"version": "10.3.0",
 	"author": {
 		"name": "DevBrains",
 		"url": "https://devbrains.io"

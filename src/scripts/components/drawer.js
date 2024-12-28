@@ -1,5 +1,5 @@
+import { ScrollLock } from '$utils'
 import gsap from 'gsap'
-import { ScrollLock } from '../utils'
 
 export class Drawer {
 	constructor(options = {}) {

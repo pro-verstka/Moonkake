@@ -1,4 +1,4 @@
-import { emitEvent } from '../helpers'
+import { emitEvent } from '$helpers'
 
 export class Tabs {
 	constructor(options = {}) {

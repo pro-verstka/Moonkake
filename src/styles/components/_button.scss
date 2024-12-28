@@ -1,4 +1,4 @@
-@use '../mixins';
+@use '_mixins';
 
 .button {
 	@include mixins.transition();

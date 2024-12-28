@@ -1,4 +1,4 @@
-import { isMobile } from '../helpers'
+import { isMobile } from '$helpers'
 
 export class FullHeight {
 	constructor(options = {}) {

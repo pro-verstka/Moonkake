@@ -1,8 +1,8 @@
 // Config
-import './config'
+import '$config'
 
 // Components
-import * as Components from './components'
+import * as Components from '$components'
 
 /* SETUP
 -------------------------------------------------- */

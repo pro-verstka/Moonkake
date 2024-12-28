@@ -1,4 +1,4 @@
-@use '../mixins';
+@use '_mixins';
 
 .pagination {
 	@include mixins.grid('grid');

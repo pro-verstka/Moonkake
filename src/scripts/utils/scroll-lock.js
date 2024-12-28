@@ -1,4 +1,4 @@
-import { getScrollbarWidth, isIOS } from '../helpers'
+import { getScrollbarWidth, isIOS } from '$helpers'
 
 export class ScrollLock {
 	constructor() {

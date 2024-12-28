@@ -5,11 +5,11 @@
 	--base-font-family: system-ui;
 	--base-text-color: #333;
 	--base-text-line-height: 1.4;
+	--base-font-size: 10px;
 
 	// grid
 	--container-max-width: 120rem;
 	--container-gap: 4rem;
-	--gap: 2rem;
 
 	// typography
 	--header-text-font-family: system-ui;
@@ -110,19 +110,23 @@
 	--spacing-200: 20rem;
 
 	// responsive
+	// target 1920
 	@include mixins.bp-desktop-only {
-		--base-font-size: 10px;
+		--base-font-size: 0.5208333333vw;
 	}
 
+	// target 1440
 	@include mixins.bp-laptop-only {
 		--base-font-size: 0.6944444444vw;
 	}
 
+	// target 768
 	@include mixins.bp-tablet-only {
 		--base-font-size: 1.3020833333vw;
 	}
 
+	// target 360
 	@include mixins.bp-mobile-only {
-		--base-font-size: 2.6666666667vw;
+		--base-font-size: 2.7777777778vw;
 	}
 }

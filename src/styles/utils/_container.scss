@@ -3,5 +3,5 @@
 	max-width: calc(var(--container-max-width) + var(--container-gap) * 2);
 	padding-right: var(--container-gap);
 	padding-left: var(--container-gap);
-	margin: 0 auto;
+	margin-inline: auto;
 }

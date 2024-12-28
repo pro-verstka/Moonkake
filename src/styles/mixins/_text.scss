@@ -1,40 +1,40 @@
 @mixin h1 {
-	margin-bottom: var(--header-text-bottom-offset-1);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-1);
 	font-weight: var(--header-text-font-weight-1);
 	line-height: var(--header-text-line-height-1);
 }
 
 @mixin h2 {
-	margin-bottom: var(--header-text-bottom-offset-2);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-2);
 	font-weight: var(--header-text-font-weight-2);
 	line-height: var(--header-text-line-height-2);
 }
 
 @mixin h3 {
-	margin-bottom: var(--header-text-bottom-offset-3);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-3);
 	font-weight: var(--header-text-font-weight-3);
 	line-height: var(--header-text-line-height-3);
 }
 
 @mixin h4 {
-	margin-bottom: var(--header-text-bottom-offset-4);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-4);
 	font-weight: var(--header-text-font-weight-4);
 	line-height: var(--header-text-line-height-4);
 }
 
 @mixin h5 {
-	margin-bottom: var(--header-text-bottom-offset-5);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-5);
 	font-weight: var(--header-text-font-weight-5);
 	line-height: var(--header-text-line-height-5);
 }
 
 @mixin h6 {
-	margin-bottom: var(--header-text-bottom-offset-6);
+	font-family: var(--header-text-font-family), system-ui;
 	font-size: var(--header-text-font-size-6);
 	font-weight: var(--header-text-font-weight-6);
 	line-height: var(--header-text-line-height-6);

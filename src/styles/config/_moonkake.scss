@@ -3,9 +3,10 @@
 /* COMMON
  * -------------------------------------------------- */
 
-html,
-body {
-	height: 100%;
+*,
+::before,
+::after {
+	box-sizing: inherit;
 }
 
 html {
@@ -16,21 +17,14 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
-*,
-::before,
-::after {
-	box-sizing: inherit;
-}
-
 body {
-	min-width: 375px;
+	min-width: 360px;
 	margin: 0;
 	background: var(--color-white);
 	color: var(--base-text-color);
 	direction: ltr;
-	font-family: var(--base-font-family);
+	font-family: var(--base-font-family), system-ui;
 	font-size: var(--content-text-font-size);
-	// font-smooth: always;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	line-height: var(--base-text-line-height);
@@ -48,19 +42,18 @@ body {
  * -------------------------------------------------- */
 
 a {
-	color: inherit;
-	outline: none;
-	-webkit-tap-highlight-color: rgb(0 0 0 / 0%);
-	text-decoration: none;
-	text-decoration-skip-ink: auto;
-	transition-duration: var(--transition-duration);
-	transition-property: color, border-color, background-color, opacity;
-	transition-timing-function: var(--transition-timing-function);
+	@include mixins.transition();
 
-	&:not([class]) {
-		&:hover {
-			color: var(--color-accent);
-		}
+	& {
+		color: inherit;
+		outline: none;
+		-webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+		text-decoration: none;
+		text-decoration-skip-ink: auto;
+	}
+
+	&:not([class]):hover {
+		color: var(--color-accent);
 	}
 
 	svg {
@@ -76,7 +69,7 @@ h5,
 h6 {
 	margin: 0;
 	color: var(--header-text-color);
-	font-family: var(--header-text-font-family);
+	font-family: var(--header-text-font-family), system-ui;
 	hyphens: none;
 	text-wrap: balance;
 
@@ -88,26 +81,50 @@ h6 {
 
 h1 {
 	@include mixins.h1;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-1);
+	}
 }
 
 h2 {
 	@include mixins.h2;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-2);
+	}
 }
 
 h3 {
 	@include mixins.h3;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-3);
+	}
 }
 
 h4 {
 	@include mixins.h4;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-4);
+	}
 }
 
 h5 {
 	@include mixins.h5;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-5);
+	}
 }
 
 h6 {
 	@include mixins.h6;
+
+	& {
+		margin-bottom: var(--header-text-bottom-offset-6);
+	}
 }
 
 p,
@@ -304,7 +321,7 @@ label {
 }
 
 legend {
-	padding: 0 0.5rem;
+	padding: 0 var(--spacing-4);
 }
 
 button,

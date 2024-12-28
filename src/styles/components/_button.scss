@@ -1,15 +1,18 @@
+@use '../mixins';
+
 .button {
-	display: inline-grid;
-	gap: 0 var(--spacing-8);
-	padding: var(--spacing-12) var(--spacing-20);
-	border: 0;
-	border-radius: 0;
-	background: var(--color-accent);
-	color: var(--color-white);
-	justify-content: center;
-	text-align: center;
-	text-decoration: none;
-	transition-duration: var(--transition-duration);
-	transition-property: color, background-color, opacity, border-color;
-	transition-timing-function: var(--transition-timing-function);
+	@include mixins.transition();
+
+	& {
+		display: inline-grid;
+		gap: 0 var(--spacing-8);
+		padding: var(--spacing-12) var(--spacing-20);
+		border: 0;
+		border-radius: 0;
+		background: var(--color-accent);
+		color: var(--color-white);
+		justify-content: center;
+		text-align: center;
+		text-decoration: none;
+	}
 }

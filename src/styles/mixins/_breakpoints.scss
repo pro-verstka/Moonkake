@@ -1,6 +1,7 @@
-$mobile: 700px;
-$tablet: 1100px;
-$laptop: 1440px;
+$mobile: 700px; // target 360
+$tablet: 1100px; // target 768
+$laptop: 1600px; // target 1440
+$desktop: 1920px; // target 1920
 
 @mixin bp-mobile-only() {
 	@media (max-width: $mobile) {
@@ -38,7 +39,19 @@ $laptop: 1440px;
 	}
 }
 
+@mixin bp-laptop-down() {
+	@media (max-width: $laptop) {
+		@content;
+	}
+}
+
 @mixin bp-desktop-only() {
+	@media (min-width: $laptop + 0.1px) and (max-width: $desktop) {
+		@content;
+	}
+}
+
+@mixin bp-desktop-up() {
 	@media (min-width: $laptop + 0.1px) {
 		@content;
 	}

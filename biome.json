@@ -1,5 +1,12 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"files": {
+		"include": [
+			"/src/scripts/**/*.js",
+			"/src/styles/**/*.scss"
+		],
+		"ignoreUnknown": true
+	},
 	"organizeImports": {
 		"enabled": true
 	},

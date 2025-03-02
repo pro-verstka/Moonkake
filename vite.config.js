@@ -1,9 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
-import { defineConfig } from 'vite'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import {defineConfig} from 'vite'
+import {viteStaticCopy} from 'vite-plugin-static-copy'
 import packageJson from './package.json'
+import postCssPresetEnvPlugin from 'postcss-preset-env'
 
 const config = {
 	base: path.relative(import.meta.dirname, './'),
@@ -65,6 +66,11 @@ export default defineConfig({
 		}),
 	],
 	css: {
+		postcss: {
+			plugins: [
+				postCssPresetEnvPlugin()
+			]
+		},
 		preprocessorOptions: {
 			scss: {
 				api: 'modern-compiler',

@@ -9,6 +9,11 @@
 	box-sizing: inherit;
 }
 
+html,
+body {
+	scrollbar-gutter: stable;
+}
+
 html {
 	box-sizing: border-box;
 	font-size: var(--base-font-size);

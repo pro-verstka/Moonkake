@@ -1,7 +1,7 @@
 @use '_mixins';
 
 .button {
-	@include mixins.transition();
+	@include mixins.transition;
 
 	& {
 		display: inline-grid;

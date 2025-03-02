@@ -16,9 +16,7 @@
 	}
 } */
 
-$block: '.select';
-
-#{$block} {
+.select {
 	position: relative;
 	color: #000;
 	text-align: left;
@@ -102,26 +100,26 @@ $block: '.select';
 		}
 	}
 
-	&#{$block}_touched {
-		#{$block}__placeholder {
+	&.select_touched {
+		.select__placeholder {
 			display: none;
 		}
 	}
 
-	&#{$block}_opened {
+	&.select_opened {
 		z-index: 1;
 
-		#{$block}__label {
+		.select__label {
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
 		}
 
-		#{$block}__dropdown {
+		.select__dropdown {
 			display: block;
 		}
 	}
 
-	&#{$block}_disabled {
+	&.select_disabled {
 		cursor: default;
 		opacity: 0.5;
 		pointer-events: none;

@@ -1,21 +1,19 @@
 @use '_mixins';
 
-$block: '.tabs';
-
-#{$block} {
+.tabs {
 	&__title {
 		@include mixins.grid('flex');
 
-		#{$block}__item {
+		.tabs__item {
 			cursor: pointer;
 		}
 	}
 
 	&__content {
-		#{$block}__item {
+		.tabs__item {
 			display: none;
 
-			&#{$block}__item_active {
+			&.tabs__item_active {
 				display: block;
 
 				// animation: fade-in 1s forwards;

@@ -1,6 +1,4 @@
-$block: '.field';
-
-#{$block} {
+.field {
 	&__label {
 		margin-bottom: var(--spacing-4);
 	}
@@ -32,14 +30,14 @@ $block: '.field';
 	}
 }
 
-#{$block}_error {
-	#{$block}__input {
+.field_error {
+	.field__input {
 		border-color: red;
 	}
 }
 
-#{$block}_success {
-	#{$block}__input {
+.field_success {
+	.field__input {
 		border-color: green;
 	}
 }

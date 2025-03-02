@@ -1,6 +1,4 @@
-$block: '.modal';
-
-#{$block} {
+.modal {
 	position: fixed;
 	z-index: 1000;
 	top: 0;
@@ -98,34 +96,34 @@ $block: '.modal';
 		visibility: hidden;
 	}
 
-	&#{$block}_opened {
+	&.modal_opened {
 		display: flex;
 	}
 
-	&#{$block}_visible {
+	&.modal_visible {
 		opacity: 1;
 
-		#{$block}__container {
+		.modal__container {
 			transform: translateY(0);
 		}
 	}
 
-	&#{$block}_video {
-		#{$block}__container {
+	&.modal_video {
+		.modal__container {
 			max-width: 100rem;
 			padding: 0;
 			background: #000;
 			box-shadow: 0 0.5rem 0.5rem rgba(#000, 0.25);
 		}
 
-		#{$block}__close {
+		.modal__close {
 			top: -4rem;
 			right: -1.5rem;
 		}
 	}
 
-	&#{$block}_image {
-		#{$block}__container {
+	&.modal_image {
+		.modal__container {
 			position: static;
 			width: auto;
 			max-width: 100%;
@@ -138,7 +136,7 @@ $block: '.modal';
 			color: #fff;
 		}
 
-		#{$block}__close {
+		.modal__close {
 			top: 0;
 			right: 0;
 			color: #fff;

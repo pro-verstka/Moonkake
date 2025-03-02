@@ -1,6 +1,4 @@
-$block: '.accordion';
-
-#{$block} {
+.accordion {
 	&__header {
 		cursor: pointer;
 	}
@@ -14,27 +12,27 @@ $block: '.accordion';
 	}
 
 	&__item_active {
-		#{$block}__body {
+		.accordion__body {
 			// display: block;
 			// animation: fade-in 1s forwards;
 		}
 	}
 
-	&#{$block}_animation {
-		#{$block}__body {
+	&.accordion_animation {
+		.accordion__body {
 			overflow: hidden;
 			height: 0;
 			transition: height 0.25s ease;
 		}
 	}
 
-	&:not(#{$block}_animation) {
-		#{$block}__body {
+	&:not(.accordion_animation) {
+		.accordion__body {
 			display: none;
 		}
 
-		#{$block}__item_active {
-			#{$block}__body {
+		.accordion__item_active {
+			.accordion__body {
 				display: block;
 			}
 		}

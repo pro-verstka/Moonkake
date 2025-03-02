@@ -2,7 +2,7 @@
 
 .form {
 	&__fieldset + &__fieldset {
-		margin-top: calc(var(--spacing-16) * 2);
+		margin-top: var(--spacing-32);
 	}
 
 	&__group + &__group {

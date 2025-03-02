@@ -1,5 +1,3 @@
-$block: '.spoiler';
-
 [data-spoiler] {
 	visibility: hidden;
 
@@ -7,7 +5,7 @@ $block: '.spoiler';
 		display: block;
 	}
 
-	&#{$block}_text-mode {
+	&.spoiler_text-mode {
 		[data-spoiler-intro] {
 			display: block;
 		}
@@ -16,7 +14,7 @@ $block: '.spoiler';
 			display: none;
 		}
 
-		&#{$block}_active {
+		&.spoiler_active {
 			[data-spoiler-intro] {
 				display: none;
 			}
@@ -29,20 +27,20 @@ $block: '.spoiler';
 		}
 	}
 
-	&#{$block}_html-mode {
+	&.spoiler_html-mode {
 		[data-spoiler-body] {
 			overflow: hidden;
 			height: 10rem;
 		}
 
-		&#{$block}_active {
+		&.spoiler_active {
 			[data-spoiler-body] {
 				height: auto;
 			}
 		}
 	}
 
-	&#{$block}_initialized {
+	&.spoiler_initialized {
 		visibility: visible;
 	}
 }
@@ -50,8 +48,8 @@ $block: '.spoiler';
 /* THEME
  * -------------------------------------------------- */
 
-#{$block} {
-	&#{$block}_custom {
+.spoiler {
+	&.spoiler_custom {
 		[data-spoiler-toggle] {
 			padding: 0;
 			border: 0;

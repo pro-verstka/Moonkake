@@ -1,8 +1,6 @@
 @use '_mixins';
 
-$block: '.field-file';
-
-#{$block} {
+.field-file {
 	display: block;
 	width: 100%;
 	padding: var(--spacing-16) var(--spacing-20);
@@ -31,12 +29,12 @@ $block: '.field-file';
 	}
 }
 
-#{$block}_active {
-	#{$block}__placeholder {
+.field-file_active {
+	.field-file__placeholder {
 		display: none;
 	}
 
-	#{$block}__value {
+	.field-file__value {
 		display: block;
 	}
 }

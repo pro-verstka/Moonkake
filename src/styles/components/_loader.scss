@@ -1,8 +1,4 @@
-@use "accordion";
-
-$block: '.loader';
-
-#{$block} {
+.loader {
 	position: fixed;
 	z-index: 9999;
 	top: 0;
@@ -28,11 +24,11 @@ $block: '.loader';
 		justify-content: center;
 	}
 
-	&#{$block}_closing {
+	&.loader_closing {
 		width: 0;
 	}
 
-	&#{$block}_closed {
+	&.loader_closed {
 		display: none;
 	}
 }

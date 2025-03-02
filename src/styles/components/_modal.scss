@@ -9,7 +9,7 @@
 	height: 100%;
 	padding: var(--spacing-20);
 	backface-visibility: hidden;
-	background: rgba(#000, 0.5);
+	background: rgba(0, 0, 0, 0.5);
 	opacity: 0;
 	outline: none;
 	-webkit-overflow-scrolling: touch;
@@ -89,7 +89,7 @@
 		left: 0;
 		width: 100%;
 		padding: var(--spacing-20);
-		background: rgba(#000, 0.5);
+		background: rgba(0, 0, 0, 0.5);
 		color: #fff;
 		font-size: 1.2rem;
 		text-align: center;
@@ -113,7 +113,7 @@
 			max-width: 100rem;
 			padding: 0;
 			background: #000;
-			box-shadow: 0 0.5rem 0.5rem rgba(#000, 0.25);
+			box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
 		}
 
 		.modal__close {
@@ -132,7 +132,7 @@
 			padding: 0;
 			margin: 0 auto;
 			background: transparent;
-			box-shadow: 0 0.5rem 0.5rem rgba(#000, 0.25);
+			box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
 			color: #fff;
 		}
 

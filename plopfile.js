@@ -1,3 +1,7 @@
+/**
+ * Plop generator function
+ * @param {import('plop').NodePlopAPI} plop - Plop API instance
+ */
 export default function (plop) {
 	plop.setGenerator('page', {
 		description: 'Create new page with scripts and styles',

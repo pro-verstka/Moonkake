@@ -1,0 +1,8 @@
+{% macro field_file(data) %}
+    <label class="field-file field-file_appearance_{{ data.appearance|default('light') }}">
+        <input type="file" name="{{ data.name|default('') }}">
+        <span class="field-file__placeholder">{{ data.placeholder|default('Приложить файл') }}</span>
+        <span class="field-file__value"></span>
+    </label>
+    {# field-file #}
+{% endmacro %}

@@ -1,0 +1,14 @@
+{% macro breadcrumbs(data) %}
+    <ul class="breadcrumbs">
+        {% for item in data %}
+            <li class="breadcrumbs__item">
+                {% if loop.last %}
+                    <span class="breadcrumbs__current">{{ item }}</span>
+                {% else %}
+                    <a class="breadcrumbs__link" href="#">{{ item }}</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {# breadcrumbs #}
+{% endmacro %}

@@ -1,0 +1,59 @@
+{% include '../mixins/mixins.twig' %}
+
+<!DOCTYPE html>
+<html lang="ru" class="notranslate" translate="no">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="format-detection" content="telephone=no">
+
+        <title>{{ title }}</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+
+        <meta property="og:title" content="">
+        <meta property="og:type" content="">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        {# <link rel="icon" href="favicon.ico" sizes="any"> #}
+        {# <link rel="icon" href="icon.svg" type="image/svg+xml"> #}
+        {# <link rel="apple-touch-icon" href="icon.png"> #}
+
+        {# <link rel="preload" href="fonts/FILE_NAME.woff2" as="font" type="font/woff2" crossorigin> #}
+
+        <link rel="stylesheet" href="styles/app.scss">
+
+        {% block css %}{% endblock %}
+
+        <script>
+            if (sessionStorage.fontsLoaded) {
+                document.documentElement.classList.add('-fonts-ready')
+            }
+        </script>
+    </head>
+
+    <body data-scroll-lock-fix-shift>
+        {# <div class="loader" data-loader><div>⏳Loading...</div></div> #}
+
+        <div class="wrapper">
+            {% include '../widgets/header.twig' %}
+
+            <main class="main">
+                {% block main %}{% endblock %}
+            </main>
+            {# main #}
+
+            {% include '../widgets/footer.twig' %}
+        </div>
+        {# wrapper #}
+
+        {% block bottom %}{% endblock %}
+
+        {# JS #}
+        <script type="module" src="scripts/app.js"></script>
+
+        {% block js %}{% endblock %}
+    </body>
+</html>

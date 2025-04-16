@@ -1,0 +1,13 @@
+{% extends 'templates-twig/layouts/layout.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="styles/pages/main.scss">
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="scripts/pages/main.js"></script>
+{% endblock %}
+
+{% block main %}
+    {% include 'templates-twig/widgets/section-intro.twig' %}
+{% endblock %}

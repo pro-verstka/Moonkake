@@ -1,0 +1,9 @@
+{% macro icon(id, width, height, className) %}
+    <svg
+        class="icon {{ className ? className : 'icon_' ~ id }}"
+        viewBox="0 0 {{ width }} {{ height }}"
+        style="aspect-ratio: {{ width/10 }} / {{ height/10 }};"
+    >
+        <use xlink:href="assets/media/icons.svg#{{ id }}"></use>
+    </svg>
+{% endmacro %}

@@ -1,10 +1,11 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
+import twig from '@vituum/vite-plugin-twig'
 import {defineConfig} from 'vite'
 import {viteStaticCopy} from 'vite-plugin-static-copy'
-import packageJson from './package.json'
 import postCssPresetEnvPlugin from 'postcss-preset-env'
+import packageJson from './package.json'
 
 const config = {
 	base: path.relative(import.meta.dirname, './'),
@@ -12,7 +13,10 @@ const config = {
 	dist: path.resolve(import.meta.dirname, './build'),
 	public: path.resolve(import.meta.dirname, './public'),
 
-	indexPageName: 'index.pug',
+	templateEngine: 'pug', // 'pug' or 'twig'
+	get indexPageName() {
+		return `index.${this.templateEngine}`;
+	},
 
 	assets: {
 		styles: {
@@ -54,6 +58,10 @@ export default defineConfig({
 				pretty: true,
 			},
 		}),
+		twig({
+			root: config.root,
+			data: path.resolve(config.root, 'data/*.json'),
+		}),
 		viteStaticCopy({
 			silent: true,
 			structured: false,
@@ -93,7 +101,7 @@ export default defineConfig({
 				chunkFileNames: utils.withAssets(`${config.assets.scripts.dir}/[name].js`),
 
 				entryFileNames: chunk => {
-					const name = chunk.name.replace(/\.pug$/, '')
+					const name = chunk.name.replace(/\.(pug|twig)$/, '')
 
 					return utils.withAssets(`${config.assets.scripts.dir}/${name}.js`)
 				},
@@ -152,7 +160,7 @@ export default defineConfig({
 })
 
 function getEntries() {
-	return fs.readdirSync(config.root).filter(file => file.endsWith('.pug'))
+	return fs.readdirSync(config.root).filter(file => file.endsWith('.pug') || file.endsWith('.twig'))
 }
 
 function getInput(entries) {
@@ -162,6 +170,18 @@ function getInput(entries) {
 function generateIndexPage(entries) {
 	const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
 
+	let html = '';
+
+	if (config.templateEngine === 'pug') {
+		html = generatePugTemplate(templates);
+	} else if (config.templateEngine === 'twig') {
+		html = generateTwigTemplate(templates);
+	}
+
+	fs.writeFileSync(path.resolve(config.root, config.indexPageName), html)
+}
+
+function generatePugTemplate(templates) {
 	let html = `doctype html
 html(lang="en")
 	head
@@ -205,5 +225,58 @@ html(lang="en")
 		html += `\t\t\tli: a(href="${name}.html") ${String(index + 1).padStart(2, '0')}. ${name}\n`
 	}
 
-	fs.writeFileSync(path.resolve(config.root, config.indexPageName), html)
+	return html;
+}
+
+function generateTwigTemplate(templates) {
+	let html = `<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<style>
+			* {
+				margin: 0; padding: 0;
+			}
+
+			body {
+				background: #fafafa;
+				font-size: 1.2rem;
+				font-family: Arial, Helvetica, sans-serif;
+				font-variant-numeric: tabular-nums;
+			}
+
+			a {
+				padding: 1rem 1.2rem;
+				display: block;
+				color: #4846FE;
+				text-decoration: none;
+				border-bottom: 1px solid #f0f0f0;
+				text-transform: capitalize;
+			}
+
+			a:visited {
+				color: #333;
+			}
+
+			a:hover {
+				background: #4846FE;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+`;
+
+	for (const [index, tpl] of templates) {
+		const [name] = tpl.split('.')
+		html += `\t\t\t<li><a href="${name}.html">${String(index + 1).padStart(2, '0')}. ${name}</a></li>\n`
+	}
+
+	html += `\t\t</ul>
+	</body>
+</html>`;
+
+	return html;
 }

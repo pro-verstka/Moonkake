@@ -4,7 +4,6 @@ import pug from '@vituum/vite-plugin-pug'
 import twig from '@vituum/vite-plugin-twig'
 import {defineConfig} from 'vite'
 import {viteStaticCopy} from 'vite-plugin-static-copy'
-import postCssPresetEnvPlugin from 'postcss-preset-env'
 import packageJson from './package.json'
 
 const config = {
@@ -13,26 +12,26 @@ const config = {
 	dist: path.resolve(import.meta.dirname, './build'),
 	public: path.resolve(import.meta.dirname, './public'),
 
-	templateEngine: 'pug', // 'pug' or 'twig'
+	templateEngine: 'pug',
 	get indexPageName() {
-		return `index.${this.templateEngine}`;
+		return `index.${this.templateEngine}`
 	},
 
 	assets: {
 		styles: {
 			dir: 'styles',
-			ext: ['.css']
+			ext: ['.css'],
 		},
 		fonts: {
 			dir: 'fonts',
-			ext: ['.woff', '.woff2']
+			ext: ['.woff', '.woff2'],
 		},
 		scripts: {
 			dir: 'scripts',
 		},
 		media: {
 			dir: 'media',
-		}
+		},
 	},
 }
 
@@ -74,11 +73,7 @@ export default defineConfig({
 		}),
 	],
 	css: {
-		postcss: {
-			plugins: [
-				postCssPresetEnvPlugin()
-			]
-		},
+		transformer: 'lightningcss',
 		preprocessorOptions: {
 			scss: {
 				api: 'modern-compiler',
@@ -129,21 +124,21 @@ export default defineConfig({
 			'@': path.resolve(config.root),
 			'@@': path.resolve(import.meta.dirname, './node_modules'),
 
-			'_styles': utils.withStyles(''),
-			'_components': utils.withStyles('components'),
-			'_config': utils.withStyles('config'),
-			'_mixins': utils.withStyles('mixins'),
-			'_utils': utils.withStyles('utils'),
-			'_vendors': utils.withStyles('vendors'),
-			'_widgets': utils.withStyles('widgets'),
-			'_pages': utils.withStyles('pages'),
+			_styles: utils.withStyles(''),
+			_components: utils.withStyles('components'),
+			_config: utils.withStyles('config'),
+			_mixins: utils.withStyles('mixins'),
+			_utils: utils.withStyles('utils'),
+			_vendors: utils.withStyles('vendors'),
+			_widgets: utils.withStyles('widgets'),
+			_pages: utils.withStyles('pages'),
 
-			'$scripts': utils.withScripts(''),
-			'$components': utils.withScripts('components'),
-			'$config': utils.withScripts('config'),
-			'$helpers': utils.withScripts('helpers'),
-			'$utils': utils.withScripts('utils'),
-			'$pages': utils.withScripts('pages'),
+			$scripts: utils.withScripts(''),
+			$components: utils.withScripts('components'),
+			$config: utils.withScripts('config'),
+			$helpers: utils.withScripts('helpers'),
+			$utils: utils.withScripts('utils'),
+			$pages: utils.withScripts('pages'),
 		},
 	},
 	server: {
@@ -154,9 +149,9 @@ export default defineConfig({
 			name: packageJson.name,
 			homepage: packageJson.homepage,
 			version: packageJson.version,
-			author: packageJson.author
-		}
-	}
+			author: packageJson.author,
+		},
+	},
 })
 
 function getEntries() {
@@ -168,15 +163,13 @@ function getInput(entries) {
 }
 
 function generateIndexPage(entries) {
-	const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
-
-	let html = '';
-
-	if (config.templateEngine === 'pug') {
-		html = generatePugTemplate(templates);
-	} else if (config.templateEngine === 'twig') {
-		html = generateTwigTemplate(templates);
+	const htmlTemplate = {
+		pug: generatePugTemplate,
+		twig: generateTwigTemplate,
 	}
+
+	const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
+	const html = htmlTemplate[config.templateEngine](templates)
 
 	fs.writeFileSync(path.resolve(config.root, config.indexPageName), html)
 }
@@ -225,7 +218,7 @@ html(lang="en")
 		html += `\t\t\tli: a(href="${name}.html") ${String(index + 1).padStart(2, '0')}. ${name}\n`
 	}
 
-	return html;
+	return html
 }
 
 function generateTwigTemplate(templates) {
@@ -267,7 +260,7 @@ function generateTwigTemplate(templates) {
 	</head>
 	<body>
 		<ul>
-`;
+`
 
 	for (const [index, tpl] of templates) {
 		const [name] = tpl.split('.')
@@ -276,7 +269,7 @@ function generateTwigTemplate(templates) {
 
 	html += `\t\t</ul>
 	</body>
-</html>`;
+</html>`
 
-	return html;
+	return html
 }

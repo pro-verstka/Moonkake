@@ -2,8 +2,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
 import twig from '@vituum/vite-plugin-twig'
-import {defineConfig} from 'vite'
-import {viteStaticCopy} from 'vite-plugin-static-copy'
+import { defineConfig } from 'vite'
+import checker from 'vite-plugin-checker'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import packageJson from './package.json'
 
 const config = {
@@ -50,6 +51,11 @@ export default defineConfig({
 	root: config.root,
 	publicDir: config.public,
 	plugins: [
+		checker({
+			biome: {
+				command: 'check',
+			},
+		}),
 		pug({
 			root: config.root,
 			data: path.resolve(config.root, 'data/*.json'),

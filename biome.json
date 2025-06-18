@@ -4,7 +4,13 @@
 		"includes": ["**/src/scripts/**/*.js", "**/vite.config.js"],
 		"ignoreUnknown": true
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -43,6 +49,11 @@
 			"lineWidth": 120,
 			"bracketSameLine": true,
 			"bracketSpacing": true
+		}
+	},
+	"html": {
+		"formatter": {
+			"enabled": true
 		}
 	},
 	"css": {

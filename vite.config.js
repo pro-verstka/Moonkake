@@ -80,11 +80,6 @@ export default defineConfig({
 	],
 	css: {
 		transformer: 'lightningcss',
-		preprocessorOptions: {
-			scss: {
-				api: 'modern-compiler',
-			},
-		},
 	},
 	build: {
 		appType: 'mpa',
@@ -94,7 +89,6 @@ export default defineConfig({
 		emptyOutDir: true,
 		modulePreload: false,
 		outDir: config.dist,
-		target: 'modules',
 		rollupOptions: {
 			input,
 			output: {

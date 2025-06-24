@@ -1,6 +1,6 @@
-export * from './device'
 export { declension } from './declension'
+export * from './device'
+export { emitEvent } from './emitEvent'
 export { getScrollbarWidth } from './getScrollbarWidth'
 // export { scrollTo } from './scrollTo'
 export { setViewportHeight } from './setViewportHeight'
-export { emitEvent } from './emitEvent'

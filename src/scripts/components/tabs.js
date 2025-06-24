@@ -35,7 +35,7 @@ export class Tabs {
 
 		// tab change on history change
 		window.addEventListener('popstate', e => {
-			if (e.state && Object.prototype.hasOwnProperty.call(e.state, 'source') && e.state.source === 'tabs') {
+			if (e.state && Object.hasOwn(e.state, 'source') && e.state.source === 'tabs') {
 				const $root = document
 					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
 					.closest(this.options.root)
@@ -109,7 +109,7 @@ export class Tabs {
 			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
 		})
 
-		if (this.options.useHashNav && changeHash && Object.prototype.hasOwnProperty.call($titles[index].dataset, 'hash')) {
+		if (this.options.useHashNav && changeHash && Object.hasOwn($titles[index].dataset, 'hash')) {
 			window.history.pushState(
 				{
 					source: 'tabs',

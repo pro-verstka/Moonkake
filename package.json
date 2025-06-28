@@ -21,10 +21,10 @@
 		"fontfaceobserver": "2.3.0",
 		"gsap": "3.13.0",
 		"imask": "7.6.1",
-		"swiper": "11.2.8"
+		"swiper": "11.2.9"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.0.5",
+		"@biomejs/biome": "2.0.6",
 		"@vituum/vite-plugin-pug": "1.1.0",
 		"@vituum/vite-plugin-twig": "1.1.0",
 		"lightningcss": "1.30.1",
@@ -32,7 +32,7 @@
 		"sass-embedded": "1.89.2",
 		"vite": "7.0.0",
 		"vite-plugin-checker": "0.9.3",
-		"vite-plugin-static-copy": "3.0.2"
+		"vite-plugin-static-copy": "3.1.0"
 	},
 	"engines": {
 		"node": ">=22.12.0"

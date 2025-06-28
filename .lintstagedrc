@@ -1,0 +1,6 @@
+{
+  "*.js": [
+    "biome check ./src/scripts --fix",
+    "biome format ./src/scripts --fix"
+  ]
+}

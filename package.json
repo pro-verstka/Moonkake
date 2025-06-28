@@ -1,7 +1,7 @@
 {
 	"name": "moonkake",
-	"description": "Site starter template based on Vite, Scss, Pug, JS",
-	"version": "10.3.3",
+	"description": "Site starter template based on Vite, Scss, Pug/Twig, JS",
+	"version": "10.3.4",
 	"author": {
 		"name": "DevBrains",
 		"url": "https://devbrains.io"
@@ -35,9 +35,9 @@
 		"vite-plugin-static-copy": "3.1.0"
 	},
 	"engines": {
-		"node": ">=22.12.0"
+		"node": ">=22.16.0"
 	},
 	"volta": {
-		"node": "22.12.0"
+		"node": "22.16.0"
 	}
 }

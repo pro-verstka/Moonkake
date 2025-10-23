@@ -23,20 +23,20 @@
 		"fontfaceobserver": "2.3.0",
 		"gsap": "3.13.0",
 		"imask": "7.6.1",
-		"swiper": "11.2.10"
+		"swiper": "12.0.3"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
+		"@biomejs/biome": "2.2.7",
 		"@vituum/vite-plugin-pug": "1.1.0",
 		"@vituum/vite-plugin-twig": "1.1.0",
 		"husky": "9.1.7",
-		"lightningcss": "1.30.1",
-		"lint-staged": "16.1.6",
-		"plop": "4.0.1",
-		"sass-embedded": "1.92.0",
-		"vite": "7.1.4",
-		"vite-plugin-checker": "0.10.3",
-		"vite-plugin-static-copy": "3.1.2"
+		"lightningcss": "1.30.2",
+		"lint-staged": "16.2.6",
+		"plop": "4.0.4",
+		"sass-embedded": "1.93.2",
+		"vite": "7.1.12",
+		"vite-plugin-checker": "0.11.0",
+		"vite-plugin-static-copy": "3.1.4"
 	},
 	"engines": {
 		"node": ">=22.17.0"

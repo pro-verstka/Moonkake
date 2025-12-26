@@ -13,10 +13,11 @@ const config = {
 	dist: path.resolve(import.meta.dirname, './build'),
 	public: path.resolve(import.meta.dirname, './public'),
 
+	/**
+	 * Available options 'pug' and 'twig'
+	 */
 	templateEngine: 'pug',
-	get indexPageName() {
-		return `index.${this.templateEngine}`
-	},
+	indexPageName: 'index.html',
 
 	assets: {
 		styles: {
@@ -44,13 +45,17 @@ const utils = {
 
 const entries = getEntries()
 const input = getInput(entries)
-generateIndexPage(entries)
 
 export default defineConfig({
 	base: config.base,
 	root: config.root,
 	publicDir: config.public,
 	plugins: [
+		{
+			name: 'check-reserved-index',
+			buildStart: checkReservedPageName,
+			configureServer: checkReservedPageName,
+		},
 		checker({
 			biome: {
 				command: 'check',
@@ -77,6 +82,15 @@ export default defineConfig({
 				},
 			],
 		}),
+		{
+			name: 'generate-index-html',
+			closeBundle() {
+				const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
+				const html = generateTemplate(templates)
+
+				fs.writeFileSync(path.resolve(config.dist, config.indexPageName), html)
+			},
+		},
 	],
 	css: {
 		transformer: 'lightningcss',
@@ -154,6 +168,18 @@ export default defineConfig({
 	},
 })
 
+function checkReservedPageName() {
+	const reservedName = config.indexPageName.split('.')[0]
+	const indexFile = path.resolve(config.root, `${reservedName}.${config.templateEngine}`)
+
+	if (fs.existsSync(indexFile)) {
+		console.error(
+			`\n❌ Error: File "${reservedName}.${config.templateEngine}" found in src/.\n   The name "${reservedName}" is reserved and used for automatic generation of ${config.indexPageName}.\n   Please rename the file.\n`,
+		)
+		process.exit(1)
+	}
+}
+
 function getEntries() {
 	return fs.readdirSync(config.root).filter(file => file.endsWith('.pug') || file.endsWith('.twig'))
 }
@@ -162,67 +188,15 @@ function getInput(entries) {
 	return entries.map(tpl => path.resolve(config.root, `${tpl}.html`))
 }
 
-function generateIndexPage(entries) {
-	const htmlTemplate = {
-		pug: generatePugTemplate,
-		twig: generateTwigTemplate,
-	}
-
-	const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
-	const html = htmlTemplate[config.templateEngine](templates)
-
-	fs.writeFileSync(path.resolve(config.root, config.indexPageName), html)
-}
-
-function generatePugTemplate(templates) {
-	let html = `doctype html
-html(lang="en")
-	head
-		meta(charset="utf-8")
-		meta(name="viewport" content="width=device-width,initial-scale=1")
-		style.
-			* {
-				margin: 0; padding: 0;
-			}
-
-			body {
-				background: #fafafa;
-				font-size: 1.2rem;
-				font-family: Arial, Helvetica, sans-serif;
-				font-variant-numeric: tabular-nums;
-			}
-
-			a {
-				padding: 1rem 1.2rem;
-				display: block;
-				color: #4846FE;
-				text-decoration: none;
-				border-bottom: 1px solid #f0f0f0;
-				text-transform: capitalize;
-			}
-
-			a:visited {
-				color: #333;
-			}
-
-			a:hover {
-				background: #4846FE;
-				color: #fff;
-			}
-	body
-		ul
-`
+function generateTemplate(templates) {
+	let html = ''
 
 	for (const [index, tpl] of templates) {
 		const [name] = tpl.split('.')
-		html += `\t\t\tli: a(href="${name}.html") ${String(index + 1).padStart(2, '0')}. ${name}\n`
+		html += `<li><a href="${name}.html">${String(index + 1).padStart(2, '0')}. ${name}</a></li>`
 	}
 
-	return html
-}
-
-function generateTwigTemplate(templates) {
-	let html = `<!DOCTYPE html>
+	return `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -259,17 +233,7 @@ function generateTwigTemplate(templates) {
 		</style>
 	</head>
 	<body>
-		<ul>
-`
-
-	for (const [index, tpl] of templates) {
-		const [name] = tpl.split('.')
-		html += `\t\t\t<li><a href="${name}.html">${String(index + 1).padStart(2, '0')}. ${name}</a></li>\n`
-	}
-
-	html += `\t\t</ul>
+		<ul>${html}</ul>
 	</body>
 </html>`
-
-	return html
 }

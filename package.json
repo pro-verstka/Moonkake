@@ -7,8 +7,10 @@
 		"url": "https://devbrains.io"
 	},
 	"homepage": "https://github.com/pro-verstka/moonkake#readme",
-	"repository": "git://github.com/pro-verstka/moonkake.git",
-	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/pro-verstka/moonkake.git"
+	},
 	"type": "module",
 	"scripts": {
 		"dev": "vite",

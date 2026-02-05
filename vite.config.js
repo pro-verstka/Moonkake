@@ -83,6 +83,15 @@ export default defineConfig({
 			],
 		}),
 		{
+			name: 'ascii-banner',
+			configureServer() {
+				printBanner('Running with Moonkake')
+			},
+			closeBundle() {
+				printBanner('Built with Moonkake')
+			},
+		},
+		{
 			name: 'generate-index-html',
 			configureServer(server) {
 				server.middlewares.use((req, res, next) => {
@@ -183,6 +192,18 @@ export default defineConfig({
 		},
 	},
 })
+
+function printBanner(text = '') {
+	console.log(`
+\x1b[36m  ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗██╗  ██╗ █████╗ ██╗  ██╗███████╗
+  ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║██║ ██╔╝██╔══██╗██║ ██╔╝██╔════╝
+  ██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║█████╔╝ ███████║█████╔╝ █████╗
+  ██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║██╔═██╗ ██╔══██║██╔═██╗ ██╔══╝
+  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║██║  ██╗██║  ██║██║  ██╗███████╗
+  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝\x1b[0m
+\x1b[90m  ${text} v${packageJson.version}\x1b[0m
+`)
+}
 
 function checkReservedPageName() {
 	const reservedName = config.indexPageName.split('.')[0]

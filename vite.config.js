@@ -84,6 +84,22 @@ export default defineConfig({
 		}),
 		{
 			name: 'generate-index-html',
+			configureServer(server) {
+				server.middlewares.use((req, res, next) => {
+					const url = req.url?.split('?')[0]
+
+					if (url === '/' || url === '/index.html') {
+						const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
+						const html = generateTemplate(templates)
+
+						res.setHeader('Content-Type', 'text/html')
+						res.end(html)
+						return
+					}
+
+					next()
+				})
+			},
 			closeBundle() {
 				const templates = entries.filter(tpl => tpl !== config.indexPageName).entries()
 				const html = generateTemplate(templates)

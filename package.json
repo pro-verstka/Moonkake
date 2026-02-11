@@ -26,6 +26,8 @@
 		"fontfaceobserver": "2.3.0",
 		"gsap": "3.14.2",
 		"imask": "7.6.1",
+		"photoswipe": "5.4.4",
+		"scrollbooster": "3.0.2",
 		"swiper": "12.1.0",
 		"tippy.js": "6.3.7"
 	},

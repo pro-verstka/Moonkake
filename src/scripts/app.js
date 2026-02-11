@@ -6,9 +6,14 @@ import { Accordion } from '$components/accordion'
 import { Calendar } from '$components/calendar'
 import { Counter } from '$components/counter'
 import { Cursor } from '$components/cursor'
+import { Drawer } from '$components/drawer'
 import { FieldFile } from '$components/field-file'
 import { FullHeight } from '$components/fullheight'
+import { Gallery } from '$components/gallery'
+import { InputMask } from '$components/inputmask'
 import { Loader } from '$components/loader'
+import { ScrollAnimation } from '$components/scroll-animation'
+import { ScrollBooster } from '$components/scrollbooster'
 import { Tabs } from '$components/tabs'
 import { Tooltip } from '$components/tooltip'
 
@@ -92,4 +97,37 @@ const $loader = document.querySelector('[data-loader]')
 
 if ($loader) {
 	new Loader($loader)
+}
+
+/* DRAWER
+-------------------------------------------------- */
+
+const $drawers = document.querySelectorAll('[data-drawer]')
+
+for (const $drawer of $drawers) {
+	new Drawer($drawer)
+}
+
+/* GALLERY
+-------------------------------------------------- */
+
+new Gallery()
+
+/* INPUTMASK
+-------------------------------------------------- */
+
+new InputMask()
+
+/* SCROLL ANIMATION
+-------------------------------------------------- */
+
+new ScrollAnimation()
+
+/* SCROLL BOOSTER
+-------------------------------------------------- */
+
+const $scrollBoosters = document.querySelectorAll('[data-scrollbooster]')
+
+for (const $scrollBooster of $scrollBoosters) {
+	new ScrollBooster($scrollBooster)
 }

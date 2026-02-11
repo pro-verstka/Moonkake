@@ -1,24 +1,55 @@
 import SB from 'scrollbooster'
 
 export class ScrollBooster {
-	constructor($el) {
-		this.$viewport = $el || document.querySelector('[data-scrollbooster]')
-		this.$content = this.$viewport.querySelector('[data-scrollbooster-content]')
+	constructor($el, options = {}) {
+		if (!$el) {
+			return
+		}
+
+		this.$viewport = $el
+
+		this.options = {
+			scrollMode: 'transform',
+			direction: 'horizontal',
+			emulateScroll: true,
+			selectors: {
+				content: '[data-scrollbooster-content]',
+			},
+		}
+
+		if (typeof options === 'object') {
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
+		}
+
+		this.selectors = this.options.selectors
+
+		this.$content = this.$viewport.querySelector(this.selectors.content)
+
+		if (!this.$content) {
+			return
+		}
 
 		this.#init()
 	}
 
 	#init() {
+		const { selectors, ...options } = this.options
+
 		this.scrollBooster = new SB({
 			viewport: this.$viewport,
 			content: this.$content,
-			scrollMode: 'transform',
-			direction: 'horizontal',
-			emulateScroll: true,
 			// onUpdate: data => {
 			// 	this.$content.style.transform = `translateX(${-data.position.x}px)`
 			// },
 			shouldScroll: () => this.$content.clientWidth > this.$viewport.clientWidth,
+			...options,
 		})
 	}
 }

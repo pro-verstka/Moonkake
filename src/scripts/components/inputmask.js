@@ -9,7 +9,6 @@ export class InputMask {
 		this.#initMask()
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	#initMask() {
 		for (const $el of document.querySelectorAll('input[type="tel"]')) {
 			const mask = IMask($el, {

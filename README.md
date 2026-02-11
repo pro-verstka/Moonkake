@@ -414,13 +414,13 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 **Pug:**
 
 ```pug
-input(type="text", name="", data-calendar, placeholder="dd.mm.yyyyyy")
+input(type="text", name="", data-calendar, placeholder="dd.mm.yyyy")
 ```
 
 **Twig:**
 
 ```twig
-<input type="text" name="" data-calendar placeholder="dd.mm.yyyyyy">
+<input type="text" name="" data-calendar placeholder="dd.mm.yyyy">
 ```
 
 ### Scroll to element

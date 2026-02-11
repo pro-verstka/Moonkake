@@ -2,7 +2,10 @@
 import '$config'
 
 // Components
-import { Accordion, Cursor, Tabs } from '$components'
+import { Accordion } from '$components/accordion'
+import { Calendar } from '$components/calendar'
+import { Cursor } from '$components/cursor'
+import { Tabs } from '$components/tabs'
 
 /* SETUP
 -------------------------------------------------- */
@@ -34,4 +37,13 @@ const $cursor = document.querySelector('[data-cursor]')
 
 if ($cursor) {
 	new Cursor($cursor)
+}
+
+/* CALENDAR
+-------------------------------------------------- */
+
+const $calendars = document.querySelectorAll('[data-calendar]')
+
+for (const $calendar of $calendars) {
+	new Calendar($calendar)
 }

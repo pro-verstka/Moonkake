@@ -1,3 +1,13 @@
+const STATE = {
+	FILLED: 'filled',
+	EMPTY: 'empty',
+}
+
+const DRAG_STATE = {
+	OVER: 'over',
+	IDLE: 'idle',
+}
+
 export class FieldFile {
 	constructor($el, options = {}) {
 		if (!$el) {
@@ -118,7 +128,7 @@ export class FieldFile {
 	}
 
 	#setDragState(isDragOver) {
-		const dragState = isDragOver ? 'over' : 'idle'
+		const dragState = isDragOver ? DRAG_STATE.OVER : DRAG_STATE.IDLE
 		this.$root.dataset.dragState = dragState
 	}
 
@@ -126,7 +136,7 @@ export class FieldFile {
 		const fileList = Array.from(files || [])
 		const hasFiles = fileList.length > 0
 
-		this.$root.dataset.state = hasFiles ? 'filled' : 'empty'
+		this.$root.dataset.state = hasFiles ? STATE.FILLED : STATE.EMPTY
 
 		if (this.$value) {
 			this.$value.innerText = hasFiles ? fileList.map(file => file.name).join(', ') : ''

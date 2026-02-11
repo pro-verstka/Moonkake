@@ -1,4 +1,4 @@
-.loader {
+[data-loader] {
 	position: fixed;
 	z-index: 9999;
 	top: 0;
@@ -24,11 +24,11 @@
 		justify-content: center;
 	}
 
-	&.loader_closing {
+	&[data-state='closing'] {
 		width: 0;
 	}
 
-	&.loader_closed {
+	&[data-state='closed'] {
 		display: none;
 	}
 }

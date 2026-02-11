@@ -314,6 +314,23 @@ a(href="#") Hover target
 <a href="#">Hover target</a>
 ```
 
+### Loader
+
+**Pug:**
+
+```pug
+div(data-loader)
+	div ⏳Loading...
+```
+
+**Twig:**
+
+```twig
+<div data-loader>
+	<div>⏳Loading...</div>
+</div>
+```
+
 ### Counter
 
 **Pug:**

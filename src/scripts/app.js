@@ -7,6 +7,7 @@ import { Calendar } from '$components/calendar'
 import { Cursor } from '$components/cursor'
 import { FieldFile } from '$components/field-file'
 import { FullHeight } from '$components/fullheight'
+import { Loader } from '$components/loader'
 import { Tabs } from '$components/tabs'
 import { Tooltip } from '$components/tooltip'
 
@@ -76,4 +77,13 @@ const $fullheights = document.querySelectorAll('[data-fullheight]')
 
 for (const $fullheight of $fullheights) {
 	new FullHeight($fullheight)
+}
+
+/* LOADER
+-------------------------------------------------- */
+
+const $loader = document.querySelector('[data-loader]')
+
+if ($loader) {
+	new Loader($loader)
 }

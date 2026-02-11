@@ -11,6 +11,7 @@ pnpm run dev
 ```
 
 ## Available commands
+
 1. `pnpm run dev` - Default task for project development
 2. `pnpm run build` - Build the project
 3. `pnpm run tools:generate` - Generate components
@@ -22,6 +23,7 @@ pnpm run dev
 ### Image
 
 **Pug:**
+
 ```pug
 +image({
 	default: {
@@ -46,6 +48,7 @@ pnpm run dev
 ```
 
 **Twig:**
+
 ```twig
 {{ image({
 	default: {
@@ -72,6 +75,7 @@ pnpm run dev
 ### Checkbox
 
 **Pug:**
+
 ```pug
 label.checkbox
 	input(type="checkbox", name="checkbox_name")
@@ -79,6 +83,7 @@ label.checkbox
 ```
 
 **Twig:**
+
 ```twig
 <label class="checkbox">
 	<input type="checkbox" name="checkbox_name">
@@ -89,6 +94,7 @@ label.checkbox
 ### Radio
 
 **Pug:**
+
 ```pug
 label.radio
 	input(type="radio", name="radio_name")
@@ -96,6 +102,7 @@ label.radio
 ```
 
 **Twig:**
+
 ```twig
 <label class="radio">
 	<input type="radio" name="radio_name">
@@ -106,6 +113,7 @@ label.radio
 ### File
 
 **Pug:**
+
 ```pug
 div.file
 	input(type="file", id="file", name="file_name")
@@ -113,6 +121,7 @@ div.file
 ```
 
 **Twig:**
+
 ```twig
 <div class="file">
 	<input type="file" id="file" name="file_name">
@@ -123,6 +132,7 @@ div.file
 ### Select
 
 **Pug:**
+
 ```pug
 select.select(name="select_name")
 	option(value="") text
@@ -136,6 +146,7 @@ div.select
 ```
 
 **Twig:**
+
 ```twig
 <select class="select" name="select_name">
 	<option value="">text</option>
@@ -154,6 +165,7 @@ div.select
 ### Form
 
 **Pug:**
+
 ```pug
 form.form(action="", mathod="", id="form")
 	div.form__fieldset
@@ -174,6 +186,7 @@ form.form(action="", mathod="", id="form")
 ```
 
 **Twig:**
+
 ```twig
 <form class="form" action="" method="" id="form">
 	<div class="form__fieldset">
@@ -206,6 +219,7 @@ form.form(action="", mathod="", id="form")
 ### Tabs
 
 **Pug:**
+
 ```pug
 div.tabs
 	div.tabs__title
@@ -220,6 +234,7 @@ div.tabs
 ```
 
 **Twig:**
+
 ```twig
 <div class="tabs">
 	<div class="tabs__title">
@@ -239,26 +254,28 @@ div.tabs
 ### Accordion
 
 **Pug:**
+
 ```pug
-div.accordion
-	div.accordion__item
-		div.accordion__header accordion title 1
-		div.accordion__body accordion content 1
-	div.accordion__item
-		div.accordion__header accordion title 2
-		div.accordion__body accordion content 2
+div(data-accordion)
+	div(data-accordion-item)
+		button(type="button" data-accordion-handler) accordion title 1
+		div(data-accordion-body) accordion content 1
+	div(data-accordion-item)
+		button(type="button" data-accordion-handler) accordion title 2
+		div(data-accordion-body) accordion content 2
 ```
 
 **Twig:**
+
 ```twig
-<div class="accordion">
-	<div class="accordion__item">
-		<div class="accordion__header">accordion title 1</div>
-		<div class="accordion__body">accordion content 1</div>
+<div data-accordion>
+	<div data-accordion-item>
+		<button type="button" data-accordion-handler>accordion title 1</button>
+		<div data-accordion-body>accordion content 1</div>
 	</div>
-	<div class="accordion__item">
-		<div class="accordion__header">accordion title 2</div>
-		<div class="accordion__body">accordion content 2</div>
+	<div data-accordion-item>
+		<button type="button" data-accordion-handler>accordion title 2</button>
+		<div data-accordion-body>accordion content 2</div>
 	</div>
 </div>
 ```
@@ -266,6 +283,7 @@ div.accordion
 ### Counter
 
 **Pug:**
+
 ```pug
 div.counter
 	button.counter__minus -
@@ -274,6 +292,7 @@ div.counter
 ```
 
 **Twig:**
+
 ```twig
 <div class="counter">
 	<button class="counter__minus">-</button>
@@ -285,6 +304,7 @@ div.counter
 ### Breadcrumbs
 
 **Pug:**
+
 ```pug
 ul.breadcrumbs
 	li.breadcrumbs__item: a.breadcrumbs__link(href="#") Home
@@ -293,6 +313,7 @@ ul.breadcrumbs
 ```
 
 **Twig:**
+
 ```twig
 <ul class="breadcrumbs">
 	<li class="breadcrumbs__item"><a class="breadcrumbs__link" href="#">Home</a></li>
@@ -304,6 +325,7 @@ ul.breadcrumbs
 ### Pagination
 
 **Pug:**
+
 ```pug
 ul.pagination
 	li.pagination__item: a.pagination__link(href="#") 1
@@ -312,6 +334,7 @@ ul.pagination
 ```
 
 **Twig:**
+
 ```twig
 <ul class="pagination">
 	<li class="pagination__item"><a class="pagination__link" href="#">1</a></li>
@@ -323,6 +346,7 @@ ul.pagination
 ### Modal
 
 **Pug:**
+
 ```pug
 a(href="#modal_example" data-modal) Open a modal window
 
@@ -337,6 +361,7 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 ```
 
 **Twig:**
+
 ```twig
 <a href="#modal_example" data-modal>Open a modal window</a>
 
@@ -355,11 +380,13 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 ### Calendar
 
 **Pug:**
+
 ```pug
 input(type="text", name="", data-calendar, placeholder="dd.mm.yyyyyy")
 ```
 
 **Twig:**
+
 ```twig
 <input type="text" name="" data-calendar placeholder="dd.mm.yyyyyy">
 ```
@@ -367,11 +394,13 @@ input(type="text", name="", data-calendar, placeholder="dd.mm.yyyyyy")
 ### Scroll to element
 
 **Pug:**
+
 ```pug
 a(href="#" data-scroll-to="div_id") Scroll to ID
 ```
 
 **Twig:**
+
 ```twig
 <a href="#" data-scroll-to="div_id">Scroll to ID</a>
 ```
@@ -379,6 +408,7 @@ a(href="#" data-scroll-to="div_id") Scroll to ID
 ### Spoiler
 
 **Pug:**
+
 ```pug
 div(data-spoiler)
 	div(data-spoiler-body)
@@ -386,6 +416,7 @@ div(data-spoiler)
 ```
 
 **Twig:**
+
 ```twig
 <div data-spoiler>
 	<div data-spoiler-body>
@@ -397,11 +428,13 @@ div(data-spoiler)
 ### Tooltip
 
 **Pug:**
+
 ```pug
 a(href="#", data-tippy, data-tippy-content="Tippy!") Text
 ```
 
 **Twig:**
+
 ```twig
 <a href="#" data-tippy data-tippy-content="Tippy!">Text</a>
 ```
@@ -409,6 +442,7 @@ a(href="#", data-tippy, data-tippy-content="Tippy!") Text
 ### Drawer
 
 **Pug:**
+
 ```pug
 button(data-drawer-toggle) Open
 
@@ -416,6 +450,7 @@ div.drawer(data-drawer)
 ```
 
 **Twig:**
+
 ```twig
 <button data-drawer-toggle>Open</button>
 
@@ -425,6 +460,7 @@ div.drawer(data-drawer)
 ### SyncScroll
 
 **Pug:**
+
 ```pug
 div(data-sync-scroll)
 	div(data-sync-scroll-item)
@@ -432,6 +468,7 @@ div(data-sync-scroll)
 ```
 
 **Twig:**
+
 ```twig
 <div data-sync-scroll>
 	<div data-sync-scroll-item></div>

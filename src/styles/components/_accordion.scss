@@ -1,40 +1,15 @@
-.accordion {
-	&__header {
+[data-accordion] {
+	[data-accordion-handler] {
 		cursor: pointer;
 	}
 
-	&__body {
-		// display: none;
+	[data-accordion-body] {
+		display: none;
 	}
 
-	&__item + &__item {
-		margin-top: var(--spacing-20);
-	}
-
-	&__item_active {
-		.accordion__body {
-			// display: block;
-			// animation: fade-in 1s forwards;
-		}
-	}
-
-	&.accordion_animation {
-		.accordion__body {
-			overflow: hidden;
-			height: 0;
-			transition: height 0.25s ease;
-		}
-	}
-
-	&:not(.accordion_animation) {
-		.accordion__body {
-			display: none;
-		}
-
-		.accordion__item_active {
-			.accordion__body {
-				display: block;
-			}
+	[data-accordion-item][data-state='opened'] {
+		[data-accordion-body] {
+			display: block;
 		}
 	}
 }

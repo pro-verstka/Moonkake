@@ -1,62 +1,83 @@
 import { emitEvent } from '$helpers'
 
+const STATE = {
+	OPENED: 'opened',
+	CLOSED: 'closed',
+}
+
+const EVENT = {
+	TOGGLE: 'mk:accordion:toggle',
+}
+
 export class Accordion {
-	constructor(options = {}) {
-		this.options = {
-			root: '.accordion',
-			item: '.accordion__item',
-			handler: '.accordion__header',
-			body: '.accordion__body',
-			active: 'accordion__item_active',
-			animation: 'accordion_animation',
-			useAnimation: false,
+	constructor($el) {
+		if (!$el) {
+			return
 		}
 
-		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
+		this.$root = $el
+
+		this.selectors = {
+			item: '[data-accordion-item]',
+			handler: '[data-accordion-handler]',
 		}
 
-		if (this.options.useAnimation) {
-			for (const $el of document.querySelectorAll(this.options.root)) {
-				$el.classList.add(this.options.animation)
-			}
-		}
-
-		document.addEventListener('click', e => {
-			if (e.target.matches(`${this.options.root} ${this.options.handler}`) || e.target.closest(this.options.handler)) {
-				this.toggle(e.target)
-			}
-		})
+		this.#init()
 	}
 
-	toggle($el) {
-		if (this.options.useAnimation) {
-			const $root = $el.closest(this.options.item)
-			const $body = $root.querySelector(this.options.body)
-			let height = 0
+	#init() {
+		this.#setupInitialState()
+		this.#enrichItems()
+		this.#setupListeners()
+	}
 
-			if ($root.classList.contains(this.options.active)) {
-				$root.classList.remove(this.options.active)
+	get items() {
+		return this.$root.querySelectorAll(this.selectors.item)
+	}
 
-				height = 0
-			} else {
-				$root.classList.add(this.options.active)
+	get handlers() {
+		return this.$root.querySelectorAll(this.selectors.handler)
+	}
 
-				$body.style.height = 'auto'
-				height = $body.clientHeight
-				$body.style.height = '0px'
+	#setupInitialState() {
+		for (const $item of this.items) {
+			const { state } = $item.dataset
+			const isValidState = Object.values(STATE).includes(state)
+
+			if (!isValidState) {
+				$item.dataset.state = STATE.CLOSED
 			}
-
-			setTimeout(() => {
-				$body.style.height = `${height}px`
-			}, 0)
-		} else {
-			$el.closest(this.options.item).classList.toggle(this.options.active)
 		}
+	}
 
-		emitEvent('mk:accordion:toggle', {
-			root: $el.closest(this.options.root),
-			item: $el.closest(this.options.item),
+	#enrichItems() {
+		for (const $item of this.items) {
+			$item.toggle = () => this.toggle($item)
+		}
+	}
+
+	#setupListeners() {
+		for (const $handler of this.handlers) {
+			$handler.addEventListener('click', () => {
+				const $item = $handler.closest(this.selectors.item)
+
+				if (!$item || !this.$root.contains($item)) {
+					return
+				}
+
+				this.toggle($item)
+			})
+		}
+	}
+
+	toggle($item) {
+		const state = $item.dataset.state === STATE.OPENED ? STATE.CLOSED : STATE.OPENED
+		$item.dataset.state = state
+
+		emitEvent(EVENT.TOGGLE, {
+			root: this.$root,
+			item: $item,
+			state,
 		})
 	}
 }

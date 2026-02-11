@@ -2,9 +2,18 @@
 import '$config'
 
 // Components
-import * as Components from '$components'
+import { Accordion } from '$components'
 
 /* SETUP
 -------------------------------------------------- */
 
-MK.addPlugins({ ...Components }, true)
+// MK.addPlugins({ ...Components }, true)
+
+/* ACCORDION
+-------------------------------------------------- */
+
+const $accordions = document.querySelectorAll('[data-accordion]')
+
+for (const $accordion of $accordions) {
+	new Accordion($accordion)
+}

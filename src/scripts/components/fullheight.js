@@ -1,9 +1,14 @@
 import { isMobile } from '$helpers'
 
 export class FullHeight {
-	constructor(options = {}) {
+	constructor($el, options = {}) {
+		if (!$el) {
+			return
+		}
+
+		this.$root = $el
+
 		this.options = {
-			item: '[data-fullheight]',
 			offset: 0,
 		}
 
@@ -11,34 +16,32 @@ export class FullHeight {
 			this.options = { ...this.options, ...options }
 		}
 
-		this.$els = document.querySelectorAll(this.options.item)
-
-		this.handle()
+		this.#init()
 	}
 
-	handle() {
+	#init() {
+		this.#setupListeners()
+	}
+
+	#setupListeners() {
 		for (const eventName of ['load', 'resize', 'orientationchange']) {
-			window.addEventListener(eventName, event => {
-				this.setFullHeight(event)
-			})
+			window.addEventListener(eventName, event => this.#setFullHeight(event))
 		}
 	}
 
-	setFullHeight(event) {
-		if (!this.$els.length || (event.type === 'resize' && isMobile())) return false
-
-		for (const $element of this.$els) {
-			const minHeight = Number.parseFloat(window.getComputedStyle($element, null).getPropertyValue('min-height')) || 0
-			const maxHeight = Number.parseFloat(window.getComputedStyle($element, null).getPropertyValue('max-height')) || ''
-			const offset = Number.parseFloat($element.getAttribute('data-fullheight-offset')) || this.options.offset
-			let height = window.innerHeight
-
-			if (minHeight && window.innerHeight <= minHeight) height = minHeight
-			if (maxHeight && window.innerHeight >= maxHeight) height = maxHeight
-
-			$element.style.height = `${height + offset}px`
+	#setFullHeight(event) {
+		if (!this.$root.length || (event.type === 'resize' && isMobile())) {
+			return
 		}
 
-		return true
+		const minHeight = Number.parseFloat(window.getComputedStyle(this.$root, null).getPropertyValue('min-height')) || 0
+		const maxHeight = Number.parseFloat(window.getComputedStyle(this.$root, null).getPropertyValue('max-height')) || ''
+		const offset = Number.parseFloat(this.$root.getAttribute('data-fullheight-offset')) || this.options.offset
+		let height = window.innerHeight
+
+		if (minHeight && window.innerHeight <= minHeight) height = minHeight
+		if (maxHeight && window.innerHeight >= maxHeight) height = maxHeight
+
+		this.$root.style.height = `${height + offset}px`
 	}
 }

@@ -6,6 +6,7 @@ import { Accordion } from '$components/accordion'
 import { Calendar } from '$components/calendar'
 import { Cursor } from '$components/cursor'
 import { FieldFile } from '$components/field-file'
+import { FullHeight } from '$components/fullheight'
 import { Tabs } from '$components/tabs'
 import { Tooltip } from '$components/tooltip'
 
@@ -66,4 +67,13 @@ const $tooltips = document.querySelectorAll('[data-tippy]')
 
 for (const $tooltip of $tooltips) {
 	new Tooltip($tooltip)
+}
+
+/* FULLHEIGHT
+-------------------------------------------------- */
+
+const $fullheights = document.querySelectorAll('[data-fullheight]')
+
+for (const $fullheight of $fullheights) {
+	new FullHeight($fullheight)
 }

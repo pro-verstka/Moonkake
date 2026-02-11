@@ -491,21 +491,16 @@ div.drawer(data-drawer)
 <div class="drawer" data-drawer></div>
 ```
 
-### SyncScroll
+### Fullheight
 
 **Pug:**
 
 ```pug
-div(data-sync-scroll)
-	div(data-sync-scroll-item)
-	div(data-sync-scroll-item)
+div.section(data-fullheight)
 ```
 
 **Twig:**
 
 ```twig
-<div data-sync-scroll>
-	<div data-sync-scroll-item></div>
-	<div data-sync-scroll-item></div>
-</div>
+<div class="section" data-fullheight></div>
 ```

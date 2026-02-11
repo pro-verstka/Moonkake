@@ -498,6 +498,7 @@ a(href="#", data-tippy, data-tippy-content="Tippy!") Text
 button(data-drawer-toggle) Open
 
 div.drawer(data-drawer)
+	button(type="button" data-drawer-close) Close
 ```
 
 **Twig:**
@@ -505,7 +506,9 @@ div.drawer(data-drawer)
 ```twig
 <button data-drawer-toggle>Open</button>
 
-<div class="drawer" data-drawer></div>
+<div class="drawer" data-drawer>
+	<button type="button" data-drawer-close>Close</button>
+</div>
 ```
 
 ### Fullheight

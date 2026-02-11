@@ -1,26 +1,48 @@
 import gsap from 'gsap'
+import { emitEvent } from '$helpers'
 import { ScrollLock } from '$utils'
 
+const STATE = {
+	OPENED: 'opened',
+	OPENING: 'opening',
+	CLOSED: 'closed',
+	CLOSING: 'closing',
+}
+
+const EVENT = {
+	OPEN: 'mk:drawer:open',
+	CLOSE: 'mk:drawer:close',
+}
+
 export class Drawer {
-	constructor(options = {}) {
-		this.options = {
-			selector: '[data-drawer]',
-			toggleButton: '[data-drawer-toggle]',
-			closeButton: '[data-drawer-close]',
-		}
-
-		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
-		}
-
-		this.$drawer = document.querySelector(this.options.selector)
-
-		if (!this.$drawer) {
+	constructor($el, options = {}) {
+		if (!$el) {
 			return
 		}
 
-		this.$toggleButton = document.querySelector(this.options.toggleButton)
-		this.$closeButton = document.querySelector(this.options.closeButton)
+		this.options = {
+			selectors: {
+				toggleButton: '[data-drawer-toggle]',
+				closeButton: '[data-drawer-close]',
+			},
+		}
+
+		if (typeof options === 'object') {
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
+		}
+
+		this.selectors = this.options.selectors
+
+		this.$drawer = $el
+		this.$toggleButton = document.querySelector(this.selectors.toggleButton)
+		this.$closeButton = document.querySelector(this.selectors.closeButton)
 		this.$html = document.documentElement
 
 		this.isOpened = false
@@ -31,7 +53,18 @@ export class Drawer {
 	}
 
 	#init() {
-		this.$toggleButton.addEventListener('click', e => {
+		this.#setupInitialState()
+		this.#setupListeners()
+	}
+
+	#setupInitialState() {
+		this.$drawer.dataset.state = STATE.CLOSED
+		this.$toggleButton?.setAttribute('data-state', STATE.CLOSED)
+		this.$html.dataset.drawerState = STATE.CLOSED
+	}
+
+	#setupListeners() {
+		this.$toggleButton?.addEventListener('click', e => {
 			e.preventDefault()
 
 			if (!this.isOpened) {
@@ -43,7 +76,7 @@ export class Drawer {
 			}
 		})
 
-		this.$closeButton.addEventListener('click', e => {
+		this.$closeButton?.addEventListener('click', e => {
 			e.preventDefault()
 
 			this.close()
@@ -60,7 +93,11 @@ export class Drawer {
 				return
 			}
 
-			if (e.target.closest(this.options.selector) || e.target.closest(this.options.toggleButton)) {
+			if (!(e.target instanceof Element)) {
+				return
+			}
+
+			if (this.$drawer.contains(e.target) || this.$toggleButton?.contains(e.target)) {
 				return
 			}
 
@@ -69,32 +106,49 @@ export class Drawer {
 	}
 
 	open() {
-		if (this.isOpened) return
+		if (this.isOpened || this.$drawer.dataset.state === STATE.OPENING) return
 
-		this.$html.classList.add('-drawer-opened')
-		this.$toggleButton.classList.add('-active')
+		this.$drawer.dataset.state = STATE.OPENING
+		this.$toggleButton?.setAttribute('data-state', STATE.OPENING)
+		this.$html.dataset.drawerState = STATE.OPENING
 
 		this.scrollLock.lockScroll()
 
-		gsap
-			.fromTo(
-				this.$drawer,
-				{
-					y: '-100%',
+		gsap.fromTo(
+			this.$drawer,
+			{
+				y: '-100%',
+			},
+			{
+				duration: 0.25,
+				y: '0%',
+
+				onComplete: () => {
+					this.isOpened = true
+					this.$drawer.dataset.state = STATE.OPENED
+					this.$toggleButton?.setAttribute('data-state', STATE.OPENED)
+					this.$html.dataset.drawerState = STATE.OPENED
+
+					emitEvent(EVENT.OPEN, {
+						root: this.$drawer,
+					})
 				},
-				{
-					duration: 0.25,
-					y: '0%',
-				},
-			)
-			.eventCallback('onComplete', () => {
-				this.isOpened = true
-			})
+			},
+		)
 	}
 
 	close() {
-		this.$html.classList.remove('-drawer-opened')
-		this.$toggleButton.classList.remove('-active')
+		if (this.$drawer.dataset.state === STATE.CLOSING) {
+			return
+		}
+
+		if (!this.isOpened && this.$drawer.dataset.state !== STATE.OPENING) {
+			return
+		}
+
+		this.$drawer.dataset.state = STATE.CLOSING
+		this.$toggleButton?.setAttribute('data-state', STATE.CLOSING)
+		this.$html.dataset.drawerState = STATE.CLOSING
 
 		gsap.to(this.$drawer, {
 			duration: 0.25,
@@ -104,6 +158,13 @@ export class Drawer {
 				this.scrollLock.unlockScroll()
 
 				this.isOpened = false
+				this.$drawer.dataset.state = STATE.CLOSED
+				this.$toggleButton?.setAttribute('data-state', STATE.CLOSED)
+				this.$html.dataset.drawerState = STATE.CLOSED
+
+				emitEvent(EVENT.CLOSE, {
+					root: this.$drawer,
+				})
 			},
 		})
 	}

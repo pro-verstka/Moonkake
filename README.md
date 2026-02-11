@@ -289,6 +289,29 @@ div(data-accordion)
 </div>
 ```
 
+### Cursor
+
+**Pug:**
+
+```pug
+div(data-cursor)
+	div(data-cursor-pointer)
+	div(data-cursor-follower)
+
+a(href="#") Hover target
+```
+
+**Twig:**
+
+```twig
+<div data-cursor>
+	<div data-cursor-pointer></div>
+	<div data-cursor-follower></div>
+</div>
+
+<a href="#">Hover target</a>
+```
+
 ### Counter
 
 **Pug:**

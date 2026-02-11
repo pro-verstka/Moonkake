@@ -23,18 +23,26 @@ export class Tabs {
 
 		this.options = {
 			useHashNav: false,
+			selectors: {
+				header: '[data-tabs-header]',
+				body: '[data-tabs-body]',
+				item: '[data-tabs-item]',
+				handler: '[data-tabs-handler]',
+			},
 		}
 
 		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
 		}
 
-		this.selectors = {
-			header: '[data-tabs-header]',
-			body: '[data-tabs-body]',
-			item: '[data-tabs-item]',
-			handler: '[data-tabs-handler]',
-		}
+		this.selectors = this.options.selectors
 
 		this.#init()
 	}

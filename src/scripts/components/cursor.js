@@ -1,32 +1,63 @@
 import gsap from 'gsap'
 
 export class Cursor {
-	constructor() {
-		this.$cursor = document.querySelector('.cursor')
-		this.$follower = document.querySelector('.cursor-follower')
+	constructor($el, options = {}) {
+		if (!$el) {
+			return
+		}
 
-		if (!this.$cursor && !this.$follower) return
+		this.$root = $el
 
-		this.init()
+		this.options = {
+			selectors: {
+				cursor: '[data-cursor-pointer]',
+				follower: '[data-cursor-follower]',
+				hover: 'a,[data-cursor-hover]',
+			},
+		}
+
+		if (typeof options === 'object') {
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
+		}
+
+		this.selectors = this.options.selectors
+
+		this.$cursor = this.$root.querySelector(this.selectors.cursor)
+		this.$follower = this.$root.querySelector(this.selectors.follower)
+
+		if (!this.$cursor || !this.$follower) return
+
+		this.#init()
 	}
 
-	init() {
-		window.addEventListener('pointermove', this.move.bind(this))
+	#init() {
+		this.#setupListeners()
+	}
+
+	#setupListeners() {
+		window.addEventListener('pointermove', this.#move.bind(this))
 
 		document.addEventListener('pointerover', e => {
-			if (e.target.tagName === 'A') {
-				this.over()
+			if (e.target instanceof Element && e.target.closest(this.selectors.hover)) {
+				this.#over()
 			}
 		})
 
 		document.addEventListener('pointerout', e => {
-			if (e.target.tagName === 'A') {
-				this.out()
+			if (e.target instanceof Element && e.target.closest(this.selectors.hover)) {
+				this.#out()
 			}
 		})
 	}
 
-	move(e) {
+	#move(e) {
 		gsap.to(this.$cursor, {
 			x: e.clientX,
 			y: e.clientY,
@@ -39,7 +70,7 @@ export class Cursor {
 		})
 	}
 
-	over() {
+	#over() {
 		gsap.to(this.$cursor, {
 			scale: 0,
 		})
@@ -49,7 +80,7 @@ export class Cursor {
 		})
 	}
 
-	out() {
+	#out() {
 		gsap.to(this.$cursor, {
 			opacity: 1,
 			scale: 1,

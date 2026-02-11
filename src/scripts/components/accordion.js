@@ -10,17 +10,32 @@ const EVENT = {
 }
 
 export class Accordion {
-	constructor($el) {
+	constructor($el, options = {}) {
 		if (!$el) {
 			return
 		}
 
 		this.$root = $el
 
-		this.selectors = {
-			item: '[data-accordion-item]',
-			handler: '[data-accordion-handler]',
+		this.options = {
+			selectors: {
+				item: '[data-accordion-item]',
+				handler: '[data-accordion-handler]',
+			},
 		}
+
+		if (typeof options === 'object') {
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
+		}
+
+		this.selectors = this.options.selectors
 
 		this.#init()
 	}

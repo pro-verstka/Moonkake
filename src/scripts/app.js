@@ -4,6 +4,7 @@ import '$config'
 // Components
 import { Accordion } from '$components/accordion'
 import { Calendar } from '$components/calendar'
+import { Counter } from '$components/counter'
 import { Cursor } from '$components/cursor'
 import { FieldFile } from '$components/field-file'
 import { FullHeight } from '$components/fullheight'
@@ -42,6 +43,11 @@ const $cursor = document.querySelector('[data-cursor]')
 if ($cursor) {
 	new Cursor($cursor)
 }
+
+/* COUNTER
+-------------------------------------------------- */
+
+new Counter()
 
 /* CALENDAR
 -------------------------------------------------- */

@@ -336,19 +336,19 @@ div(data-loader)
 **Pug:**
 
 ```pug
-div.counter
-	button.counter__minus -
-	input(type="text" value="before 5 after" data-prefix="before " data-postfix=" after" data-min="2" data-max="10")
-	button.counter__plus +
+div(data-counter)
+	button(type="button" data-counter-minus) -
+	input(type="text" data-counter-input value="before 5 after" data-prefix="before " data-postfix=" after" data-min="2" data-max="10")
+	button(type="button" data-counter-plus) +
 ```
 
 **Twig:**
 
 ```twig
-<div class="counter">
-	<button class="counter__minus">-</button>
-	<input type="text" value="before 5 after" data-prefix="before " data-postfix=" after" data-min="2" data-max="10">
-	<button class="counter__plus">+</button>
+<div data-counter>
+	<button type="button" data-counter-minus>-</button>
+	<input type="text" data-counter-input value="before 5 after" data-prefix="before " data-postfix=" after" data-min="2" data-max="10">
+	<button type="button" data-counter-plus>+</button>
 </div>
 ```
 

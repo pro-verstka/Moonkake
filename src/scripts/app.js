@@ -7,6 +7,7 @@ import { Calendar } from '$components/calendar'
 import { Cursor } from '$components/cursor'
 import { FieldFile } from '$components/field-file'
 import { Tabs } from '$components/tabs'
+import { Tooltip } from '$components/tooltip'
 
 /* SETUP
 -------------------------------------------------- */
@@ -56,4 +57,13 @@ const $files = document.querySelectorAll('[data-file]')
 
 for (const $file of $files) {
 	new FieldFile($file)
+}
+
+/* TOOLTIP
+-------------------------------------------------- */
+
+const $tooltips = document.querySelectorAll('[data-tippy]')
+
+for (const $tooltip of $tooltips) {
+	new Tooltip($tooltip)
 }

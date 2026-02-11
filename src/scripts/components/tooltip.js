@@ -1,18 +1,31 @@
 import tippy from 'tippy.js'
 
 export class Tooltip {
-	constructor(selector = '[data-tippy]') {
-		this.selector = selector
+	constructor($el, options = {}) {
+		if (!$el) {
+			return
+		}
+
+		this.$root = $el
+
+		this.options = {
+			allowHTML: true,
+			delay: [100, 100],
+			interactive: true,
+			maxWidth: 200,
+		}
+
+		if (typeof options === 'object') {
+			this.options = {
+				...this.options,
+				...options,
+			}
+		}
 
 		this.#init()
 	}
 
 	#init() {
-		tippy(this.selector, {
-			allowHTML: true,
-			delay: [100, 100],
-			interactive: true,
-			maxWidth: 200,
-		})
+		this.tooltip = tippy(this.$root, this.options)
 	}
 }

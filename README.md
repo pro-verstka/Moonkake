@@ -221,32 +221,41 @@ form.form(action="", mathod="", id="form")
 **Pug:**
 
 ```pug
-div.tabs
-	div.tabs__title
-		div.tabs__item.tabs__item_active(data-hash="tab1") Tab 1
-		div.tabs__item(data-hash="tab2") Tab 2
-		div.tabs__item(data-hash="tab3") Tab 3
+div(data-tabs)
+	div(data-tabs-header)
+		div(data-tabs-item)
+			button(type="button" data-tabs-handler data-hash="tab1") Tab 1
+		div(data-tabs-item)
+			button(type="button" data-tabs-handler data-hash="tab2") Tab 2
+		div(data-tabs-item)
+			button(type="button" data-tabs-handler data-hash="tab3") Tab 3
 
-	div.tabs__content
-		div.tabs__item.tabs__item_active Tab 1
-		div.tabs__item Tab 2
-		div.tabs__item Tab 3
+	div(data-tabs-body)
+		div(data-tabs-item) Tab 1
+		div(data-tabs-item) Tab 2
+		div(data-tabs-item) Tab 3
 ```
 
 **Twig:**
 
 ```twig
-<div class="tabs">
-	<div class="tabs__title">
-		<div class="tabs__item tabs__item_active" data-hash="tab1">Tab 1</div>
-		<div class="tabs__item" data-hash="tab2">Tab 2</div>
-		<div class="tabs__item" data-hash="tab3">Tab 3</div>
+<div data-tabs>
+	<div data-tabs-header>
+		<div data-tabs-item data-state="opened">
+			<button type="button" data-tabs-handler data-hash="tab1">Tab 1</button>
+		</div>
+		<div data-tabs-item data-state="closed">
+			<button type="button" data-tabs-handler data-hash="tab2">Tab 2</button>
+		</div>
+		<div data-tabs-item data-state="closed">
+			<button type="button" data-tabs-handler data-hash="tab3">Tab 3</button>
+		</div>
 	</div>
 
-	<div class="tabs__content">
-		<div class="tabs__item tabs__item_active">Tab 1</div>
-		<div class="tabs__item">Tab 2</div>
-		<div class="tabs__item">Tab 3</div>
+	<div data-tabs-body>
+		<div data-tabs-item data-state="opened">Tab 1</div>
+		<div data-tabs-item data-state="closed">Tab 2</div>
+		<div data-tabs-item data-state="closed">Tab 3</div>
 	</div>
 </div>
 ```

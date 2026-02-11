@@ -1,23 +1,21 @@
 @use '_mixins';
 
-.tabs {
-	&__title {
+[data-tabs] {
+	[data-tabs-header] {
 		@include mixins.grid('flex');
-
-		.tabs__item {
-			cursor: pointer;
-		}
 	}
 
-	&__content {
-		.tabs__item {
+	[data-tabs-handler] {
+		cursor: pointer;
+	}
+
+	[data-tabs-body] {
+		[data-tabs-item] {
 			display: none;
+		}
 
-			&.tabs__item_active {
-				display: block;
-
-				// animation: fade-in 1s forwards;
-			}
+		[data-tabs-item][data-state='opened'] {
+			display: block;
 		}
 	}
 }

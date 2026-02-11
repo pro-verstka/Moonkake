@@ -1,129 +1,197 @@
 import { emitEvent } from '$helpers'
 
+const STATE = {
+	OPENED: 'opened',
+	CLOSED: 'closed',
+}
+
+const EVENT = {
+	CHANGE: 'mk:tabs:change',
+}
+
+const HISTORY = {
+	SOURCE: 'tabs',
+}
+
 export class Tabs {
-	constructor(options = {}) {
+	constructor($el, options = {}) {
+		if (!$el) {
+			return
+		}
+
+		this.$root = $el
+
 		this.options = {
-			root: '.tabs',
-			title: '.tabs__title',
-			content: '.tabs__content',
-			item: '.tabs__item',
-			active: 'tabs__item_active',
 			useHashNav: false,
-			equalHeight: false,
 		}
 
 		if (typeof options === 'object') {
 			this.options = { ...this.options, ...options }
 		}
 
-		// tab click
-		document.addEventListener('click', e => {
-			if (
-				e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`) ||
-				e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
-			) {
-				const $root = e.target.closest(this.options.root)
-				const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
+		this.selectors = {
+			header: '[data-tabs-header]',
+			body: '[data-tabs-body]',
+			item: '[data-tabs-item]',
+			handler: '[data-tabs-handler]',
+		}
 
-				const $el = e.target.matches(`${this.options.root} ${this.options.title} ${this.options.item}`)
-					? e.target
-					: e.target.closest(`${this.options.root} ${this.options.title} ${this.options.item}`)
+		this.#init()
+	}
 
-				this.change($root, Array.from($titles).indexOf($el))
+	#init() {
+		this.#setupInitialState()
+		this.#enrichRoot()
+		this.#setupListeners()
+
+		if (this.options.useHashNav) {
+			this.#setupPopstateListener()
+			this.#setupWindowLoadListener()
+		}
+	}
+
+	#enrichRoot() {
+		this.$root.changeTab = (index, changeHash = true) => this.changeTab(index, changeHash)
+	}
+
+	get headerItems() {
+		const $header = this.$root.querySelector(this.selectors.header)
+		return $header ? Array.from($header.querySelectorAll(this.selectors.item)) : []
+	}
+
+	get bodyItems() {
+		const $body = this.$root.querySelector(this.selectors.body)
+		return $body ? Array.from($body.querySelectorAll(this.selectors.item)) : []
+	}
+
+	get handlers() {
+		return Array.from(this.$root.querySelectorAll(this.selectors.handler))
+	}
+
+	#setupInitialState() {
+		const $headers = this.headerItems
+		const $bodies = this.bodyItems
+
+		if (!$headers.length || !$bodies.length) {
+			return
+		}
+
+		for (const $item of [...$headers, ...$bodies]) {
+			const isValidState = Object.values(STATE).includes($item.dataset.state)
+
+			if (!isValidState) {
+				$item.dataset.state = STATE.CLOSED
 			}
-		})
+		}
 
-		// tab change on history change
-		window.addEventListener('popstate', e => {
-			if (e.state && Object.hasOwn(e.state, 'source') && e.state.source === 'tabs') {
-				const $root = document
-					.querySelector(`${this.options.root} [data-hash="${e.state.hash}"]`)
-					.closest(this.options.root)
+		const openedIndex = $headers.findIndex($item => $item.dataset.state === STATE.OPENED)
+		const nextIndex = openedIndex >= 0 && openedIndex < $bodies.length ? openedIndex : 0
 
-				this.change($root, e.state.index, false)
+		this.changeTab(nextIndex, false)
+	}
+
+	#setupListeners() {
+		for (const $handler of this.handlers) {
+			$handler.addEventListener('click', () => {
+				const $item = $handler.closest(this.selectors.item)
+				const index = this.headerItems.indexOf($item)
+
+				if (!$item || !this.$root.contains($item) || index < 0) {
+					return
+				}
+
+				this.changeTab(index)
+			})
+		}
+	}
+
+	#setupPopstateListener() {
+		window.addEventListener('popstate', event => {
+			const { state } = event
+
+			if (!state || state.source !== HISTORY.SOURCE) {
+				return
 			}
-		})
 
-		// tab change on window load
+			if (typeof state.hash === 'string') {
+				const $item = this.headerItems.find($el => $el.dataset.hash === state.hash)
+				const index = this.headerItems.indexOf($item)
+
+				if (!$item || index < 0) {
+					return
+				}
+
+				this.changeTab(index, false)
+				return
+			}
+
+			if (typeof state.index !== 'number') {
+				return
+			}
+
+			this.changeTab(state.index, false)
+		})
+	}
+
+	#setupWindowLoadListener() {
 		window.addEventListener('load', () => {
-			if (window.location.hash) {
-				const hash = window.location.hash.substr(1)
-				const $title = document.querySelector(`${this.options.root} [data-hash="${hash}"]`)
-
-				if ($title) {
-					const $root = $title.closest(this.options.root)
-					const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
-
-					this.change($root, Array.from($titles).indexOf($title), false)
-				}
-			}
+			this.#changeByHash(window.location.hash, false)
 		})
 
-		// set tabs equal height
-		if (this.options.equalHeight) {
-			this.setEqualHeight()
-
-			for (const eventType of ['load', 'resize']) {
-				window.addEventListener(eventType, () => {
-					this.setEqualHeight()
-				})
-			}
+		if (document.readyState === 'complete') {
+			this.#changeByHash(window.location.hash, false)
 		}
 	}
 
-	setEqualHeight() {
-		if (!this.options.equalHeight) return false
-
-		for (const $root of document.querySelectorAll(this.options.root)) {
-			const $content = $root.querySelector(this.options.content)
-			const $contents = $content.querySelectorAll(this.options.item)
-			const heights = []
-
-			$content.style.minHeight = ''
-
-			for (const $el of $contents) {
-				if (!$el.classList.contains(this.options.active)) {
-					$el.style.display = 'block'
-					heights.push($el.clientHeight)
-					$el.style.display = ''
-				} else {
-					heights.push($el.clientHeight)
-				}
-			}
-
-			$content.style.minHeight = `${Math.max(...heights)}px`
+	#changeByHash(hash, changeHash = true) {
+		if (!hash) {
+			return
 		}
 
-		return true
+		const cleanHash = hash.replace('#', '')
+		const $item = this.headerItems.find($el => $el.dataset.hash === cleanHash)
+		const index = this.headerItems.indexOf($item)
+
+		if (!$item || index < 0) {
+			return
+		}
+
+		this.changeTab(index, changeHash)
 	}
 
-	change($root, index, changeHash = true) {
-		const $titles = $root.querySelectorAll(`${this.options.title} ${this.options.item}`)
-		const $contents = $root.querySelectorAll(`${this.options.content} ${this.options.item}`)
+	changeTab(index, changeHash = true) {
+		const $headers = this.headerItems
+		const $bodies = this.bodyItems
 
-		$titles.forEach(($el, key) => {
-			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
+		if (!$headers.length || !$bodies.length || index < 0 || index >= $headers.length || index >= $bodies.length) {
+			return
+		}
+
+		$headers.forEach(($item, key) => {
+			$item.dataset.state = key === index ? STATE.OPENED : STATE.CLOSED
 		})
 
-		$contents.forEach(($el, key) => {
-			$el.classList[key === index ? 'add' : 'remove'](this.options.active)
+		$bodies.forEach(($item, key) => {
+			$item.dataset.state = key === index ? STATE.OPENED : STATE.CLOSED
 		})
 
-		if (this.options.useHashNav && changeHash && Object.hasOwn($titles[index].dataset, 'hash')) {
+		if (this.options.useHashNav && changeHash && Object.hasOwn($headers[index].dataset, 'hash')) {
 			window.history.pushState(
 				{
-					source: 'tabs',
-					hash: $titles[index].dataset.hash,
+					source: HISTORY.SOURCE,
+					hash: $headers[index].dataset.hash,
 					index,
 				},
 				null,
-				`${window.location.pathname}#${$titles[index].dataset.hash}`,
+				`${window.location.pathname}#${$headers[index].dataset.hash}`,
 			)
 		}
 
-		emitEvent('mk:tabs:change', {
-			root: $root,
+		emitEvent(EVENT.CHANGE, {
+			root: this.$root,
 			index,
+			headerItem: $headers[index],
+			bodyItem: $bodies[index],
 		})
 	}
 }

@@ -27,6 +27,7 @@ export class Accordion {
 
 	#init() {
 		this.#setupInitialState()
+		this.#enrichRoot()
 		this.#enrichItems()
 		this.#setupListeners()
 	}
@@ -50,9 +51,13 @@ export class Accordion {
 		}
 	}
 
+	#enrichRoot() {
+		this.$root.toggleItem = $item => this.toggle($item)
+	}
+
 	#enrichItems() {
 		for (const $item of this.items) {
-			$item.toggle = () => this.toggle($item)
+			$item.toggleItem = () => this.toggle($item)
 		}
 	}
 

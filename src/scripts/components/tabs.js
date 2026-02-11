@@ -42,6 +42,7 @@ export class Tabs {
 	#init() {
 		this.#setupInitialState()
 		this.#enrichRoot()
+		this.#enrichItems()
 		this.#setupListeners()
 
 		if (this.options.useHashNav) {
@@ -52,6 +53,16 @@ export class Tabs {
 
 	#enrichRoot() {
 		this.$root.changeTab = (index, changeHash = true) => this.changeTab(index, changeHash)
+	}
+
+	#enrichItems() {
+		this.headerItems.forEach(($item, index) => {
+			$item.openTab = (changeHash = true) => this.changeTab(index, changeHash)
+		})
+
+		this.bodyItems.forEach(($item, index) => {
+			$item.openTab = (changeHash = true) => this.changeTab(index, changeHash)
+		})
 	}
 
 	get headerItems() {

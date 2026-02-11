@@ -117,9 +117,6 @@ export default defineConfig({
 			},
 		},
 	],
-	css: {
-		transformer: 'lightningcss',
-	},
 	build: {
 		appType: 'mpa',
 		assetsInlineLimit: 0,

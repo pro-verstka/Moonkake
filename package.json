@@ -22,6 +22,7 @@
 		"lint-staged": "lint-staged"
 	},
 	"dependencies": {
+		"flatpickr": "4.6.13",
 		"fontfaceobserver": "2.3.0",
 		"gsap": "3.14.2",
 		"imask": "7.6.1",

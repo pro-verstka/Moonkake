@@ -1,6 +1,6 @@
 mixin field-file(data)
-	label(class=`field-file field-file_appearance_${data.appearance || 'light'}`)
-		input(type="file", name=`${data.name || ''}`)
+	label(class=`field-file field-file_appearance_${data.appearance || 'light'}` data-file)
+		input(type="file", name=`${data.name || ''}` data-file-input)
 		span.field-file__placeholder #{data.placeholder || 'Приложить файл'}
-		span.field-file__value
+		span.field-file__value(data-file-value)
 	// field-file

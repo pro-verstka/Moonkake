@@ -115,18 +115,20 @@ label.radio
 **Pug:**
 
 ```pug
-div.file
-	input(type="file", id="file", name="file_name")
-	label(for="file"): span(data-label="Select file") Select file
+label.field-file(data-file)
+	input(type="file", name="file_name", data-file-input)
+	span.field-file__placeholder Select file
+	span.field-file__value(data-file-value)
 ```
 
 **Twig:**
 
 ```twig
-<div class="file">
-	<input type="file" id="file" name="file_name">
-	<label for="file"><span data-label="Select file">Select file</span></label>
-</div>
+<label class="field-file" data-file>
+	<input type="file" name="file_name" data-file-input>
+	<span class="field-file__placeholder">Select file</span>
+	<span class="field-file__value" data-file-value></span>
+</label>
 ```
 
 ### Select

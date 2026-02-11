@@ -5,6 +5,7 @@ import '$config'
 import { Accordion } from '$components/accordion'
 import { Calendar } from '$components/calendar'
 import { Cursor } from '$components/cursor'
+import { FieldFile } from '$components/field-file'
 import { Tabs } from '$components/tabs'
 
 /* SETUP
@@ -46,4 +47,13 @@ const $calendars = document.querySelectorAll('[data-calendar]')
 
 for (const $calendar of $calendars) {
 	new Calendar($calendar)
+}
+
+/* FILE
+-------------------------------------------------- */
+
+const $files = document.querySelectorAll('[data-file]')
+
+for (const $file of $files) {
+	new FieldFile($file)
 }

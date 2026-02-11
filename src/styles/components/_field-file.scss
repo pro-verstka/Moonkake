@@ -29,7 +29,7 @@
 	}
 }
 
-.field-file_active {
+[data-file][data-state='filled'] {
 	.field-file__placeholder {
 		display: none;
 	}
@@ -37,4 +37,8 @@
 	.field-file__value {
 		display: block;
 	}
+}
+
+[data-file][data-drag-state='over'] {
+	border-color: currentColor;
 }

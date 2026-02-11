@@ -10,17 +10,59 @@ import { Drawer } from '$components/drawer'
 import { FieldFile } from '$components/field-file'
 import { FullHeight } from '$components/fullheight'
 import { Gallery } from '$components/gallery'
+import { Header } from '$components/header'
 import { InputMask } from '$components/inputmask'
 import { Loader } from '$components/loader'
 import { ScrollAnimation } from '$components/scroll-animation'
 import { ScrollBooster } from '$components/scrollbooster'
+import { ScrollTo } from '$components/scrollto'
 import { Tabs } from '$components/tabs'
 import { Tooltip } from '$components/tooltip'
+import { Validation } from '$components/validation'
 
 /* SETUP
 -------------------------------------------------- */
 
 // MK.addPlugins({ ...Components }, true)
+
+/* SCROLL TO
+-------------------------------------------------- */
+
+new ScrollTo()
+
+/* VALIDATION
+-------------------------------------------------- */
+
+new Validation()
+
+/* GALLERY
+-------------------------------------------------- */
+
+new Gallery()
+
+/* INPUTMASK
+-------------------------------------------------- */
+
+new InputMask()
+
+/* SCROLL ANIMATION
+-------------------------------------------------- */
+
+new ScrollAnimation()
+
+/* COUNTER
+-------------------------------------------------- */
+
+new Counter()
+
+/* HEADER
+-------------------------------------------------- */
+
+const $header = document.querySelector('[data-header]')
+
+if ($header) {
+	new Header($header)
+}
 
 /* ACCORDION
 -------------------------------------------------- */
@@ -48,11 +90,6 @@ const $cursor = document.querySelector('[data-cursor]')
 if ($cursor) {
 	new Cursor($cursor)
 }
-
-/* COUNTER
--------------------------------------------------- */
-
-new Counter()
 
 /* CALENDAR
 -------------------------------------------------- */
@@ -107,21 +144,6 @@ const $drawers = document.querySelectorAll('[data-drawer]')
 for (const $drawer of $drawers) {
 	new Drawer($drawer)
 }
-
-/* GALLERY
--------------------------------------------------- */
-
-new Gallery()
-
-/* INPUTMASK
--------------------------------------------------- */
-
-new InputMask()
-
-/* SCROLL ANIMATION
--------------------------------------------------- */
-
-new ScrollAnimation()
 
 /* SCROLL BOOSTER
 -------------------------------------------------- */

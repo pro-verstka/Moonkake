@@ -38,15 +38,26 @@ export class Validation {
 		}
 
 		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
+			this.options = {
+				...this.options,
+				...options,
+				classNames: {
+					...this.options.classNames,
+					...(options.classNames || {}),
+				},
+			}
 		}
 
 		this.schema = !isEmpty(schema) ? schema : defaultSchema
 
-		this.#addListeners()
+		this.#init()
 	}
 
-	#addListeners() {
+	#init() {
+		this.#setupListeners()
+	}
+
+	#setupListeners() {
 		for (const $field of this.$form.querySelectorAll(this.options.selectors)) {
 			const events = this.options.events.split(',')
 

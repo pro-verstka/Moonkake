@@ -1,0 +1,18 @@
+{
+	"biome.suggestInstallingGlobally": false,
+	"biome.lsp.bin": "./node_modules/.bin/biome",
+
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+
+	"emmet.includeLanguages": {
+    "twig": "html",
+  },
+  "[twig]": {
+    "editor.defaultFormatter": "mblode.twig-language-2",
+  },
+}

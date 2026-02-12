@@ -1,95 +1,150 @@
+const STATE = {
+	FOCUS: 'focus',
+	TOUCHED: 'touched',
+	EMPTY: 'empty',
+}
+
+const VALIDATION_STATE = {
+	DEFAULT: 'default',
+	ERROR: 'error',
+	SUCCESS: 'success',
+}
+
 export class Field {
 	constructor(options = {}) {
 		this.options = {
-			classNames: {
-				root: 'field',
-				focus: 'field_focus',
-				touched: 'field_touched',
-				error: 'field_error',
-				success: 'field_success',
-				disabled: 'field_disabled',
-				readonly: 'field_readonly',
-				required: 'field_required',
+			selectors: {
+				root: '[data-field]',
+				input: '[data-field-input]',
 			},
 		}
 
 		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+			}
 		}
 
-		this.$fields = null
+		this.selectors = this.options.selectors
+		this.$fields = []
 
+		this.#init()
+	}
+
+	#init() {
 		this.#setListeners()
 		this.update()
 	}
 
 	#setListeners() {
-		document.addEventListener(
-			'focus',
-			e => {
-				const $el = e.target
+		document.addEventListener('focus', this.#onFocus.bind(this), true)
+		document.addEventListener('blur', this.#onBlur.bind(this), true)
+		document.addEventListener('input', this.#onInput.bind(this), true)
+	}
 
-				if (!$el.matches(`.${this.options.classNames.root} input`)) return
+	#onFocus(event) {
+		const $input = this.#getInputByEvent(event)
 
-				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.focus)
-			},
-			true,
-		)
+		if (!$input) {
+			return
+		}
 
-		document.addEventListener(
-			'blur',
-			e => {
-				const $el = e.target
+		const $field = $input.closest(this.selectors.root)
 
-				if (!$el.matches(`.${this.options.classNames.root} input`)) return
+		if (!$field) {
+			return
+		}
 
-				if ($el.value === '') {
-					$el
-						.closest(`.${this.options.classNames.root}`)
-						.classList.remove(
-							this.options.classNames.touched,
-							this.options.classNames.error,
-							this.options.classNames.success,
-						)
-				}
+		$field.dataset.state = STATE.FOCUS
+	}
 
-				$el.closest(`.${this.options.classNames.root}`).classList.remove(this.options.classNames.focus)
-			},
-			true,
-		)
+	#onBlur(event) {
+		const $input = this.#getInputByEvent(event)
 
-		document.addEventListener(
-			'input',
-			e => {
-				const $el = e.target
+		if (!$input) {
+			return
+		}
 
-				if (!$el.matches(`.${this.options.classNames.root} input`)) return
+		const $field = $input.closest(this.selectors.root)
 
-				$el.closest(`.${this.options.classNames.root}`).classList.add(this.options.classNames.touched)
-				$el
-					.closest(`.${this.options.classNames.root}`)
-					.classList.remove(this.options.classNames.error, this.options.classNames.success)
-			},
-			true,
-		)
+		if (!$field) {
+			return
+		}
+
+		if ($input.value === '') {
+			$field.dataset.state = STATE.EMPTY
+			$field.dataset.validationState = VALIDATION_STATE.DEFAULT
+			return
+		}
+
+		$field.dataset.state = STATE.TOUCHED
+	}
+
+	#onInput(event) {
+		const $input = this.#getInputByEvent(event)
+
+		if (!$input) {
+			return
+		}
+
+		const $field = $input.closest(this.selectors.root)
+
+		if (!$field) {
+			return
+		}
+
+		$field.dataset.state = $input.value === '' ? STATE.EMPTY : STATE.TOUCHED
+		$field.dataset.validationState = VALIDATION_STATE.DEFAULT
+	}
+
+	#getInputByEvent(event) {
+		const $target = event.target
+
+		if (!($target instanceof HTMLInputElement) && !($target instanceof HTMLTextAreaElement)) {
+			return null
+		}
+
+		if (!$target.matches(this.selectors.input)) {
+			return null
+		}
+
+		if (!$target.closest(this.selectors.root)) {
+			return null
+		}
+
+		return $target
 	}
 
 	update() {
-		this.$fields = document.querySelectorAll(`.${this.options.classNames.root} input`)
+		this.$fields = Array.from(document.querySelectorAll(`${this.selectors.root} ${this.selectors.input}`))
 
-		if (this.$fields.length) {
-			for (const $el of this.$fields) {
-				const $field = $el.closest(`.${this.options.classNames.root}`)
-				const classNames = []
+		if (!this.$fields.length) {
+			return
+		}
 
-				classNames.push(`${this.options.classNames.root}--${$el.type}`)
+		for (const $input of this.$fields) {
+			const $field = $input.closest(this.selectors.root)
 
-				if ($el.value !== '') classNames.push(this.options.classNames.touched)
-				if ($el.disabled) classNames.push(this.options.classNames.disabled)
-				if ($el.readonly) classNames.push(this.options.classNames.readonly)
-				if ($el.required) classNames.push(this.options.classNames.required)
+			if (!$field) {
+				continue
+			}
 
-				$field.classList.add(...classNames)
+			$field.dataset.type = $input.type || 'text'
+			$field.dataset.state = $input.value !== '' ? STATE.TOUCHED : STATE.EMPTY
+			$field.dataset.disabled = String($input.disabled)
+			$field.dataset.readonly = String($input.readOnly)
+			$field.dataset.required = String($input.required)
+
+			const { validationState } = $field.dataset
+			const isValidValidationState = Object.values(VALIDATION_STATE).includes(validationState)
+
+			if (!isValidValidationState) {
+				$field.dataset.validationState = VALIDATION_STATE.DEFAULT
 			}
 		}
 	}

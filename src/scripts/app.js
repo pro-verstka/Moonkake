@@ -7,6 +7,7 @@ import { Calendar } from '$components/calendar'
 import { Counter } from '$components/counter'
 import { Cursor } from '$components/cursor'
 import { Drawer } from '$components/drawer'
+import { Field } from '$components/field'
 import { FieldFile } from '$components/field-file'
 import { FullHeight } from '$components/fullheight'
 import { Gallery } from '$components/gallery'
@@ -55,6 +56,11 @@ new ScrollAnimation()
 -------------------------------------------------- */
 
 new Counter()
+
+/* FIELD
+-------------------------------------------------- */
+
+new Field()
 
 /* HEADER
 -------------------------------------------------- */

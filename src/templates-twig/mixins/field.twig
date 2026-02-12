@@ -1,13 +1,13 @@
 {% macro field(data) %}
-    <div class="field field_appearance_{{ data.appearance|default('light') }}">
+    <div class="field field_appearance_{{ data.appearance|default('light') }}" data-field>
         {% if data.useTextarea %}
-            <textarea class="field__input"
+            <textarea class="field__input" data-field-input
                 placeholder="{{ data.placeholder|default('') }}"
                 name="{{ data.name|default('') }}"
                 rows="{{ data.rows|default(5) }}"
             >{{ data.value|default('') }}</textarea>
         {% else %}
-            <input class="field__input"
+            <input class="field__input" data-field-input
                 type="{{ data.type|default('text') }}"
                 placeholder="{{ data.placeholder|default('') }}"
                 name="{{ data.name|default('') }}"

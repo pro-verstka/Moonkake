@@ -2,6 +2,11 @@ import validate from 'validate.js'
 
 const isEmpty = obj => obj && Object.keys(obj).length === 0 && obj.constructor === Object
 
+const VALIDATION_STATE = {
+	ERROR: 'error',
+	SUCCESS: 'success',
+}
+
 const defaultSchema = {
 	email: {
 		email: true,
@@ -28,22 +33,20 @@ export class Validation {
 		}
 
 		this.options = {
-			selectors: 'input, select, textarea',
-			events: 'change, input, blur',
-			classNames: {
-				root: 'field',
-				error: 'field_error',
-				success: 'field_success',
+			selectors: {
+				fields: 'input, select, textarea',
+				root: '[data-field]',
 			},
+			events: 'change, input, blur',
 		}
 
 		if (typeof options === 'object') {
 			this.options = {
 				...this.options,
 				...options,
-				classNames: {
-					...this.options.classNames,
-					...(options.classNames || {}),
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
 				},
 			}
 		}
@@ -58,11 +61,13 @@ export class Validation {
 	}
 
 	#setupListeners() {
-		for (const $field of this.$form.querySelectorAll(this.options.selectors)) {
-			const events = this.options.events.split(',')
+		for (const $field of this.$form.querySelectorAll(this.options.selectors.fields)) {
+			const events = this.options.events.split(',').map(event => event.trim())
 
 			for (const event of events) {
-				$field.addEventListener(event, this.validate($field).bind(this))
+				$field.addEventListener(event, () => {
+					this.validate($field)
+				})
 			}
 		}
 	}
@@ -73,14 +78,16 @@ export class Validation {
 		const values = validate.collectFormValues(this.$form)
 		const errors = validate.single(values[$el.name], this.schema[$el.name])
 
-		const $field = $el.closest(`.${this.options.classNames.root}`)
+		const $field = $el.closest(this.options.selectors.root)
+
+		if (!$field) {
+			return
+		}
 
 		if (errors) {
-			$field.classList.add(this.options.classNames.error)
-			$field.classList.remove(this.options.classNames.success)
+			$field.dataset.validationState = VALIDATION_STATE.ERROR
 		} else {
-			$field.classList.remove(this.options.classNames.error)
-			$field.classList.add(this.options.classNames.success)
+			$field.dataset.validationState = VALIDATION_STATE.SUCCESS
 		}
 	}
 }

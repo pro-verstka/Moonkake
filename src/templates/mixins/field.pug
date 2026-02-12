@@ -1,13 +1,13 @@
 mixin field(data)
-	div(class=`field field_appearance_${data.appearance || 'light'}`)
+	div(class=`field field_appearance_${data.appearance || 'light'}` data-field)
 		if (data.useTextarea)
-			textarea.field__input(
+			textarea.field__input(data-field-input
 				placeholder=`${data.placeholder || ''}`,
 				name=`${data.name || ''}`
 				rows=`${data.rows || 5}`
 			)=data.value
 		else
-			input.field__input(
+			input.field__input(data-field-input
 				type=`${data.type || 'text'}`,
 				placeholder=`${data.placeholder || ''}`,
 				name=`${data.name || ''}`,

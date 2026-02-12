@@ -30,13 +30,15 @@
 	}
 }
 
-.field_error {
+
+[data-field][data-validation-state='error'] {
 	.field__input {
 		border-color: red;
 	}
 }
 
-.field_success {
+
+[data-field][data-validation-state='success'] {
 	.field__input {
 		border-color: green;
 	}

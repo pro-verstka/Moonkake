@@ -85,10 +85,10 @@ export default defineConfig({
 		{
 			name: 'ascii-banner',
 			configureServer() {
-				printBanner('Running with Moonkake')
+				printBanner('Powered by Moonkake')
 			},
 			closeBundle() {
-				printBanner('Built with Moonkake')
+				printBanner('Powered by Moonkake')
 			},
 		},
 		{

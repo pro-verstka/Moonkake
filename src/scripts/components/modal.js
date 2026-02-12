@@ -1,350 +1,733 @@
 import { emitEvent } from '$helpers'
 import { ScrollLock } from '$utils'
 
+const STATE = {
+	OPENING: 'opening',
+	OPENED: 'opened',
+	CLOSING: 'closing',
+	CLOSED: 'closed',
+}
+
+const LOCK_STATE = {
+	LOCKED: 'locked',
+	UNLOCKED: 'unlocked',
+}
+
+const TYPE = {
+	DEFAULT: 'default',
+	IMAGE: 'image',
+	VIDEO: 'video',
+}
+
+const EVENT = {
+	BEFORE_OPEN: 'mk:modal:beforeOpen',
+	OPEN: 'mk:modal:open',
+	AFTER_OPEN: 'mk:modal:afterOpen',
+	BEFORE_CLOSE: 'mk:modal:beforeClose',
+	CLOSE: 'mk:modal:close',
+	AFTER_CLOSE: 'mk:modal:afterClose',
+	AFTER_IMAGE_LOAD: 'mk:modal:afterImageLoad',
+}
+
+const KEY = {
+	ESCAPE: 'Escape',
+}
+
+const IFRAME_DEFAULT_PARAMS = {
+	allowfullscreen: 'allowfullscreen',
+	frameborder: '0',
+	allow: 'autoplay; fullscreen',
+}
+
+export const youtubeVideoPlugin = (url, iframeDefaults = IFRAME_DEFAULT_PARAMS) => {
+	if (url.hostname.includes('youtube.com')) {
+		if (url.pathname.includes('/embed/')) {
+			return {
+				...iframeDefaults,
+				src: `https://www.youtube.com${url.pathname}?autoplay=1`,
+			}
+		}
+
+		const id = url.searchParams.get('v')
+
+		if (id) {
+			return {
+				...iframeDefaults,
+				src: `https://www.youtube.com/embed/${id}?autoplay=1`,
+			}
+		}
+	}
+
+	if (url.hostname.includes('youtu.be')) {
+		const id = url.pathname.replace('/', '')
+
+		if (id) {
+			return {
+				...iframeDefaults,
+				src: `https://www.youtube.com/embed/${id}?autoplay=1`,
+			}
+		}
+	}
+
+	return null
+}
+
+export const vimeoVideoPlugin = (url, iframeDefaults = IFRAME_DEFAULT_PARAMS) => {
+	if (!url.hostname.includes('vimeo.com')) {
+		return null
+	}
+
+	const id = url.pathname.replace(/[^0-9]/g, '')
+
+	if (!id) {
+		return null
+	}
+
+	return {
+		...iframeDefaults,
+		src: `https://player.vimeo.com/video/${id}?autoplay=1`,
+	}
+}
+
+export const rutubeVideoPlugin = (url, iframeDefaults = IFRAME_DEFAULT_PARAMS) => {
+	if (!url.hostname.includes('rutube.ru')) {
+		return null
+	}
+
+	const pathParts = url.pathname.split('/').filter(Boolean)
+	let id = ''
+
+	if (pathParts[0] === 'video' && pathParts[1]) {
+		id = pathParts[1]
+	}
+
+	if (pathParts[0] === 'play' && pathParts[1] === 'embed' && pathParts[2]) {
+		id = pathParts[2]
+	}
+
+	if (!id) {
+		return null
+	}
+
+	const embedParamNames = new Set(['t', 'stopTime', 'skinColor', 'getPlayOptions', 'p'])
+	const embedSearchParams = new URLSearchParams()
+
+	for (const [name, value] of url.searchParams.entries()) {
+		if (embedParamNames.has(name)) {
+			embedSearchParams.append(name, value)
+		}
+	}
+
+	const query = embedSearchParams.toString()
+	const src = `https://rutube.ru/play/embed/${id}${query ? `?${query}` : ''}`
+
+	return {
+		...iframeDefaults,
+		src,
+	}
+}
+
 export class Modal {
 	constructor(options = {}) {
 		this.options = {
-			modalSelector: '[data-modal]',
-			modalImageSelector: '[data-modal-image]',
-			modalVideoSelector: '[data-modal-video]',
-			modalCloseSelector: '[data-modal-close]',
-
+			selectors: {
+				root: '.modal[data-modal]',
+				trigger: '[data-modal][href]',
+				triggerImage: '[data-modal-image]',
+				triggerVideo: '[data-modal-video]',
+				close: '[data-modal-close]',
+				iframe: '[data-modal-iframe]',
+				image: '[data-modal-image-content]',
+				caption: '[data-modal-caption]',
+			},
+			ids: {
+				image: 'modal_image',
+				video: 'modal_video',
+			},
 			closeByOverlayClick: true,
-
-			modalImageId: 'modal_image',
-			modalVideoId: 'modal_video',
-
 			language: {
 				loadingText: 'Loading...',
 			},
-
 			duration: 300,
 			imagePadding: 40,
+			videoPlugins: [],
 		}
 
 		if (typeof options === 'object') {
-			this.options = { ...this.options, ...options }
+			this.options = {
+				...this.options,
+				...options,
+				selectors: {
+					...this.options.selectors,
+					...(options.selectors || {}),
+				},
+				ids: {
+					...this.options.ids,
+					...(options.ids || {}),
+				},
+				language: {
+					...this.options.language,
+					...(options.language || {}),
+				},
+			}
 		}
+
+		this.selectors = this.options.selectors
+		this.ids = this.options.ids
+		this.videoPlugins = Array.isArray(this.options.videoPlugins) ? this.options.videoPlugins : []
 
 		this.scrollLock = new ScrollLock()
-
 		this.modals = []
+		this.imageResizeHandlers = new Map()
+		this.focusReturnTargets = new Map()
 
-		// prepare for image
-		if (document.querySelector(this.options.modalImageSelector)) {
-			document.body.insertAdjacentHTML(
-				'beforeend',
-				`
-				<div class="modal modal_image" id="${this.options.modalImageId}">
-					<div class="modal__container">
-						<button class="modal__close" data-modal-close>&times;</button>
-						<div class="modal__image"></div>
-						<div class="modal__caption"></div>
-					</div>
-				</div>
-			`,
-			)
-		}
-
-		// prepare for video
-		if (document.querySelector(this.options.modalVideoSelector)) {
-			document.body.insertAdjacentHTML(
-				'beforeend',
-				`
-				<div class="modal modal_video" id="${this.options.modalVideoId}">
-					<div class="modal__container">
-						<button class="modal__close" data-modal-close>&times;</button>
-						<div class="modal__iframe"></div>
-					</div>
-				</div>
-			`,
-			)
-		}
-
-		document.addEventListener('click', e => {
-			// open by button
-			if (e.target.matches(this.options.modalSelector) || e.target.closest(this.options.modalSelector)) {
-				e.preventDefault()
-
-				const $el = e.target.matches(this.options.modalSelector)
-					? e.target
-					: e.target.closest(this.options.modalSelector)
-
-				this.open($el.getAttribute('href').substr(1), $el)
-			}
-
-			// open image by link
-			if (e.target.matches(this.options.modalImageSelector) || e.target.closest(this.options.modalImageSelector)) {
-				e.preventDefault()
-
-				const $el = e.target.matches(this.options.modalImageSelector)
-					? e.target
-					: e.target.closest(this.options.modalImageSelector)
-
-				this.openImage($el.getAttribute('href'), $el)
-			}
-
-			// open video by button
-			if (e.target.matches(this.options.modalVideoSelector) || e.target.closest(this.options.modalVideoSelector)) {
-				e.preventDefault()
-
-				const $el = e.target.matches(this.options.modalVideoSelector)
-					? e.target
-					: e.target.closest(this.options.modalVideoSelector)
-
-				this.openVideo($el.getAttribute('href'), $el)
-			}
-
-			// close by button
-			if (e.target.matches(this.options.modalCloseSelector) || e.target.closest(this.options.modalCloseSelector)) {
-				e.preventDefault()
-
-				this.close(e.target.closest('.modal').getAttribute('id'))
-			}
-
-			// close by overlay click
-			if (e.target.matches('.modal') && this.options.closeByOverlayClick) {
-				e.preventDefault()
-
-				this.close(e.target.getAttribute('id'))
-			}
-		})
-
-		// close by Esc
-		document.addEventListener('keydown', e => {
-			if (document.documentElement.classList.contains('-modal-locked') && e.keyCode === 27) {
-				if (this.modals.length) {
-					this.close(this.modals[this.modals.length - 1])
-				}
-			}
-		})
+		this.#init()
 	}
 
-	setImageDimensions(image) {
-		const $element = image
+	#init() {
+		this.#prepareMediaModals()
+		this.#setupInitialState()
+		this.#setupListeners()
+	}
+
+	#setupInitialState() {
+		for (const $modal of document.querySelectorAll(this.selectors.root)) {
+			const { state } = $modal.dataset
+			const isValidState = Object.values(STATE).includes(state)
+
+			if (!isValidState) {
+				$modal.dataset.state = STATE.CLOSED
+			}
+
+			if (!$modal.dataset.modalType) {
+				$modal.dataset.modalType = TYPE.DEFAULT
+			}
+
+			if (!$modal.getAttribute('role')) {
+				$modal.setAttribute('role', 'dialog')
+			}
+
+			if (!$modal.hasAttribute('aria-modal')) {
+				$modal.setAttribute('aria-modal', 'true')
+			}
+
+			$modal.setAttribute(
+				'aria-hidden',
+				$modal.dataset.state === STATE.OPENED || $modal.dataset.state === STATE.OPENING ? 'false' : 'true',
+			)
+
+			if (!$modal.hasAttribute('tabindex')) {
+				$modal.setAttribute('tabindex', '-1')
+			}
+		}
+
+		document.documentElement.dataset.modalState = LOCK_STATE.UNLOCKED
+	}
+
+	#setupListeners() {
+		document.addEventListener('click', this.#onDocumentClick.bind(this))
+		document.addEventListener('keydown', this.#onDocumentKeydown.bind(this))
+	}
+
+	#onDocumentClick(event) {
+		if (!(event.target instanceof Element)) {
+			return
+		}
+
+		const $trigger = event.target.closest(this.selectors.trigger)
+
+		if ($trigger) {
+			event.preventDefault()
+			const id = this.#extractIdFromTrigger($trigger)
+
+			if (id) {
+				this.open(id, $trigger)
+			}
+
+			return
+		}
+
+		const $imageTrigger = event.target.closest(this.selectors.triggerImage)
+
+		if ($imageTrigger) {
+			event.preventDefault()
+			const href = $imageTrigger.getAttribute('href')
+
+			if (href) {
+				this.openImage(href, $imageTrigger)
+			}
+
+			return
+		}
+
+		const $videoTrigger = event.target.closest(this.selectors.triggerVideo)
+
+		if ($videoTrigger) {
+			event.preventDefault()
+			const href = $videoTrigger.getAttribute('href')
+
+			if (href) {
+				this.openVideo(href, $videoTrigger)
+			}
+
+			return
+		}
+
+		const $close = event.target.closest(this.selectors.close)
+
+		if ($close) {
+			event.preventDefault()
+			const $modal = $close.closest(this.selectors.root)
+
+			if ($modal?.id) {
+				this.close($modal.id)
+			}
+
+			return
+		}
+
+		if (event.target.matches(this.selectors.root) && this.options.closeByOverlayClick) {
+			event.preventDefault()
+
+			if (event.target.id) {
+				this.close(event.target.id)
+			}
+		}
+	}
+
+	#onDocumentKeydown(event) {
+		if (event.key !== KEY.ESCAPE) {
+			return
+		}
+
+		if (!this.modals.length) {
+			return
+		}
+
+		this.close(this.modals[this.modals.length - 1])
+	}
+
+	#prepareMediaModals() {
+		if (document.querySelector(this.selectors.triggerImage) && !this.#getModalById(this.ids.image)) {
+			document.body.insertAdjacentHTML(
+				'beforeend',
+				`
+				<div
+					class="modal"
+					id="${this.ids.image}"
+					data-modal
+					data-modal-type="${TYPE.IMAGE}"
+					data-state="${STATE.CLOSED}"
+					role="dialog"
+					aria-modal="true"
+					aria-hidden="true"
+					tabindex="-1"
+				>
+					<div class="modal__container" data-modal-container>
+						<button class="modal__close" data-modal-close>&times;</button>
+						<div class="modal__image" data-modal-image-content></div>
+						<div class="modal__caption" data-modal-caption></div>
+					</div>
+				</div>
+			`,
+			)
+		}
+
+		if (document.querySelector(this.selectors.triggerVideo) && !this.#getModalById(this.ids.video)) {
+			document.body.insertAdjacentHTML(
+				'beforeend',
+				`
+				<div
+					class="modal"
+					id="${this.ids.video}"
+					data-modal
+					data-modal-type="${TYPE.VIDEO}"
+					data-state="${STATE.CLOSED}"
+					role="dialog"
+					aria-modal="true"
+					aria-hidden="true"
+					tabindex="-1"
+				>
+					<div class="modal__container" data-modal-container>
+						<button class="modal__close" data-modal-close>&times;</button>
+						<div class="modal__iframe" data-modal-iframe></div>
+					</div>
+				</div>
+			`,
+			)
+		}
+	}
+
+	#extractIdFromTrigger($trigger) {
+		const href = $trigger.getAttribute('href') || ''
+
+		if (!href.startsWith('#')) {
+			return null
+		}
+
+		return href.slice(1)
+	}
+
+	#normalizeId(id) {
+		return String(id || '').replace(/^#/, '')
+	}
+
+	#getModalById(id) {
+		const normalizedId = this.#normalizeId(id)
+		const $modal = document.getElementById(normalizedId)
+
+		if (!$modal || !$modal.matches(this.selectors.root)) {
+			return null
+		}
+
+		return $modal
+	}
+
+	#isOpened(id) {
+		return this.modals.includes(id)
+	}
+
+	#setModalState($modal, state) {
+		$modal.dataset.state = state
+		$modal.setAttribute('aria-hidden', state === STATE.OPENED || state === STATE.OPENING ? 'false' : 'true')
+	}
+
+	#saveFocusTarget(id, $trigger) {
+		const focusTarget =
+			$trigger instanceof HTMLElement
+				? $trigger
+				: document.activeElement instanceof HTMLElement
+					? document.activeElement
+					: null
+
+		if (focusTarget) {
+			this.focusReturnTargets.set(id, focusTarget)
+		}
+	}
+
+	#focusModal($modal) {
+		$modal.focus()
+	}
+
+	#restoreFocus(id) {
+		const $target = this.focusReturnTargets.get(id)
+
+		if (!$target) {
+			return
+		}
+
+		this.focusReturnTargets.delete(id)
+
+		if (document.contains($target)) {
+			$target.focus()
+		}
+	}
+
+	#lock() {
+		document.documentElement.dataset.modalState = LOCK_STATE.LOCKED
+		this.scrollLock.lockScroll()
+	}
+
+	#unlock() {
+		document.documentElement.dataset.modalState = LOCK_STATE.UNLOCKED
+		this.scrollLock.unlockScroll()
+	}
+
+	#emit(eventName, detail = {}) {
+		emitEvent(eventName, detail)
+	}
+
+	#waitForTransition($modal, callback) {
+		let completed = false
+
+		const finish = () => {
+			if (completed) {
+				return
+			}
+
+			completed = true
+			$modal.removeEventListener('transitionend', onTransitionEnd)
+			clearTimeout(timer)
+			callback()
+		}
+
+		const onTransitionEnd = event => {
+			if (event.target !== $modal) {
+				return
+			}
+
+			finish()
+		}
+
+		const timer = setTimeout(finish, this.options.duration + 100)
+		$modal.addEventListener('transitionend', onTransitionEnd)
+	}
+
+	#resolveVideoIframeParams(url) {
+		for (const plugin of this.videoPlugins) {
+			if (typeof plugin !== 'function') {
+				continue
+			}
+
+			try {
+				const result = plugin(url, IFRAME_DEFAULT_PARAMS)
+
+				if (result && typeof result === 'object' && typeof result.src === 'string' && result.src) {
+					return result
+				}
+			} catch {}
+		}
+
+		return null
+	}
+
+	#applyIframeParams($iframe, params = {}) {
+		for (const [key, value] of Object.entries(params)) {
+			if (value === null || value === undefined || value === false) {
+				continue
+			}
+
+			if (value === true) {
+				$iframe.setAttribute(key, '')
+				continue
+			}
+
+			$iframe.setAttribute(key, String(value))
+		}
+	}
+
+	#createVideoIframe(href) {
+		try {
+			const url = new URL(href, window.location.origin)
+			const iframeParams = this.#resolveVideoIframeParams(url)
+
+			if (!iframeParams) {
+				return null
+			}
+
+			const $iframe = document.createElement('iframe')
+			this.#applyIframeParams($iframe, {
+				...IFRAME_DEFAULT_PARAMS,
+				...iframeParams,
+			})
+
+			return $iframe
+		} catch {
+			return null
+		}
+	}
+
+	#setImageDimensions(image) {
 		let maxWidth
 		let maxHeight
 		const padding = this.options.imagePadding
 
-		$element.removeAttribute('style')
+		image.removeAttribute('style')
 
-		if ($element.naturalWidth >= window.innerWidth - padding) {
+		if (image.naturalWidth >= window.innerWidth - padding) {
 			maxWidth = window.innerWidth - padding
 		} else {
-			maxWidth = $element.naturalWidth
+			maxWidth = image.naturalWidth
 		}
 
-		if ($element.naturalHeight >= window.innerHeight - padding) {
+		if (image.naturalHeight >= window.innerHeight - padding) {
 			maxHeight = window.innerHeight - padding
 		} else {
-			maxHeight = $element.naturalHeight
+			maxHeight = image.naturalHeight
 		}
 
-		$element.style.maxWidth = `${maxWidth}px`
-		$element.style.maxHeight = `${maxHeight}px`
+		image.style.maxWidth = `${maxWidth}px`
+		image.style.maxHeight = `${maxHeight}px`
+	}
+
+	#cleanupModal($modal) {
+		const id = $modal.id
+		const $iframeWrap = $modal.querySelector(this.selectors.iframe)
+		const $caption = $modal.querySelector(this.selectors.caption)
+		const $image = $modal.querySelector(this.selectors.image)
+
+		if ($iframeWrap) {
+			$iframeWrap.innerHTML = ''
+		}
+
+		if ($caption) {
+			$caption.style.visibility = 'hidden'
+			$caption.innerHTML = ''
+		}
+
+		if ($image) {
+			delete $image.dataset.orientation
+		}
+
+		const resizeHandler = this.imageResizeHandlers.get(id)
+
+		if (resizeHandler) {
+			window.removeEventListener('resize', resizeHandler)
+			this.imageResizeHandlers.delete(id)
+		}
 	}
 
 	open(id, $trigger = null) {
-		const $modal = document.getElementById(id)
+		const normalizedId = this.#normalizeId(id)
+		const $modal = this.#getModalById(normalizedId)
 
 		if (!$modal) {
-			console.warn(`Modal "${id}" does not exist`)
+			console.warn(`Modal "${normalizedId}" does not exist`)
 			return
 		}
 
-		emitEvent('mk:modal:beforeOpen', {
-			id,
+		if (this.#isOpened(normalizedId)) {
+			return
+		}
+
+		this.#emit(EVENT.BEFORE_OPEN, {
+			id: normalizedId,
 			trigger: $trigger,
 		})
 
-		this.modals.push(id)
+		this.#saveFocusTarget(normalizedId, $trigger)
 
-		document.documentElement.classList.add('-modal-locked')
+		const shouldLock = this.modals.length === 0
+		this.modals.push(normalizedId)
 
-		$modal.classList.add('modal_opened')
+		if (shouldLock) {
+			this.#lock()
+		}
 
-		emitEvent('mk:modal:open', {
-			id,
+		this.#setModalState($modal, STATE.OPENING)
+
+		this.#emit(EVENT.OPEN, {
+			id: normalizedId,
 			trigger: $trigger,
 		})
 
-		setTimeout(() => {
-			$modal.classList.add('modal_visible')
-		}, 10)
+		requestAnimationFrame(() => {
+			this.#setModalState($modal, STATE.OPENED)
+			this.#focusModal($modal)
+		})
 
-		this.scrollLock.lockScroll()
-
-		emitEvent('mk:modal:afterOpen', {
-			id,
+		this.#emit(EVENT.AFTER_OPEN, {
+			id: normalizedId,
 			trigger: $trigger,
 		})
 	}
 
 	openImage(href, $trigger = null) {
-		emitEvent('mk:modal:beforeOpen', {
-			id: this.options.modalImageId,
-			trigger: $trigger,
-		})
+		const $modal = this.#getModalById(this.ids.image)
 
-		this.modals.push(this.options.modalImageId)
-
-		const $modal = document.getElementById(this.options.modalImageId)
-		const $modalImage = $modal.querySelector('.modal__image')
-		const $modalCaption = $modal.querySelector('.modal__caption')
-		$modalImage.innerHTML = `<span class="modal__loader">${this.options.language.loadingText}</span>`
-
-		document.documentElement.classList.add('-modal-locked')
-
-		$modal.classList.add('modal_opened')
-
-		if ($modalCaption) {
-			const title = $trigger.getAttribute('title') || ''
-
-			if (title) {
-				$modalCaption.innerHTML = title
-				$modalCaption.style.visibility = 'visible'
-			}
+		if (!$modal) {
+			console.warn(`Modal "${this.ids.image}" does not exist`)
+			return
 		}
 
-		emitEvent('mk:modal:open', {
-			id: this.options.modalImageId,
-			trigger: $trigger,
-		})
+		const $modalImage = $modal.querySelector(this.selectors.image)
+		const $modalCaption = $modal.querySelector(this.selectors.caption)
 
-		setTimeout(() => {
-			$modal.classList.add('modal_visible')
-		}, 10)
+		if ($modalImage) {
+			$modalImage.innerHTML = `<span class="modal__loader">${this.options.language.loadingText}</span>`
+		}
 
-		this.scrollLock.lockScroll()
+		if ($modalCaption) {
+			const title = $trigger?.getAttribute('title') || ''
+			$modalCaption.innerHTML = title
+			$modalCaption.style.visibility = title ? 'visible' : 'hidden'
+		}
 
-		emitEvent('mk:modal:afterOpen', {
-			id: this.options.modalImageId,
-			trigger: $trigger,
-		})
+		this.open(this.ids.image, $trigger)
 
 		const image = new Image()
 		image.src = href
 
 		image.onload = () => {
-			const ratio = image.width / image.height
+			if (!$modalImage) {
+				return
+			}
 
-			$modalImage.classList.toggle('modal__image_portrait', image.width > image.height)
-			$modalImage.classList.toggle('modal__image_landscape', image.width < image.height)
+			const orientation = image.width > image.height ? 'landscape' : image.width < image.height ? 'portrait' : 'square'
 
-			this.setImageDimensions(image, ratio)
+			$modalImage.dataset.orientation = orientation
+			this.#setImageDimensions(image)
 
 			$modalImage.innerHTML = ''
 			$modalImage.appendChild(image)
 
-			window.addEventListener('resize', () => {
-				this.setImageDimensions(image, ratio)
-			})
+			const resizeHandler = () => {
+				this.#setImageDimensions(image)
+			}
 
-			emitEvent('mk:modal:afterImageLoad', {
-				id: this.options.modalImageId,
+			const prevResizeHandler = this.imageResizeHandlers.get(this.ids.image)
+
+			if (prevResizeHandler) {
+				window.removeEventListener('resize', prevResizeHandler)
+			}
+
+			window.addEventListener('resize', resizeHandler)
+			this.imageResizeHandlers.set(this.ids.image, resizeHandler)
+
+			this.#emit(EVENT.AFTER_IMAGE_LOAD, {
+				id: this.ids.image,
 				trigger: $trigger,
 			})
 		}
 	}
 
 	openVideo(href, $trigger = null) {
-		emitEvent('mk:modal:beforeOpen', {
-			id: this.options.modalVideoId,
-			trigger: $trigger,
-		})
+		const $modal = this.#getModalById(this.ids.video)
 
-		this.modals.push(this.options.modalVideoId)
-
-		const $modal = document.getElementById(this.options.modalVideoId)
-
-		const $iframe = document.createElement('iframe')
-		$iframe.setAttribute('allowfullscreen', 'allowfullscreen')
-		$iframe.setAttribute('frameborder', '0')
-		$iframe.setAttribute('allow', 'autoplay; fullscreen')
-
-		if (href.indexOf('youtube') > -1) {
-			const src = href.replace(/watch\?v=/g, 'embed/')
-
-			$iframe.setAttribute('src', `${src}?autoplay=1`)
-		}
-
-		if (href.indexOf('vimeo') > -1) {
-			const src = href.replace(/[^0-9]/g, '')
-
-			$iframe.setAttribute('src', `https://player.vimeo.com/video/${src}?autoplay=1`)
-		}
-
-		$modal.querySelector('.modal__iframe').appendChild($iframe)
-
-		document.documentElement.classList.add('-modal-locked')
-
-		$modal.classList.add('modal_opened')
-
-		emitEvent('mk:modal:open', {
-			id: this.options.modalVideoId,
-			trigger: $trigger,
-		})
-
-		setTimeout(() => {
-			$modal.classList.add('modal_visible')
-		}, 10)
-
-		this.scrollLock.lockScroll()
-
-		emitEvent('mk:modal:afterOpen', {
-			id: this.options.modalVideoId,
-			trigger: $trigger,
-		})
-	}
-
-	close(id) {
-		const $modal = document.getElementById(id)
-
-		if (!$modal || this.modals.indexOf(id) < 0) {
-			console.warn(`Modal "${id}" does not exist`)
+		if (!$modal) {
+			console.warn(`Modal "${this.ids.video}" does not exist`)
 			return
 		}
 
-		emitEvent('mk:modal:beforeClose', {
-			id,
-		})
+		const $iframeWrap = $modal.querySelector(this.selectors.iframe)
+		const $iframe = this.#createVideoIframe(href)
 
-		this.modals = this.modals.filter(item => item !== id)
-
-		$modal.classList.remove('modal_visible')
-
-		emitEvent('mk:modal:close', {
-			id,
-		})
-
-		const handleClose = () => {
-			$modal.classList.remove('modal_opened')
-
-			const $modalIframe = $modal.querySelector('.modal__iframe iframe')
-			const $modalCaption = $modal.querySelector('.modal__caption')
-
-			if ($modalIframe) {
-				$modalIframe.remove()
-			}
-
-			if ($modalCaption) {
-				$modalCaption.style.visibility = 'hidden'
-				$modalCaption.innerHTML = ''
-			}
-
-			emitEvent('mk:modal:afterClose', {
-				id,
-			})
-
-			window.removeEventListener('resize', this.setImageDimensions)
-			$modal.removeEventListener('transitionend', handleClose)
-
-			if (!this.modals.length) {
-				document.documentElement.classList.remove('-modal-locked')
-				this.scrollLock.unlockScroll()
-			}
+		if (!$iframeWrap || !$iframe) {
+			return
 		}
 
-		$modal.addEventListener('transitionend', handleClose)
+		$iframeWrap.innerHTML = ''
+		$iframeWrap.appendChild($iframe)
+
+		this.open(this.ids.video, $trigger)
+	}
+
+	close(id) {
+		const normalizedId = this.#normalizeId(id)
+		const $modal = this.#getModalById(normalizedId)
+
+		if (!$modal || !this.#isOpened(normalizedId)) {
+			console.warn(`Modal "${normalizedId}" does not exist`)
+			return
+		}
+
+		if ($modal.dataset.state === STATE.CLOSING || $modal.dataset.state === STATE.CLOSED) {
+			return
+		}
+
+		this.#emit(EVENT.BEFORE_CLOSE, {
+			id: normalizedId,
+		})
+
+		this.modals = this.modals.filter(item => item !== normalizedId)
+		this.#setModalState($modal, STATE.CLOSING)
+
+		this.#emit(EVENT.CLOSE, {
+			id: normalizedId,
+		})
+
+		this.#waitForTransition($modal, () => {
+			this.#setModalState($modal, STATE.CLOSED)
+			this.#cleanupModal($modal)
+			this.#restoreFocus(normalizedId)
+
+			this.#emit(EVENT.AFTER_CLOSE, {
+				id: normalizedId,
+			})
+
+			if (!this.modals.length) {
+				this.#unlock()
+			}
+		})
 	}
 }

@@ -401,13 +401,14 @@ ul.pagination
 ```pug
 a(href="#modal_example" data-modal) Open a modal window
 
-div.modal#modal_example
+div.modal#modal_example(data-modal data-modal-type="default" data-state="closed" role="dialog" aria-modal="true" aria-hidden="true")
 	div.modal__container
 		button.modal__close(data-modal-close) &times;
 		h2 Header
 
 a(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) Open YouTube video
 a(href="https://vimeo.com/191947042" data-modal-video) Open Vimeo video
+a(href="https://rutube.ru/video/7f8f70dd116cb1691f0f10d510ebdf2f/?r=wd&t=5" data-modal-video) Open Rutube video
 a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image, title="Image Caption") Open Image
 ```
 
@@ -416,7 +417,7 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 ```twig
 <a href="#modal_example" data-modal>Open a modal window</a>
 
-<div class="modal" id="modal_example">
+<div class="modal" id="modal_example" data-modal data-modal-type="default" data-state="closed" role="dialog" aria-modal="true" aria-hidden="true">
 	<div class="modal__container">
 		<button class="modal__close" data-modal-close>&times;</button>
 		<h2>Header</h2>
@@ -425,6 +426,7 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 
 <a href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video>Open YouTube video</a>
 <a href="https://vimeo.com/191947042" data-modal-video>Open Vimeo video</a>
+<a href="https://rutube.ru/video/7f8f70dd116cb1691f0f10d510ebdf2f/?r=wd&t=5" data-modal-video>Open Rutube video</a>
 <a href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image title="Image Caption">Open Image</a>
 ```
 

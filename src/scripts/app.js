@@ -14,6 +14,7 @@ import { Gallery } from '$components/gallery'
 import { Header } from '$components/header'
 import { InputMask } from '$components/inputmask'
 import { Loader } from '$components/loader'
+import { Modal, rutubeVideoPlugin, vimeoVideoPlugin, youtubeVideoPlugin } from '$components/modal'
 import { ScrollAnimation } from '$components/scroll-animation'
 import { ScrollBooster } from '$components/scrollbooster'
 import { ScrollTo } from '$components/scrollto'
@@ -151,6 +152,15 @@ const $loader = document.querySelector('[data-loader]')
 if ($loader) {
 	new Loader($loader)
 }
+
+/* MODAL
+-------------------------------------------------- */
+
+const modal = new Modal({
+	videoPlugins: [youtubeVideoPlugin, vimeoVideoPlugin, rutubeVideoPlugin],
+})
+
+MK.addPlugins({ modal })
 
 /* DRAWER
 -------------------------------------------------- */

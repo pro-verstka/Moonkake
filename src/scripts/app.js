@@ -16,6 +16,7 @@ import { Loader } from '$components/loader'
 import { ScrollAnimation } from '$components/scroll-animation'
 import { ScrollBooster } from '$components/scrollbooster'
 import { ScrollTo } from '$components/scrollto'
+import { Spoiler } from '$components/spoiler'
 import { Tabs } from '$components/tabs'
 import { Tooltip } from '$components/tooltip'
 import { Validation } from '$components/validation'
@@ -98,6 +99,15 @@ const $calendars = document.querySelectorAll('[data-calendar]')
 
 for (const $calendar of $calendars) {
 	new Calendar($calendar)
+}
+
+/* SPOILER
+-------------------------------------------------- */
+
+const $spoilers = document.querySelectorAll('[data-spoiler]')
+
+for (const $spoiler of $spoilers) {
+	new Spoiler($spoiler)
 }
 
 /* FILE

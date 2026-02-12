@@ -5,7 +5,7 @@
 		display: block;
 	}
 
-	&.spoiler_text-mode {
+	&[data-mode='text'] {
 		[data-spoiler-intro] {
 			display: block;
 		}
@@ -14,49 +14,31 @@
 			display: none;
 		}
 
-		&.spoiler_active {
+		&[data-state='opened'] {
 			[data-spoiler-intro] {
 				display: none;
 			}
 
 			[data-spoiler-body] {
 				display: block;
-
-				// animation: fade-in 1s forwards
 			}
 		}
 	}
 
-	&.spoiler_html-mode {
+	&[data-mode='html'] {
 		[data-spoiler-body] {
 			overflow: hidden;
 			height: 10rem;
 		}
 
-		&.spoiler_active {
+		&[data-state='opened'] {
 			[data-spoiler-body] {
 				height: auto;
 			}
 		}
 	}
 
-	&.spoiler_initialized {
+	&[data-initialized='true'] {
 		visibility: visible;
-	}
-}
-
-/* THEME
- * -------------------------------------------------- */
-
-.spoiler {
-	&.spoiler_custom {
-		[data-spoiler-toggle] {
-			padding: 0;
-			border: 0;
-			border-bottom: 0.1rem dashed currentcolor;
-			margin: 0;
-			background: transparent;
-			cursor: pointer;
-		}
 	}
 }

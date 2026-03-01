@@ -1,0 +1,44 @@
+@use '_mixins';
+
+.autocomplete {
+	position: relative;
+
+	&__input {
+		width: 100%;
+	}
+
+	&__dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 10;
+		display: none;
+		width: 100%;
+		border: 0.1rem solid #ccc;
+		border-radius: 0 0 0.3rem 0.3rem;
+		margin-top: -0.1rem;
+		background-color: #fff;
+		max-height: 24rem;
+		overflow-y: auto;
+	}
+
+	&__option {
+		padding: 1rem 2rem;
+		cursor: pointer;
+
+		&:hover,
+		&_active {
+			background-color: #ccc;
+		}
+	}
+
+	&_open {
+		.autocomplete__dropdown {
+			display: block;
+		}
+	}
+
+	&_loading {
+		// reserved for optional loading indicator
+	}
+}

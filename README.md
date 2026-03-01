@@ -526,3 +526,18 @@ div.section(data-fullheight)
 ```twig
 <div class="section" data-fullheight></div>
 ```
+
+### Autocomplete
+**Pug:**
+```pug
+div.autocomplete(data-autocomplete)
+	input.autocomplete__input(type="text" placeholder="Search...")
+```
+
+**Twig:**
+
+```twig
+<div class="autocomplete" data-autocomplete>
+	<input class="autocomplete__input" type="text" placeholder="Search...">
+</div>
+```

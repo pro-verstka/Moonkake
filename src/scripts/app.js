@@ -3,6 +3,7 @@ import '$config'
 
 // Components
 import { Accordion } from '$components/accordion'
+import { Autocomplete } from '$components/autocomplete'
 import { Calendar } from '$components/calendar'
 import { Counter } from '$components/counter'
 import { Cursor } from '$components/cursor'
@@ -178,4 +179,23 @@ const $scrollBoosters = document.querySelectorAll('[data-scrollbooster]')
 
 for (const $scrollBooster of $scrollBoosters) {
 	new ScrollBooster($scrollBooster)
+}
+
+/* AUTOCOMPLETE
+-------------------------------------------------- */
+
+const $autocompletes = document.querySelectorAll('[data-autocomplete]')
+
+for (const $autocomplete of $autocompletes) {
+	new Autocomplete($autocomplete, {
+		minLength: 2,
+		debounce: 300,
+		fetch: async (query, signal) => {
+			const response = await fetch(`https://api.example.com/autocomplete?q=${query}`, { signal })
+			const data = await response.json()
+			return data
+		},
+		map: data => data.map(item => ({ label: item.label, value: item.value })),
+		itemTemplate: item => `<div>${item.label}</div>`,
+	})
 }

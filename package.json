@@ -1,7 +1,7 @@
 {
 	"name": "moonkake",
 	"description": "Site starter template based on Vite, Scss, Pug/Twig, JS",
-	"version": "10.5.0",
+	"version": "10.5.1",
 	"author": {
 		"name": "DevBrains",
 		"url": "https://devbrains.io"
@@ -29,17 +29,17 @@
 		"photoswipe": "5.4.4",
 		"scroll-to-element": "2.0.3",
 		"scrollbooster": "3.0.2",
-		"swiper": "12.1.0",
+		"swiper": "12.1.2",
 		"tippy.js": "6.3.7",
 		"validate.js": "0.13.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.14",
+		"@biomejs/biome": "2.4.6",
 		"@vituum/vite-plugin-pug": "1.1.0",
 		"@vituum/vite-plugin-twig": "1.1.0",
 		"husky": "9.1.7",
 		"lightningcss": "1.31.1",
-		"lint-staged": "16.2.7",
+		"lint-staged": "16.3.2",
 		"plop": "4.0.5",
 		"sass-embedded": "1.97.3",
 		"vite": "7.3.1",
@@ -47,9 +47,9 @@
 		"vite-plugin-static-copy": "3.2.0"
 	},
 	"engines": {
-		"node": ">=22.17.0"
+		"node": ">=24.14.0"
 	},
 	"volta": {
-		"node": "22.17.0"
+		"node": "24.14.0"
 	}
 }

@@ -21,6 +21,7 @@ import { ScrollBooster } from '$components/scrollbooster'
 import { ScrollTo } from '$components/scrollto'
 import { Spoiler } from '$components/spoiler'
 import { Tabs } from '$components/tabs'
+import { Toggler } from '$components/toggler'
 import { Tooltip } from '$components/tooltip'
 import { Validation } from '$components/validation'
 
@@ -135,6 +136,17 @@ const $tooltips = document.querySelectorAll('[data-tippy]')
 for (const $tooltip of $tooltips) {
 	new Tooltip($tooltip)
 }
+
+/* TOGGLER
+-------------------------------------------------- */
+
+const $togglers = document.querySelectorAll('[data-toggler]')
+
+for (const $toggler of $togglers) {
+	new Toggler($toggler)
+}
+
+Toggler.syncAll()
 
 /* FULLHEIGHT
 -------------------------------------------------- */

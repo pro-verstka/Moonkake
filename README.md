@@ -513,6 +513,29 @@ div.drawer(data-drawer)
 </div>
 ```
 
+### Toggler
+
+**Pug:**
+
+```pug
+button(type="button" data-toggler="menu") Open menu
+
+div#menu(data-state="inactive")
+	p Menu content
+	button(type="button" data-toggler-close="menu") Close menu
+```
+
+**Twig:**
+
+```twig
+<button type="button" data-toggler="menu">Open menu</button>
+
+<div id="menu" data-state="inactive">
+	<p>Menu content</p>
+	<button type="button" data-toggler-close="menu">Close menu</button>
+</div>
+```
+
 ### Fullheight
 
 **Pug:**

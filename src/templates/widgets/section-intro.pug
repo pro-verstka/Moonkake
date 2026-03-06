@@ -1,7 +1,17 @@
-section.section.section_intro
+section.section.section_intro(data-intro-hero)
 	div.container.section__container
-		h1=title
-		p: small=description
-		p: a(href="https://github.com/pro-verstka/moonkake") GitHub
-		p: a(href="https://devbrains.io") DevBrains
+		div.intro-hero
+			div.intro-hero__content
+				p.intro-hero__eyebrow Template starter kit
+				h1.intro-hero__title=title
+				p.intro-hero__description=description
+				div.intro-hero__actions
+					a.intro-hero__link(href="https://github.com/pro-verstka/moonkake" target="_blank" rel="noreferrer") GitHub
+					a.intro-hero__link(href="https://devbrains.io" target="_blank" rel="noreferrer") DevBrains
+			div.intro-hero__visual(aria-hidden="true")
+				div.intro-hero__visual-frame
+					canvas.intro-hero__canvas(data-intro-canvas)
+					div.intro-hero__orbit.intro-hero__orbit_primary
+					div.intro-hero__orbit.intro-hero__orbit_secondary
+					div.intro-hero__glow
 // section

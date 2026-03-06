@@ -1,9 +1,24 @@
-<section class="section section_intro">
+<section class="section section_intro" data-intro-hero>
     <div class="container section__container">
-        <h1>{{ title }}</h1>
-        <p><small>{{ description }}</small></p>
-        <p><a href="https://github.com/pro-verstka/moonkake">GitHub</a></p>
-        <p><a href="https://devbrains.io">DevBrains</a></p>
+        <div class="intro-hero">
+            <div class="intro-hero__content">
+                <p class="intro-hero__eyebrow">Template starter kit</p>
+                <h1 class="intro-hero__title">{{ title }}</h1>
+                <p class="intro-hero__description">{{ description }}</p>
+                <div class="intro-hero__actions">
+                    <a class="intro-hero__link" href="https://github.com/pro-verstka/moonkake" target="_blank" rel="noreferrer">GitHub</a>
+                    <a class="intro-hero__link" href="https://devbrains.io" target="_blank" rel="noreferrer">DevBrains</a>
+                </div>
+            </div>
+            <div class="intro-hero__visual" aria-hidden="true">
+                <div class="intro-hero__visual-frame">
+                    <canvas class="intro-hero__canvas" data-intro-canvas></canvas>
+                    <div class="intro-hero__orbit intro-hero__orbit_primary"></div>
+                    <div class="intro-hero__orbit intro-hero__orbit_secondary"></div>
+                    <div class="intro-hero__glow"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {# section #}

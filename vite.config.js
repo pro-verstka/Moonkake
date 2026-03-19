@@ -1,7 +1,15 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
-import { getPlugins } from './config/vite/plugins.js'
-import { createPathUtils, getAssetFileName, getEntries, getInput } from './config/vite/utils.js'
+import { createAsciiBannerPlugin } from './config/vite/asciiBanner.plugin.js'
+import { getAssetFileName } from './config/vite/assetFileName.util.js'
+import { createCheckerPlugin } from './config/vite/checker.plugin.js'
+import { createCheckReservedIndexPlugin } from './config/vite/checkReservedIndex.plugin.js'
+import { getEntries, getInput } from './config/vite/entries.util.js'
+import { createGenerateIndexHtmlPlugin } from './config/vite/generateIndexHtml.plugin.js'
+import { createPathUtils } from './config/vite/pathUtils.util.js'
+import { createPublicAssetsMediaPlugin } from './config/vite/publicAssetsMedia.plugin.js'
+import { createPugPlugin } from './config/vite/pug.plugin.js'
+import { createTwigPlugin } from './config/vite/twig.plugin.js'
 import packageJson from './package.json'
 
 const config = {
@@ -43,8 +51,16 @@ const input = getInput(config.root, entries)
 export default defineConfig({
 	base: config.base,
 	root: config.root,
-	publicDir: config.public,
-	plugins: getPlugins({ config, entries, packageJson }),
+	publicDir: false,
+	plugins: [
+		createPublicAssetsMediaPlugin(config),
+		createCheckReservedIndexPlugin(config),
+		createCheckerPlugin(),
+		createPugPlugin(config),
+		createTwigPlugin(config),
+		createAsciiBannerPlugin(packageJson),
+		createGenerateIndexHtmlPlugin({ config, entries }),
+	],
 	css: {
 		lightningcss: {
 			errorRecovery: true,

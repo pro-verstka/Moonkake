@@ -18,6 +18,19 @@ pnpm run dev
 4. `pnpm run tools:lint` - Run linter
 5. `pnpm run tools:format` - Run formatter
 
+## Static files (`public/`)
+
+This template turns off Vite’s default `public` folder (nothing is mounted at the site root). Anything you put in **`public/`** is instead available under a fixed URL prefix:
+
+**`assets/media/<file>`**
+
+Examples:
+
+- `public/icons.svg` → use `assets/media/icons.svg` in HTML, `url()` in CSS, or `src` in JS
+- `public/photo.jpg` → `assets/media/photo.jpg`
+
+The same paths work in **`pnpm run dev`** and after **`pnpm run build`** (files are copied into `build/assets/media/`). If you change `assets.media.dir` in `vite.config.js`, the prefix segment after `assets/` changes accordingly—keep markup and scripts in sync with that setting.
+
 # Markup
 
 ### Image

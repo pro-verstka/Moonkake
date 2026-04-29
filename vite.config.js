@@ -91,7 +91,7 @@ export default defineConfig({
 					const pathToAsset = [config.assets.media.dir, fileName]
 
 					for (const output of Object.values(config.assets)) {
-						if (!output.ext || !output.ext.length) {
+						if (!output.ext?.length) {
 							continue
 						}
 

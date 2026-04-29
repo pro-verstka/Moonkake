@@ -376,7 +376,7 @@ export class Modal {
 		const normalizedId = this.#normalizeId(id)
 		const $modal = document.getElementById(normalizedId)
 
-		if (!$modal || !$modal.matches(this.selectors.root)) {
+		if (!$modal?.matches(this.selectors.root)) {
 			return null
 		}
 

@@ -1,10 +1,14 @@
-import path from 'node:path'
 import pug from '@vituum/vite-plugin-pug'
+import { loadTemplateData } from './templateData.util.js'
 
 export function createPugPlugin(config) {
 	return pug({
 		root: config.root,
-		data: path.resolve(config.root, 'data/*.json'),
+		data: [],
+		globals: {
+			format: 'pug',
+			...loadTemplateData(config.root),
+		},
 		options: {
 			pretty: true,
 		},

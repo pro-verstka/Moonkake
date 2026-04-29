@@ -100,7 +100,7 @@ export class FieldFile {
 
 			const files = event.dataTransfer?.files
 
-			if (!files || !files.length) {
+			if (!files?.length) {
 				return
 			}
 

@@ -14,6 +14,20 @@ const EVENT = {
 	CLOSE: 'mk:drawer:close',
 }
 
+/**
+ * Drawer with a global toggle, close button, overlay click, Escape close, and scroll lock.
+ *
+ * Markup:
+ * <button data-drawer-toggle type="button">Open</button>
+ * <aside data-drawer>
+ *   <button data-drawer-close type="button">Close</button>
+ * </aside>
+ *
+ * Emits `mk:drawer:open` and `mk:drawer:close`.
+ *
+ * @example
+ * document.querySelectorAll('[data-drawer]').forEach($el => new Drawer($el))
+ */
 export class Drawer {
 	constructor($el, options = {}) {
 		if (!$el) {

@@ -1,5 +1,20 @@
 import gsap from 'gsap'
 
+/**
+ * Custom cursor with a pointer and delayed follower.
+ *
+ * Markup:
+ * <div data-cursor>
+ *   <div data-cursor-pointer></div>
+ *   <div data-cursor-follower></div>
+ * </div>
+ *
+ * Hover targets are links and `[data-cursor-hover]` by default.
+ *
+ * @example
+ * const $cursor = document.querySelector('[data-cursor]')
+ * if ($cursor) new Cursor($cursor)
+ */
 export class Cursor {
 	constructor($el, options = {}) {
 		if (!$el) {

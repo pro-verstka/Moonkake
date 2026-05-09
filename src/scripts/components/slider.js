@@ -1,6 +1,22 @@
 import Swiper from 'swiper'
 import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from 'swiper/modules'
 
+/**
+ * Swiper slider initializer with navigation, pagination, autoplay, and mousewheel modules.
+ *
+ * Markup:
+ * <div class="swiper" data-slider>
+ *   <div class="swiper-wrapper">
+ *     <div class="swiper-slide">Slide</div>
+ *   </div>
+ *   <button class="swiper-button-prev" type="button"></button>
+ *   <button class="swiper-button-next" type="button"></button>
+ *   <div class="swiper-pagination"></div>
+ * </div>
+ *
+ * @example
+ * document.querySelectorAll('[data-slider]').forEach($el => new Slider($el))
+ */
 export class Slider {
 	constructor($el) {
 		if (!$el) {

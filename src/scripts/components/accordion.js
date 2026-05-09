@@ -9,6 +9,26 @@ const EVENT = {
 	TOGGLE: 'mk:accordion:toggle',
 }
 
+/**
+ * Accordion with independent item states.
+ *
+ * Markup:
+ * <div data-accordion>
+ *   <div data-accordion-item data-state="opened">
+ *     <button data-accordion-handler>Toggle</button>
+ *     <div>Content</div>
+ *   </div>
+ * </div>
+ *
+ * Emits `mk:accordion:toggle`.
+ *
+ * @example
+ * document.querySelectorAll('[data-accordion]').forEach($el => new Accordion($el))
+ *
+ * document.addEventListener('mk:accordion:toggle', event => {
+ *   console.log(event.detail.item, event.detail.state)
+ * })
+ */
 export class Accordion {
 	constructor($el, options = {}) {
 		if (!$el) {

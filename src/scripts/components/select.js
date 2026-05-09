@@ -1,3 +1,21 @@
+/**
+ * Custom select UI synced with a native select element.
+ *
+ * Markup:
+ * <div class="select">
+ *   <select data-placeholder="Choose option">
+ *     <option value=""></option>
+ *     <option value="one">One</option>
+ *   </select>
+ * </div>
+ *
+ * @example
+ * document.querySelectorAll('.select').forEach($el => new Select($el))
+ *
+ * // Rebuild after changing native options:
+ * const select = new Select(document.querySelector('.select'))
+ * select.update()
+ */
 export class Select {
 	constructor($el) {
 		if (!$el) {

@@ -5,6 +5,19 @@ gsap.registerPlugin(ScrollTrigger)
 
 const DEFAULT_THEME = 'color-dark,background-light'
 
+/**
+ * Header theme switcher powered by ScrollTrigger.
+ *
+ * Markup:
+ * <header data-header></header>
+ * <section data-header-theme="color-light,background-dark"></section>
+ *
+ * The active theme is written to the header `data-header` attribute.
+ *
+ * @example
+ * const $header = document.querySelector('[data-header]')
+ * if ($header) new Header($header)
+ */
 export class Header {
 	constructor($el) {
 		if (!$el) {

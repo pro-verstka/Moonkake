@@ -1,5 +1,16 @@
 const MAP_ID = 'map'
 
+/**
+ * Lazy Yandex map loader for the `#map` element.
+ *
+ * Markup:
+ * <div id="map"></div>
+ *
+ * Registers `MK.methods.initMap` and loads the Yandex Maps script when the map nears the viewport.
+ *
+ * @example
+ * import '$components/map'
+ */
 const initMap = () => {
 	ymaps.ready(() => {
 		const map = new ymaps.Map(

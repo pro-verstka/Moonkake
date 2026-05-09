@@ -8,6 +8,24 @@ const DRAG_STATE = {
 	IDLE: 'idle',
 }
 
+/**
+ * File field state and selected file name renderer.
+ *
+ * Markup:
+ * <label data-file>
+ *   <input data-file-input type="file" multiple>
+ *   <span data-file-value></span>
+ * </label>
+ *
+ * Sets `data-state="empty"|"filled"` and `data-drag-state="idle"|"over"` on the root.
+ *
+ * @example
+ * document.querySelectorAll('[data-file]').forEach($el => new FieldFile($el))
+ *
+ * new FieldFile(document.querySelector('[data-file]'), {
+ *   useDragAndDrop: false,
+ * })
+ */
 export class FieldFile {
 	constructor($el, options = {}) {
 		if (!$el) {

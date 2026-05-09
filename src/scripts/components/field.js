@@ -10,6 +10,23 @@ const VALIDATION_STATE = {
 	SUCCESS: 'success',
 }
 
+/**
+ * Field state synchronizer for text inputs and textareas.
+ *
+ * Markup:
+ * <label data-field>
+ *   <span>Label</span>
+ *   <input data-field-input type="text" required>
+ * </label>
+ *
+ * Sets field data attributes for type, state, disabled, readonly, required, and validation state.
+ *
+ * @example
+ * const fields = new Field()
+ *
+ * // After adding fields dynamically:
+ * fields.update()
+ */
 export class Field {
 	constructor(options = {}) {
 		this.options = {

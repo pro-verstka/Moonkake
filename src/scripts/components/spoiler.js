@@ -14,6 +14,26 @@ const EVENT = {
 	TOGGLE: 'mk:spoiler:toggle',
 }
 
+/**
+ * Collapsible text or HTML spoiler.
+ *
+ * Markup:
+ * <div data-spoiler>
+ *   <div data-spoiler-body>Long content...</div>
+ *   <button data-spoiler-toggle type="button"></button>
+ * </div>
+ *
+ * Sets `data-state`, `data-mode`, and `data-initialized` on the root.
+ * Emits `mk:spoiler:toggle`.
+ *
+ * @example
+ * document.querySelectorAll('[data-spoiler]').forEach($el => new Spoiler($el))
+ *
+ * new Spoiler(document.querySelector('[data-spoiler]'), {
+ *   mode: 'html',
+ *   labels: ['Show more', 'Hide'],
+ * })
+ */
 export class Spoiler {
 	constructor($el, options = {}) {
 		if (!$el) {

@@ -7,6 +7,7 @@ import { Autocomplete } from '$components/autocomplete'
 import { Calendar } from '$components/calendar'
 import { Counter } from '$components/counter'
 import { Cursor } from '$components/cursor'
+import { DragScroll } from '$components/drag-scroll'
 import { Drawer } from '$components/drawer'
 import { Field } from '$components/field'
 import { FieldFile } from '$components/field-file'
@@ -17,7 +18,6 @@ import { InputMask } from '$components/inputmask'
 import { Loader } from '$components/loader'
 import { Modal, rutubeVideoPlugin, vimeoVideoPlugin, youtubeVideoPlugin } from '$components/modal'
 import { ScrollAnimation } from '$components/scroll-animation'
-import { ScrollBooster } from '$components/scrollbooster'
 import { ScrollTo } from '$components/scrollto'
 import { Spoiler } from '$components/spoiler'
 import { Tabs } from '$components/tabs'
@@ -184,13 +184,13 @@ for (const $drawer of $drawers) {
 	new Drawer($drawer)
 }
 
-/* SCROLL BOOSTER
+/* DRAG SCROLL
 -------------------------------------------------- */
 
-const $scrollBoosters = document.querySelectorAll('[data-scrollbooster]')
+const $dragScrolls = document.querySelectorAll('[data-drag-scroll]')
 
-for (const $scrollBooster of $scrollBoosters) {
-	new ScrollBooster($scrollBooster)
+for (const $dragScroll of $dragScrolls) {
+	new DragScroll($dragScroll)
 }
 
 /* AUTOCOMPLETE

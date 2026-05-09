@@ -9,6 +9,28 @@ const EVENT = {
 	SELECT: 'mk:autocomplete:select',
 }
 
+/**
+ * Async autocomplete for a field wrapper with a nested input.
+ *
+ * Markup:
+ * <div data-autocomplete>
+ *   <input type="text" name="city">
+ * </div>
+ *
+ * Emits `mk:autocomplete:select` from the root element.
+ *
+ * @example
+ * new Autocomplete(document.querySelector('[data-autocomplete]'), {
+ *   minLength: 2,
+ *   debounce: 300,
+ *   fetch: async (query, signal) => {
+ *     const response = await fetch(`/api/search?q=${query}`, { signal })
+ *     return response.json()
+ *   },
+ *   map: data => data.items.map(item => ({ label: item.name, value: item.id })),
+ *   itemTemplate: item => `<span>${item.label}</span>`,
+ * })
+ */
 export class Autocomplete {
 	constructor($el, options = {}) {
 		if (!$el) {

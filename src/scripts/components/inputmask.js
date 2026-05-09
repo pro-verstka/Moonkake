@@ -1,5 +1,18 @@
 import IMask from 'imask'
 
+/**
+ * Input masks for telephone, numeric, and date fields.
+ *
+ * Markup:
+ * <input type="tel">
+ * <input data-mask-number>
+ * <input data-mask-date>
+ *
+ * Telephone inputs use `+7 (000) 000-00-00`.
+ *
+ * @example
+ * new InputMask()
+ */
 export class InputMask {
 	constructor() {
 		this.#init()

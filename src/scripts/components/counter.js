@@ -5,6 +5,25 @@ const STATE = {
 	EMPTY: 'empty',
 }
 
+/**
+ * Numeric counter with plus/minus controls and optional input limits.
+ *
+ * Markup:
+ * <div data-counter>
+ *   <button data-counter-minus type="button">-</button>
+ *   <input data-counter-input data-min="1" data-max="10" value="1">
+ *   <button data-counter-plus type="button">+</button>
+ * </div>
+ *
+ * Sets `data-state="min"|"max"|"normal"|"empty"` on the root.
+ *
+ * @example
+ * new Counter()
+ *
+ * new Counter({
+ *   minValue: 0,
+ * })
+ */
 export class Counter {
 	constructor(options = {}) {
 		this.options = {

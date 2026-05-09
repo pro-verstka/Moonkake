@@ -1,5 +1,20 @@
 import { isMobile } from '$helpers'
 
+/**
+ * Sets an element height to the viewport height with an optional offset.
+ *
+ * Markup:
+ * <section data-fullheight data-fullheight-offset="-80"></section>
+ *
+ * Reads CSS min-height/max-height as bounds.
+ *
+ * @example
+ * document.querySelectorAll('[data-fullheight]').forEach($el => new FullHeight($el))
+ *
+ * new FullHeight(document.querySelector('[data-fullheight]'), {
+ *   offset: -80,
+ * })
+ */
 export class FullHeight {
 	constructor($el, options = {}) {
 		if (!$el) {

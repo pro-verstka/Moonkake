@@ -13,6 +13,30 @@ const HISTORY = {
 	SOURCE: 'tabs',
 }
 
+/**
+ * Tabs with synchronized header/body item states and optional hash navigation.
+ *
+ * Markup:
+ * <div data-tabs>
+ *   <div data-tabs-header>
+ *     <div data-tabs-item data-state="opened" data-hash="first">
+ *       <button data-tabs-handler type="button">First</button>
+ *     </div>
+ *   </div>
+ *   <div data-tabs-body>
+ *     <div data-tabs-item>First panel</div>
+ *   </div>
+ * </div>
+ *
+ * Emits `mk:tabs:change`.
+ *
+ * @example
+ * document.querySelectorAll('[data-tabs]').forEach($el => new Tabs($el))
+ *
+ * new Tabs(document.querySelector('[data-tabs]'), {
+ *   useHashNav: true,
+ * })
+ */
 export class Tabs {
 	constructor($el, options = {}) {
 		if (!$el) {

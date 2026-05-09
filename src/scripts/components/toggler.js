@@ -11,6 +11,23 @@ const EVENT = {
 	CLOSE: 'mk:toggler:close',
 }
 
+/**
+ * Toggle one target by id and close other togglers when opened.
+ *
+ * Markup:
+ * <button data-toggler="menu" type="button">Toggle menu</button>
+ * <div id="menu" data-state="inactive">
+ *   <button data-toggler-close="menu" type="button">Close</button>
+ * </div>
+ *
+ * Emits `mk:toggler:open`, `mk:toggler:close`, and `mk:toggler:toggle`.
+ *
+ * @example
+ * document.querySelectorAll('[data-toggler]').forEach($el => new Toggler($el))
+ * Toggler.syncAll()
+ *
+ * document.getElementById('menu').openToggler()
+ */
 export class Toggler {
 	static instances = []
 

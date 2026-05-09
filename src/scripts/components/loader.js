@@ -15,6 +15,24 @@ const EVENT = {
 	END: 'mk:loader:end',
 }
 
+/**
+ * Page loader that locks body scroll until the window load event.
+ *
+ * Markup:
+ * <div data-loader>
+ *   <div>Loading...</div>
+ * </div>
+ *
+ * Emits `mk:loader:end` after the close transition finishes.
+ *
+ * @example
+ * const $loader = document.querySelector('[data-loader]')
+ * if ($loader) new Loader($loader)
+ *
+ * document.addEventListener('mk:loader:end', () => {
+ *   console.log('Loader closed')
+ * })
+ */
 export class Loader {
 	constructor($el, options = {}) {
 		if (!$el) {

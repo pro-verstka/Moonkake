@@ -35,6 +35,9 @@ The same paths work in **`pnpm run dev`** and after **`pnpm run build`** (files 
 
 ### Image
 
+<details>
+<summary>Example</summary>
+
 **Pug:**
 
 ```pug
@@ -85,7 +88,12 @@ The same paths work in **`pnpm run dev`** and after **`pnpm run build`** (files 
 }) }}
 ```
 
+</details>
+
 ### Checkbox
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -104,7 +112,12 @@ label.checkbox
 </label>
 ```
 
+</details>
+
 ### Radio
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -123,7 +136,12 @@ label.radio
 </label>
 ```
 
+</details>
+
 ### File
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -144,7 +162,12 @@ label.field-file(data-file)
 </label>
 ```
 
+</details>
+
 ### Select
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -177,7 +200,12 @@ div.select
 </div>
 ```
 
+</details>
+
 ### Form
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -231,7 +259,12 @@ form.form(action="", mathod="", id="form")
 </form>
 ```
 
+</details>
+
 ### Tabs
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -275,7 +308,12 @@ div(data-tabs)
 </div>
 ```
 
+</details>
+
 ### Accordion
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -304,7 +342,12 @@ div(data-accordion)
 </div>
 ```
 
+</details>
+
 ### Cursor
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -327,7 +370,12 @@ a(href="#") Hover target
 <a href="#">Hover target</a>
 ```
 
+</details>
+
 ### Loader
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -344,7 +392,12 @@ div(data-loader)
 </div>
 ```
 
+</details>
+
 ### Counter
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -365,7 +418,12 @@ div(data-counter)
 </div>
 ```
 
+</details>
+
 ### Breadcrumbs
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -386,7 +444,12 @@ ul.breadcrumbs
 </ul>
 ```
 
+</details>
+
 ### Pagination
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -407,7 +470,12 @@ ul.pagination
 </ul>
 ```
 
+</details>
+
 ### Modal
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -443,7 +511,12 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 <a href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80" data-modal-image title="Image Caption">Open Image</a>
 ```
 
+</details>
+
 ### Calendar
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -457,7 +530,12 @@ input(type="text", name="", data-calendar, placeholder="dd.mm.yyyy")
 <input type="text" name="" data-calendar placeholder="dd.mm.yyyy">
 ```
 
+</details>
+
 ### Scroll to element
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -471,7 +549,12 @@ a(href="#" data-scroll-to="div_id") Scroll to ID
 <a href="#" data-scroll-to="div_id">Scroll to ID</a>
 ```
 
+</details>
+
 ### Spoiler
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -491,7 +574,12 @@ div(data-spoiler)
 </div>
 ```
 
+</details>
+
 ### Tooltip
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -505,7 +593,12 @@ a(href="#", data-tippy, data-tippy-content="Tippy!") Text
 <a href="#" data-tippy data-tippy-content="Tippy!">Text</a>
 ```
 
+</details>
+
 ### Drawer
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -526,7 +619,12 @@ div.drawer(data-drawer)
 </div>
 ```
 
+</details>
+
 ### Toggler
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -549,7 +647,12 @@ div#menu(data-state="inactive")
 </div>
 ```
 
+</details>
+
 ### Fullheight
+
+<details>
+<summary>Example</summary>
 
 **Pug:**
 
@@ -563,8 +666,44 @@ div.section(data-fullheight)
 <div class="section" data-fullheight></div>
 ```
 
-### Autocomplete
+</details>
+
+### DragScroll
+
+<details>
+<summary>Example</summary>
+
 **Pug:**
+
+```pug
+div.drag-scroll(data-drag-scroll)
+	div.drag-scroll__content(data-drag-scroll-content)
+		div.drag-scroll__item Item 1
+		div.drag-scroll__item Item 2
+		div.drag-scroll__item Item 3
+```
+
+**Twig:**
+
+```twig
+<div class="drag-scroll" data-drag-scroll>
+	<div class="drag-scroll__content" data-drag-scroll-content>
+		<div class="drag-scroll__item">Item 1</div>
+		<div class="drag-scroll__item">Item 2</div>
+		<div class="drag-scroll__item">Item 3</div>
+	</div>
+</div>
+```
+
+</details>
+
+### Autocomplete
+
+<details>
+<summary>Example</summary>
+
+**Pug:**
+
 ```pug
 div.autocomplete(data-autocomplete)
 	input.autocomplete__input(type="text" placeholder="Search...")
@@ -577,3 +716,5 @@ div.autocomplete(data-autocomplete)
 	<input class="autocomplete__input" type="text" placeholder="Search...">
 </div>
 ```
+
+</details>

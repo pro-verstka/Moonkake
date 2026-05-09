@@ -127,6 +127,30 @@ export const rutubeVideoPlugin = (url, iframeDefaults = IFRAME_DEFAULT_PARAMS) =
 	}
 }
 
+/**
+ * Modal manager for inline modals plus generated image/video modals.
+ *
+ * Markup:
+ * <a href="#feedback" data-modal>Open modal</a>
+ * <div class="modal" id="feedback" data-modal>
+ *   <button data-modal-close type="button">Close</button>
+ * </div>
+ *
+ * <a href="image.jpg" data-modal-image title="Image caption">Open image</a>
+ * <a href="https://youtu.be/video-id" data-modal-video>Open video</a>
+ *
+ * Adds `modal` to MK plugins in app.js.
+ *
+ * @example
+ * const modal = new Modal({
+ *   videoPlugins: [youtubeVideoPlugin, vimeoVideoPlugin, rutubeVideoPlugin],
+ * })
+ *
+ * MK.addPlugins({ modal })
+ *
+ * modal.open('feedback')
+ * modal.close('feedback')
+ */
 export class Modal {
 	constructor(options = {}) {
 		this.options = {

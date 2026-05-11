@@ -1,0 +1,315 @@
+section.section.examples(id="examples")
+	div.container.examples__container
+		header.examples__intro
+			p.examples__eyebrow Components
+			h2.examples__heading Live component examples
+			p.examples__lead Every block shipped with Moonkake — rendered inline so you can see the styles and behavior at a glance. Copy the markup from the README to wire any of them into your own pages.
+
+		div.examples__grid
+
+			section.examples__section
+				h3.examples__title Button
+				div.examples__body
+					div.examples__row
+						button.button(type="button") Submit
+						a.button(href="#") Link button
+
+			section.examples__section
+				h3.examples__title Breadcrumbs
+				div.examples__body
+					ul.breadcrumbs
+						li.breadcrumbs__item: a.breadcrumbs__link(href="#") Home
+						li.breadcrumbs__item: a.breadcrumbs__link(href="#") Section
+						li.breadcrumbs__item: span.breadcrumbs__current Page
+
+			section.examples__section
+				h3.examples__title Pagination
+				div.examples__body
+					ul.pagination
+						li.pagination__item: a.pagination__link(href="#") 1
+						li.pagination__item(aria-current="page"): a.pagination__link(href="#") 2
+						li.pagination__item: a.pagination__link(href="#") 3
+						li.pagination__item: a.pagination__link(href="#") 4
+
+			section.examples__section
+				h3.examples__title Field (input + textarea)
+				div.examples__body
+					+field({ placeholder: 'Type something', name: 'demo_field_text' })
+					+field({ useTextarea: true, placeholder: 'Longer message…', name: 'demo_field_textarea', rows: 3 })
+
+			section.examples__section
+				h3.examples__title Field-file
+				div.examples__body
+					+field-file({ name: 'demo_field_file', placeholder: 'Select a file' })
+
+			section.examples__section
+				h3.examples__title Checkbox
+				div.examples__body
+					label.checkbox
+						input(type="checkbox" name="demo_checkbox_1")
+						span Option one
+					label.checkbox
+						input(type="checkbox" name="demo_checkbox_2" checked)
+						span Option two (pre-checked)
+
+			section.examples__section
+				h3.examples__title Radio
+				div.examples__body
+					label.radio
+						input(type="radio" name="demo_radio")
+						span Choice A
+					label.radio
+						input(type="radio" name="demo_radio" checked)
+						span Choice B
+
+			section.examples__section
+				h3.examples__title Select
+				div.examples__body
+					div.select(data-demo-select)
+						select(data-placeholder="Select a country…")
+							option(value="")
+							option(value="ad") Andorra
+							option(value="ar") Argentina
+							option(value="au") Australia
+							option(value="br") Brazil
+							option(value="ca") Canada
+							option(value="cn") China
+							option(value="de") Germany
+							option(value="es") Spain
+							option(value="fr") France
+							option(value="gb") United Kingdom
+							option(value="it") Italy
+							option(value="jp") Japan
+							option(value="kr") South Korea
+							option(value="mx") Mexico
+							option(value="nl") Netherlands
+							option(value="us") United States
+
+			section.examples__section
+				h3.examples__title Counter
+				div.examples__body
+					div(data-counter)
+						button(type="button" data-counter-minus) −
+						input(type="text" data-counter-input value="5" data-min="0" data-max="10")
+						button(type="button" data-counter-plus) +
+
+			section.examples__section
+				h3.examples__title Calendar
+				div.examples__body
+					input.field__input(type="text" name="demo_calendar" data-calendar placeholder="dd.mm.yyyy")
+
+			section.examples__section
+				h3.examples__title Autocomplete
+				div.examples__body
+					div.autocomplete(data-autocomplete)
+						input.autocomplete__input(type="text" placeholder="Search…")
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Form with validation
+				div.examples__body
+					p.examples__hint-text Type an invalid email or a short phone number, then blur the field — errors highlight inline. Phone uses an input mask.
+					form.form#demo_form(action="" method="" novalidate)
+						div.form__fieldset
+							div.form__group
+								div.form__item
+									+field({ name: 'name', placeholder: 'Name' })
+							div.form__group.form__group_row
+								div.form__item
+									+field({ name: 'email', placeholder: 'Email' })
+								div.form__item
+									+field({ name: 'phone', type: 'tel', placeholder: '+7 (___) ___-__-__' })
+							div.form__group
+								div.form__item
+									+field({ useTextarea: true, name: 'message', placeholder: 'Your message', rows: 3 })
+						div.form__fieldset
+							div.form__group
+								div.form__item
+									button.button(type="submit") Submit
+
+			section.examples__section
+				h3.examples__title Tabs
+				div.examples__body
+					div(data-tabs)
+						div(data-tabs-header)
+							div(data-tabs-item)
+								button(type="button" data-tabs-handler data-hash="demo-tab-1") Tab 1
+							div(data-tabs-item)
+								button(type="button" data-tabs-handler data-hash="demo-tab-2") Tab 2
+							div(data-tabs-item)
+								button(type="button" data-tabs-handler data-hash="demo-tab-3") Tab 3
+						div(data-tabs-body)
+							div(data-tabs-item)
+								p Content of the first tab.
+							div(data-tabs-item)
+								p Content of the second tab.
+							div(data-tabs-item)
+								p Content of the third tab.
+
+			section.examples__section
+				h3.examples__title Accordion
+				div.examples__body
+					div(data-accordion)
+						div(data-accordion-item)
+							button(type="button" data-accordion-handler) First item
+							div(data-accordion-body)
+								p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						div(data-accordion-item)
+							button(type="button" data-accordion-handler) Second item
+							div(data-accordion-body)
+								p Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						div(data-accordion-item)
+							button(type="button" data-accordion-handler) Third item
+							div(data-accordion-body)
+								p Ut enim ad minim veniam, quis nostrud exercitation.
+
+			section.examples__section
+				h3.examples__title Spoiler
+				div.examples__body
+					div(data-spoiler)
+						div(data-spoiler-body)
+							p Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto nisi, pariatur nostrum est est iste sint recusandae. Consequuntur libero ratione cupiditate numquam saepe, odio delectus aliquam voluptatibus.
+
+			section.examples__section
+				h3.examples__title Tooltip
+				div.examples__body
+					div.examples__row
+						a.button(href="#" data-tippy data-tippy-content="Tooltip content") Hover me
+						span.examples__hint(data-tippy data-tippy-content="Tooltips work on any element.") Or this span
+
+			section.examples__section
+				h3.examples__title Modal
+				div.examples__body
+					div.examples__row
+						a.button(href="#examples_modal" data-modal) Default
+						a.button(href="https://www.youtube.com/embed/G_hKGYD8gOg" data-modal-video) YouTube
+						a.button(
+							href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?auto=format&fit=crop&w=1600&q=80"
+							data-modal-image
+							title="Image caption"
+						) Image
+
+			section.examples__section
+				h3.examples__title Drawer
+				div.examples__body
+					button.button(type="button" data-drawer-toggle) Open drawer
+
+			section.examples__section
+				h3.examples__title Toggler
+				div.examples__body
+					button.button(type="button" data-toggler="demo_menu") Toggle menu
+					div.examples__toggler#demo_menu(data-state="inactive")
+						p Hidden menu content.
+						button.button(type="button" data-toggler-close="demo_menu") Close
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Drag-scroll
+				div.examples__body
+					div.drag-scroll(data-drag-scroll)
+						div.drag-scroll__content(data-drag-scroll-content)
+							- for (let i = 1; i <= 12; i++)
+								div.drag-scroll__item.examples__drag-item Item #{i}
+
+			section.examples__section
+				h3.examples__title Scroll-to
+				div.examples__body
+					a.button(href="#examples" data-scroll-to) Scroll to top of this section
+
+			section.examples__section
+				h3.examples__title Loader
+				div.examples__body
+					div.examples__loader-frame(data-loader)
+						div ⏳ Loading…
+
+			section.examples__section
+				h3.examples__title Icon
+				div.examples__body
+					+icon('facebook', 6, 14)
+
+			section.examples__section
+				h3.examples__title Image
+				div.examples__body
+					+image({
+						default: {
+							src: 'https://picsum.photos/id/1015/800/500',
+							width: 800,
+							height: 500,
+							alt: 'Sample image'
+						}
+					})
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Gallery
+				div.examples__body
+					+gallery([
+						{
+							thumb: { src: 'https://picsum.photos/id/1015/400/280', width: 400, height: 280 },
+							full: { src: 'https://picsum.photos/id/1015/1600/1000', width: 1600, height: 1000 }
+						},
+						{
+							thumb: { src: 'https://picsum.photos/id/1025/400/280', width: 400, height: 280 },
+							full: { src: 'https://picsum.photos/id/1025/1600/1000', width: 1600, height: 1000 }
+						},
+						{
+							thumb: { src: 'https://picsum.photos/id/1035/400/280', width: 400, height: 280 },
+							full: { src: 'https://picsum.photos/id/1035/1600/1000', width: 1600, height: 1000 }
+						},
+						{
+							thumb: { src: 'https://picsum.photos/id/1045/400/280', width: 400, height: 280 },
+							full: { src: 'https://picsum.photos/id/1045/1600/1000', width: 1600, height: 1000 }
+						}
+					])
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Scroll animation
+				div.examples__body
+					p.examples__hint-text Cards fade and slide into view with a stagger as they enter the viewport.
+					div.examples__fx-grid
+						div.examples__fx-card(data-scroll-fx)
+							h4.examples__fx-title Step 1
+						div.examples__fx-card(data-scroll-fx)
+							h4.examples__fx-title Step 2
+						div.examples__fx-card(data-scroll-fx)
+							h4.examples__fx-title Step 3
+						div.examples__fx-card(data-scroll-fx)
+							h4.examples__fx-title Step 4
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Map (Yandex)
+				div.examples__body
+					div#map.examples__map
+
+			section.examples__section
+				h3.examples__title Cursor
+				div.examples__body
+					p.examples__hint-text A custom cursor follows the pointer across the page — a dot and a delayed follower that scales up over interactive elements.
+					div.examples__row
+						a.button(href="#" data-cursor-hover) Hover target one
+						a.button(href="#" data-cursor-hover) Hover target two
+
+			section.examples__section.examples__section_wide
+				h3.examples__title Slider
+				div.examples__body
+					div.swiper.examples__slider(data-slider)
+						div.swiper-wrapper
+							div.swiper-slide
+								div.examples__slide Slide 1
+							div.swiper-slide
+								div.examples__slide Slide 2
+							div.swiper-slide
+								div.examples__slide Slide 3
+						button.swiper-button-prev(type="button")
+						button.swiper-button-next(type="button")
+						div.swiper-pagination
+
+	div.modal#examples_modal(data-modal data-modal-type="default" data-state="closed" role="dialog" aria-modal="true" aria-hidden="true")
+		div.modal__container
+			button.modal__close(type="button" data-modal-close) ×
+			h2 Modal heading
+			p Sample modal content. Close it with ×, the Escape key, or a click outside the panel.
+
+	div.drawer(data-drawer)
+		div.examples__drawer-body
+			button.button(type="button" data-drawer-close) Close drawer
+			h2 Drawer content
+			p Drawers slide in from the top by default — see the Drawer component in src/scripts/components/drawer.js.
+// section

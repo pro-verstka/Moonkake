@@ -76,12 +76,16 @@ export class Cursor {
 		gsap.to(this.$cursor, {
 			x: e.clientX,
 			y: e.clientY,
+			ease: 'linear',
+			delay: 0,
+			duration: 0,
 		})
 
 		gsap.to(this.$follower, {
 			x: e.clientX,
 			y: e.clientY,
 			delay: 0.1,
+			duration: 0.2,
 		})
 	}
 

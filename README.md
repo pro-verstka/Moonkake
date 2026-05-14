@@ -513,6 +513,31 @@ a(href="https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1
 
 </details>
 
+### Video
+
+<details>
+<summary>Example</summary>
+
+Lazy embed: shows a poster + play button, swaps to the provider's iframe only on click. YouTube poster is fetched automatically; for Vimeo and Rutube pass `poster` explicitly.
+
+**Pug:**
+
+```pug
++video({ url: "https://www.youtube.com/watch?v=G_hKGYD8gOg" })
++video({ url: "https://vimeo.com/191947042", poster: "path/to/poster.jpg", alt: "Video description" })
++video({ url: "https://rutube.ru/video/7f8f70dd116cb1691f0f10d510ebdf2f/", poster: "path/to/poster.jpg" })
+```
+
+**Twig:**
+
+```twig
+{{ video({ url: "https://www.youtube.com/watch?v=G_hKGYD8gOg" }) }}
+{{ video({ url: "https://vimeo.com/191947042", poster: "path/to/poster.jpg", alt: "Video description" }) }}
+{{ video({ url: "https://rutube.ru/video/7f8f70dd116cb1691f0f10d510ebdf2f/", poster: "path/to/poster.jpg" }) }}
+```
+
+</details>
+
 ### Calendar
 
 <details>

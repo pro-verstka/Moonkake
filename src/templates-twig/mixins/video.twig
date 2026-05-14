@@ -1,0 +1,9 @@
+{% macro video(props) %}
+    <div
+        data-video
+        data-video-url="{{ props.url }}"
+        {% if props.poster %}data-video-poster="{{ props.poster }}"{% endif %}
+        {% if props.alt %}data-video-alt="{{ props.alt }}"{% endif %}
+    ></div>
+    {# video #}
+{% endmacro %}

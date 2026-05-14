@@ -24,6 +24,7 @@ import { Tabs } from '$components/tabs'
 import { Toggler } from '$components/toggler'
 import { Tooltip } from '$components/tooltip'
 import { Validation } from '$components/validation'
+import { rutubeVideoEmbedPlugin, Video, vimeoVideoEmbedPlugin, youtubeVideoEmbedPlugin } from '$components/video'
 
 /* SETUP
 -------------------------------------------------- */
@@ -174,6 +175,17 @@ const modal = new Modal({
 })
 
 MK.addPlugins({ modal })
+
+/* VIDEO
+-------------------------------------------------- */
+
+const $videos = document.querySelectorAll('[data-video]')
+
+for (const $video of $videos) {
+	new Video($video, {
+		videoPlugins: [youtubeVideoEmbedPlugin, vimeoVideoEmbedPlugin, rutubeVideoEmbedPlugin],
+	})
+}
 
 /* DRAWER
 -------------------------------------------------- */
